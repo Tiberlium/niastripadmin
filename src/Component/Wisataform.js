@@ -6,67 +6,72 @@ import {
   FormControl,
   FormHelperText,
   Box,
-  Flex,
+  Wrap,
+  WrapItem,
+  Textarea,
 } from "@chakra-ui/react";
 
-import GoogleMapReact from "google-map-react";
+import { Map } from "pigeon-maps";
+import { maptiler } from "pigeon-maps/providers";
 
 export default class Wisataform extends Component {
-  constructor() {
-    super();
-    this.state = {
-      lat: "b",
-      long: "c",
-    };
-  }
-
+  maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
   render() {
     return (
       <>
         <Text fontSize={"4xl"} padding="2">
           Wisata Form
         </Text>
-        <Flex>
-          <>
-            <FormControl required padding={5}>
-              <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
-              <Input
-                placeholder="Nama Wisata"
-                variant={"filled"}
-                type={"text"}
-              />
-              <FormHelperText>masukkan nama tempat wisata</FormHelperText>
-            </FormControl>
-            <FormControl required ml={5}>
-              <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
-              <Input placeholder="Deskripsi" variant={"filled"} type={"text"} />
-              <FormHelperText>masukkan deskripsi tempat wisata</FormHelperText>
-            </FormControl>
-            <FormControl required ml={5} mt={5}>
-              <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
-              <Input placeholder="Kabupaten" variant={"filled"} type={"text"} />
-              <FormHelperText>
-                masukkan kabupaten dimana tempat wisata berada
-              </FormHelperText>
-            </FormControl>
-            <FormControl required ml={5} mt={5}>
-              <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
-              <Input placeholder="Kecamatan" variant={"filled"} type={"text"} />
-            </FormControl>
-          </>
-          <Box width="40%" height={300} mt={10} alignSelf="flex-end">
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyD5XWimbhan8mN0-wVAIG87RvBDA13fdy0",
-              }}
-              defaultCenter={{
-                lat: 1.204274087096239,
-                lng: 97.52212877347822,
-              }}
-              defaultZoom={10}
+        <Wrap>
+          <WrapItem>
+            <Box>
+              <FormControl required padding={5}>
+                <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
+                <Input
+                  placeholder="Nama Wisata"
+                  variant={"filled"}
+                  type={"text"}
+                />
+                <FormHelperText>masukkan nama tempat wisata</FormHelperText>
+              </FormControl>
+              <FormControl required ml={5}>
+                <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
+                <Textarea placeholder="masukkan deskripsi" variant={"filled"} />
+                <FormHelperText>
+                  masukkan deskripsi tempat wisata
+                </FormHelperText>
+              </FormControl>
+              <FormControl required ml={5} mt={5}>
+                <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
+                <Input
+                  placeholder="Kabupaten"
+                  variant={"filled"}
+                  type={"text"}
+                />
+                <FormHelperText>
+                  masukkan kabupaten dimana tempat wisata berada
+                </FormHelperText>
+              </FormControl>
+              <FormControl required ml={5} mt={5}>
+                <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
+                <Input
+                  placeholder="Kecamatan"
+                  variant={"filled"}
+                  type={"text"}
+                />
+              </FormControl>
+            </Box>
+          </WrapItem>
+          <WrapItem>
+            <Map
+              provider={this.maptilerProvider}
+              height={400}
+              dprs={[1, 2]}
+              defaultCenter={[1.1603381323455186, 97.52212877347822]}
+              defaultZoom={11}
             />
-          </Box>
-        </Flex>
+          </WrapItem>
+        </Wrap>
       </>
     );
   }
