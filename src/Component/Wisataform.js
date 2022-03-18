@@ -13,13 +13,22 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-import { Map } from "pigeon-maps";
+import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
-import Dropzone from "react-dropzone";
+import ImageUploading from "react-images-uploading";
+import Imagescard from "./Atom/Imagescard";
+import { AiOutlineUpload } from "react-icons/ai";
 
 export default class Wisataform extends Component {
   maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
+  images = [];
+
+  onChange = (imageList, addUpdateIndex) => {
+    this.images.push(imageList);
+  };
+
   render() {
+    console.log(this.images);
     return (
       <Flex
         flexDirection={"row"}
@@ -85,38 +94,46 @@ export default class Wisataform extends Component {
             width={350}
             dprs={[1, 2]}
             defaultCenter={[1.1603381323455186, 97.52212877347822]}
-            defaultZoom={11}
-          />
-          <Dropzone onDrop={(acceptedfiles) => console.log(acceptedfiles)}>
-            {({ getInputProps, getRootProps }) => (
-              <>
-                <FormLabel marginTop={10}>Upload Gambar</FormLabel>
-                <Box
-                  {...getRootProps()}
-                  height={"100"}
-                  width={"90"}
-                  borderWidth={"thin"}
-                  borderColor={"blackAlpha.400"}
-                  borderRadius={5}
+            defaultZoom={9}
+            onClick={() => alert("hallo bangsat")}
+          >
+            <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
+          </Map>
+          <ImageUploading value={this.images} onChange={this.onChange}>
+            {({
+              imageList,
+              onImageUpload,
+              onImageUpdate,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) => (
+              <Box>
+                <Button
+                  onClick={onImageUpload}
+                  leftIcon={<AiOutlineUpload size={20} color="white" />}
+                  width={[100, 300, 350]}
+                  colorScheme={isDragging ? "red" : "teal"}
+                  {...dragProps}
                 >
-                  <Input {...getInputProps()} />
-                  <Text
-                    fontSize={"15"}
-                    color={"gray.400"}
-                    textAlign={"center"}
-                    marginTop={"8"}
-                  >
-                    Drag 'n' drop some files here, or click to select files
-                  </Text>
-                </Box>
-              </>
+                  Click or Drophere
+                </Button>
+                {this.images.map((image, index) =>
+                  // <Imagescard
+                  //   key={index}
+                  //   label={image.file.name}
+                  //   onClick={() => onImageRemove(index)}
+                  // />
+                  console.log(image)
+                )}
+              </Box>
             )}
-          </Dropzone>
+          </ImageUploading>
           <Button
             colorScheme={"blue"}
             marginTop={"6"}
             width={[100, 300, 350]}
-            alignSelf={'center'}
+            alignSelf={"center"}
           >
             Submit
           </Button>
