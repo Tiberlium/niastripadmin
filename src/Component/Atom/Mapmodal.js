@@ -11,16 +11,17 @@ import {
 } from "@chakra-ui/react";
 
 import { Map, Marker, ZoomControl } from "pigeon-maps";
-import { maptiler } from "pigeon-maps/providers";
+import { osm } from "pigeon-maps/providers";
 
 export default class Mapmodal extends Component {
-  maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
   state = {
-    latitude: 0,
-    longitude: 0,
+    latitude: this.props.lat,
+    longitude: this.props.long,
   };
+
   render() {
     const { open, close } = this.props;
+    console.log(this.state.latitude, this.state.longitude);
     return (
       <Modal isOpen={open} onClose={close} size="6xl">
         <ModalOverlay />
@@ -30,7 +31,7 @@ export default class Mapmodal extends Component {
           <ModalBody>
             <Box>
               <Map
-                provider={this.maptilerProvider}
+                provider={osm}
                 height={500}
                 width={1200}
                 dprs={[1, 2]}
