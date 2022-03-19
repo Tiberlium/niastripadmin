@@ -17,18 +17,24 @@ import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
 import ImageUploading from "react-images-uploading";
 import Imagescard from "./Atom/Imagescard";
+import Mapmodal from "./Atom/Mapmodal";
 import { AiOutlineUpload } from "react-icons/ai";
 
 export default class Wisataform extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [],
+      open: false,
+    };
+  }
   maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
-  images = [];
 
   onChange = (imageList, addUpdateIndex) => {
-    this.images.push(imageList);
+    this.setState({ images: imageList });
   };
 
   render() {
-    console.log(this.images);
     return (
       <Flex
         flexDirection={"row"}
@@ -37,6 +43,10 @@ export default class Wisataform extends Component {
         w={[500, 700, 1300]}
         h={{ base: "100%", md: "50%", xl: "25%" }}
       >
+        <Mapmodal
+          open={this.state.open}
+          close={() => this.setState({ open: false })}
+        />
         <Box>
           <Text fontSize={"4xl"} padding="2">
             Wisata Form
@@ -95,15 +105,14 @@ export default class Wisataform extends Component {
             dprs={[1, 2]}
             defaultCenter={[1.1603381323455186, 97.52212877347822]}
             defaultZoom={9}
-            onClick={() => alert("hallo bangsat")}
+            onClick={() => this.setState({ open: true })}
           >
             <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
           </Map>
-          <ImageUploading value={this.images} onChange={this.onChange}>
+          <ImageUploading value={this.images} onChange={this.onChange} multiple>
             {({
               imageList,
               onImageUpload,
-              onImageUpdate,
               onImageRemove,
               isDragging,
               dragProps,
@@ -116,16 +125,15 @@ export default class Wisataform extends Component {
                   colorScheme={isDragging ? "red" : "teal"}
                   {...dragProps}
                 >
-                  Click or Drophere
+                  {isDragging ? "Drop here" : "upload multiple"}
                 </Button>
-                {this.images.map((image, index) =>
-                  // <Imagescard
-                  //   key={index}
-                  //   label={image.file.name}
-                  //   onClick={() => onImageRemove(index)}
-                  // />
-                  console.log(image)
-                )}
+                {imageList.map((doc, index) => (
+                  <Imagescard
+                    key={index}
+                    label={doc.file.name}
+                    onClick={() => onImageRemove(index)}
+                  />
+                ))}
               </Box>
             )}
           </ImageUploading>
