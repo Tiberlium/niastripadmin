@@ -15,10 +15,9 @@ import {
 
 import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
-import ImageUploading from "react-images-uploading";
-import Imagescard from "./Atom/Imagescard";
 import Mapmodal from "./Atom/Mapmodal";
-import { AiOutlineUpload } from "react-icons/ai";
+
+import Uploadfile from "./Atom/Uploadfile";
 
 export default class Wisataform extends Component {
   constructor(props) {
@@ -30,11 +29,8 @@ export default class Wisataform extends Component {
   }
   maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
-  onChange = (imageList, addUpdateIndex) => {
-    this.setState({ images: imageList });
-  };
-
   render() {
+    console.log(this.state.images);
     return (
       <Flex
         flexDirection={"row"}
@@ -109,11 +105,13 @@ export default class Wisataform extends Component {
           >
             <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
           </Map>
-          <Box/>
+          <Box>
+            <Uploadfile file={(images) => this.setState({ images: images })} />
+          </Box>
           <Button
             colorScheme={"blue"}
             marginTop={"6"}
-            width={[100, 300, 350]}
+            width={"full"}
             alignSelf={"center"}
           >
             Submit

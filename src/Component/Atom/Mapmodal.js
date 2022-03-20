@@ -21,7 +21,6 @@ export default class Mapmodal extends Component {
 
   render() {
     const { open, close } = this.props;
-    console.log(this.state.latitude, this.state.longitude);
     return (
       <Modal isOpen={open} onClose={close} size="6xl">
         <ModalOverlay />

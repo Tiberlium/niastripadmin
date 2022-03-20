@@ -4,7 +4,7 @@ import Uploadfile from "./Component/Atom/Uploadfile";
 
 class App extends react.Component {
   render() {
-    return <Uploadfile />;
+    return <Wisataform />;
   }
 }
 

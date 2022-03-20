@@ -1,18 +1,18 @@
 import React from "react";
 import ImageUploading from "react-images-uploading";
 import Imagescard from "./Imagescard";
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
+import { FiUpload } from "react-icons/fi";
 
-
-
-export default function Uploadfile() {
+export default function Uploadfile({ file }) {
   const [images, setImages] = React.useState([]);
   const maxNumber = 8;
 
   const onChange = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
+    file(imageList);
   };
+
   return (
     <div className="App">
       <ImageUploading
@@ -25,16 +25,15 @@ export default function Uploadfile() {
         {({
           imageList,
           onImageUpload,
-          onImageRemoveAll,
-          onImageUpdate,
           onImageRemove,
           isDragging,
           dragProps,
         }) => (
-          // write your building UI
-          <div className="upload__image-wrapper">
+          <Box>
             <Button
-              style={isDragging ? { color: "red" } : undefined}
+              width={"full"}
+              leftIcon={<FiUpload />}
+              colorScheme={isDragging ? "red" : "teal"}
               onClick={onImageUpload}
               {...dragProps}
             >
@@ -47,7 +46,7 @@ export default function Uploadfile() {
                 onClick={() => onImageRemove(index)}
               />
             ))}
-          </div>
+          </Box>
         )}
       </ImageUploading>
     </div>
