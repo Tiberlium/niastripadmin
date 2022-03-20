@@ -25,12 +25,14 @@ export default class Wisataform extends Component {
     this.state = {
       images: [],
       open: false,
+      latitude: 0,
+      longitude: 0,
     };
   }
   maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
   render() {
-    console.log(this.state.images);
+    console.log(this.state.latitude, this.state.longitude);
     return (
       <Flex
         flexDirection={"row"}
@@ -42,6 +44,8 @@ export default class Wisataform extends Component {
         <Mapmodal
           open={this.state.open}
           close={() => this.setState({ open: false })}
+          lat={(lat) => this.setState({ latitude: lat })}
+          long={(long) => this.setState({ longitude: long })}
         />
         <Box>
           <Text fontSize={"4xl"} padding="2">

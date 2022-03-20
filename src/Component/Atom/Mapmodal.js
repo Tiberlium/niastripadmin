@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -14,13 +13,16 @@ import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { osm } from "pigeon-maps/providers";
 
 export default class Mapmodal extends Component {
-  state = {
-    latitude: this.props.lat,
-    longitude: this.props.long,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      latitude: 0,
+      longitude: 0,
+    };
+  }
 
   render() {
-    const { open, close } = this.props;
+    const { open, close, lat, long } = this.props;
     return (
       <Modal isOpen={open} onClose={close} size="6xl">
         <ModalOverlay />
@@ -37,6 +39,8 @@ export default class Mapmodal extends Component {
                 defaultCenter={[1.1603381323455186, 97.52212877347822]}
                 defaultZoom={12}
                 onClick={(e) => {
+                  lat(e.latLng[0]);
+                  long(e.latLng[1]);
                   this.setState({ latitude: e.latLng[0] });
                   this.setState({ longitude: e.latLng[1] });
                 }}
