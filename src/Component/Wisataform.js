@@ -109,34 +109,7 @@ export default class Wisataform extends Component {
           >
             <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
           </Map>
-          <ImageUploading value={this.images} onChange={this.onChange} multiple>
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              <Box>
-                <Button
-                  onClick={onImageUpload}
-                  leftIcon={<AiOutlineUpload size={20} color="white" />}
-                  width={[100, 300, 350]}
-                  colorScheme={isDragging ? "red" : "teal"}
-                  {...dragProps}
-                >
-                  {isDragging ? "Drop here" : "upload multiple"}
-                </Button>
-                {imageList.map((doc, index) => (
-                  <Imagescard
-                    key={index}
-                    label={doc.file.name}
-                    onClick={() => onImageRemove(index)}
-                  />
-                ))}
-              </Box>
-            )}
-          </ImageUploading>
+          <Box/>
           <Button
             colorScheme={"blue"}
             marginTop={"6"}
