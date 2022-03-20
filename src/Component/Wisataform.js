@@ -16,7 +16,6 @@ import {
 import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
 import Mapmodal from "./Atom/Mapmodal";
-
 import Uploadfile from "./Atom/Uploadfile";
 
 export default class Wisataform extends Component {
@@ -27,12 +26,16 @@ export default class Wisataform extends Component {
       open: false,
       latitude: 0,
       longitude: 0,
+      nama: "",
+      deskripsi: "",
+      kabupaten: "",
+      kecamatan: "",
     };
   }
   maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
   render() {
-    console.log(this.state.latitude, this.state.longitude);
+    console.log(this.state.nama);
     return (
       <Flex
         flexDirection={"row"}
@@ -54,12 +57,14 @@ export default class Wisataform extends Component {
           <Wrap>
             <WrapItem>
               <Box>
-                <FormControl required padding={5}>
+                <FormControl required ml={5} mt={5} mb={5}>
                   <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
                   <Input
                     placeholder="Nama Wisata"
                     variant={"filled"}
                     type={"text"}
+                    value={this.state.nama}
+                    onChange={(e) => this.setState({ nama: e.target.value })}
                   />
                   <FormHelperText>masukkan nama tempat wisata</FormHelperText>
                 </FormControl>
@@ -68,6 +73,10 @@ export default class Wisataform extends Component {
                   <Textarea
                     placeholder="masukkan deskripsi"
                     variant={"filled"}
+                    value={this.state.deskripsi}
+                    onChange={(e) =>
+                      this.setState({ deskripsi: e.target.value })
+                    }
                   />
                   <FormHelperText>
                     masukkan deskripsi tempat wisata
@@ -79,6 +88,10 @@ export default class Wisataform extends Component {
                     placeholder="Kabupaten"
                     variant={"filled"}
                     type={"text"}
+                    value={this.state.kabupaten}
+                    onChange={(e) =>
+                      this.setState({ kabupaten: e.target.value })
+                    }
                   />
                   <FormHelperText>
                     masukkan kabupaten dimana tempat wisata berada
@@ -90,6 +103,10 @@ export default class Wisataform extends Component {
                     placeholder="Kecamatan"
                     variant={"filled"}
                     type={"text"}
+                    value={this.state.kecamatan}
+                    onChange={(e) =>
+                      this.setState({ kecamatan: e.target.value })
+                    }
                   />
                 </FormControl>
               </Box>
