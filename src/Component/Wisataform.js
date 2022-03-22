@@ -17,10 +17,12 @@ import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
 import Mapmodal from "./Atom/Mapmodal";
 import Uploadfile from "./Atom/Uploadfile";
+import { App, storages } from "../Firebase";
 
 export default class Wisataform extends Component {
   constructor(props) {
     super(props);
+    this.handleUpload = this.handleUpload.bind(this);
     this.state = {
       images: [],
       open: false,
@@ -30,12 +32,46 @@ export default class Wisataform extends Component {
       deskripsi: "",
       kabupaten: "",
       kecamatan: "",
+      progres: 0,
+      urls: [],
     };
   }
   maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
+  async handleUpload() {
+    const promises = [];
+    this.state.images.map((doc) => {
+      const uploadTasks = storages.ref(`images/${doc.file.name}`).put(doc.file);
+      promises.push(uploadTasks);
+      uploadTasks.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          this.setState({ progres: progress });
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await storages
+            .ref("images")
+            .child(doc.file.name)
+            .getDownloadURL()
+            .then((url) => {
+              this.setState({ urls: [...this.state.urls, url] });
+            });
+        }
+      );
+    });
+
+    return Promise.all(promises)
+      .then(() => alert("semua telah terupload"))
+      .catch((err) => console.log(err));
+  }
   render() {
-    console.log(this.state.nama);
+    console.log(this.state.urls);
     return (
       <Flex
         flexDirection={"row"}
@@ -134,6 +170,7 @@ export default class Wisataform extends Component {
             marginTop={"6"}
             width={"full"}
             alignSelf={"center"}
+            onClick={this.handleUpload}
           >
             Submit
           </Button>
