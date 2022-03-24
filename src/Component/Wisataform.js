@@ -17,7 +17,7 @@ import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
 import Mapmodal from "./Atom/Mapmodal";
 import Uploadfile from "./Atom/Uploadfile";
-import { App, storages } from "../Firebase";
+import { App, storages, db } from "../Firebase";
 
 export default class Wisataform extends Component {
   constructor(props) {
@@ -32,46 +32,44 @@ export default class Wisataform extends Component {
       deskripsi: "",
       kabupaten: "",
       kecamatan: "",
-      progres: 0,
-      urls: [],
     };
   }
   maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
   async handleUpload() {
-    const promises = [];
-    this.state.images.map((doc) => {
-      const uploadTasks = storages.ref(`images/${doc.file.name}`).put(doc.file);
-      promises.push(uploadTasks);
-      uploadTasks.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          this.setState({ progres: progress });
-        },
-        (error) => {
-          console.log(error);
-        },
-        async () => {
-          await storages
-            .ref("images")
-            .child(doc.file.name)
-            .getDownloadURL()
-            .then((url) => {
-              this.setState({ urls: [...this.state.urls, url] });
-            });
-        }
-      );
+    const promises = this.state.images.map((doc) => {
+      const uploadTask = storages.ref(`images/${doc.file.name}`);
+      return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
     });
 
-    return Promise.all(promises)
-      .then(() => alert("semua telah terupload"))
+    Promise.all(promises)
+      .then((filedownloadurl) => {
+        db.collection("Wisata").add({
+          Nama: this.state.nama,
+          Deskripsi: this.state.deskripsi,
+          Kabupaten: this.state.kabupaten,
+          Kecamatan: this.state.kecamatan,
+          Kategori: "Tempat wisata",
+          Latitude: this.state.latitude,
+          Longitude: this.state.longitude,
+          Galery: filedownloadurl,
+          Gambar: filedownloadurl[0],
+        });
+      })
+      .then(() => {
+        alert("berhasil upload");
+        this.setState({ nama: "" });
+        this.setState({ deskripsi: "" });
+        this.setState({ kabupaten: "" });
+        this.setState({ kecamatan: "" });
+        this.setState({ latitude: 0 });
+        this.setState({ longitude: 0 });
+        this.setState({ images: [] });
+      })
       .catch((err) => console.log(err));
   }
+
   render() {
-    console.log(this.state.urls);
     return (
       <Flex
         flexDirection={"row"}
