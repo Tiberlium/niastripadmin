@@ -9,11 +9,34 @@ import {
   Th,
   Button,
 } from "@chakra-ui/react";
+import { db } from "../Firebase";
+import { BsFillPencilFill,BsFillTrashFill } from "react-icons/bs";
 
 export default class Wisatatable extends Component {
+  state = {
+    data: [],
+  };
+  async get() {
+    let x = [];
+    const docRef = await db
+      .collection("Wisata")
+      .where("Kategori", "==", "Tempat wisata")
+      .get();
+    docRef.docs.map((doc) =>
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      })
+    );
+    this.setState({ data: x });
+  }
+
+  componentDidMount() {
+    this.get();
+  }
   render() {
     return (
-      <Table variant={"striped"} colorScheme="facebook">
+      <Table variant={"striped"} colorScheme="telegram" size="sm">
         <TableCaption fontWeight={"bold"} fontSize={"20"}>
           Wisata List
         </TableCaption>
@@ -21,7 +44,6 @@ export default class Wisatatable extends Component {
           <Tr>
             <Th>No</Th>
             <Th>Nama</Th>
-            <Th>Deskripsi</Th>
             <Th>Kabupaten</Th>
             <Th>Kota</Th>
             <Th>Latitude/Longitude</Th>
@@ -30,24 +52,27 @@ export default class Wisatatable extends Component {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>{this.props.nomor}</Td>
-            <Td>{this.props.nama}</Td>
-            <Td>{this.props.deskripsi}</Td>
-            <Td>{this.props.kabupaten}</Td>
-            <Td>{this.props.kota}</Td>
-            <td>{this.props.latlong}</td>
-            <Td>
-              <Button colorScheme={"blue"} variant="outline">
-                Edit
-              </Button>
-            </Td>
-            <Td>
-              <Button colorScheme={"red"} variant="outline">
-                Delete
-              </Button>
-            </Td>
-          </Tr>
+          {this.state.data.map((doc, index) => (
+            <Tr key={doc.id}>
+              <Td>{index}</Td>
+              <Td>{doc.data.Nama}</Td>
+              <Td>{doc.data.Kabupaten}</Td>
+              <Td>{doc.data.Kecamatan}</Td>
+              <Td>
+                {doc.data.Latitude}/{doc.data.Longitude}
+              </Td>
+              <Td>
+                <Button colorScheme={"blue"} variant="solid" size='sm' leftIcon={<BsFillPencilFill/>}>
+                  Edit
+                </Button>
+              </Td>
+              <Td>
+                <Button colorScheme={"red"} variant="solid" size='sm' leftIcon={<BsFillTrashFill/>}>
+                  Delete
+                </Button>
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     );
