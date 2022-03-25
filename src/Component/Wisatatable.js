@@ -17,7 +17,6 @@ export default class Wisatatable extends Component {
     data: [],
   };
 
-  
   async get() {
     let x = [];
     const docRef = await db
@@ -31,6 +30,12 @@ export default class Wisatatable extends Component {
       })
     );
     this.setState({ data: x });
+  }
+
+  async remove(id) {
+    const docRef = await db.collection("Wisata").doc(id);
+    docRef.delete();
+    this.get();
   }
 
   componentDidMount() {
@@ -69,7 +74,7 @@ export default class Wisatatable extends Component {
                   variant="solid"
                   size="sm"
                   leftIcon={<BsFillPencilFill />}
-                  onClick={()=>this.props.edit(doc.id)}
+                  onClick={() => this.props.edit(doc.id)}
                 >
                   Edit
                 </Button>
@@ -80,7 +85,7 @@ export default class Wisatatable extends Component {
                   variant="solid"
                   size="sm"
                   leftIcon={<BsFillTrashFill />}
-                  onClick={this.props.delete}
+                  onClick={() => this.remove(doc.id)}
                 >
                   Delete
                 </Button>
