@@ -1,12 +1,9 @@
 import react from "react";
-import Wisataform from "./Component/Wisataform";
-
+import { Wisata } from "./Pages";
 
 class App extends react.Component {
-
-
   render() {
-    return <Wisataform />;
+    return <Wisata />;
   }
 }
 

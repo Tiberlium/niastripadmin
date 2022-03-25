@@ -1,5 +1,6 @@
 import Login from "./Login";
 import Home from "./Home";
-import Manage from "./Manage";
+import Wisata from "./Wisata";
+import Managewisata from "./Managewisata";
 
-export { Login, Home, Manage };
+export { Login, Home, Wisata, Managewisata };

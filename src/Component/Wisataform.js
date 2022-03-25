@@ -71,7 +71,8 @@ export default class Wisataform extends Component {
 
   render() {
     return (
-      <Flex
+      <>
+        <Flex
         flexDirection={"row"}
         wrap
         justifyContent={"space-evenly"}
@@ -174,6 +175,9 @@ export default class Wisataform extends Component {
           </Button>
         </Box>
       </Flex>
+
+      </>
+
     );
   }
 }
