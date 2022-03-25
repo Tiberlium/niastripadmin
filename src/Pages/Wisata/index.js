@@ -6,15 +6,10 @@ export default class Wisata extends Component {
   render() {
     return (
       <Box paddingLeft={5} paddingRight={5}>
-        <Text
-          fontSize={"2xl"}
-          fontWeight="bold"
-          paddingBottom={10}
-          marginTop={10}
-        >
+        <Text fontSize={30} fontWeight="bold" paddingBottom={10} marginTop={10}>
           Daftar Tempat Wisata
         </Text>
-        <Wisatatable/>
+        <Wisatatable />
       </Box>
     );
   }

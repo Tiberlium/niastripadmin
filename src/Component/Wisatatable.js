@@ -10,12 +10,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { db } from "../Firebase";
-import { BsFillPencilFill,BsFillTrashFill } from "react-icons/bs";
+import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
 
 export default class Wisatatable extends Component {
   state = {
     data: [],
   };
+
+  
   async get() {
     let x = [];
     const docRef = await db
@@ -62,12 +64,24 @@ export default class Wisatatable extends Component {
                 {doc.data.Latitude}/{doc.data.Longitude}
               </Td>
               <Td>
-                <Button colorScheme={"blue"} variant="solid" size='sm' leftIcon={<BsFillPencilFill/>}>
+                <Button
+                  colorScheme={"blue"}
+                  variant="solid"
+                  size="sm"
+                  leftIcon={<BsFillPencilFill />}
+                  onClick={()=>this.props.edit(doc.id)}
+                >
                   Edit
                 </Button>
               </Td>
               <Td>
-                <Button colorScheme={"red"} variant="solid" size='sm' leftIcon={<BsFillTrashFill/>}>
+                <Button
+                  colorScheme={"red"}
+                  variant="solid"
+                  size="sm"
+                  leftIcon={<BsFillTrashFill />}
+                  onClick={this.props.delete}
+                >
                   Delete
                 </Button>
               </Td>
