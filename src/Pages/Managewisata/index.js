@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Text,
   Input,
@@ -15,29 +15,24 @@ import {
 
 import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
-import Mapmodal from '../../Component/Atom/Mapmodal';
-import Uploadfile from '../../Component/Atom/Uploadfile';
+import Mapmodal from "../../Component/Atom/Mapmodal";
+import Uploadfile from "../../Component/Atom/Uploadfile";
 import { storages, db } from "../../Firebase";
 
-export default class Managewisata extends Component {
-  constructor(props) {
-    super(props);
-    this.handleUpload = this.handleUpload.bind(this);
-    this.state = {
-      images: [],
-      open: false,
-      latitude: 0,
-      longitude: 0,
-      nama: "",
-      deskripsi: "",
-      kabupaten: "",
-      kecamatan: "",
-    };
-  }
-  maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
+export default function Managewisata() {
+  const [nama, setnama] = useState("");
+  const [deskripsi, setdeskripsi] = useState("");
+  const [kabupaten, setkabupaten] = useState("");
+  const [kecamatan, setkecamatan] = useState("");
+  const [latitude, setlatitude] = useState(0);
+  const [longitude, setlongitude] = useState(0);
+  const [images, setimages] = useState([]);
+  const [open, setopen] = useState(false);
 
-  async handleUpload() {
-    const promises = this.state.images.map((doc) => {
+  const maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
+
+  async function handleUpload() {
+    const promises = images.map((doc) => {
       const uploadTask = storages.ref(`images/${doc.file.name}`);
       return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
     });
@@ -45,139 +40,128 @@ export default class Managewisata extends Component {
     Promise.all(promises)
       .then((filedownloadurl) => {
         db.collection("Wisata").add({
-          Nama: this.state.nama,
-          Deskripsi: this.state.deskripsi,
-          Kabupaten: this.state.kabupaten,
-          Kecamatan: this.state.kecamatan,
+          Nama: nama,
+          Deskripsi: deskripsi,
+          Kabupaten: kabupaten,
+          Kecamatan: kecamatan,
           Kategori: "Tempat wisata",
-          Latitude: this.state.latitude,
-          Longitude: this.state.longitude,
+          Latitude: latitude,
+          Longitude: longitude,
           Galery: filedownloadurl,
           Gambar: filedownloadurl[0],
         });
       })
       .then(() => {
         alert("berhasil upload");
-        this.setState({ nama: "" });
-        this.setState({ deskripsi: "" });
-        this.setState({ kabupaten: "" });
-        this.setState({ kecamatan: "" });
-        this.setState({ latitude: 0 });
-        this.setState({ longitude: 0 });
-        this.setState({ images: [] });
+        setimages([]);
+        setnama("");
+        setkecamatan("");
+        setdeskripsi("");
+        setkabupaten("");
+        setlatitude(0);
+        setlongitude(0);
       })
       .catch((err) => console.log(err));
   }
-
-  render() {
-    return (
-      <>
-        <Flex
-          flexDirection={"row"}
-          wrap
-          justifyContent={"space-evenly"}
-          w={[500, 700, 1300]}
-          h={{ base: "100%", md: "50%", xl: "25%" }}
-        >
-          <Mapmodal
-            open={this.state.open}
-            close={() => this.setState({ open: false })}
-            lat={(lat) => this.setState({ latitude: lat })}
-            long={(long) => this.setState({ longitude: long })}
-          />
+  return (
+    <>
+      <Flex
+        flexDirection={"row"}
+        wrap
+        justifyContent={"space-evenly"}
+        w={[500, 700, 1300]}
+        h={{ base: "100%", md: "50%", xl: "25%" }}
+      >
+        <Mapmodal
+          open={open}
+          close={() => setopen(false)}
+          lat={(lat) => setlatitude(lat)}
+          long={(long) => setlongitude(long)}
+        />
+        <Box>
+          <Text fontSize={"4xl"} padding="2">
+            Wisata Form
+          </Text>
+          <Wrap>
+            <WrapItem>
+              <Box>
+                <FormControl required ml={5} mt={5} mb={5}>
+                  <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
+                  <Input
+                    placeholder="Nama Wisata"
+                    variant={"filled"}
+                    type={"text"}
+                    value={nama}
+                    onChange={(e) => setnama(e.target.value)}
+                  />
+                  <FormHelperText>masukkan nama tempat wisata</FormHelperText>
+                </FormControl>
+                <FormControl required ml={5}>
+                  <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
+                  <Textarea
+                    placeholder="masukkan deskripsi"
+                    variant={"filled"}
+                    value={deskripsi}
+                    onChange={(e) => setdeskripsi(e.target.value)}
+                  />
+                  <FormHelperText>
+                    masukkan deskripsi tempat wisata
+                  </FormHelperText>
+                </FormControl>
+                <FormControl required ml={5} mt={5}>
+                  <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
+                  <Input
+                    placeholder="Kabupaten"
+                    variant={"filled"}
+                    type={"text"}
+                    value={kabupaten}
+                    onChange={(e) => setkabupaten(e.target.value)}
+                  />
+                  <FormHelperText>
+                    masukkan kabupaten dimana tempat wisata berada
+                  </FormHelperText>
+                </FormControl>
+                <FormControl required ml={5} mt={5}>
+                  <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
+                  <Input
+                    placeholder="Kecamatan"
+                    variant={"filled"}
+                    type={"text"}
+                    value={kecamatan}
+                    onChange={(e) => setkecamatan(e.target.value)}
+                  />
+                </FormControl>
+              </Box>
+            </WrapItem>
+          </Wrap>
+        </Box>
+        <Box marginTop={"20"} marginLeft={10}>
+          <FormLabel>Lokasi Wisata</FormLabel>
+          <Map
+            provider={maptilerProvider}
+            height={200}
+            width={350}
+            dprs={[1, 2]}
+            defaultCenter={[1.1603381323455186, 97.52212877347822]}
+            defaultZoom={9}
+            onClick={() => setopen(true)}
+          >
+            <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
+          </Map>
           <Box>
-            <Text fontSize={"4xl"} padding="2">
-              Wisata Form
-            </Text>
-            <Wrap>
-              <WrapItem>
-                <Box>
-                  <FormControl required ml={5} mt={5} mb={5}>
-                    <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
-                    <Input
-                      placeholder="Nama Wisata"
-                      variant={"filled"}
-                      type={"text"}
-                      value={this.state.nama}
-                      onChange={(e) => this.setState({ nama: e.target.value })}
-                    />
-                    <FormHelperText>masukkan nama tempat wisata</FormHelperText>
-                  </FormControl>
-                  <FormControl required ml={5}>
-                    <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
-                    <Textarea
-                      placeholder="masukkan deskripsi"
-                      variant={"filled"}
-                      value={this.state.deskripsi}
-                      onChange={(e) =>
-                        this.setState({ deskripsi: e.target.value })
-                      }
-                    />
-                    <FormHelperText>
-                      masukkan deskripsi tempat wisata
-                    </FormHelperText>
-                  </FormControl>
-                  <FormControl required ml={5} mt={5}>
-                    <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
-                    <Input
-                      placeholder="Kabupaten"
-                      variant={"filled"}
-                      type={"text"}
-                      value={this.state.kabupaten}
-                      onChange={(e) =>
-                        this.setState({ kabupaten: e.target.value })
-                      }
-                    />
-                    <FormHelperText>
-                      masukkan kabupaten dimana tempat wisata berada
-                    </FormHelperText>
-                  </FormControl>
-                  <FormControl required ml={5} mt={5}>
-                    <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
-                    <Input
-                      placeholder="Kecamatan"
-                      variant={"filled"}
-                      type={"text"}
-                      value={this.state.kecamatan}
-                      onChange={(e) =>
-                        this.setState({ kecamatan: e.target.value })
-                      }
-                    />
-                  </FormControl>
-                </Box>
-              </WrapItem>
-            </Wrap>
+            <Uploadfile file={(images) => setimages(images)} />
           </Box>
-          <Box marginTop={"20"} marginLeft={10}>
-            <FormLabel>Lokasi Wisata</FormLabel>
-            <Map
-              provider={this.maptilerProvider}
-              height={200}
-              width={350}
-              dprs={[1, 2]}
-              defaultCenter={[1.1603381323455186, 97.52212877347822]}
-              defaultZoom={9}
-              onClick={() => this.setState({ open: true })}
-            >
-              <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
-            </Map>
-            <Box>
-              <Uploadfile
-                file={(images) => this.setState({ images: images })}
-              />
-            </Box>
-            <Button
-              colorScheme={"blue"}
-              marginTop={"6"}
-              width={"full"}
-              alignSelf={"center"}
-              onClick={this.handleUpload}
-            >
-              Submit
-            </Button>
-          </Box>
-        </Flex>
-      </>
-    );
-  }
+          <Button
+            colorScheme={"blue"}
+            marginTop={"6"}
+            width={"full"}
+            alignSelf={"center"}
+            onClick={handleUpload}
+          >
+            Submit
+          </Button>
+        </Box>
+      </Flex>
+    </>
+  );
 }
