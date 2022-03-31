@@ -5,13 +5,12 @@ import { Managewisata, Wisata } from "./Pages";
 class App extends react.Component {
   render() {
     return (
-      // <BrowserRouter>
-      //   <Routes>
-      //     <Route path="/" element={<Wisata />} />
-      //     <Route path="/Managewisata" element={<Managewisata />} />
-      //   </Routes>
-      // </BrowserRouter>
-      <Text>Halo bangsat</Text>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Wisata />} />
+          <Route path="/Managewisata" element={<Managewisata />} />
+        </Routes>
+      </BrowserRouter>
     );
   }
 }

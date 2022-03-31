@@ -15,8 +15,8 @@ import {
 
 import { Map, Marker } from "pigeon-maps";
 import { maptiler } from "pigeon-maps/providers";
-import Mapmodal from "./Atom/Mapmodal";
-import Uploadfile from "./Atom/Uploadfile";
+import Mapmodal from '../../Component/Atom/Mapmodal';
+import Uploadfile from '../../Component/Atom/Uploadfile';
 import { storages, db } from "../../Firebase";
 
 export default class Managewisata extends Component {
