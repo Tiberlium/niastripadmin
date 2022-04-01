@@ -30,9 +30,7 @@ export default function Managewisata() {
   const [images, setimages] = useState([]);
   const [open, setopen] = useState(false);
 
-  let params = useParams();
-
-  console.log(params);
+  let id = useParams();
 
   const maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
