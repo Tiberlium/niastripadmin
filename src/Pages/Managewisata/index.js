@@ -9,7 +9,7 @@ import {
   Wrap,
   WrapItem,
   Textarea,
-  Flex,
+  Center,
   Button,
 } from "@chakra-ui/react";
 
@@ -67,14 +67,8 @@ export default function Managewisata() {
       .catch((err) => console.log(err));
   }
   return (
-    <>
-      <Flex
-        flexDirection={"row"}
-        wrap
-        justifyContent={"space-evenly"}
-        w={[500, 700, 1300]}
-        h={{ base: "100%", md: "50%", xl: "25%" }}
-      >
+    <Center>
+      <Box width={"3xl"}>
         <Mapmodal
           open={open}
           close={() => setopen(false)}
@@ -82,13 +76,13 @@ export default function Managewisata() {
           long={(long) => setlongitude(long)}
         />
         <Box>
-          <Text fontSize={"4xl"} padding="2">
+          <Text fontSize={"4xl"}>
             Wisata Form
           </Text>
           <Wrap>
             <WrapItem>
               <Box>
-                <FormControl required ml={5} mt={5} mb={5}>
+                <FormControl required width={'3xl'} mt={10}>
                   <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
                   <Input
                     placeholder="Nama Wisata"
@@ -99,7 +93,7 @@ export default function Managewisata() {
                   />
                   <FormHelperText>masukkan nama tempat wisata</FormHelperText>
                 </FormControl>
-                <FormControl required ml={5}>
+                <FormControl required mt={5}>
                   <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
                   <Textarea
                     placeholder="masukkan deskripsi"
@@ -111,7 +105,7 @@ export default function Managewisata() {
                     masukkan deskripsi tempat wisata
                   </FormHelperText>
                 </FormControl>
-                <FormControl required ml={5} mt={5}>
+                <FormControl required mt={5}>
                   <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
                   <Input
                     placeholder="Kabupaten"
@@ -124,7 +118,7 @@ export default function Managewisata() {
                     masukkan kabupaten dimana tempat wisata berada
                   </FormHelperText>
                 </FormControl>
-                <FormControl required ml={5} mt={5}>
+                <FormControl mt={5}>
                   <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
                   <Input
                     placeholder="Kecamatan"
@@ -133,38 +127,38 @@ export default function Managewisata() {
                     value={kecamatan}
                     onChange={(e) => setkecamatan(e.target.value)}
                   />
+                  <FormHelperText>Masukkan nama kecamatan tempat wisata berada</FormHelperText>
                 </FormControl>
               </Box>
             </WrapItem>
           </Wrap>
         </Box>
-        <Box marginTop={"20"} marginLeft={10}>
-          <FormLabel>Lokasi Wisata</FormLabel>
-          <Map
-            provider={maptilerProvider}
-            height={200}
-            width={350}
-            dprs={[1, 2]}
-            defaultCenter={[1.1603381323455186, 97.52212877347822]}
-            defaultZoom={9}
-            onClick={() => setopen(true)}
-          >
-            <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
-          </Map>
-          <Box>
-            <Uploadfile file={(images) => setimages(images)} />
-          </Box>
-          <Button
-            colorScheme={"blue"}
-            marginTop={"6"}
-            width={"full"}
-            alignSelf={"center"}
-            onClick={handleUpload}
-          >
-            Submit
-          </Button>
+        <FormLabel mt={5}>Lokasi Wisata</FormLabel>
+        <Map
+          provider={maptilerProvider}
+          height={200}
+          width={765}
+          dprs={[1, 2]}
+          defaultCenter={[1.1603381323455186, 97.52212877347822]}
+          defaultZoom={9}
+          onClick={() => setopen(true)}
+        >
+          <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
+        </Map>
+        <Box>
+          <FormLabel mt={5}>Gambar</FormLabel>
+          <Uploadfile file={(images) => setimages(images)} />
         </Box>
-      </Flex>
-    </>
+        <Button
+          colorScheme={"blue"}
+          marginTop={"6"}
+          width={"full"}
+          alignSelf={"center"}
+          onClick={handleUpload}
+        >
+          Submit
+        </Button>
+      </Box>
+    </Center>
   );
 }
