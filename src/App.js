@@ -8,7 +8,7 @@ class App extends react.Component {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Wisata />} />
-          <Route path="/Managewisata" element={<Managewisata />} />
+          <Route path="/Tambahkandatawisata" element={<Managewisata />} />
           <Route path="/Editwisata/:id" element={<Managewisata />} />
           <Route />
         </Routes>

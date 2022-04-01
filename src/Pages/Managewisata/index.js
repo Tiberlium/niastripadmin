@@ -32,19 +32,25 @@ export default function Managewisata() {
 
   const maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
-  let data = useLocation();
   let id = useParams();
+  let data = useLocation();
 
-  useEffect(() => {
-    if (id !== null) {
+  function getParams() {
+    if (data.state !== null) {
       setdeskripsi(data.state.Deskripsi);
       setnama(data.state.Nama);
       setlatitude(data.state.Latitude);
       setlongitude(data.state.Longitude);
       setkabupaten(data.state.Kabupaten);
       setkecamatan(data.state.Kecamatan);
-      setbutton('Update');
+      setbutton("Update");
+    } else {
+      return false;
     }
+  }
+
+  useEffect(() => {
+    getParams();
   }, []);
 
   async function handleUpload() {
@@ -147,10 +153,14 @@ export default function Managewisata() {
           width={765}
           dprs={[1, 2]}
           defaultCenter={[1.1603381323455186, 97.52212877347822]}
-          defaultZoom={12}
+          defaultZoom={14}
+          onClick={(e) => {
+            setlatitude(e.latLng[0]);
+            setlongitude(e.latLng[1]);
+          }}
         >
-          <Marker latLngToPixel={[1.1603381323455186, 97.52212877347822]} />
-          <ZoomControl/>
+          <Marker anchor={[latitude, longitude]} color="red" />
+          <ZoomControl />
         </Map>
         <Box>
           <FormLabel mt={5}>Gambar</FormLabel>
