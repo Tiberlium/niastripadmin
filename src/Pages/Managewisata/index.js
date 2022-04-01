@@ -153,13 +153,14 @@ export default function Managewisata() {
           width={765}
           dprs={[1, 2]}
           defaultCenter={[1.1603381323455186, 97.52212877347822]}
-          defaultZoom={14}
+          center={[latitude, longitude]}
+          defaultZoom={12}
           onClick={(e) => {
             setlatitude(e.latLng[0]);
             setlongitude(e.latLng[1]);
           }}
         >
-          <Marker anchor={[latitude, longitude]} color="red" />
+          <Marker color="red" width={40} />
           <ZoomControl />
         </Map>
         <Box>
