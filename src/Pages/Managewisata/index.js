@@ -18,6 +18,7 @@ import { maptiler } from "pigeon-maps/providers";
 import Mapmodal from "../../Component/Atom/Mapmodal";
 import Uploadfile from "../../Component/Atom/Uploadfile";
 import { storages, db } from "../../Firebase";
+import { useParams } from "react-router-dom";
 
 export default function Managewisata() {
   const [nama, setnama] = useState("");
@@ -28,6 +29,10 @@ export default function Managewisata() {
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
   const [open, setopen] = useState(false);
+
+  let params = useParams();
+
+  console.log(params);
 
   const maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
