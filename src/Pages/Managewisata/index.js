@@ -36,7 +36,15 @@ export default function Managewisata() {
   let data = useLocation();
 
   function getParams() {
+    let x = [];
     if (data.state !== null) {
+      data.state.Galery.map((doc) => {
+        const meta = storages.refFromURL(doc);
+        return meta.getMetadata().then((metadata) => {
+          x.push(metadata);
+        });
+      });
+      setimages(x);
       setdeskripsi(data.state.Deskripsi);
       setnama(data.state.Nama);
       setlatitude(data.state.Latitude);
@@ -149,7 +157,7 @@ export default function Managewisata() {
         <FormLabel mt={5}>Lokasi Wisata</FormLabel>
         <Map
           provider={maptilerProvider}
-          height={300}
+          height={400}
           width={765}
           dprs={[1, 2]}
           defaultCenter={[1.1603381323455186, 97.52212877347822]}
