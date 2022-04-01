@@ -9,7 +9,7 @@ class App extends react.Component {
         <Routes>
           <Route path="/" element={<Wisata />} />
           <Route path="/Managewisata" element={<Managewisata />} />
-          <Route path="/Managewisata/:id" element={<Managewisata />} />
+          <Route path="/Editwisata/:id" element={<Managewisata />} />
           <Route />
         </Routes>
       </BrowserRouter>
