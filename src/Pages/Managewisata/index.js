@@ -35,15 +35,7 @@ export default function Managewisata() {
   let data = useLocation();
 
   function getParams() {
-    let x = [];
     if (data.state !== null) {
-      data.state.Galery.map((doc) => {
-        const meta = storages.refFromURL(doc);
-        return meta.getMetadata().then((metadata) => {
-          x.push(metadata);
-        });
-      });
-      setimages(x);
       setdeskripsi(data.state.Deskripsi);
       setnama(data.state.Nama);
       setlatitude(data.state.Latitude);
@@ -63,41 +55,47 @@ export default function Managewisata() {
   }, []);
 
   async function handleUpload() {
-    const promises = images.map((doc) => {
-      const uploadTask = storages.ref(`images/${doc.file.name}`);
-      return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
-    });
+    if (button === "Submit") {
+      const promises = images.map((doc) => {
+        const uploadTask = storages.ref(`images/${doc.file.name}`);
+        return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
+      });
 
-    Promise.all(promises)
-      .then((filedownloadurl) => {
-        db.collection("Wisata").add({
-          Nama: nama,
-          Deskripsi: deskripsi,
-          Kabupaten: kabupaten,
-          Kecamatan: kecamatan,
-          Kategori: "Tempat wisata",
-          Latitude: latitude,
-          Longitude: longitude,
-          Galery: filedownloadurl,
-          Gambar: filedownloadurl[0],
-        });
-      })
-      .then(() => {
-        alert("berhasil upload");
-        setimages([]);
-        setnama("");
-        setkecamatan("");
-        setdeskripsi("");
-        setkabupaten("");
-        setlatitude(0);
-        setlongitude(0);
-      })
-      .catch((err) => console.log(err));
+      Promise.all(promises)
+        .then((filedownloadurl) => {
+          db.collection("Wisata").add({
+            Nama: nama,
+            Deskripsi: deskripsi,
+            Kabupaten: kabupaten,
+            Kecamatan: kecamatan,
+            Kategori: "Tempat wisata",
+            Latitude: latitude,
+            Longitude: longitude,
+            Galery: filedownloadurl,
+            Gambar: filedownloadurl[0],
+          });
+        })
+        .then(() => {
+          alert("berhasil upload");
+          setimages([]);
+          setnama("");
+          setkecamatan("");
+          setdeskripsi("");
+          setkabupaten("");
+          setlatitude(0);
+          setlongitude(0);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return false;
+    }
   }
 
   function onChange(imageList, addUpdateIndex) {
     setimages(imageList);
   }
+
+  console.log(images);
 
   return (
     <Center>
