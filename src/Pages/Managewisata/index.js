@@ -14,10 +14,12 @@ import {
 } from "@chakra-ui/react";
 
 import { Map, Marker, ZoomControl } from "pigeon-maps";
-import { maptiler } from "pigeon-maps/providers";
-import Uploadfile from "../../Component/Atom/Uploadfile";
+import { osm } from "pigeon-maps/providers";
 import { storages, db } from "../../Firebase";
 import { useParams, useLocation } from "react-router-dom";
+import ImageUploading from "react-images-uploading";
+import { FiUpload } from "react-icons/fi";
+import Imagescard from "../../Component/Imagescard";
 
 export default function Managewisata() {
   const [nama, setnama] = useState("");
@@ -27,10 +29,7 @@ export default function Managewisata() {
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
-
   const [button, setbutton] = useState("Submit");
-
-  const maptilerProvider = maptiler("WCIEW9m9YztfxQQ2nfyB", "basic");
 
   let id = useParams();
   let data = useLocation();
@@ -56,6 +55,8 @@ export default function Managewisata() {
       return false;
     }
   }
+
+  console.log(images);
 
   useEffect(() => {
     getParams();
@@ -93,6 +94,11 @@ export default function Managewisata() {
       })
       .catch((err) => console.log(err));
   }
+
+  function onChange(imageList, addUpdateIndex) {
+    setimages(imageList);
+  }
+
   return (
     <Center>
       <Box width={"3xl"}>
@@ -156,7 +162,7 @@ export default function Managewisata() {
         </Box>
         <FormLabel mt={5}>Lokasi Wisata</FormLabel>
         <Map
-          provider={maptilerProvider}
+          provider={osm}
           height={400}
           width={765}
           dprs={[1, 2]}
@@ -173,7 +179,34 @@ export default function Managewisata() {
         </Map>
         <Box>
           <FormLabel mt={5}>Gambar</FormLabel>
-          <Uploadfile file={(images) => setimages(images)} />
+          <ImageUploading multiple value={images} onChange={onChange}>
+            {({
+              imageList,
+              onImageUpload,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) => (
+              <Box>
+                <Button
+                  width={"full"}
+                  leftIcon={<FiUpload />}
+                  colorScheme={isDragging ? "red" : "teal"}
+                  onClick={onImageUpload}
+                  {...dragProps}
+                >
+                  Click or Drop here
+                </Button>
+                {imageList.map((image, index) => (
+                  <Imagescard
+                    key={index}
+                    label={image.file.name}
+                    onClick={() => onImageRemove(index)}
+                  />
+                ))}
+              </Box>
+            )}
+          </ImageUploading>
         </Box>
         <Button
           colorScheme={"blue"}
