@@ -84,7 +84,7 @@ export default function Wisata() {
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editwisata/${doc.id}`} state={doc.data}>
+                  <Link to={`/Editwisata/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

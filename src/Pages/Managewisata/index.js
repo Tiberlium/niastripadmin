@@ -16,7 +16,7 @@ import {
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { osm } from "pigeon-maps/providers";
 import { storages, db } from "../../Firebase";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ImageUploading from "react-images-uploading";
 import { FiUpload } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
@@ -31,26 +31,7 @@ export default function Managewisata() {
   const [images, setimages] = useState([]);
   const [button, setbutton] = useState("Submit");
 
-  let id = useParams();
-  let data = useLocation();
-
-  function getParams() {
-    if (data.state !== null) {
-      setdeskripsi(data.state.Deskripsi);
-      setnama(data.state.Nama);
-      setlatitude(data.state.Latitude);
-      setlongitude(data.state.Longitude);
-      setkabupaten(data.state.Kabupaten);
-      setkecamatan(data.state.Kecamatan);
-      setbutton("Update");
-    } else {
-      return false;
-    }
-  }
-
-  useEffect(() => {
-    getParams();
-  });
+  const { id } = useParams();
 
   async function handleUpload() {
     if (button === "Submit") {
@@ -84,7 +65,7 @@ export default function Managewisata() {
           setlongitude(0);
         })
         .catch((err) => console.log(err));
-    } else if (button === "Update") {
+    } else {
       if (images.length !== 0) {
         const promises = images.map((doc) => {
           const uploadTask = storages.ref(`images/${doc.file.name}`);
@@ -94,20 +75,28 @@ export default function Managewisata() {
         });
 
         Promise.all(promises).then((filedownloadurl) => {
-          db.collection("Wisata").doc(id).update({
-            Nama: nama,
-            Deskripsi: deskripsi,
-            Kabupaten: kabupaten,
-            Kecamatan: kecamatan,
-            Kategori: "Tempat wisata",
-            Latitude: latitude,
-            Longitude: longitude,
-            Galery: filedownloadurl,
-            Gambar: filedownloadurl[0],
-          });
+          db.collection("Wisata")
+            .doc(id)
+            .update({
+              Nama: nama,
+              Deskripsi: deskripsi,
+              Kabupaten: kabupaten,
+              Kecamatan: kecamatan,
+              Kategori: "Tempat wisata",
+              Latitude: latitude,
+              Longitude: longitude,
+              Galery: filedownloadurl,
+              Gambar: filedownloadurl[0],
+            })
+            .then(() => alert("berhasil diupdate"))
+            .catch((e) => console.log(e));
         });
-      } else if (images.length === 0) {
-        db.collection("Wisata").doc(id).update({
+      }
+
+      await db
+        .collection("Wisata")
+        .doc(id)
+        .update({
           Nama: nama,
           Deskripsi: deskripsi,
           Kabupaten: kabupaten,
@@ -115,18 +104,15 @@ export default function Managewisata() {
           Kategori: "Tempat wisata",
           Latitude: latitude,
           Longitude: longitude,
-        });
-      }
-    } else {
-      return false;
+        })
+        .then(() => alert("berhasil"))
+        .catch((e) => console.log(e));
     }
   }
 
-  function onChange(imageList, addUpdateIndex) {
+  function onChange(imageList) {
     setimages(imageList);
   }
-
-  console.log(images);
 
   return (
     <Center>
