@@ -50,7 +50,7 @@ export default function Managewisata() {
 
   useEffect(() => {
     getParams();
-  }, []);
+  });
 
   async function handleUpload() {
     if (button === "Submit") {
