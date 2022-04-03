@@ -29,7 +29,9 @@ export default function Managewisata() {
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
-  const [button, setbutton] = useState("Submit");
+  const [button, setbutton] = useState("");
+
+  const [data, setdata] = useState({});
 
   const { id } = useParams();
 
@@ -110,9 +112,18 @@ export default function Managewisata() {
     }
   }
 
+  async function Get() {
+    const docRef = await db.collection("Wisata").doc(id).get();
+    setdata(docRef.data());
+  }
+
   function onChange(imageList) {
     setimages(imageList);
   }
+
+  useEffect(() => {
+    Get();
+  }, []);
 
   return (
     <Center>
@@ -230,7 +241,7 @@ export default function Managewisata() {
           alignSelf={"center"}
           onClick={handleUpload}
         >
-          {button}
+          {id ? setbutton("Update") : setbutton("Submit")}
         </Button>
       </Box>
     </Center>
