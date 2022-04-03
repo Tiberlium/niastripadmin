@@ -29,7 +29,6 @@ export default function Managewisata() {
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
-  const [button, setbutton] = useState("");
 
   const [data, setdata] = useState({});
 
@@ -241,7 +240,7 @@ export default function Managewisata() {
           alignSelf={"center"}
           onClick={handleUpload}
         >
-          {id ? setbutton("Update") : setbutton("Submit")}
+          {id ? "Update" : "Submit"}
         </Button>
       </Box>
     </Center>
