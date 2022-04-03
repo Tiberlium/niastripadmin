@@ -34,8 +34,13 @@ export default function Managewisata() {
 
   const { id } = useParams();
 
+  useEffect(() => {
+    Get();
+    return () => setdata({});
+  }, []);
+
   async function handleUpload() {
-    if (button === "Submit") {
+    if (!id) {
       const promises = images.map((doc) => {
         const uploadTask = storages.ref(`images/${doc.file.name}`);
         return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
@@ -114,15 +119,13 @@ export default function Managewisata() {
   async function Get() {
     const docRef = await db.collection("Wisata").doc(id).get();
     setdata(docRef.data());
+    setlatitude(docRef.data().Latitude);
+    setlongitude(docRef.data().Longitude);
   }
 
   function onChange(imageList) {
     setimages(imageList);
   }
-
-  useEffect(() => {
-    Get();
-  }, []);
 
   return (
     <Center>
@@ -138,7 +141,7 @@ export default function Managewisata() {
                     placeholder="Nama Wisata"
                     variant={"filled"}
                     type={"text"}
-                    value={nama}
+                    defaultValue={data.Nama || nama}
                     onChange={(e) => setnama(e.target.value)}
                   />
                   <FormHelperText>masukkan nama tempat wisata</FormHelperText>
@@ -148,7 +151,7 @@ export default function Managewisata() {
                   <Textarea
                     placeholder="masukkan deskripsi"
                     variant={"filled"}
-                    value={deskripsi}
+                    defaultValue={data.Deskripsi || deskripsi}
                     onChange={(e) => setdeskripsi(e.target.value)}
                   />
                   <FormHelperText>
@@ -161,7 +164,7 @@ export default function Managewisata() {
                     placeholder="Kabupaten"
                     variant={"filled"}
                     type={"text"}
-                    value={kabupaten}
+                    defaultValue={data.Kabupaten || kabupaten}
                     onChange={(e) => setkabupaten(e.target.value)}
                   />
                   <FormHelperText>
@@ -174,7 +177,7 @@ export default function Managewisata() {
                     placeholder="Kecamatan"
                     variant={"filled"}
                     type={"text"}
-                    value={kecamatan}
+                    defaultValue={data.Kecamatan || kecamatan}
                     onChange={(e) => setkecamatan(e.target.value)}
                   />
                   <FormHelperText>
