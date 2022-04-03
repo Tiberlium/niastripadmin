@@ -141,7 +141,7 @@ export default function Managewisata() {
                     placeholder="Nama Wisata"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={data.Nama || nama}
+                    defaultValue={data.Nama || ""}
                     onChange={(e) => setnama(e.target.value)}
                   />
                   <FormHelperText>masukkan nama tempat wisata</FormHelperText>
@@ -151,7 +151,7 @@ export default function Managewisata() {
                   <Textarea
                     placeholder="masukkan deskripsi"
                     variant={"filled"}
-                    defaultValue={data.Deskripsi || deskripsi}
+                    defaultValue={data.Deskripsi || ""}
                     onChange={(e) => setdeskripsi(e.target.value)}
                   />
                   <FormHelperText>
@@ -164,7 +164,7 @@ export default function Managewisata() {
                     placeholder="Kabupaten"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={data.Kabupaten || kabupaten}
+                    defaultValue={data.Kabupaten || ""}
                     onChange={(e) => setkabupaten(e.target.value)}
                   />
                   <FormHelperText>
@@ -177,7 +177,7 @@ export default function Managewisata() {
                     placeholder="Kecamatan"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={data.Kecamatan || kecamatan}
+                    defaultValue={data.Kecamatan || ""}
                     onChange={(e) => setkecamatan(e.target.value)}
                   />
                   <FormHelperText>
