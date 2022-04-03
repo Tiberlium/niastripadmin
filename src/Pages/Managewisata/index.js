@@ -48,8 +48,6 @@ export default function Managewisata() {
     }
   }
 
-  console.log(images);
-
   useEffect(() => {
     getParams();
   }, []);
@@ -86,6 +84,39 @@ export default function Managewisata() {
           setlongitude(0);
         })
         .catch((err) => console.log(err));
+    } else if (button === "Update") {
+      if (images.length !== 0) {
+        const promises = images.map((doc) => {
+          const uploadTask = storages.ref(`images/${doc.file.name}`);
+          return uploadTask
+            .put(doc.file)
+            .then(() => uploadTask.getDownloadURL());
+        });
+
+        Promise.all(promises).then((filedownloadurl) => {
+          db.collection("Wisata").doc(id).update({
+            Nama: nama,
+            Deskripsi: deskripsi,
+            Kabupaten: kabupaten,
+            Kecamatan: kecamatan,
+            Kategori: "Tempat wisata",
+            Latitude: latitude,
+            Longitude: longitude,
+            Galery: filedownloadurl,
+            Gambar: filedownloadurl[0],
+          });
+        });
+      } else if (images.length === 0) {
+        db.collection("Wisata").doc(id).update({
+          Nama: nama,
+          Deskripsi: deskripsi,
+          Kabupaten: kabupaten,
+          Kecamatan: kecamatan,
+          Kategori: "Tempat wisata",
+          Latitude: latitude,
+          Longitude: longitude,
+        });
+      }
     } else {
       return false;
     }
