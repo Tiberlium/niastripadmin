@@ -32,13 +32,10 @@ export default function Managewisata() {
   const [images, setimages] = useState([]);
   const toast = useToast();
 
-  const [data, setdata] = useState({});
-
   const { id } = useParams();
 
   useEffect(() => {
     Get();
-    return () => setdata({});
   }, []);
 
   async function handleUpload() {
