@@ -151,8 +151,7 @@ export default function Managewisata() {
       setkabupaten("");
       setkecamatan("");
       setdeskripsi("");
-      setlatitude("");
-      setlongitude("");
+      setimages([]);
     }
   }
 
