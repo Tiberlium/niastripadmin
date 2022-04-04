@@ -10,6 +10,7 @@ import {
   WrapItem,
   Textarea,
   Center,
+  useToast,
   Button,
 } from "@chakra-ui/react";
 
@@ -29,6 +30,7 @@ export default function Managewisata() {
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
+  const toast = useToast();
 
   const [data, setdata] = useState({});
 
@@ -61,7 +63,13 @@ export default function Managewisata() {
           });
         })
         .then(() => {
-          alert("berhasil upload");
+          toast({
+            title: "Data ditambahkan",
+            description: "Data telah berhasil di tambahkan",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           setimages([]);
           setnama("");
           setkecamatan("");
@@ -94,7 +102,15 @@ export default function Managewisata() {
               Galery: filedownloadurl,
               Gambar: filedownloadurl[0],
             })
-            .then(() => alert("berhasil diupdate"))
+            .then(() =>
+              toast({
+                title: "Data di perbarui",
+                description: "Data telah berhasil di perbarui",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              })
+            )
             .catch((e) => console.log(e));
         });
       }
@@ -111,16 +127,36 @@ export default function Managewisata() {
           Latitude: latitude,
           Longitude: longitude,
         })
-        .then(() => alert("berhasil"))
+        .then(() =>
+          toast({
+            title: "Data di perbarui",
+            description: "Data telah berhasil di perbarui",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          })
+        )
         .catch((e) => console.log(e));
     }
   }
 
   async function Get() {
-    const docRef = await db.collection("Wisata").doc(id).get();
-    setdata(docRef.data());
-    setlatitude(docRef.data().Latitude);
-    setlongitude(docRef.data().Longitude);
+    if (id) {
+      const docRef = await db.collection("Wisata").doc(id).get();
+      setnama(docRef.data().Nama);
+      setkabupaten(docRef.data().Kabupaten);
+      setkecamatan(docRef.data().Kecamatan);
+      setdeskripsi(docRef.data().Deskripsi);
+      setlatitude(docRef.data().Latitude);
+      setlongitude(docRef.data().Longitude);
+    } else {
+      setnama("");
+      setkabupaten("");
+      setkecamatan("");
+      setdeskripsi("");
+      setlatitude("");
+      setlongitude("");
+    }
   }
 
   function onChange(imageList) {
@@ -141,7 +177,7 @@ export default function Managewisata() {
                     placeholder="Nama Wisata"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={data.Nama || ""}
+                    defaultValue={nama || ""}
                     onChange={(e) => setnama(e.target.value)}
                   />
                   <FormHelperText>masukkan nama tempat wisata</FormHelperText>
@@ -151,7 +187,7 @@ export default function Managewisata() {
                   <Textarea
                     placeholder="masukkan deskripsi"
                     variant={"filled"}
-                    defaultValue={data.Deskripsi || ""}
+                    defaultValue={deskripsi || ""}
                     onChange={(e) => setdeskripsi(e.target.value)}
                   />
                   <FormHelperText>
@@ -164,7 +200,7 @@ export default function Managewisata() {
                     placeholder="Kabupaten"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={data.Kabupaten || ""}
+                    defaultValue={kabupaten || ""}
                     onChange={(e) => setkabupaten(e.target.value)}
                   />
                   <FormHelperText>
@@ -177,7 +213,7 @@ export default function Managewisata() {
                     placeholder="Kecamatan"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={data.Kecamatan || ""}
+                    defaultValue={kecamatan || ""}
                     onChange={(e) => setkecamatan(e.target.value)}
                   />
                   <FormHelperText>
