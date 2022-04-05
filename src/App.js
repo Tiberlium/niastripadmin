@@ -13,23 +13,14 @@ import {
   Userdetail,
 } from "./Pages";
 
-import { Box, List, ListItem, Text } from "@chakra-ui/react";
-import { BsHouseFill } from "react-icons/bs";
+import { Box, List, ListItem, Text, Flex, Spacer } from "@chakra-ui/react";
+
+
 class App extends react.Component {
   render() {
     return (
       <Box>
         <BrowserRouter>
-          <List>
-            <ListItem>
-              <BsHouseFill color="red" size={30} />
-              <Link to="/">
-                <Text fontWeight="medium" fontSize={20} color={"black"}>
-                  Home
-                </Text>
-              </Link>
-            </ListItem>
-          </List>
           <Routes>
             <Route path="/" element={<User />} />
             <Route path="/Tambahkandatawisata" element={<Managewisata />} />
