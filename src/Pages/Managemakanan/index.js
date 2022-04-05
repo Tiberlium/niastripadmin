@@ -1,5 +1,7 @@
-import React from "react";
+import React from 'react'
 
-export default function Managemakanan() {
-  return <div>Managemakanan</div>;
+export default function Managemakana() {
+  return (
+    <div>Managemakana</div>
+  )
 }

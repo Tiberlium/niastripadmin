@@ -6,6 +6,8 @@ import Manageevent from "./Manageevent";
 import Staycation from "./Staycation";
 import Managestaycation from "./Managestaycation";
 import Managemakanan from "./Managemakanan";
+import Makanan from "./Makanan";
+import Event from './Event';
 
 
 export {
@@ -17,4 +19,6 @@ export {
   Staycation,
   Managestaycation,
   Managemakanan,
+  Makanan,
+  Event,
 };
