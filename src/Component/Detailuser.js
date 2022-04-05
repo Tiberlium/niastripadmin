@@ -49,6 +49,10 @@ export default class Detailuser extends Component {
                 <Text fontWeight={"bold"}>Telephone</Text>
                 <Text color={"gray.500"}>Jason Mratz</Text>
               </Box>
+              <Box marginBottom={5}>
+                <Text fontWeight={"bold"}>Kewarganegaraan</Text>
+                <Text color={"gray.500"}>Jason Mratz</Text>
+              </Box>
             </Box>
           </WrapItem>
         </Wrap>

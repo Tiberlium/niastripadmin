@@ -7,8 +7,9 @@ import Staycation from "./Staycation";
 import Managestaycation from "./Managestaycation";
 import Managemakanan from "./Managemakanan";
 import Makanan from "./Makanan";
-import Event from './Event';
-
+import Event from "./Event";
+import User from "./User";
+import Userdetail from "./Userdetail";
 
 export {
   Login,
@@ -21,4 +22,6 @@ export {
   Managemakanan,
   Makanan,
   Event,
+  User,
+  Userdetail,
 };
