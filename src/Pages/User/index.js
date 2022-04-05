@@ -28,6 +28,7 @@ export default function User() {
           <Thead>
             <Tr>
               <Th>No</Th>
+              <Th>Id</Th>
               <Th>Nama</Th>
               <Th>Email atau phone</Th>
               <Th>Detail</Th>
@@ -36,8 +37,6 @@ export default function User() {
           </Thead>
           <Tbody>
             {/* <Tr>
-              <Td>{this.props.nama}</Td>
-              <Td>{this.props.email}</Td>
               <Td>
                 <Button
                   colorScheme="red"
