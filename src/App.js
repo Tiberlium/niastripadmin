@@ -34,21 +34,25 @@ import {
   HStack,
   StackDivider,
   Image,
-  Center,
 } from "@chakra-ui/react";
 
 function App() {
   return (
     <BrowserRouter>
-      <HStack spacing="20" divider={<StackDivider borderColor="gray.200" />}>
-        <Box h={"full"} w={"48"} p={7}>
+      <HStack
+        spacing='12'
+        divider={<StackDivider borderColor="gray.200" height={650} />}
+      >
+        <Box h={"full"} w={"48"} ml='10'>
           <List spacing={4}>
-            <Image
-              borderRadius="full"
-              boxSize="100px"
-              src="https://bit.ly/dan-abramov"
-              alt="Dan Abramov"
-            />
+            <Box ml={"10"}>
+              <Image
+                borderRadius="full"
+                boxSize="100px"
+                src="https://bit.ly/dan-abramov"
+                alt="Dan Abramov"
+              />
+            </Box>
             <ListItem
               backgroundColor={"azure"}
               p={2}
@@ -127,7 +131,7 @@ function App() {
             </ListItem>
           </List>
         </Box>
-        <Box h={"fit-content"} w={"fit-content"}>
+        <Box h={"fit-content"} marginTop={"-60"}>
           <Routes>
             <Route path="/" element={<User />} />
             <Route path="/Tambahkandatawisata" element={<Managewisata />} />
