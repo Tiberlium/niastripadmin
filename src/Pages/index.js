@@ -10,6 +10,8 @@ import Makanan from "./Makanan";
 import Event from "./Event";
 import User from "./User";
 import Userdetail from "./Userdetail";
+import Transaction from "./Transaction";
+import Report from './Report';
 
 export {
   Login,
@@ -24,4 +26,6 @@ export {
   Event,
   User,
   Userdetail,
+  Transaction,
+  Report,
 };
