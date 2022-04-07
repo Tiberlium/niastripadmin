@@ -13,8 +13,8 @@ export default function Manage() {
       <Text fontWeight={"semibold"} fontSize={25} pb={5}>
         Manage
       </Text>
-      <VStack>
-        <HStack>
+      <VStack spacing={'10'}>
+        <HStack spacing={20}>
           <Box
             h={"56"}
             width={"96"}
@@ -42,7 +42,7 @@ export default function Manage() {
             </Text>
           </Box>
         </HStack>
-        <HStack>
+        <HStack spacing={20}>
           <Box
             h={"56"}
             width={"96"}
