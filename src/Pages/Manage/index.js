@@ -10,7 +10,7 @@ import {
 export default function Manage() {
   return (
     <Box>
-      <Text fontWeight={"semibold"} fontSize={25} pb={5}>
+      <Text fontWeight={"semibold"} fontSize={30} pb={5}>
         Manage
       </Text>
       <VStack spacing={'10'}>
