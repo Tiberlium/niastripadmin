@@ -11,7 +11,8 @@ import Event from "./Event";
 import User from "./User";
 import Userdetail from "./Userdetail";
 import Transaction from "./Transaction";
-import Report from './Report';
+import Report from "./Report";
+import Manage from "./Manage";
 
 export {
   Login,
@@ -28,4 +29,5 @@ export {
   Userdetail,
   Transaction,
   Report,
+  Manage,
 };
