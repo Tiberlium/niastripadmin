@@ -18,14 +18,14 @@ import {
 } from "./Pages";
 
 import {
-  IoHomeSharp,
+  IoHome,
   IoBedSharp,
   IoCalendarNumberSharp,
   IoFastFood,
-  IoPersonSharp,
-  IoCashSharp,
-  IoBuildSharp,
-  IoNewspaperSharp,
+  IoPerson,
+  IoCash,
+  IoBuild,
+  IoNewspaper,
   IoHomeOutline,
   IoCashOutline,
   IoPersonOutline,
@@ -59,141 +59,187 @@ function App() {
                 src={Logo}
                 alt="Dan Abramov"
               />
-              <Text p={3} fontWeight='bold' fontSize={20}>
+              <Text p={3} fontWeight="bold" fontSize={20}>
                 Nias Trip
               </Text>
             </Box>
-            <ListItem
-              backgroundColor={"azure"}
-              p={2}
-              borderRadius={10}
-              w={"52"}
-            >
+            <ListItem>
               <NavLink
                 to="/"
                 children={({ isActive }) =>
                   isActive ? (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"blue.400"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoHomeSharp color="blue" size={20} />
+                        <IoHome color="white" size={20} />
                       </Box>
-                      <Text fontWeight="bold">Home</Text>
+                      <Text fontWeight="bold" color="white">
+                        Home
+                      </Text>
                     </Flex>
                   ) : (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"antiquewhite"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoHomeOutline color="black" size={20} />
+                        <IoHomeOutline color="blue" size={20} />
                       </Box>
-                      <Text fontWeight="Regular">Home</Text>
+                      <Text fontWeight="Regular" color={"blue"}>
+                        Home
+                      </Text>
                     </Flex>
                   )
                 }
               />
             </ListItem>
-            <ListItem
-              backgroundColor={"azure"}
-              p={2}
-              borderRadius={10}
-              w={"52"}
-            >
+            <ListItem>
               <NavLink
                 to="/Transaction"
                 children={({ isActive }) =>
                   isActive ? (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"blue.400"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoCashSharp color="blue" size={20} />
+                        <IoCash color="white" size={20} />
                       </Box>
-                      <Text fontWeight="bold">Transaction</Text>
+                      <Text fontWeight="bold" color="white">
+                        Transaction
+                      </Text>
                     </Flex>
                   ) : (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"antiquewhite"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoCashOutline color="black" size={20} />
+                        <IoCashOutline color="blue" size={20} />
                       </Box>
-                      <Text fontWeight="Regular">Transaction</Text>
+                      <Text fontWeight="Regular" color={"blue"}>
+                        Transaction
+                      </Text>
                     </Flex>
                   )
                 }
               />
             </ListItem>
-            <ListItem
-              backgroundColor={"azure"}
-              p={2}
-              borderRadius={10}
-              w={"52"}
-            >
+            <ListItem>
               <NavLink
                 to="/User"
                 children={({ isActive }) =>
                   isActive ? (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"blue.400"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoPersonSharp color="blue" size={20} />
+                        <IoPerson color="white" size={20} />
                       </Box>
-                      <Text fontWeight="bold">User</Text>
+                      <Text fontWeight="bold" color={"white"}>
+                        User
+                      </Text>
                     </Flex>
                   ) : (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"antiquewhite"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoPersonOutline color="black" size={20} />
+                        <IoPersonOutline color="blue" size={20} />
                       </Box>
-                      <Text fontWeight="Regular">User</Text>
+                      <Text fontWeight="Regular" color={"blue"}>
+                        User
+                      </Text>
                     </Flex>
                   )
                 }
               />
             </ListItem>
-            <ListItem
-              backgroundColor={"azure"}
-              p={2}
-              borderRadius={10}
-              w={"52"}
-            >
+            <ListItem>
               <NavLink
                 to="/Manage"
                 children={({ isActive }) =>
                   isActive ? (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"blue.400"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoBuildSharp color="blue" size={20} />
+                        <IoBuild color="white" size={20} />
                       </Box>
-                      <Text fontWeight="bold">Manage</Text>
+                      <Text fontWeight="bold" color={"white"}>
+                        Manage
+                      </Text>
                     </Flex>
                   ) : (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"antiquewhite"}
+                      p={2}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoBuildOutline color="black" size={20} />
+                        <IoBuildOutline color="blue" size={20} />
                       </Box>
-                      <Text fontWeight="Regular">Manage</Text>
+                      <Text fontWeight="Regular" color={"blue"}>
+                        Manage
+                      </Text>
                     </Flex>
                   )
                 }
               />
             </ListItem>
-            <ListItem
-              backgroundColor={"azure"}
-              p={2}
-              mb={5}
-              borderRadius={10}
-              w={"52"}
-            >
+            <ListItem>
               <NavLink
                 to="/Report"
                 children={({ isActive }) =>
                   isActive ? (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"blue.400"}
+                      p={2}
+                      mb={5}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoNewspaperSharp color="blue" size={20} />
+                        <IoNewspaper color="white" size={20} />
                       </Box>
-                      <Text fontWeight="semibold">Report</Text>
+                      <Text fontWeight="bold" color={"white"}>
+                        Report
+                      </Text>
                     </Flex>
                   ) : (
-                    <Flex>
+                    <Flex
+                      backgroundColor={"antiquewhite"}
+                      p={2}
+                      mb={5}
+                      borderRadius={10}
+                      w={"52"}
+                    >
                       <Box mr={5}>
-                        <IoNewspaperOutline color="black" size={20} />
+                        <IoNewspaperOutline color="blue" size={20} />
                       </Box>
-                      <Text fontWeight="Regular">Report</Text>
+                      <Text fontWeight="Regular" color={"blue"}>
+                        Report
+                      </Text>
                     </Flex>
                   )
                 }
@@ -201,7 +247,7 @@ function App() {
             </ListItem>
           </List>
         </Box>
-        <Box h={"fit-content"} marginTop={"-60"}>
+        <Box h={"fit-content"} marginTop={'-80'}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Tambahkandatawisata" element={<Managewisata />} />
