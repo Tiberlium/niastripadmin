@@ -37,8 +37,8 @@ import {
   ListItem,
   Text,
   Box,
-  Divider,
   Image,
+  Center,
 } from "@chakra-ui/react";
 function App() {
   return (
@@ -241,26 +241,31 @@ function App() {
             </ListItem>
           </List>
         </Box>
-        <Box ml={"20"}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Wisata" element={<Wisata />} />
-            <Route path="/Tambahkandatawisata" element={<Managewisata />} />
-            <Route path="/Editwisata/:id" element={<Managewisata />} />
-            <Route path="/User" element={<User />} />
-            <Route path="/Transaction" element={<Transaction />} />
-            <Route path="/Manage" element={<Manage />} />
-            <Route path="/Report" element={<Report />} />
-            <Route path="/Event" element={<Event />} />
-            <Route path="/Makanan" element={<Makanan />} />
-            <Route path="/Staycation" element={<Staycation />} />
-            <Route path="/Editevent/:id" element={<Manageevent />} />
-            <Route path="/Editmakanan/:id" element={<Managemakanan />} />
-            <Route path="/Editstaycation/:id" element={<Managestaycation />} />
-            <Route path="/User/:id" element={<Userdetail />} />
-            <Route />
-          </Routes>
-        </Box>
+        <Center w="100%">
+          <Box ml={"20"} display="flex">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/Wisata" element={<Wisata />} />
+              <Route path="/Tambahkandatawisata" element={<Managewisata />} />
+              <Route path="/Editwisata/:id" element={<Managewisata />} />
+              <Route path="/User" element={<User />} />
+              <Route path="/Transaction" element={<Transaction />} />
+              <Route path="/Manage" element={<Manage />} />
+              <Route path="/Report" element={<Report />} />
+              <Route path="/Event" element={<Event />} />
+              <Route path="/Makanan" element={<Makanan />} />
+              <Route path="/Staycation" element={<Staycation />} />
+              <Route path="/Editevent/:id" element={<Manageevent />} />
+              <Route path="/Editmakanan/:id" element={<Managemakanan />} />
+              <Route
+                path="/Editstaycation/:id"
+                element={<Managestaycation />}
+              />
+              <Route path="/User/:id" element={<Userdetail />} />
+              <Route />
+            </Routes>
+          </Box>
+        </Center>
       </Flex>
     </BrowserRouter>
   );
