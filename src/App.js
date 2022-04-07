@@ -13,6 +13,7 @@ import {
   User,
   Userdetail,
   Home,
+  Manage,
   Transaction,
   Report,
 } from "./Pages";
@@ -247,14 +248,14 @@ function App() {
             </ListItem>
           </List>
         </Box>
-        <Box h={"fit-content"} marginTop={'-80'}>
+        <Box h={"fit-content"} marginTop={"-80"}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Tambahkandatawisata" element={<Managewisata />} />
             <Route path="/Editwisata/:id" element={<Managewisata />} />
             <Route path="/User" element={<User />} />
             <Route path="/Transaction" element={<Transaction />} />
-            <Route path="/Manage" />
+            <Route path="/Manage" element={<Manage />} />
             <Route path="/Report" element={<Report />} />
             <Route />
           </Routes>
