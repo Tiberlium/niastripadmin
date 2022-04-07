@@ -18,6 +18,7 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { db } from "../../Firebase";
+import { Scrollbar } from "smooth-scrollbar-react";
 
 export default function Wisata() {
   const [data, setdata] = useState([]);
@@ -48,7 +49,7 @@ export default function Wisata() {
   }, []);
 
   return (
-    <>
+    <Box>
       <Text fontSize={"4xl"} fontWeight="bold" pb={5} pl={10} pt={5}>
         Daftar Tempat Wisata
       </Text>
@@ -74,43 +75,43 @@ export default function Wisata() {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((doc, index) => (
-              <Tr key={doc.id}>
-                <Td>{index}</Td>
-                <Td>{doc.data.Nama}</Td>
-                <Td>{doc.data.Kabupaten}</Td>
-                <Td>{doc.data.Kecamatan}</Td>
-                <Td>
-                  {doc.data.Latitude}/{doc.data.Longitude}
-                </Td>
-                <Td>
-                  <Link to={`/Editwisata/${doc.id}`}>
+              {data.map((doc, index) => (
+                <Tr key={doc.id}>
+                  <Td>{index}</Td>
+                  <Td>{doc.data.Nama}</Td>
+                  <Td>{doc.data.Kabupaten}</Td>
+                  <Td>{doc.data.Kecamatan}</Td>
+                  <Td>
+                    {doc.data.Latitude}/{doc.data.Longitude}
+                  </Td>
+                  <Td>
+                    <Link to={`/Editwisata/${doc.id}`}>
+                      <Button
+                        colorScheme={"blue"}
+                        variant="solid"
+                        size="sm"
+                        leftIcon={<BsFillPencilFill />}
+                      >
+                        Edit
+                      </Button>
+                    </Link>
+                  </Td>
+                  <Td>
                     <Button
-                      colorScheme={"blue"}
+                      colorScheme={"red"}
                       variant="solid"
                       size="sm"
-                      leftIcon={<BsFillPencilFill />}
+                      leftIcon={<BsFillTrashFill />}
+                      onClick={() => remove(doc.id)}
                     >
-                      Edit
+                      Delete
                     </Button>
-                  </Link>
-                </Td>
-                <Td>
-                  <Button
-                    colorScheme={"red"}
-                    variant="solid"
-                    size="sm"
-                    leftIcon={<BsFillTrashFill />}
-                    onClick={() => remove(doc.id)}
-                  >
-                    Delete
-                  </Button>
-                </Td>
-              </Tr>
-            ))}
+                  </Td>
+                </Tr>
+              ))}
           </Tbody>
         </Table>
       </Box>
-    </>
+    </Box>
   );
 }

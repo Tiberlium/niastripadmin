@@ -37,20 +37,16 @@ import {
   ListItem,
   Text,
   Box,
-  HStack,
-  StackDivider,
+  Divider,
   Image,
 } from "@chakra-ui/react";
 function App() {
   return (
     <BrowserRouter>
-      <HStack
-        spacing="12"
-        divider={<StackDivider borderColor="gray.200" height={650} />}
-      >
-        <Box h={"full"} w={"48"} ml="10">
+      <Flex mt={"28"}>
+        <Box w={"48"} ml={10}>
           <List spacing={4}>
-            <Box ml={"10"} mt={"-16"} mb="20">
+            <Box ml={"10"} mt={"-10"} mb="20">
               <Image
                 borderRadius="full"
                 boxSize="100px"
@@ -245,19 +241,27 @@ function App() {
             </ListItem>
           </List>
         </Box>
-        <Box h={"fit-content"}>
+        <Box ml={"20"}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/Wisata" element={<Wisata />} />
             <Route path="/Tambahkandatawisata" element={<Managewisata />} />
             <Route path="/Editwisata/:id" element={<Managewisata />} />
             <Route path="/User" element={<User />} />
             <Route path="/Transaction" element={<Transaction />} />
             <Route path="/Manage" element={<Manage />} />
             <Route path="/Report" element={<Report />} />
+            <Route path="/Event" element={<Event />} />
+            <Route path="/Makanan" element={<Makanan />} />
+            <Route path="/Staycation" element={<Staycation />} />
+            <Route path="/Editevent/:id" element={<Manageevent />} />
+            <Route path="/Editmakanan/:id" element={<Managemakanan />} />
+            <Route path="/Editstaycation/:id" element={<Managestaycation />} />
+            <Route path="/User/:id" element={<Userdetail />} />
             <Route />
           </Routes>
         </Box>
-      </HStack>
+      </Flex>
     </BrowserRouter>
   );
 }
