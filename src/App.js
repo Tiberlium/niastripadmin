@@ -20,9 +20,6 @@ import {
 
 import {
   IoHome,
-  IoBedSharp,
-  IoCalendarNumberSharp,
-  IoFastFood,
   IoPerson,
   IoCash,
   IoBuild,
@@ -248,7 +245,7 @@ function App() {
             </ListItem>
           </List>
         </Box>
-        <Box h={"fit-content"} marginTop={"-80"}>
+        <Box h={"fit-content"}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Tambahkandatawisata" element={<Managewisata />} />
