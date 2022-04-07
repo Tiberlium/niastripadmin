@@ -18,7 +18,6 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { db } from "../../Firebase";
-import { Scrollbar } from "smooth-scrollbar-react";
 
 export default function Wisata() {
   const [data, setdata] = useState([]);

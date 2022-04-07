@@ -242,7 +242,7 @@ function App() {
           </List>
         </Box>
         <Center w="100%">
-          <Box ml={"20"} display="flex">
+          <Box ml={"20"} display="flex" mt={'-12'}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Wisata" element={<Wisata />} />
