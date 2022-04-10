@@ -51,7 +51,7 @@ function App() {
                 borderRadius="full"
                 boxSize="100px"
                 src={Logo}
-                alt="Dan Abramov"
+                alt="No Images"
               />
               <Text p={3} fontWeight="bold" fontSize={20}>
                 Nias Trip
@@ -242,7 +242,7 @@ function App() {
           </List>
         </Box>
         <Center w="100%">
-          <Box ml={"20"} display="flex" mt={'-12'}>
+          <Box ml={"20"} display="flex" mt={"-12"}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Wisata" element={<Wisata />} />
@@ -259,6 +259,10 @@ function App() {
               <Route path="/Editmakanan/:id" element={<Managemakanan />} />
               <Route
                 path="/Editstaycation/:id"
+                element={<Managestaycation />}
+              />
+              <Route
+                path="/Tambahkandatastaycation"
                 element={<Managestaycation />}
               />
               <Route path="/User/:id" element={<Userdetail />} />
