@@ -33,10 +33,12 @@ export default function Managestaycation() {
       <Center>
         <Box width={"3xl"}>
           <Box>
-            <Text fontSize={"4xl"}>Staycation Form</Text>
+            <Text fontSize={"4xl"}>Penginapan Form</Text>
             <Box>
               <FormControl required width={"3xl"} mt={10}>
-                <FormLabel htmlFor="Nama wisata" mt={5}>Nama Staycation</FormLabel>
+                <FormLabel htmlFor="Nama wisata" mt={5}>
+                  Nama Penginapan
+                </FormLabel>
                 <Input
                   placeholder="Nama Wisata"
                   variant={"filled"}
@@ -44,9 +46,11 @@ export default function Managestaycation() {
                   // defaultValue={nama || ""}
                   // onChange={(e) => setnama(e.target.value)}
                 />
-                <FormHelperText>masukkan nama staycation</FormHelperText>
+                <FormHelperText>masukkan nama Penginapan</FormHelperText>
 
-                <FormLabel htmlFor="Deskripsi" mt={5}>Deskripsi</FormLabel>
+                <FormLabel htmlFor="Deskripsi" mt={5}>
+                  Deskripsi
+                </FormLabel>
                 <Textarea
                   placeholder="masukkan deskripsi"
                   variant={"filled"}
@@ -54,10 +58,12 @@ export default function Managestaycation() {
                   // onChange={(e) => setdeskripsi(e.target.value)}
                 />
                 <FormHelperText>
-                  masukkan deskripsi tentang staycation
+                  masukkan deskripsi tentang penginapan
                 </FormHelperText>
 
-                <FormLabel htmlFor="Kabupaten" mt={5}>Kabupaten</FormLabel>
+                <FormLabel htmlFor="Kabupaten" mt={5}>
+                  Kabupaten
+                </FormLabel>
                 <Input
                   placeholder="Kabupaten"
                   variant={"filled"}
@@ -66,10 +72,12 @@ export default function Managestaycation() {
                   // onChange={(e) => setkabupaten(e.target.value)}
                 />
                 <FormHelperText>
-                  masukkan kabupaten dimana tempat staycation berada
+                  masukkan kabupaten dimana tempat penginapan berada
                 </FormHelperText>
 
-                <FormLabel htmlFor="Kecamatan" mt={5}>Kecamatan</FormLabel>
+                <FormLabel htmlFor="Kecamatan" mt={5}>
+                  Kecamatan
+                </FormLabel>
                 <Input
                   placeholder="Kecamatan"
                   variant={"filled"}
@@ -78,10 +86,12 @@ export default function Managestaycation() {
                   // onChange={(e) => setkecamatan(e.target.value)}
                 />
                 <FormHelperText>
-                  Masukkan nama kecamatan dimana tempat staycation berada
+                  Masukkan nama kecamatan dimana tempat penginapan berada
                 </FormHelperText>
 
-                <FormLabel htmlFor="Tarif" mt={5}>Tarif per Malam</FormLabel>
+                <FormLabel htmlFor="Tarif" mt={5}>
+                  Tarif per Malam
+                </FormLabel>
                 <Input
                   placeholder="ex Rp.123456789"
                   variant={"filled"}
@@ -90,7 +100,7 @@ export default function Managestaycation() {
                   // onChange={(e) => setkecamatan(e.target.value)}
                 />
                 <FormHelperText>
-                  Masukkan Tarif permalam untuk penggunaan staycation
+                  Masukkan Tarif permalam untuk penggunaan penginapan
                 </FormHelperText>
 
                 <CheckboxGroup
@@ -112,7 +122,7 @@ export default function Managestaycation() {
               </FormControl>
             </Box>
           </Box>
-          <FormLabel mt={5}>Lokasi Wisata</FormLabel>
+          <FormLabel mt={5}>Lokasi Penginapan</FormLabel>
           <Map
             provider={osm}
             height={400}
@@ -129,7 +139,9 @@ export default function Managestaycation() {
             <Marker color="red" width={40} />
             <ZoomControl />
           </Map>
-          <Text fontSize='sm' textColor={'GrayText'}>Atur Marker dimana letak lokasi wisata berada</Text>
+          <Text fontSize="sm" textColor={"GrayText"}>
+            Atur Marker dimana letak penginapan berada
+          </Text>
           <Box>
             <FormLabel mt={5}>Gambar</FormLabel>
             <ImageUploading multiple value={images}>
