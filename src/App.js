@@ -247,6 +247,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/Wisata" element={<Wisata />} />
               <Route path="/Tambahkandatawisata" element={<Managewisata />} />
+              <Route path="/Tambahkandatamakanan" element={<Managemakanan />} />
+              <Route path="/Tambahkandataevent" element={<Manageevent />} />
               <Route path="/Editwisata/:id" element={<Managewisata />} />
               <Route path="/User" element={<User />} />
               <Route path="/Transaction" element={<Transaction />} />

@@ -26,15 +26,14 @@ export default function Managemakanan() {
   const { id } = useParams();
 
   return (
-    <Box>
       <Center>
         <Box width={"3xl"}>
           <Box>
             <Text fontSize={"4xl"}>Makanan Form</Text>
             <Box>
               <FormControl required width={"3xl"} mt={10}>
-                <FormLabel htmlFor="Nama wisata" mt={5}>
-                  Nama Penginapan
+                <FormLabel htmlFor="Nama makanan" mt={5}>
+                  Nama Makanan
                 </FormLabel>
                 <Input
                   placeholder="Nama Wisata"
@@ -43,7 +42,7 @@ export default function Managemakanan() {
                   // defaultValue={nama || ""}
                   // onChange={(e) => setnama(e.target.value)}
                 />
-                <FormHelperText>masukkan nama penginapan</FormHelperText>
+                <FormHelperText>masukkan nama makanan</FormHelperText>
 
                 <FormLabel htmlFor="Deskripsi" mt={5}>
                   Deskripsi
@@ -149,6 +148,5 @@ export default function Managemakanan() {
           </Button>
         </Box>
       </Center>
-    </Box>
   );
 }
