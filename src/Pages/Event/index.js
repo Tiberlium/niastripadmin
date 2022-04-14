@@ -22,12 +22,12 @@ import { Link } from "react-router-dom";
 
 export default function Event() {
   return (
-    <>
+    <Box>
       <Text fontSize={"4xl"} fontWeight="bold" pb={5} pl={10} pt={5}>
         Daftar Event
       </Text>
       <Box pl={10} pr={10} pt={5}>
-        <Link to="/Tambahkandatawisata">
+        <Link to="/Tambahkandataevent">
           <Button colorScheme="blue" mb={5} leftIcon={<BsFillPlusCircleFill />}>
             Tambahkan yang baru
           </Button>
@@ -85,6 +85,6 @@ export default function Event() {
           </Tbody>
         </Table>
       </Box>
-    </>
+    </Box>
   );
 }

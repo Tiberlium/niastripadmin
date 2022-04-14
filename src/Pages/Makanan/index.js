@@ -39,8 +39,6 @@ export default function Makanan() {
             <Tr>
               <Th>No</Th>
               <Th>Nama</Th>
-              <Th>Kabupaten</Th>
-              <Th>Kota</Th>
               <Th>Latitude/Longitude</Th>
               <Th>Aksi Edit</Th>
               <Th>Aksi Hapus</Th>
