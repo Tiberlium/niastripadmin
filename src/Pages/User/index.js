@@ -19,7 +19,7 @@ import { IoMdWarning, IoMdTrash } from "react-icons/io";
 export default function User() {
   return (
     <Box>
-      <Text fontWeight="bold" fontSize={"3xl"} mt={10} ml={5}>
+      <Text fontSize={"5xl"} mt={10} ml={5}>
         List Pengguna
       </Text>
       <TableContainer>

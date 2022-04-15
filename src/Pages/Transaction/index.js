@@ -8,24 +8,30 @@ import {
   Tr,
   Td,
   TableCaption,
+  Text,
 } from "@chakra-ui/react";
 
 export default function Transaction() {
   return (
-    <Table variant={"striped"}>
-      <TableCaption>Transaction</TableCaption>
-      <Thead>
-        <Th>No</Th>
-        <Th>Id order</Th>
-        <Th>Pengguna</Th>
-        <Th>Status</Th>
-        <Th>Jumlah</Th>
-      </Thead>
-      {/* <Tbody>
+    <Box>
+      <Text fontSize={"5xl"} color="blackAlpha">
+        Transaksi
+      </Text>
+      <Table variant={"striped"}>
+        <TableCaption>Transaksi</TableCaption>
+        <Thead>
+          <Th>No</Th>
+          <Th>Id order</Th>
+          <Th>Pengguna</Th>
+          <Th>Status</Th>
+          <Th>Jumlah</Th>
+        </Thead>
+        {/* <Tbody>
         <Tr>
          
         </Tr>
       </Tbody> */}
-    </Table>
+      </Table>
+    </Box>
   );
 }

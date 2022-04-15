@@ -49,7 +49,7 @@ export default function Wisata() {
 
   return (
     <Box>
-      <Text fontSize={"4xl"} fontWeight="bold" pb={5} pl={10} pt={5}>
+      <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
         Daftar Tempat Wisata
       </Text>
       <Box pl={10} pr={10} pt={5}>

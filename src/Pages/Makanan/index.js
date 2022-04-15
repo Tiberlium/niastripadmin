@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 export default function Makanan() {
   return (
     <Box>
-      <Text fontSize={"4xl"} fontWeight="bold" pb={5} pl={10} pt={5}>
+      <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
         Daftar Makanan Tradisional
       </Text>
       <Box pl={10} pr={10} pt={5}>
