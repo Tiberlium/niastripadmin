@@ -16,6 +16,7 @@ import {
   Manage,
   Transaction,
   Report,
+  Login,
 } from "./Pages";
 
 import {

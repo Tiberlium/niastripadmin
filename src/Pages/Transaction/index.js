@@ -25,6 +25,7 @@ export default function Transaction() {
           <Th>Pengguna</Th>
           <Th>Status</Th>
           <Th>Jumlah</Th>
+          <Th>Detail</Th>
         </Thead>
         {/* <Tbody>
         <Tr>
