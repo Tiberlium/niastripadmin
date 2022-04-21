@@ -17,7 +17,6 @@ import {
   Manage,
   Transaction,
   Report,
-  Login,
 } from "./Pages";
 
 import {
@@ -42,6 +41,7 @@ import {
   Image,
   Center,
 } from "@chakra-ui/react";
+
 function App() {
   const stickref = useStickyBox({ offsetTop: 0, offsetBottom: 0 });
   return (
@@ -253,7 +253,7 @@ function App() {
           </List>
         </Box>
         <Center w="100%">
-          <Box ml={"20"} display="flex" mt='20'>
+          <Box ml={"20"} display="flex" mt="20">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Wisata" element={<Wisata />} />
