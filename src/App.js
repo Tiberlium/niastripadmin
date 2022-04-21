@@ -48,10 +48,10 @@ function App() {
     <BrowserRouter>
       <Flex>
         <Box
-          backgroundColor="chocolate"
+          backgroundColor="#342F2A"
           w="fit-content"
           p="16"
-          height='41rem'
+          height="41rem"
           ref={stickref}
         >
           <List spacing={4}>
@@ -63,7 +63,7 @@ function App() {
                   src={Logo}
                   alt="No Images"
                 />
-                <Text p={3} fontWeight="bold" fontSize={20}>
+                <Text p={3} fontWeight="bold" fontSize={20} color="white">
                   Nias Trip
                 </Text>
               </Box>
@@ -253,7 +253,7 @@ function App() {
           </List>
         </Box>
         <Center w="100%">
-          <Box ml={"20"} display="flex" mt={"-12"}>
+          <Box ml={"20"} display="flex" mt='20'>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Wisata" element={<Wisata />} />
