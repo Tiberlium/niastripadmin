@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import Logo from "./Asset/Logo.png";
+import { useStickyBox } from "react-sticky-box";
 import {
   Managewisata,
   Wisata,
@@ -42,22 +43,31 @@ import {
   Center,
 } from "@chakra-ui/react";
 function App() {
+  const stickref = useStickyBox({ offsetTop: 0, offsetBottom: 0 });
   return (
     <BrowserRouter>
-      <Flex mt={"28"}>
-        <Box w={"48"} ml={10}>
+      <Flex>
+        <Box
+          backgroundColor="chocolate"
+          w="fit-content"
+          p="16"
+          height='41rem'
+          ref={stickref}
+        >
           <List spacing={4}>
-            <Box ml={"10"} mt={"-10"} mb="20">
-              <Image
-                borderRadius="full"
-                boxSize="100px"
-                src={Logo}
-                alt="No Images"
-              />
-              <Text p={3} fontWeight="bold" fontSize={20}>
-                Nias Trip
-              </Text>
-            </Box>
+            <Center>
+              <Box>
+                <Image
+                  borderRadius="full"
+                  boxSize="100px"
+                  src={Logo}
+                  alt="No Images"
+                />
+                <Text p={3} fontWeight="bold" fontSize={20}>
+                  Nias Trip
+                </Text>
+              </Box>
+            </Center>
             <ListItem>
               <NavLink
                 to="/"
