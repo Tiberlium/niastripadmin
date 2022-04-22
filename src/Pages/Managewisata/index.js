@@ -31,6 +31,7 @@ export default function Managewisata() {
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
   const [loading, setloading] = useState(false);
+  const [url, seturl] = useState();
   const toast = useToast();
 
   const { id } = useParams();
@@ -80,39 +81,49 @@ export default function Managewisata() {
         })
         .catch((err) => console.log(err));
     } else {
+      setloading(true);
       if (images.length !== 0) {
-        const promises = images.map((doc) => {
+        const deleteImagesFrom_Url = url.map((x) => {
+          const imagesRef = storages.refFromURL(x);
+          imagesRef.delete();
+        });
+
+        const uploadTask = images.map((doc) => {
           const uploadTask = storages.ref(`images/${doc.file.name}`);
           return uploadTask
             .put(doc.file)
             .then(() => uploadTask.getDownloadURL());
         });
 
-        Promise.all(promises).then((filedownloadurl) => {
-          db.collection("Wisata")
-            .doc(id)
-            .update({
-              Nama: nama,
-              Deskripsi: deskripsi,
-              Kabupaten: kabupaten,
-              Kecamatan: kecamatan,
-              Kategori: "Tempat wisata",
-              Latitude: latitude,
-              Longitude: longitude,
-              Galery: filedownloadurl,
-              Gambar: filedownloadurl[0],
+        Promise.all(deleteImagesFrom_Url).then(() =>
+          Promise.all(uploadTask)
+            .then((filedownloadurl) => {
+              db.collection("Wisata")
+                .doc(id)
+                .update({
+                  Nama: nama,
+                  Deskripsi: deskripsi,
+                  Kabupaten: kabupaten,
+                  Kecamatan: kecamatan,
+                  Kategori: "Tempat wisata",
+                  Latitude: latitude,
+                  Longitude: longitude,
+                  Galery: filedownloadurl,
+                  Gambar: filedownloadurl[0],
+                })
+                .then(() =>
+                  toast({
+                    title: "Data di perbarui",
+                    description: "Data telah berhasil di perbarui",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                  })
+                )
+                .catch((e) => console.log(e));
             })
-            .then(() =>
-              toast({
-                title: "Data di perbarui",
-                description: "Data telah berhasil di perbarui",
-                status: "success",
-                duration: 9000,
-                isClosable: true,
-              })
-            )
-            .catch((e) => console.log(e));
-        });
+            .catch((err) => console.error(err))
+        );
       }
 
       await db
@@ -127,15 +138,16 @@ export default function Managewisata() {
           Latitude: latitude,
           Longitude: longitude,
         })
-        .then(() =>
+        .then(() => {
+          setloading(false);
           toast({
             title: "Data di perbarui",
             description: "Data telah berhasil di perbarui",
             status: "success",
             duration: 9000,
             isClosable: true,
-          })
-        )
+          });
+        })
         .catch((e) => console.log(e));
     }
   }
@@ -149,6 +161,7 @@ export default function Managewisata() {
       setdeskripsi(docRef.data().Deskripsi);
       setlatitude(docRef.data().Latitude);
       setlongitude(docRef.data().Longitude);
+      seturl(docRef.data().Galery);
     } else {
       setnama("");
       setkabupaten("");
