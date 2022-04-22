@@ -30,6 +30,7 @@ export default function Managewisata() {
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
+  const [loading, setloading] = useState(false);
   const toast = useToast();
 
   const { id } = useParams();
@@ -40,6 +41,7 @@ export default function Managewisata() {
 
   async function handleUpload() {
     if (!id) {
+      setloading(true);
       const promises = images.map((doc) => {
         const uploadTask = storages.ref(`images/${doc.file.name}`);
         return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
@@ -60,13 +62,6 @@ export default function Managewisata() {
           });
         })
         .then(() => {
-          toast({
-            title: "Data ditambahkan",
-            description: "Data telah berhasil di tambahkan",
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
           setimages([]);
           setnama("");
           setkecamatan("");
@@ -74,6 +69,14 @@ export default function Managewisata() {
           setkabupaten("");
           setlatitude(0);
           setlongitude(0);
+          setloading(false);
+          toast({
+            title: "Data ditambahkan",
+            description: "Data telah berhasil di tambahkan",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
         })
         .catch((err) => console.log(err));
     } else {
@@ -274,6 +277,7 @@ export default function Managewisata() {
           width={"full"}
           alignSelf={"center"}
           onClick={handleUpload}
+          isLoading={loading}
         >
           {id ? "Update" : "Submit"}
         </Button>
