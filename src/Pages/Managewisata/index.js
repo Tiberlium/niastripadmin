@@ -40,7 +40,6 @@ export default function Managewisata() {
     Get();
   }, []);
 
-
   async function handleUpload(event) {
     if (!id) {
       setloading(true);
@@ -292,7 +291,7 @@ export default function Managewisata() {
           marginTop={"6"}
           width={"full"}
           alignSelf={"center"}
-          onClick={() => handleUpload(Event)}
+          onClick={handleUpload}
           isLoading={loading}
         >
           {id ? "Update" : "Submit"}
