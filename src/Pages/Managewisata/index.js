@@ -40,7 +40,8 @@ export default function Managewisata() {
     Get();
   }, []);
 
-  async function handleUpload() {
+
+  async function handleUpload(event) {
     if (!id) {
       setloading(true);
       const promises = images.map((doc) => {
@@ -55,7 +56,7 @@ export default function Managewisata() {
             Deskripsi: deskripsi,
             Kabupaten: kabupaten,
             Kecamatan: kecamatan,
-            Kategori: "Tempat wisata",
+            Kategori: "Tempat Wisata",
             Latitude: latitude,
             Longitude: longitude,
             Galery: filedownloadurl,
@@ -105,7 +106,7 @@ export default function Managewisata() {
                   Deskripsi: deskripsi,
                   Kabupaten: kabupaten,
                   Kecamatan: kecamatan,
-                  Kategori: "Tempat wisata",
+                  Kategori: "Tempat Wisata",
                   Latitude: latitude,
                   Longitude: longitude,
                   Galery: filedownloadurl,
@@ -134,7 +135,7 @@ export default function Managewisata() {
           Deskripsi: deskripsi,
           Kabupaten: kabupaten,
           Kecamatan: kecamatan,
-          Kategori: "Tempat wisata",
+          Kategori: "Tempat Wisata",
           Latitude: latitude,
           Longitude: longitude,
         })
@@ -175,6 +176,8 @@ export default function Managewisata() {
     setimages(imageList);
   }
 
+  const isError = Input === "" && images === [];
+
   return (
     <Center>
       <Box width={"3xl"}>
@@ -183,7 +186,7 @@ export default function Managewisata() {
           <Wrap>
             <WrapItem>
               <Box>
-                <FormControl required width={"3xl"} mt={10}>
+                <FormControl required width={"3xl"} mt={10} isInvalid={isError}>
                   <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
                   <Input
                     placeholder="Nama Wisata"
@@ -289,7 +292,7 @@ export default function Managewisata() {
           marginTop={"6"}
           width={"full"}
           alignSelf={"center"}
-          onClick={handleUpload}
+          onClick={() => handleUpload(Event)}
           isLoading={loading}
         >
           {id ? "Update" : "Submit"}

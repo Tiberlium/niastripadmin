@@ -51,7 +51,7 @@ function App() {
 					backgroundColor="#342F2A"
 					w="fit-content"
 					p='10'
-					height="41rem"
+					height='660px'
 					ref={stickref}
 				>
 					<List spacing={4}>
