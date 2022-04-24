@@ -7,7 +7,6 @@ import {
   Tr,
   Th,
   Td,
-  Tfoot,
   Tbody,
   Button,
   Text,
