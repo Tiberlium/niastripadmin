@@ -27,10 +27,7 @@ export default function Wisata() {
 
   async function get() {
     let x = [];
-    const docRef = await db
-      .collection("Wisata")
-      .where("Kategori", "==", "Tempat wisata")
-      .get();
+    const docRef = await db.collection("Wisata").get();
     docRef.docs.map((doc) =>
       x.push({
         id: doc.id,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Table,
@@ -17,10 +17,29 @@ import {
   BsFillTrashFill,
   BsFillPlusCircleFill,
 } from "react-icons/bs";
+import { db } from "../../Firebase";
 
 import { Link } from "react-router-dom";
 
 export default function Event() {
+  const [data, setdata] = useState([]);
+
+  const get = async () => {
+    let x = [];
+    const docRef = await db.collection("Event").get();
+    docRef.docs.map((doc) => {
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+
+    setdata(x);
+  };
+
+  useState(() => {
+    get();
+  }, []);
   return (
     <Box>
       <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
@@ -41,47 +60,46 @@ export default function Event() {
               <Th>No</Th>
               <Th>Nama</Th>
               <Th>Kabupaten</Th>
-              <Th>Kota</Th>
+              <Th>Kategori</Th>
               <Th>Latitude/Longitude</Th>
               <Th>Aksi Edit</Th>
               <Th>Aksi Hapus</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {/* {data.map((doc, index) => (
-            <Tr key={doc.id}>
-              <Td>{index}</Td>
-              <Td>{doc.data.Nama}</Td>
-              <Td>{doc.data.Kabupaten}</Td>
-              <Td>{doc.data.Kecamatan}</Td>
-              <Td>
-                {doc.data.Latitude}/{doc.data.Longitude}
-              </Td>
-              <Td>
-                <Link to={`/Editwisata/${doc.id}`}>
+            {data.map((doc, index) => (
+              <Tr key={doc.id}>
+                <Td>{index}</Td>
+                <Td>{doc.data.Nama}</Td>
+                <Td>{doc.data.Kabupaten}</Td>
+                <Td>{doc.data.Kategori}</Td>
+                <Td>
+                  {doc.data.Latitude}/{doc.data.Longitude}
+                </Td>
+                <Td>
+                  <Link to={`/Editwisata/${doc.id}`}>
+                    <Button
+                      colorScheme={"blue"}
+                      variant="solid"
+                      size="sm"
+                      leftIcon={<BsFillPencilFill />}
+                    >
+                      Edit
+                    </Button>
+                  </Link>
+                </Td>
+                <Td>
                   <Button
-                    colorScheme={"blue"}
+                    colorScheme={"red"}
                     variant="solid"
                     size="sm"
-                    leftIcon={<BsFillPencilFill />}
+                    leftIcon={<BsFillTrashFill />}
                   >
-                    Edit
+                    Delete
                   </Button>
-                </Link>
-              </Td>
-              <Td>
-                <Button
-                  colorScheme={"red"}
-                  variant="solid"
-                  size="sm"
-                  leftIcon={<BsFillTrashFill />}
-                  onClick={() => remove(doc.id)}
-                >
-                  Delete
-                </Button>
-              </Td>
-            </Tr>
-          ))} */}
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </Box>

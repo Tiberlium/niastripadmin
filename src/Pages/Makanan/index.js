@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Tr,
@@ -19,7 +19,27 @@ import {
 
 import { Link } from "react-router-dom";
 
+import { db, storages } from "../../Firebase";
+
 export default function Makanan() {
+  const [data, setdata] = useState([]);
+
+  const get = async () => {
+    let x = [];
+    const dataRef = await db.collection("Makanan").get();
+    dataRef.docs.map((doc) => {
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+    setdata(x);
+  };
+
+  useEffect(() => {
+    get();
+  }, []);
+
   return (
     <Box>
       <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
@@ -39,20 +59,20 @@ export default function Makanan() {
             <Tr>
               <Th>No</Th>
               <Th>Nama</Th>
+              <Th>Kategori</Th>
               <Th>Latitude/Longitude</Th>
               <Th>Aksi Edit</Th>
               <Th>Aksi Hapus</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {/* {data.map((doc, index) => (
+            {data.map((doc, index) => (
               <Tr key={doc.id}>
                 <Td>{index}</Td>
                 <Td>{doc.data.Nama}</Td>
-                <Td>{doc.data.Kabupaten}</Td>
-                <Td>{doc.data.Kecamatan}</Td>
+                <Td>{doc.data.Kategori}</Td>
                 <Td>
-                  {doc.data.Latitude}/{doc.data.Longitude}
+                  {doc.data.lat}/{doc.data.long}
                 </Td>
                 <Td>
                   <Link to={`/Editwisata/${doc.id}`}>
@@ -72,13 +92,12 @@ export default function Makanan() {
                     variant="solid"
                     size="sm"
                     leftIcon={<BsFillTrashFill />}
-                    onClick={() => remove(doc.id)}
                   >
                     Delete
                   </Button>
                 </Td>
               </Tr>
-            ))} */}
+            ))}
           </Tbody>
         </Table>
       </Box>
