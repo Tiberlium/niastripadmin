@@ -165,8 +165,8 @@ export default function Managemakanan() {
                 placeholder="Nama Wisata"
                 variant={"filled"}
                 type={"text"}
-                // defaultValue={nama || ""}
-                // onChange={(e) => setnama(e.target.value)}
+                defaultValue={nama || ""}
+                onChange={(e) => setnama(e.target.value)}
               />
               <FormHelperText>masukkan nama makanan</FormHelperText>
 
@@ -176,8 +176,8 @@ export default function Managemakanan() {
               <Textarea
                 placeholder="masukkan deskripsi"
                 variant={"filled"}
-                // defaultValue={deskripsi || ""}
-                // onChange={(e) => setdeskripsi(e.target.value)}
+                defaultValue={deskripsi || ""}
+                onChange={(e) => setdeskripsi(e.target.value)}
               />
               <FormHelperText>
                 masukkan deskripsi tentang makanan
@@ -242,6 +242,7 @@ export default function Managemakanan() {
           width={"full"}
           alignSelf={"center"}
           isLoading={loading}
+          onClick={handleUpload}
         >
           {id ? "Update" : "Submit"}
         </Button>
