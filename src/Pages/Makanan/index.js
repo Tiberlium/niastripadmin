@@ -10,6 +10,7 @@ import {
   Button,
   Text,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 import {
   BsFillPencilFill,
@@ -23,6 +24,8 @@ import { db, storages } from "../../Firebase";
 
 export default function Makanan() {
   const [data, setdata] = useState([]);
+  const [alterData, setalterData] = useState("");
+  const toast = useToast();
 
   const get = async () => {
     let x = [];
@@ -39,6 +42,45 @@ export default function Makanan() {
   useEffect(() => {
     get();
   }, []);
+
+  const onRemove = (id) => {
+    const docRef = db.collection("Makanan").doc(id);
+
+    docRef
+      .get()
+      .then((doc) => {
+        setalterData(doc.data.Galery);
+      })
+      .then(() => {
+        const deleteImages = alterData.map((doc) => {
+          storages.refFromURL(doc).delete();
+        });
+
+        Promise.all(deleteImages).then(() => {
+          docRef
+            .delete()
+            .then(() => {
+              toast({
+                title: "Data di hapus.",
+                description: "Data telah di berhasil hapus",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
+              get();
+            })
+            .catch(() => {
+              toast({
+                title: "Data gagal di hapus.",
+                description: "Ada kesalahan data gagal di hapus",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+              });
+            });
+        });
+      });
+  };
 
   return (
     <Box>
@@ -92,6 +134,7 @@ export default function Makanan() {
                     variant="solid"
                     size="sm"
                     leftIcon={<BsFillTrashFill />}
+                    onClick={() => onRemove(doc.id)}
                   >
                     Delete
                   </Button>
