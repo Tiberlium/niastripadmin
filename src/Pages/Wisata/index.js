@@ -52,6 +52,7 @@ export default function Wisata() {
             .then(() => console.info("berhasil"))
             .catch(() => console.error("gagal"));
         });
+
         Promise.all(deleteUri).then(() => {
           docRef
             .delete()

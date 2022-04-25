@@ -17,12 +17,13 @@ import {
   BsFillTrashFill,
   BsFillPlusCircleFill,
 } from "react-icons/bs";
-import { db } from "../../Firebase";
+import { db, storages } from "../../Firebase";
 
 import { Link } from "react-router-dom";
 
 export default function Event() {
   const [data, setdata] = useState([]);
+  const [alterData, setalterData] = useState("");
 
   const get = async () => {
     let x = [];
@@ -40,6 +41,41 @@ export default function Event() {
   useState(() => {
     get();
   }, []);
+
+  const onRemove = (id) => {
+    const docRef = db.collection("Event").doc(id);
+    docRef
+      .get()
+      .then((doc) => {
+        setalterData(doc.data().Gambar);
+      })
+      .then(() => {
+        const deleteUri = storages.refFromURL(alterData).delete();
+        deleteUri.then(() => {
+          docRef
+            .delete()
+            .then(() => {
+              toast({
+                title: "Data di hapus.",
+                description: "Data telah di berhasil hapus",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
+              get();
+            })
+            .catch(() => {
+              toast({
+                title: "Data gagal di hapus.",
+                description: "Ada kesalahan data gagal di hapus",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+              });
+            });
+        });
+      });
+  };
   return (
     <Box>
       <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
@@ -94,6 +130,7 @@ export default function Event() {
                     variant="solid"
                     size="sm"
                     leftIcon={<BsFillTrashFill />}
+                    onChange={() => onRemove(doc.id)}
                   >
                     Delete
                   </Button>

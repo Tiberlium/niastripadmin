@@ -162,6 +162,11 @@ export default function Manageevent() {
       settarif(0);
     }
   };
+
+  useState(() => {
+    get();
+  }, []);
+
   const onChange = (imagelist) => {
     setimages(imagelist);
   };
@@ -243,7 +248,7 @@ export default function Manageevent() {
         </Text>
         <Box>
           <FormLabel mt={5}>Gambar</FormLabel>
-          <ImageUploading multiple value={images} onChange={onchange}>
+          <ImageUploading multiple value={images} onChange={onChange}>
             {({
               imageList,
               onImageUpload,
@@ -278,6 +283,7 @@ export default function Manageevent() {
           width={"full"}
           alignSelf={"center"}
           isLoading={loading}
+          onClick={handleUpload}
         >
           {id ? "Update" : "Submit"}
         </Button>
