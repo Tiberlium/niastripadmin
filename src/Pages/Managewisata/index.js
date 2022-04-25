@@ -40,7 +40,7 @@ export default function Managewisata() {
     Get();
   }, []);
 
-  async function handleUpload(event) {
+  async function handleUpload() {
     if (!id) {
       setloading(true);
       const promises = images.map((doc) => {
