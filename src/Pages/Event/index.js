@@ -11,6 +11,7 @@ import {
   Button,
   Text,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 import {
   BsFillPencilFill,
@@ -24,6 +25,7 @@ import { Link } from "react-router-dom";
 export default function Event() {
   const [data, setdata] = useState([]);
   const [alterData, setalterData] = useState("");
+  const toast = useToast();
 
   const get = async () => {
     let x = [];
@@ -113,7 +115,7 @@ export default function Event() {
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editwisata/${doc.id}`}>
+                  <Link to={`/Editevent/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"
