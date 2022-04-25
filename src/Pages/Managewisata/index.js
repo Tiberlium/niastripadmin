@@ -40,11 +40,12 @@ export default function Managewisata() {
     Get();
   }, []);
 
+
   async function handleUpload() {
     if (!id) {
       setloading(true);
       const promises = images.map((doc) => {
-        const uploadTask = storages.ref(`images/${doc.file.name}`);
+        const uploadTask = storages.ref(`Wisata/${doc.file.name}`);
         return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
       });
 

@@ -18,12 +18,141 @@ import { osm } from "pigeon-maps/providers";
 import { FiUpload } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
 import { useParams } from "react-router-dom";
+import { db, storages } from "../../Firebase";
 
 export default function Manageevent() {
   const [images, setimages] = useState([]);
+  const [nama, setnama] = useState("");
+  const [deskripsi, setdeskripsi] = useState("");
+  const [kabupaten, setkabupaten] = useState("");
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
+  const [tarif, settarif] = useState(0);
+  const [loading, setloading] = useState(false);
+  const [url, seturl] = useState("");
+  const toast = useToast();
   const { id } = useParams();
+
+  const handleUpload = () => {
+    if (!id) {
+      setloading(true);
+      const taskUpload = images.map((doc) => {
+        const dataRef = storages.ref(`Event/${doc.file.name}`);
+        return dataRef.put(doc.file).then(() => dataRef.getDownloadURL());
+      });
+
+      Promise.all(taskUpload)
+        .then((filedownloadurl) => {
+          db.collection("Event")
+            .add({
+              Nama: nama,
+              Kabupaten: kabupaten,
+              Kategori: "Event",
+              Deskripsi: deskripsi,
+              Latitude: latitude,
+              Longitude: longitude,
+              Gambar: filedownloadurl[0],
+              Tarif: tarif,
+            })
+            .then(() => {
+              setimages([]);
+              setnama("");
+              setdeskripsi("");
+              setkabupaten("");
+              setlatitude(0);
+              setlongitude(0);
+              setloading(false);
+              toast({
+                title: "Data ditambahkan",
+                description: "Data telah berhasil di tambahkan",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
+            });
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    } else {
+      if (images !== 0) {
+        const deleteimages = storages.refFromURL(url).delete();
+        const uploadTask = images.map((doc) => {
+          const docRef = storages.ref(`Event/${doc.file.name}`);
+          return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+        });
+
+        Promise.all(deleteimages).then(() =>
+          Promise.all(uploadTask).then((filedownloadurl) => {
+            db.collection("Event")
+              .doc(id)
+              .update({
+                Nama: nama,
+                Kabupaten: kabupaten,
+                Kategori: "Event",
+                Deskripsi: deskripsi,
+                Latitude: latitude,
+                Longitude: longitude,
+                Gambar: filedownloadurl[0],
+                Tarif: tarif,
+              })
+              .then(() => {
+                toast({
+                  title: "Data di perbarui",
+                  description: "Data telah berhasil di perbarui",
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                });
+              });
+          })
+        );
+      } else {
+        db.collection("Event")
+          .doc(id)
+          .update({
+            Nama: nama,
+            Kabupaten: kabupaten,
+            Kategori: "Event",
+            Deskripsi: deskripsi,
+            Latitude: latitude,
+            Longitude: longitude,
+            Tarif: tarif,
+          })
+          .then(() => {
+            toast({
+              title: "Data di perbarui",
+              description: "Data telah berhasil di perbarui",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          });
+      }
+    }
+  };
+
+  const get = async () => {
+    if (id) {
+      const docRef = await db.collection("Event").doc(id).get();
+      setnama(docRef.data().Nama);
+      setkabupaten(docRef.data().Kabupaten);
+      setdeskripsi(docRef.data().Deskripsi);
+      setlatitude(docRef.data().Latitude);
+      setlongitude(docRef.data().Longitude);
+      seturl(docRef.data().Gambar);
+      settarif(docRef.data().Tarif);
+    } else {
+      setnama("");
+      setkabupaten("");
+      setdeskripsi("");
+      setimages([]);
+      settarif(0);
+    }
+  };
+  const onChange = (imagelist) => {
+    setimages(imagelist);
+  };
   return (
     <Center>
       <Box width={"3xl"}>
@@ -38,8 +167,8 @@ export default function Manageevent() {
                 placeholder="Nama Event"
                 variant={"filled"}
                 type={"text"}
-                // defaultValue={nama || ""}
-                // onChange={(e) => setnama(e.target.value)}
+                defaultValue={nama || ""}
+                onChange={(e) => setnama(e.target.value)}
               />
               <FormHelperText>masukkan nama Event</FormHelperText>
 
@@ -49,23 +178,10 @@ export default function Manageevent() {
               <Textarea
                 placeholder="masukkan deskripsi"
                 variant={"filled"}
-                // defaultValue={deskripsi || ""}
-                // onChange={(e) => setdeskripsi(e.target.value)}
+                defaultValue={deskripsi || ""}
+                onChange={(e) => setdeskripsi(e.target.value)}
               />
               <FormHelperText>masukkan deskripsi tentang Event</FormHelperText>
-              <FormLabel htmlFor="Kecamatan" mt={5}>
-                Kecamatan
-              </FormLabel>
-              <Input
-                type={"text"}
-                placeholder="masukkan kecamatan"
-                variant={"filled"}
-                // defaultValue={deskripsi || ""}
-                // onChange={(e) => setdeskripsi(e.target.value)}
-              />
-              <FormHelperText>
-                masukkan kabupaten diamana event akan di adakan
-              </FormHelperText>
               <FormLabel htmlFor="Kabupaten" mt={5}>
                 Kabupaten
               </FormLabel>
@@ -73,8 +189,8 @@ export default function Manageevent() {
                 type={"text"}
                 placeholder="masukkan kabupaten"
                 variant={"filled"}
-                // defaultValue={deskripsi || ""}
-                // onChange={(e) => setdeskripsi(e.target.value)}
+                defaultValue={kabupaten || ""}
+                onChange={(e) => setkabupaten(e.target.value)}
               />
               <FormHelperText>
                 masukkan kabupaten diamana event akan di adakan
@@ -86,8 +202,8 @@ export default function Manageevent() {
                 type={"number"}
                 placeholder="masukkan tarif"
                 variant={"filled"}
-                // defaultValue={deskripsi || ""}
-                // onChange={(e) => setdeskripsi(e.target.value)}
+                defaultValue={tarif || ""}
+                onChange={(e) => settarif(e.target.value)}
               />
               <FormHelperText>masukkan tarif tiket event</FormHelperText>
             </FormControl>
@@ -115,7 +231,7 @@ export default function Manageevent() {
         </Text>
         <Box>
           <FormLabel mt={5}>Gambar</FormLabel>
-          <ImageUploading multiple value={images}>
+          <ImageUploading multiple value={images} onChange={onchange}>
             {({
               imageList,
               onImageUpload,
@@ -149,6 +265,7 @@ export default function Manageevent() {
           marginTop={"6"}
           width={"full"}
           alignSelf={"center"}
+          isLoading={loading}
         >
           {id ? "Update" : "Submit"}
         </Button>
