@@ -76,6 +76,7 @@ export default function Manageevent() {
         });
     } else {
       if (images !== 0) {
+        setloading(true);
         const deleteimages = storages.refFromURL(url).delete();
         const uploadTask = images.map((doc) => {
           const docRef = storages.ref(`Event/${doc.file.name}`);
@@ -97,6 +98,7 @@ export default function Manageevent() {
                 Tarif: tarif,
               })
               .then(() => {
+                setloading(false);
                 toast({
                   title: "Data di perbarui",
                   description: "Data telah berhasil di perbarui",
@@ -120,10 +122,20 @@ export default function Manageevent() {
             Tarif: tarif,
           })
           .then(() => {
+            setloading(true);
             toast({
               title: "Data di perbarui",
               description: "Data telah berhasil di perbarui",
               status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          })
+          .catch(() => {
+            toast({
+              title: "Terjadi kesalahan",
+              description: "Terjadi sebuah kesalahan",
+              status: "error",
               duration: 9000,
               isClosable: true,
             });
