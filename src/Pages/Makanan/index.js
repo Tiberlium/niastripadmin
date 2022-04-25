@@ -24,7 +24,7 @@ import { db, storages } from "../../Firebase";
 
 export default function Makanan() {
   const [data, setdata] = useState([]);
-  const [alterData, setalterData] = useState("");
+  const [alterData, setalterData] = useState([]);
   const toast = useToast();
 
   const get = async () => {

@@ -11,6 +11,7 @@ import {
   Button,
   Text,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 import {
   BsFillPencilFill,
@@ -18,12 +19,15 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 
-import { db } from "../../Firebase";
+import { db, storages } from "../../Firebase";
 
 import { Link } from "react-router-dom";
+import { storage } from "firebase-admin";
 
 export default function Staycation() {
   const [data, setdata] = useState([]);
+  const [alterData, setalterData] = useState([]);
+  const toast = useToast();
 
   const get = async () => {
     let x = [];
@@ -40,6 +44,48 @@ export default function Staycation() {
   useEffect(() => {
     get();
   }, []);
+
+  const onRemove = (id) => {
+    const docRef = db.collection("Staycation").doc(id);
+
+    docRef
+      .get((doc) => {
+        setalterData(doc.data().Galery);
+      })
+      .then(() => {
+        const deleteImageTask = alterData.map((doc) => {
+          storages.refFromURL(doc).delete();
+        });
+
+        Promise.all(deleteImageTask)
+          .then(() => {
+            docRef
+              .delete()
+              .then(() => {
+                toast({
+                  title: "Data di hapus.",
+                  description: "Data telah di berhasil hapus",
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                });
+                get();
+              })
+              .catch(() => {
+                toast({
+                  title: "Data gagal di hapus.",
+                  description: "Ada kesalahan data gagal di hapus",
+                  status: "error",
+                  duration: 9000,
+                  isClosable: true,
+                });
+              });
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      });
+  };
 
   return (
     <Box>
