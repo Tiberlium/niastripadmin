@@ -117,7 +117,7 @@ export default function Makanan() {
                   {doc.data.lat}/{doc.data.long}
                 </Td>
                 <Td>
-                  <Link to={`/Editwisata/${doc.id}`}>
+                  <Link to={`/Editmakanan/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

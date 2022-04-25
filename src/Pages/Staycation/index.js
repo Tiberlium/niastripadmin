@@ -124,7 +124,7 @@ export default function Staycation() {
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editwisata/${doc.id}`}>
+                  <Link to={`/Editstaycation/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

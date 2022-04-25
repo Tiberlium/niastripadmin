@@ -18,12 +18,138 @@ import { osm } from "pigeon-maps/providers";
 import { FiUpload } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
 import { useParams } from "react-router-dom";
+import { db, storages } from "../../Firebase";
 
 export default function Managemakanan() {
   const [images, setimages] = useState([]);
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
+  const [nama, setnama] = useState("");
+  const [deskripsi, setdeskripsi] = useState("");
+  const [url, seturl] = useState([]);
+  const [loading, setloading] = useState(false);
+  const toast = useToast();
   const { id } = useParams();
+
+  const get = () => {
+    if (id) {
+      const docRef = db.collection("Makanan").doc(id).get();
+      setnama(docRef.data().Nama);
+      setdeskripsi(docRef.data().Deskripsi);
+      seturl(docRef.data().Galery);
+    } else {
+      setnama("");
+      setdeskripsi("");
+    }
+  };
+
+  const handleUpload = () => {
+    if (!id) {
+      const uploadTask = images.map((doc) => {
+        const docRef = storages.ref(`Makanan/${doc.file.name}`);
+        return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+      });
+
+      Promise.all(uploadTask)
+        .then((filedownloadurl) => {
+          db.collection("Makanan")
+            .add({
+              Nama: nama,
+              Deskripsi: deskripsi,
+              Galery: filedownloadurl,
+              Gambar: filedownloadurl[0],
+              lat: latitude,
+              long: longitude,
+              Kategori: "Makanan",
+            })
+            .then(() => {
+              setimages([]);
+              setnama("");
+              setkecamatan("");
+              setdeskripsi("");
+              setlatitude(0);
+              setlongitude(0);
+              setloading(false);
+              toast({
+                title: "Data ditambahkan",
+                description: "Data telah berhasil di tambahkan",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
+            });
+        })
+        .catch((e) => console.error(e));
+    } else {
+      if (images !== 0) {
+        const deleteTask = url.map((doc) => {
+          storages.refFromURL(doc).delete();
+        });
+
+        const uploadTask = images.map((doc) => {
+          const docRef = storages.ref(`Makanan/${doc.file.name}`);
+          return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+        });
+
+        Promise.all(deleteTask)
+          .then(() => {
+            Promise.all(uploadTask).then((filedownloadurl) => {
+              db.collection("Makanan")
+                .doc(id)
+                .update({
+                  Nama: nama,
+                  Deskripsi: deskripsi,
+                  Galery: filedownloadurl,
+                  Gambar: filedownloadurl[0],
+                  lat: latitude,
+                  long: longitude,
+                  Kategori: "Makanan",
+                })
+                .then(() => {
+                  toast({
+                    title: "Data di perbarui",
+                    description: "Data telah berhasil di perbarui",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                  });
+                });
+            });
+          })
+          .catch((e) => console.error(e));
+      } else {
+        db.collection("Makanan")
+          .doc(id)
+          .update({
+            Nama: nama,
+            Deskripsi: deskripsi,
+            lat: latitude,
+            long: longitude,
+            Kategori: "Makanan",
+          })
+          .then(() => {
+            toast({
+              title: "Data di perbarui",
+              description: "Data telah berhasil di perbarui",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      }
+    }
+  };
+
+  useEffect(() => {
+    get();
+  }, []);
+
+  const onChange = (imageList) => {
+    setimages(imageList);
+  };
 
   return (
     <Center>
@@ -81,7 +207,7 @@ export default function Managemakanan() {
         </Text>
         <Box>
           <FormLabel mt={5}>Gambar</FormLabel>
-          <ImageUploading multiple value={images}>
+          <ImageUploading multiple value={images} onChange={onChange}>
             {({
               imageList,
               onImageUpload,
@@ -115,6 +241,7 @@ export default function Managemakanan() {
           marginTop={"6"}
           width={"full"}
           alignSelf={"center"}
+          isLoading={loading}
         >
           {id ? "Update" : "Submit"}
         </Button>
