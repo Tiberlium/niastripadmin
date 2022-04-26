@@ -24,10 +24,22 @@ import { useParams } from "react-router-dom";
 
 export default function Managestaycation() {
   const [images, setimages] = useState([]);
+  const [nama, setnama] = useState("");
+  const [kecamatan, setkecamatan] = useState("");
+  const [kabupaten, setkabupaten] = useState("");
+  const [deskripsi, setdeskripsi] = useState("");
+  const [tarif, settarif] = useState(0);
+  const [fasilitas, setfasilitas] = useState("");
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
+  const toast = useToast();
   const { id } = useParams();
 
+  const onChange = (imageList) => {
+    setimages(imageList);
+  };
+
+  
   return (
     <Box>
       <Center>
@@ -43,8 +55,8 @@ export default function Managestaycation() {
                   placeholder="Nama Wisata"
                   variant={"filled"}
                   type={"text"}
-                  // defaultValue={nama || ""}
-                  // onChange={(e) => setnama(e.target.value)}
+                  defaultValue={nama || ""}
+                  onChange={(e) => setnama(e.target.value)}
                 />
                 <FormHelperText>masukkan nama Penginapan</FormHelperText>
 
@@ -54,8 +66,8 @@ export default function Managestaycation() {
                 <Textarea
                   placeholder="masukkan deskripsi"
                   variant={"filled"}
-                  // defaultValue={deskripsi || ""}
-                  // onChange={(e) => setdeskripsi(e.target.value)}
+                  defaultValue={deskripsi || ""}
+                  onChange={(e) => setdeskripsi(e.target.value)}
                 />
                 <FormHelperText>
                   masukkan deskripsi tentang penginapan
@@ -68,8 +80,8 @@ export default function Managestaycation() {
                   placeholder="Kabupaten"
                   variant={"filled"}
                   type={"text"}
-                  // defaultValue={kabupaten || ""}
-                  // onChange={(e) => setkabupaten(e.target.value)}
+                  defaultValue={kabupaten || ""}
+                  onChange={(e) => setkabupaten(e.target.value)}
                 />
                 <FormHelperText>
                   masukkan kabupaten dimana tempat penginapan berada
@@ -82,8 +94,8 @@ export default function Managestaycation() {
                   placeholder="Kecamatan"
                   variant={"filled"}
                   type={"text"}
-                  // defaultValue={kecamatan || ""}
-                  // onChange={(e) => setkecamatan(e.target.value)}
+                  defaultValue={kecamatan || ""}
+                  onChange={(e) => setkecamatan(e.target.value)}
                 />
                 <FormHelperText>
                   Masukkan nama kecamatan dimana tempat penginapan berada
@@ -96,8 +108,8 @@ export default function Managestaycation() {
                   placeholder="ex Rp.123456789"
                   variant={"filled"}
                   type={"number"}
-                  // defaultValue={kecamatan || ""}
-                  // onChange={(e) => setkecamatan(e.target.value)}
+                  defaultValue={tarif || ""}
+                  onChange={(e) => settarif(e.target.value)}
                 />
                 <FormHelperText>
                   Masukkan Tarif permalam untuk penggunaan penginapan
@@ -106,6 +118,7 @@ export default function Managestaycation() {
                 <CheckboxGroup
                   colorScheme="green"
                   defaultValue={["Bed", "Fan"]}
+                  onChange={(e) => console.log(e)}
                 >
                   <FormLabel htmlFor="Fasilitas" mt={5}>
                     Fasilitas
@@ -144,7 +157,7 @@ export default function Managestaycation() {
           </Text>
           <Box>
             <FormLabel mt={5}>Gambar</FormLabel>
-            <ImageUploading multiple value={images}>
+            <ImageUploading multiple value={images} onChange={onChange}>
               {({
                 imageList,
                 onImageUpload,
