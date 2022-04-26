@@ -21,17 +21,19 @@ import { osm } from "pigeon-maps/providers";
 import { FiUpload } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
 import { useParams } from "react-router-dom";
+import { db, storages } from "../../Firebase";
 
 export default function Managestaycation() {
   const [images, setimages] = useState([]);
   const [nama, setnama] = useState("");
   const [kabupaten, setkabupaten] = useState("");
-  const [kecamatan, setkecamatan] = useState("");
   const [deskripsi, setdeskripsi] = useState("");
   const [tarif, settarif] = useState(0);
   const [fasilitas, setfasilitas] = useState(["Bed", "Fan"]);
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
+  const [url, seturl] = useState([]);
+  const [loading, setloading] = useState(false);
   const toast = useToast();
   const { id } = useParams();
 
@@ -39,7 +41,149 @@ export default function Managestaycation() {
     setimages(imageList);
   };
 
-  console.log(fasilitas);
+  const Get = () => {
+    if (id) {
+      const docRef = db.collection("Staycation").doc(id).get();
+      docRef.then((doc) => {
+        setdeskripsi(doc.data().Deskripsi);
+        setnama(doc.data().Nama);
+        setkabupaten(doc.data().Kabupaten);
+        settarif(doc.data().Harga);
+        setfasilitas(doc.data().Fasilitas);
+        seturl(doc.data().Galery);
+        setlatitude(doc.data().Latitude);
+        setlongitude(doc.data().Longitude);
+      });
+    } else {
+      setnama("");
+      setkabupaten("");
+      settarif(0);
+      setdeskripsi("");
+      setimages([]);
+    }
+  };
+
+  const handleUpload = () => {
+    if (id) {
+      const uploadTask = images.map((doc) => {
+        const docRef = storages.ref(`Hotel/${doc.file.name}`);
+        return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+      });
+
+      Promise.all(uploadTask)
+        .then((filedownloadurl) => {
+          db.collection("Staycation").add({
+            Nama: nama,
+            Deskripsi: deskripsi,
+            Kabupaten: kabupaten,
+            Harga: tarif,
+            Latitude: latitude,
+            Kategori: "Penginapan",
+            Longitude: longitude,
+            Fasilitas: fasilitas,
+            Galery: filedownloadurl,
+            Gambar: filedownloadurl[0],
+          });
+        })
+        .then(() => {
+          setimages([]);
+          setnama("");
+          setdeskripsi("");
+          settarif(0);
+          setkabupaten("");
+          setlatitude(0);
+          setlongitude(0);
+          setloading(false);
+          toast({
+            title: "Data ditambahkan",
+            description: "Data telah berhasil di tambahkan",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    } else {
+      if (images !== 0) {
+        const deleteTask = url.map((doc) => {
+          storages.refFromURL(doc).delete();
+        });
+
+        const uploadTask = images.map((doc) => {
+          const docRef = storages.ref(`Hotel/${doc.file.name}`);
+          return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+        });
+
+        Promise.all(deleteTask)
+          .then(() => {
+            Promise.all(uploadTask).then((filedownloadurl) => {
+              db.collection("Staycation")
+                .doc(id)
+                .update({
+                  Deskripsi: deskripsi,
+                  Kabupaten: kabupaten,
+                  Harga: tarif,
+                  Latitude: latitude,
+                  Kategori: "Penginapan",
+                  Longitude: longitude,
+                  Fasilitas: fasilitas,
+                  Galery: filedownloadurl,
+                  Gambar: filedownloadurl[0],
+                })
+                .then(() => {
+                  setimages([]);
+                  setnama("");
+                  setdeskripsi("");
+                  settarif(0);
+                  setkabupaten("");
+                  setlatitude(0);
+                  setlongitude(0);
+                  setloading(false);
+                  toast({
+                    title: "Data ditambahkan",
+                    description: "Data telah berhasil di tambahkan",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                  });
+                });
+            });
+          })
+          .catch((e) => console.error(e));
+      } else {
+        db.collection("Staycation")
+          .doc(id)
+          .update({
+            Deskripsi: deskripsi,
+            Kabupaten: kabupaten,
+            Harga: tarif,
+            Latitude: latitude,
+            Kategori: "Penginapan",
+            Longitude: longitude,
+            Fasilitas: fasilitas,
+          })
+          .then(() => {
+            setimages([]);
+            setnama("");
+            setdeskripsi("");
+            settarif(0);
+            setkabupaten("");
+            setlatitude(0);
+            setlongitude(0);
+            setloading(false);
+            toast({
+              title: "Data ditambahkan",
+              description: "Data telah berhasil di tambahkan",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          });
+      }
+    }
+  };
 
   return (
     <Box>
@@ -73,21 +217,6 @@ export default function Managestaycation() {
                 <FormHelperText>
                   masukkan deskripsi tentang penginapan
                 </FormHelperText>
-
-                <FormLabel htmlFor="Kecamatan" mt={5}>
-                  Kecamatan
-                </FormLabel>
-                <Input
-                  placeholder="Kecamatan"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={kecamatan || ""}
-                  onChange={(e) => setkecamatan(e.target.value)}
-                />
-                <FormHelperText>
-                  Masukkan nama kecamatan dimana tempat penginapan berada
-                </FormHelperText>
-
                 <FormLabel htmlFor="Kabupaten" mt={5}>
                   Kabupaten
                 </FormLabel>
