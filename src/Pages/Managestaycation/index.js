@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   Input,
@@ -64,6 +64,7 @@ export default function Managestaycation() {
   };
 
   const handleUpload = () => {
+    setloading(true);
     if (id) {
       const uploadTask = images.map((doc) => {
         const docRef = storages.ref(`Hotel/${doc.file.name}`);
@@ -184,6 +185,10 @@ export default function Managestaycation() {
       }
     }
   };
+
+  useEffect(() => {
+    Get();
+  }, []);
 
   return (
     <Box>
@@ -320,6 +325,8 @@ export default function Managestaycation() {
             marginTop={"6"}
             width={"full"}
             alignSelf={"center"}
+            isLoading={loading}
+            onClick={handleUpload}
           >
             {id ? "Update" : "Submit"}
           </Button>
