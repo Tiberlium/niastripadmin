@@ -65,7 +65,6 @@ export default function Managemakanan() {
             .then(() => {
               setimages([]);
               setnama("");
-              setkecamatan("");
               setdeskripsi("");
               setlatitude(0);
               setlongitude(0);

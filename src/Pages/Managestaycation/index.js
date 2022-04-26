@@ -25,11 +25,11 @@ import { useParams } from "react-router-dom";
 export default function Managestaycation() {
   const [images, setimages] = useState([]);
   const [nama, setnama] = useState("");
-  const [kecamatan, setkecamatan] = useState("");
   const [kabupaten, setkabupaten] = useState("");
+  const [kecamatan, setkecamatan] = useState("");
   const [deskripsi, setdeskripsi] = useState("");
   const [tarif, settarif] = useState(0);
-  const [fasilitas, setfasilitas] = useState("");
+  const [fasilitas, setfasilitas] = useState(["Bed", "Fan"]);
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const toast = useToast();
@@ -39,7 +39,8 @@ export default function Managestaycation() {
     setimages(imageList);
   };
 
-  
+  console.log(fasilitas);
+
   return (
     <Box>
       <Center>
@@ -73,20 +74,6 @@ export default function Managestaycation() {
                   masukkan deskripsi tentang penginapan
                 </FormHelperText>
 
-                <FormLabel htmlFor="Kabupaten" mt={5}>
-                  Kabupaten
-                </FormLabel>
-                <Input
-                  placeholder="Kabupaten"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={kabupaten || ""}
-                  onChange={(e) => setkabupaten(e.target.value)}
-                />
-                <FormHelperText>
-                  masukkan kabupaten dimana tempat penginapan berada
-                </FormHelperText>
-
                 <FormLabel htmlFor="Kecamatan" mt={5}>
                   Kecamatan
                 </FormLabel>
@@ -101,6 +88,19 @@ export default function Managestaycation() {
                   Masukkan nama kecamatan dimana tempat penginapan berada
                 </FormHelperText>
 
+                <FormLabel htmlFor="Kabupaten" mt={5}>
+                  Kabupaten
+                </FormLabel>
+                <Input
+                  placeholder="Kabupaten"
+                  variant={"filled"}
+                  type={"text"}
+                  defaultValue={kabupaten || ""}
+                  onChange={(e) => setkabupaten(e.target.value)}
+                />
+                <FormHelperText>
+                  masukkan kabupaten dimana tempat penginapan berada
+                </FormHelperText>
                 <FormLabel htmlFor="Tarif" mt={5}>
                   Tarif per Malam
                 </FormLabel>
@@ -117,8 +117,8 @@ export default function Managestaycation() {
 
                 <CheckboxGroup
                   colorScheme="green"
-                  defaultValue={["Bed", "Fan"]}
-                  onChange={(e) => console.log(e)}
+                  defaultValue={fasilitas}
+                  onChange={(res) => setfasilitas(res)}
                 >
                   <FormLabel htmlFor="Fasilitas" mt={5}>
                     Fasilitas
