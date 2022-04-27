@@ -63,7 +63,7 @@ export default function User() {
           <Tbody>
             {data.map((doc, index) => (
               <Tr>
-                <Td>{index}</Td>
+                <Td>{index + 1}</Td>
                 <Td>{doc.data.id}</Td>
                 <Td>{doc.data.name}</Td>
                 <Td>{doc.data.gender}</Td>

@@ -113,7 +113,7 @@ export default function Wisata() {
           <Tbody>
             {data.map((doc, index) => (
               <Tr key={doc.id}>
-                <Td>{index}</Td>
+                <Td>{index + 1}</Td>
                 <Td>{doc.data.Nama}</Td>
                 <Td>{doc.data.Kabupaten}</Td>
                 <Td>{doc.data.Kecamatan}</Td>

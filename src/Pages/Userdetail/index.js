@@ -17,7 +17,7 @@ import Detailuser from "../../Component/Detailuser";
 export default function Userdetail() {
   const [data, setdata] = useState({});
   const { id } = useParams();
-  
+
   const get = async () => {
     const docRef = await db.collection("Users").doc(id).get();
     setdata(docRef.data());
@@ -54,7 +54,7 @@ export default function Userdetail() {
         <Tbody>
           {data["reservation"]?.map((doc, index) => (
             <Tr>
-              <Td>{(index = 1)}</Td>
+              <Td>{index + 1}</Td>
               <Td>{doc.nama}</Td>
               <Td>
                 <Text isTruncated noOfLines={[1, 2, 3]}>
