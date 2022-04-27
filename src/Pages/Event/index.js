@@ -40,7 +40,7 @@ export default function Event() {
     setdata(x);
   };
 
-  useState(() => {
+  useEffect(() => {
     get();
   }, []);
 
