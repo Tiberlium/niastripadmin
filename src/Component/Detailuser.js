@@ -10,8 +10,8 @@ export default class Detailuser extends Component {
             <Image
               boxSize={"150px"}
               objectFit="cover"
-              alt="theres no image user"
-              src="https://placeimg.com/640/480/people"
+              alt="theres no user image"
+              src={this.props.gambar}
               borderRadius={"full"}
             />
           </WrapItem>
@@ -20,19 +20,19 @@ export default class Detailuser extends Component {
               <Box marginBottom={5}>
                 <Text fontWeight={"bold"}>Nama</Text>
                 <Text color={"gray.500"} textTransform="capitalize">
-                  xason Mratz
+                  {this.props.nama}
                 </Text>
               </Box>
               <Box marginBottom={5}>
                 <Text fontWeight={"bold"}>Alamat</Text>
                 <Text color={"gray.500"} textTransform="capitalize">
-                  Jason Mratz
+                  {this.props.alamat}
                 </Text>
               </Box>
               <Box marginBottom={5}>
                 <Text fontWeight={"bold"}>Email</Text>
                 <Text color={"gray.500"} textTransform="capitalize">
-                  Jason Mratz
+                  {this.props.email}
                 </Text>
               </Box>
             </Box>
@@ -42,16 +42,16 @@ export default class Detailuser extends Component {
               <Box marginBottom={5}>
                 <Text fontWeight={"bold"}>Gender</Text>
                 <Text color={"gray.500"} textTransform="capitalize">
-                  Jason Mratz
+                  {this.props.gender}
                 </Text>
               </Box>
               <Box marginBottom={5}>
                 <Text fontWeight={"bold"}>Telephone</Text>
-                <Text color={"gray.500"}>Jason Mratz</Text>
+                <Text color={"gray.500"}>{this.props.phone}</Text>
               </Box>
               <Box marginBottom={5}>
                 <Text fontWeight={"bold"}>Kewarganegaraan</Text>
-                <Text color={"gray.500"}>Jason Mratz</Text>
+                <Text color={"gray.500"}>{this.props.nation}</Text>
               </Box>
             </Box>
           </WrapItem>
