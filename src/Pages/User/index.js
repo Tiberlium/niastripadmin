@@ -14,7 +14,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { IoIosInformationCircle, IoMdTrash } from "react-icons/io";
-
+import { Link } from "react-router-dom";
 import { db } from "../../Firebase";
 
 export default function User() {
@@ -63,13 +63,15 @@ export default function User() {
                 <Td>{doc.data.name}</Td>
                 <Td>{doc.data.gender}</Td>
                 <Td>
-                  <Button
-                    colorScheme="green"
-                    size="sm"
-                    leftIcon={<IoIosInformationCircle />}
-                  >
-                    Detail
-                  </Button>
+                  <Link to={`/Userdetail/${doc.id}`}>
+                    <Button
+                      colorScheme="green"
+                      size="sm"
+                      leftIcon={<IoIosInformationCircle />}
+                    >
+                      Detail
+                    </Button>
+                  </Link>
                 </Td>
                 <Td>
                   <Button
