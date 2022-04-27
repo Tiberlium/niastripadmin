@@ -36,6 +36,12 @@ export default function User() {
     get();
   }, []);
 
+  const onRemove = (id) => {
+    db.collection("Users")
+      .doc(id)
+      .delete()
+      .then(() => get());
+  };
   return (
     <Box>
       <Text fontSize={"5xl"} mt={10} ml={5}>
@@ -78,6 +84,7 @@ export default function User() {
                     size="sm"
                     leftIcon={<IoMdTrash />}
                     mr={5}
+                    onClick={() => onRemove(doc.id)}
                   >
                     Hapus
                   </Button>

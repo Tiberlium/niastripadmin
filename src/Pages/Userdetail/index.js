@@ -17,7 +17,7 @@ import Detailuser from "../../Component/Detailuser";
 export default function Userdetail() {
   const [data, setdata] = useState({});
   const { id } = useParams();
-
+  
   const get = async () => {
     const docRef = await db.collection("Users").doc(id).get();
     setdata(docRef.data());
