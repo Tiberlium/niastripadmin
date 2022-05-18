@@ -22,7 +22,6 @@ import {
 import { db, storages } from "../../Firebase";
 
 import { Link } from "react-router-dom";
-import { storage } from "firebase-admin";
 
 export default function Staycation() {
   const [data, setdata] = useState([]);
