@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Table,
@@ -24,6 +24,25 @@ import { db, storages } from "../../Firebase";
 import { Link } from "react-router-dom";
 
 export default function Restoran() {
+  const [data, setdata] = useState([]);
+
+  async function get() {
+    let x = [];
+    const docRef = await db.collection("Rm").get();
+    docRef.docs.map((doc) => {
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+    setdata(x);
+  }
+
+  useEffect(() => {
+    get();
+  }, []);
+
+  
   return (
     <Box>
       <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
@@ -51,17 +70,17 @@ export default function Restoran() {
             </Tr>
           </Thead>
           <Tbody>
-            {/* {data.map((doc, index) => (
+            {data.map((doc, index) => (
               <Tr key={doc.id}>
                 <Td>{index}</Td>
                 <Td>{doc.data.Nama}</Td>
-                <Td>{doc.data.Kabupaten}</Td>
-                <Td>{doc.data.Harga}</Td>
+                <Td>{doc.data.Kontak}</Td>
+                <Td>{doc.data.Operasional}</Td>
                 <Td>
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editstaycation/${doc.id}`}>
+                  <Link to={`/Editrestoran/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"
@@ -83,7 +102,7 @@ export default function Restoran() {
                   </Button>
                 </Td>
               </Tr>
-            ))} */}
+            ))}
           </Tbody>
         </Table>
       </Box>
