@@ -105,6 +105,7 @@ export default function Wisata() {
               <Th>Nama</Th>
               <Th>Kabupaten</Th>
               <Th>Kota</Th>
+              <Th>Rekomendasi</Th>
               <Th>Latitude/Longitude</Th>
               <Th>Aksi Edit</Th>
               <Th>Aksi Hapus</Th>
@@ -117,6 +118,7 @@ export default function Wisata() {
                 <Td>{doc.data.Nama}</Td>
                 <Td>{doc.data.Kabupaten}</Td>
                 <Td>{doc.data.Kecamatan}</Td>
+                <Td>{doc.data.Rekomendasi.toString()}</Td>
                 <Td>
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>

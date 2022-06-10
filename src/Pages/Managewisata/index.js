@@ -61,6 +61,8 @@ export default function Managewisata() {
             Kecamatan: kecamatan,
             Kategori: "Tempat Wisata",
             Latitude: latitude,
+            Rekomendasi: disable,
+            Alasanrekomen: rekomendasi,
             Longitude: longitude,
             Galery: filedownloadurl,
             Gambar: filedownloadurl[0],
@@ -72,6 +74,8 @@ export default function Managewisata() {
           setkecamatan("");
           setdeskripsi("");
           setkabupaten("");
+          setdisable(false);
+          setrekomendasi("");
           setlatitude(0);
           setlongitude(0);
           setloading(false);
@@ -111,6 +115,8 @@ export default function Managewisata() {
                   Kecamatan: kecamatan,
                   Kategori: "Tempat Wisata",
                   Latitude: latitude,
+                  Rekomendasi: disable,
+                  Alasanrekomen: rekomendasi,
                   Longitude: longitude,
                   Galery: filedownloadurl,
                   Gambar: filedownloadurl[0],
@@ -139,6 +145,8 @@ export default function Managewisata() {
           Kabupaten: kabupaten,
           Kecamatan: kecamatan,
           Kategori: "Tempat Wisata",
+          Rekomendasi: disable,
+          Alasanrekomen: rekomendasi,
           Latitude: latitude,
           Longitude: longitude,
         })
@@ -165,6 +173,8 @@ export default function Managewisata() {
       setdeskripsi(docRef.data().Deskripsi);
       setlatitude(docRef.data().Latitude);
       setlongitude(docRef.data().Longitude);
+      setdisable(docRef.data().Rekomendasi);
+      setrekomendasi(docRef.data().Alasanrekomen);
       seturl(docRef.data().Galery);
     } else {
       setnama("");
