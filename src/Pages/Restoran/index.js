@@ -11,9 +11,21 @@ import {
   useToast,
   Button,
 } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
 export default function Restoran() {
-  const [nama, setnama] = useState(second);
+  const [nama, setnama] = useState("");
+  const [kontak, setkontak] = useState(0);
+  const [alamat, setalamat] = useState("");
+  const [operasional, setoperasional] = useState("");
+  const [images, setimages] = useState([]);
+  const [latitude, setlatitude] = useState(0);
+  const [longitude, setlongitude] = useState(0);
+
+  const { id } = useParams();
+
+  const onChange = (imageList) => setimages(imageList);
+
   return (
     <Center>
       <Box width={"3xl"}>
@@ -23,7 +35,7 @@ export default function Restoran() {
             <WrapItem>
               <Box>
                 <FormControl required width={"3xl"} mt={10} isInvalid={isError}>
-                  <FormLabel htmlFor="Nama wisata">Nama Restoran</FormLabel>
+                  <FormLabel htmlFor="Nama restoran">Nama Restoran</FormLabel>
                   <Input
                     placeholder="Nama Restoran"
                     variant={"filled"}
@@ -34,39 +46,41 @@ export default function Restoran() {
                   <FormHelperText>masukkan nama tempat restoran</FormHelperText>
                 </FormControl>
                 <FormControl required mt={5}>
-                  <FormLabel htmlFor="Deskripsi">Kontak</FormLabel>
+                  <FormLabel htmlFor="Kontak">Kontak</FormLabel>
                   <Textarea
                     placeholder="masukkan Kontak"
                     variant={"filled"}
-                    defaultValue={deskripsi || ""}
-                    onChange={(e) => setdeskripsi(e.target.value)}
+                    defaultValue={kontak || ""}
+                    onChange={(e) => setkontak(e.target.value)}
                   />
-                  <FormHelperText>masukkan deskripsi restoran</FormHelperText>
+                  <FormHelperText>masukkan kontak restoran</FormHelperText>
                 </FormControl>
                 <FormControl required mt={5}>
-                  <FormLabel htmlFor="Kabupaten">Lokasi</FormLabel>
+                  <FormLabel htmlFor="Lokasi">Lokasi</FormLabel>
                   <Input
                     placeholder="Lokasi"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={kabupaten || ""}
-                    onChange={(e) => setkabupaten(e.target.value)}
+                    defaultValue={alamat || ""}
+                    onChange={(e) => setalamat(e.target.value)}
                   />
                   <FormHelperText>
                     masukkan nama jalan dimana restoran berada
                   </FormHelperText>
                 </FormControl>
                 <FormControl mt={5}>
-                  <FormLabel htmlFor="Kecamatan">Jam operasional</FormLabel>
+                  <FormLabel htmlFor="Jam Operasional">
+                    Jam operasional
+                  </FormLabel>
                   <Input
                     placeholder="Jam operasional"
                     variant={"filled"}
                     type={"text"}
-                    defaultValue={kecamatan || ""}
-                    onChange={(e) => setkecamatan(e.target.value)}
+                    defaultValue={operasional || ""}
+                    onChange={(e) => setoperasional(e.target.value)}
                   />
                   <FormHelperText>
-                    Masukkan nama kecamatan tempat wisata berada
+                    Masukkan jam operasional restoran
                   </FormHelperText>
                 </FormControl>
               </Box>
