@@ -11,6 +11,7 @@ import {
   Textarea,
   Center,
   useToast,
+  Switch,
   Button,
 } from "@chakra-ui/react";
 
@@ -27,6 +28,7 @@ export default function Managewisata() {
   const [deskripsi, setdeskripsi] = useState("");
   const [kabupaten, setkabupaten] = useState("");
   const [kecamatan, setkecamatan] = useState("");
+  const [rekomendasi, setrekomendasi] = useState("");
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const [images, setimages] = useState([]);
@@ -34,12 +36,13 @@ export default function Managewisata() {
   const [url, seturl] = useState();
   const toast = useToast();
 
+  const [disable, setdisable] = useState(false);
+
   const { id } = useParams();
 
   useEffect(() => {
     Get();
   }, []);
-
 
   async function handleUpload() {
     if (!id) {
@@ -233,6 +236,33 @@ export default function Managewisata() {
                   />
                   <FormHelperText>
                     Masukkan nama kecamatan tempat wisata berada
+                  </FormHelperText>
+                </FormControl>
+                <FormControl display="flex" alignItems="center" mt={5}>
+                  <FormLabel htmlFor="editor" mb="0">
+                    Jadikan sebagai rekomendasi editor?
+                  </FormLabel>
+                  <Switch
+                    id="editor"
+                    isChecked={disable}
+                    onChange={() =>
+                      disable === false ? setdisable(true) : setdisable(false)
+                    }
+                  />
+                </FormControl>
+                <FormControl mt={5}>
+                  <FormLabel htmlFor="Kecamatan">Alasan Editor</FormLabel>
+                  <Textarea
+                    isDisabled={!disable}
+                    placeholder="Masukkan alasan anda memilih tempat ini sebagai rekomendasi"
+                    variant={"filled"}
+                    type={"text"}
+                    defaultValue={rekomendasi || ""}
+                    onChange={(e) => setrekomendasi(e.target.value)}
+                  />
+                  <FormHelperText>
+                    Masukkan alasan anda sebagai editor untuk rekomendasi tempat
+                    ini
                   </FormHelperText>
                 </FormControl>
               </Box>
