@@ -171,6 +171,10 @@ export default function Managerestoran() {
     }
   };
 
+  useEffect(() => {
+    get();
+  }, []);
+
   const onChange = (imageList) => setimages(imageList);
 
   return (
