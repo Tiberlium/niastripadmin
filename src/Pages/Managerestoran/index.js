@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
-export default function Restoran() {
+export default function Managerestoran() {
   const [nama, setnama] = useState("");
   const [kontak, setkontak] = useState(0);
   const [alamat, setalamat] = useState("");
