@@ -37,14 +37,14 @@ export default function Restoran() {
         </Link>
         <Table variant={"striped"} colorScheme="telegram" size="sm">
           <TableCaption fontWeight={"bold"} fontSize={"20"}>
-            Staycation list
+            Restoran list
           </TableCaption>
           <Thead>
             <Tr>
               <Th>No</Th>
               <Th>Nama</Th>
-              <Th>Kabupaten</Th>
-              <Th>Tarif</Th>
+              <Th>Kontak</Th>
+              <Th>Jam Operasional</Th>
               <Th>Latitude/Longitude</Th>
               <Th>Aksi Edit</Th>
               <Th>Aksi Hapus</Th>
