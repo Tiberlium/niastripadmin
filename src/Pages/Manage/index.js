@@ -19,8 +19,8 @@ export default function Manage() {
         <HStack spacing={20}>
           <Link to='/Wisata'>
             <Box
-              h={"56"}
-              width={"96"}
+              h={'44'}
+              width={'80'}
               borderWidth={1}
               borderRadius={20}
               p={5}
@@ -34,8 +34,8 @@ export default function Manage() {
           </Link>
           <Link to='/Event'>
             <Box
-              h={"56"}
-              width={"96"}
+              h={"44"}
+              width={"80"}
               borderWidth={1}
               borderRadius={20}
               p={5}
@@ -51,8 +51,8 @@ export default function Manage() {
         <HStack spacing={20}>
           <Link to="/Makanan">
             <Box
-              h={"56"}
-              width={"96"}
+              h={"44"}
+              width={"80"}
               borderWidth={1}
               borderRadius={20}
               p={5}
@@ -66,8 +66,8 @@ export default function Manage() {
           </Link>
           <Link to="/Staycation">
             <Box
-              h={"56"}
-              width={"96"}
+              h={"44"}
+              width={"80"}
               borderWidth={1}
               borderRadius={20}
               p={5}
