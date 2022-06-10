@@ -6,12 +6,21 @@ import {
   FormControl,
   FormHelperText,
   Box,
+  Wrap,
+  WrapItem,
   Textarea,
   Center,
   useToast,
   Button,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
+
+import { Map, Marker, ZoomControl } from "pigeon-maps";
+import { osm } from "pigeon-maps/providers";
+import { storages, db } from "../../Firebase";
+import ImageUploading from "react-images-uploading";
+import { FiUpload } from "react-icons/fi";
+import Imagescard from "../../Component/Imagescard";
 
 export default function Managerestoran() {
   const [nama, setnama] = useState("");
@@ -21,8 +30,13 @@ export default function Managerestoran() {
   const [images, setimages] = useState([]);
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
+  const [loading, setloading] = useState(false);
 
   const { id } = useParams();
+
+  const handleUpload = () => {
+    return false;
+  };
 
   const onChange = (imageList) => setimages(imageList);
 
@@ -34,7 +48,7 @@ export default function Managerestoran() {
           <Wrap>
             <WrapItem>
               <Box>
-                <FormControl required width={"3xl"} mt={10} isInvalid={isError}>
+                <FormControl required width={"3xl"} mt={10}>
                   <FormLabel htmlFor="Nama restoran">Nama Restoran</FormLabel>
                   <Input
                     placeholder="Nama Restoran"

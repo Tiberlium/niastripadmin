@@ -13,7 +13,8 @@ import Userdetail from "./Userdetail";
 import Transaction from "./Transaction";
 import Report from "./Report";
 import Manage from "./Manage";
-
+import Managerestoran from './Managerestoran';
+import Restoran from "./Restoran";
 export {
   Login,
   Home,
@@ -30,4 +31,6 @@ export {
   Transaction,
   Report,
   Manage,
+  Managerestoran,
+  Restoran,
 };

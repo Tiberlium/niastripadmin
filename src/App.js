@@ -17,6 +17,8 @@ import {
   Manage,
   Transaction,
   Report,
+  Managerestoran,
+  Restoran,
 } from "./Pages";
 
 import {
@@ -260,7 +262,13 @@ function App() {
               <Route path="/Tambahkandatawisata" element={<Managewisata />} />
               <Route path="/Tambahkandatamakanan" element={<Managemakanan />} />
               <Route path="/Tambahkandataevent" element={<Manageevent />} />
+              <Route
+                path="/Tambahkandatarestoran"
+                element={<Managerestoran />}
+              />
               <Route path="/Editwisata/:id" element={<Managewisata />} />
+              <Route path="/Editrestoran/:id" element={<Managerestoran />} />
+              <Route path="/Restoran" element={<Restoran />} />
               <Route path="/User" element={<User />} />
               <Route path="/Transaction" element={<Transaction />} />
               <Route path="/Manage" element={<Manage />} />
