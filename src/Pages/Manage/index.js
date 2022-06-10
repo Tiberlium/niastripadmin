@@ -5,6 +5,7 @@ import {
   IoBeer,
   IoCalendarNumber,
   IoBed,
+  IoRestaurant,
 } from "react-icons/io5";
 
 import { Link } from "react-router-dom";
@@ -17,36 +18,43 @@ export default function Manage() {
       </Text>
       <VStack spacing={"10"}>
         <HStack spacing={20}>
-          <Link to='/Wisata'>
-            <Box
-              h={'44'}
-              width={'80'}
-              borderWidth={1}
-              borderRadius={20}
-              p={5}
-              bgGradient="linear(to-r, #544a7d,#ffd452)"
-            >
-              <IoPartlySunny color="white" size={50} />
-              <Text fontSize={"3xl"} fontWeight={"medium"} mt={5} color="white">
-                Tempat Wisata
-              </Text>
-            </Box>
-          </Link>
-          <Link to='/Event'>
+          <Link to="/Wisata">
             <Box
               h={"44"}
               width={"80"}
               borderWidth={1}
               borderRadius={20}
               p={5}
-              bgGradient="linear(to-r,#009FFF,#ec2F4B)"
+              backgroundColor='green.400'
+            >
+              <IoPartlySunny color="white" size={50} />
+              <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
+                Tempat Wisata
+              </Text>
+            </Box>
+          </Link>
+          <Link to="/Event">
+            <Box
+              h={"44"}
+              width={"80"}
+              borderWidth={1}
+              borderRadius={20}
+              p={5}
+              backgroundColor='blue.400'
             >
               <IoCalendarNumber color="white" size={50} />
-              <Text fontSize={"3xl"} fontWeight={"medium"} mt={5} color="white">
+              <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
                 Event
               </Text>
             </Box>
           </Link>
+
+          <Box h={"44"} w={"80"} borderWidth={1} borderRadius={20} p={5} backgroundColor='gray.400'>
+            <IoRestaurant color="white" size={50} />
+            <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
+              Restoran
+            </Text>
+          </Box>
         </HStack>
         <HStack spacing={20}>
           <Link to="/Makanan">
@@ -56,10 +64,10 @@ export default function Manage() {
               borderWidth={1}
               borderRadius={20}
               p={5}
-              bgGradient="linear(to-r,#0f0c29,#302b63,#24243e)"
+              backgroundColor='yellow.400'
             >
               <IoBeer color="white" size={50} />
-              <Text fontSize={"3xl"} fontWeight={"medium"} mt={5} color="white">
+              <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
                 Makanan Tradisional
               </Text>
             </Box>
@@ -71,10 +79,10 @@ export default function Manage() {
               borderWidth={1}
               borderRadius={20}
               p={5}
-              bgGradient="linear(to-r,#40E0D0,#FF8C00,#FF0080)"
+              backgroundColor='red.400'
             >
               <IoBed color="white" size={50} />
-              <Text fontSize={"3xl"} fontWeight={"medium"} mt={5} color="white">
+              <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
                 Staycation
               </Text>
             </Box>
