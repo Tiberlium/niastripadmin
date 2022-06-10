@@ -30,7 +30,7 @@ export default function Restoran() {
         Daftar Restoran
       </Text>
       <Box pl={10} pr={10} pt={5}>
-        <Link to="/Tambahkandatastaycation">
+        <Link to="/Tambahkandatarestoran">
           <Button colorScheme="blue" mb={5} leftIcon={<BsFillPlusCircleFill />}>
             Tambahkan yang baru
           </Button>

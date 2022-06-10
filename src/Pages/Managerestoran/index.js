@@ -24,18 +24,151 @@ import Imagescard from "../../Component/Imagescard";
 
 export default function Managerestoran() {
   const [nama, setnama] = useState("");
-  const [kontak, setkontak] = useState(0);
+  const [kontak, setkontak] = useState("");
   const [alamat, setalamat] = useState("");
   const [operasional, setoperasional] = useState("");
   const [images, setimages] = useState([]);
   const [latitude, setlatitude] = useState(0);
   const [longitude, setlongitude] = useState(0);
   const [loading, setloading] = useState(false);
+  const [url, seturl] = useState("");
+  const toast = useToast();
 
   const { id } = useParams();
 
   const handleUpload = () => {
-    return false;
+    if (!id) {
+      setloading(true);
+      const taskUpload = images.map((doc) => {
+        const dataRef = storages.ref(`Rm/${doc.file.name}`);
+        return dataRef.put(doc.file).then(() => dataRef.getDownloadURL());
+      });
+
+      Promise.all(taskUpload)
+        .then((filedownloadurl) => {
+          db.collection("Rm")
+            .add({
+              Nama: nama,
+              Kontak: kontak,
+              Kategori: "Tempat Makan",
+              Lokasi: alamat,
+              Kontak: kontak,
+              Operasional: operasional,
+              Latitude: latitude,
+              Longitude: longitude,
+              Gambar: filedownloadurl[0],
+              Rating: 0,
+            })
+            .then(() => {
+              setimages([]);
+              setnama("");
+              setkontak(0);
+              setoperasional("");
+              setalamat("");
+              setlatitude(0);
+              setlongitude(0);
+              setloading(false);
+              toast({
+                title: "Data ditambahkan",
+                description: "Data telah berhasil di tambahkan",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
+            });
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    } else {
+      if (images.length !== 0) {
+        setloading(true);
+        const deleteimages = storages.refFromURL(url).delete();
+        const uploadTask = images.map((doc) => {
+          const docRef = storages.ref(`Rm/${doc.file.name}`);
+          return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+        });
+
+        Promise.all(deleteimages).then(() =>
+          Promise.all(uploadTask).then((filedownloadurl) => {
+            db.collection("Event")
+              .doc(id)
+              .update({
+                Nama: nama,
+                Kontak: kontak,
+                Kategori: "Tempat Makan",
+                Lokasi: alamat,
+                Kontak: kontak,
+                Operasional: operasional,
+                Latitude: latitude,
+                Longitude: longitude,
+                Gambar: filedownloadurl[0],
+              })
+              .then(() => {
+                setloading(false);
+                toast({
+                  title: "Data di perbarui",
+                  description: "Data telah berhasil di perbarui",
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                });
+              });
+          })
+        );
+      } else {
+        db.collection("Event")
+          .doc(id)
+          .update({
+            Nama: nama,
+            Kontak: kontak,
+            Kategori: "Tempat Makan",
+            Lokasi: alamat,
+            Kontak: kontak,
+            Operasional: operasional,
+            Latitude: latitude,
+            Longitude: longitude,
+          })
+          .then(() => {
+            setloading(true);
+            toast({
+              title: "Data di perbarui",
+              description: "Data telah berhasil di perbarui",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          })
+          .catch(() => {
+            toast({
+              title: "Terjadi kesalahan",
+              description: "Terjadi sebuah kesalahan",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          });
+      }
+    }
+  };
+
+  const get = async () => {
+    if (id) {
+      const docRef = await db.collection("Rm").doc(id).get();
+      setalamat(docRef.data().Lokasi);
+      setnama(docRef.data().Nama);
+      setkontak(docRef.data().Kontak);
+      setoperasional(docRef.data().Operasional);
+      setlatitude(docRef.data().Latitude);
+      setlongitude(docRef.data().Longitude);
+      seturl(docRef.data().Gambar);
+    } else {
+      setalamat("");
+      setnama("");
+      setkontak("");
+      setoperasional("");
+      setimages([]);
+    }
   };
 
   const onChange = (imageList) => setimages(imageList);
