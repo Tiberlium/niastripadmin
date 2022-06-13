@@ -1,5 +1,6 @@
 import { Box, Text, HStack } from "@chakra-ui/react";
-export default function Cardinfopembayaran() {
+
+export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
   return (
     <Box
       width={["2xs", "3xs", "3xl", "4xl"]}
@@ -20,7 +21,7 @@ export default function Cardinfopembayaran() {
             Orderid
           </Text>
           <Text fontSize="small" color="blackAlpha.900">
-            orderIdyzyufPQLs7QxBgHmeXsiQ8Lt9ou11655052541761
+            {orderid}
           </Text>
         </Box>
         <Box
@@ -34,7 +35,7 @@ export default function Cardinfopembayaran() {
             Jumlah
           </Text>
           <Text fontSize="small" color="blackAlpha.900">
-            Rp 1.700.000
+            Rp {jumlah}
           </Text>
         </Box>
         <Box
@@ -48,7 +49,7 @@ export default function Cardinfopembayaran() {
             Metode Pembayaran
           </Text>
           <Text fontSize="small" color="blackAlpha.900">
-            Bca klikpay
+            {metode}
           </Text>
         </Box>
       </HStack>

@@ -1,6 +1,12 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 
-export default function Carddetailorder() {
+export default function Carddetailorder({
+  orderid,
+  metode,
+  jumlah,
+  idtransaksi,
+  waktu,
+}) {
   return (
     <Box p="5" mt="16" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
@@ -11,7 +17,7 @@ export default function Carddetailorder() {
           Order id
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          orderIdyzyufPQLs7QxBgHmeXsiQ8Lt9ou11655052541761
+          {orderid}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -19,7 +25,7 @@ export default function Carddetailorder() {
           Tipe pembayaran
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Bca klikpay
+          {metode}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -27,7 +33,7 @@ export default function Carddetailorder() {
           Jumlah
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Rp 50000
+          Rp {jumlah}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -35,7 +41,7 @@ export default function Carddetailorder() {
           Id transaksi
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          ffcab911-2edc-4354-ba33-6fce07bb6de3
+          {idtransaksi}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -43,7 +49,7 @@ export default function Carddetailorder() {
           Waktu
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Yesterday, 11:49 pm
+          {waktu}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>

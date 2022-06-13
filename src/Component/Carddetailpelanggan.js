@@ -1,8 +1,6 @@
 import { Box, Text, HStack } from "@chakra-ui/react";
 
-
-
-export default function Carddetailpelanggan() {
+export default function Carddetailpelanggan({ nama, telepon, email, alamat }) {
   return (
     <Box p="5" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
@@ -13,7 +11,7 @@ export default function Carddetailpelanggan() {
           Nama
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          James gwee
+          {nama}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -21,7 +19,7 @@ export default function Carddetailpelanggan() {
           Telepon
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          08242555323
+          {telepon}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -29,7 +27,7 @@ export default function Carddetailpelanggan() {
           Email
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Jamesgwee@gmail.com
+          {email}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -37,7 +35,7 @@ export default function Carddetailpelanggan() {
           Alamat
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          jln pattimura no.22
+          {alamat}
         </Text>
       </HStack>
     </Box>
