@@ -109,7 +109,7 @@ function App() {
             </ListItem>
             <ListItem>
               <NavLink
-                to="/Transactiondetail"
+                to="/Transaction"
                 children={({ isActive }) =>
                   isActive ? (
                     <Flex
@@ -273,7 +273,7 @@ function App() {
               <Route path="/User" element={<User />} />
               <Route path="/Transaction" element={<Transaction />} />
               <Route
-                path="/Transactiondetail"
+                path="/Transactiondetail/:id"
                 element={<Transactiondetail />}
               />
               <Route path="/Manage" element={<Manage />} />
