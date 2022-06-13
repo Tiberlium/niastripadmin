@@ -1,57 +1,40 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
-
-export default function Carddetailorder() {
+import { Box, Text, HStack } from "@chakra-ui/react";
+export default function Carddetailpelanggan() {
   return (
     <Box mt="10" p="5" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
-        Detail Order
+        Detail Pelanggan
       </Text>
       <HStack justifyContent="space-between" mt={2} mb={2}>
         <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Order id
+          Nama
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          orderIdyzyufPQLs7QxBgHmeXsiQ8Lt9ou11655052541761
+          James gwee
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
         <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Tipe pembayaran
+          Telepon
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Bca klikpay
+          08242555323
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
         <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Jumlah
+          Email
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Rp 50000
+          Jamesgwee@gmail.com
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
         <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Id transaksi
+          Alamat
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          ffcab911-2edc-4354-ba33-6fce07bb6de3
-        </Text>
-      </HStack>
-      <HStack justifyContent="space-between" mt={2} mb={2}>
-        <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Waktu
-        </Text>
-        <Text color="blackAlpha.600" fontSize="small">
-          Yesterday, 11:49 pm
-        </Text>
-      </HStack>
-      <HStack justifyContent="space-between" mt={2} mb={2}>
-        <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Status
-        </Text>
-        <Text color="blackAlpha.600" fontSize="small">
-          Selesai
+          jln pattimura no.22
         </Text>
       </HStack>
     </Box>
