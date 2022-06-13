@@ -19,7 +19,7 @@ import {
   Report,
   Managerestoran,
   Restoran,
-  Transactiondetail
+  Transactiondetail,
 } from "./Pages";
 
 import {
@@ -109,7 +109,7 @@ function App() {
             </ListItem>
             <ListItem>
               <NavLink
-                to="/Transaction"
+                to="/Transactiondetail"
                 children={({ isActive }) =>
                   isActive ? (
                     <Flex
@@ -272,7 +272,10 @@ function App() {
               <Route path="/Restoran" element={<Restoran />} />
               <Route path="/User" element={<User />} />
               <Route path="/Transaction" element={<Transaction />} />
-                <Route path="/Transactiondetail/:id" element={<Transactiondetail />} />
+              <Route
+                path="/Transactiondetail"
+                element={<Transactiondetail />}
+              />
               <Route path="/Manage" element={<Manage />} />
               <Route path="/Report" element={<Report />} />
               <Route path="/Event" element={<Event />} />
