@@ -8,6 +8,10 @@ export default function Carddetailorder({
   waktu,
   currency,
 }) {
+  function trunctext(text) {
+    return text?.length > 20 ? `${text.substr(0, 20)}...` : text;
+  }
+
   return (
     <Box p="5" mt="16" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
@@ -18,7 +22,7 @@ export default function Carddetailorder({
           Order id
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          {orderid}
+          {trunctext(orderid)}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>

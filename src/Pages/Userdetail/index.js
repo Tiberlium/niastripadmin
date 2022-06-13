@@ -22,6 +22,10 @@ const Empty = () => (
   </Box>
 );
 
+function trunctext(text) {
+  return text?.length > 20 ? `${text.substr(0, 20)}...` : text;
+}
+
 export default function Userdetail() {
   const [data, setdata] = useState({});
   const { id } = useParams();
@@ -58,6 +62,7 @@ export default function Userdetail() {
           <Th>Order id</Th>
           <Th>Check in</Th>
           <Th>Check out</Th>
+          <Th>Jumlah</Th>
           <Th>Tarif</Th>
         </Thead>
         <Tbody>
@@ -67,7 +72,7 @@ export default function Userdetail() {
               <Td>{doc.nama}</Td>
               <Td>
                 <Text isTruncated noOfLines={[1, 2, 3]}>
-                  {doc.orderId}
+                  {trunctext(doc.orderId)}
                 </Text>
               </Td>
               <Td>{doc.checkIN}</Td>
@@ -83,7 +88,7 @@ export default function Userdetail() {
         Order History Event
       </Text>
 
-      <Table variant="striped" size="md">
+      <Table variant="striped" size="md" w="full">
         <TableCaption>Order History Event</TableCaption>
         <Thead>
           <Th>No</Th>
@@ -92,6 +97,7 @@ export default function Userdetail() {
           <Th>Jenis</Th>
           <Th>Metode</Th>
           <Th>Harga</Th>
+          <Th>Waktu</Th>
         </Thead>
         <Tbody>
           {data["reservation"]?.map((doc, index) => (
@@ -99,13 +105,12 @@ export default function Userdetail() {
               <Td>{index + 1}</Td>
               <Td>{doc.nama}</Td>
               <Td>
-                <Text isTruncated noOfLines={[1, 2, 3]}>
-                  {doc.orderid}
-                </Text>
+                <Text>{trunctext(doc.orderid)}</Text>
               </Td>
               <Td>{doc.jenis}</Td>
               <Td>{doc.metode}</Td>
               <Td>{doc.tarif}</Td>
+              <Td>{doc.time}</Td>
               <Td>{doc.harga}</Td>
             </Tr>
           ))}
