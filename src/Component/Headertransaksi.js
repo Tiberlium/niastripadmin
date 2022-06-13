@@ -10,9 +10,9 @@ export default function Headertransaksi() {
       p="1"
       borderRadius={20}
       borderWidth="thin"
-      borderColor="blue.900"
+      borderColor="blue.400"
     >
-      <Text fontSize="small" textAlign="center" color="blue.900">
+      <Text fontSize="small" textAlign="center" color="blue.700">
         Transaksi telah diselesaikan
       </Text>
     </Box>
