@@ -1,13 +1,18 @@
 import { Box, Text, HStack } from "@chakra-ui/react";
 export default function Cardinfopembayaran() {
   return (
-    <Box width={["2xs", "3xs", "3xl", "4xl"]} mt="10" p="5" boxShadow="base" borderRadius={10}>
+    <Box
+      width={["2xs", "3xs", "3xl", "4xl"]}
+      mt="10"
+      p="5"
+      boxShadow="base"
+      borderRadius={10}
+    >
       <Text fontSize="large">Informasi Pembayaran</Text>
-      <HStack>
+      <HStack mt={5}>
         <Box
           padding={2}
           backgroundColor="gray.100"
-          mt={2}
           w="fit-content"
           borderRadius={10}
         >
@@ -21,7 +26,6 @@ export default function Cardinfopembayaran() {
         <Box
           padding={2}
           backgroundColor="gray.100"
-          mt={2}
           w="fit-content"
           borderRadius={10}
           width="2xs"
@@ -36,7 +40,6 @@ export default function Cardinfopembayaran() {
         <Box
           padding={2}
           backgroundColor="gray.100"
-          mt={2}
           w="fit-content"
           borderRadius={10}
           width="2xs"

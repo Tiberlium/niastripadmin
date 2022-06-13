@@ -1,7 +1,10 @@
 import { Box, Text, HStack } from "@chakra-ui/react";
+
+
+
 export default function Carddetailpelanggan() {
   return (
-    <Box mt="10" p="5" boxShadow="base" width="full" borderRadius={10}>
+    <Box p="5" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
         Detail Pelanggan
       </Text>

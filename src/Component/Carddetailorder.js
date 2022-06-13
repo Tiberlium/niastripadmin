@@ -2,7 +2,7 @@ import { Box, HStack, Text } from "@chakra-ui/react";
 
 export default function Carddetailorder() {
   return (
-    <Box mt="10" p="5" boxShadow="base" width="full" borderRadius={10}>
+    <Box p="5" mt="16" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
         Detail Order
       </Text>

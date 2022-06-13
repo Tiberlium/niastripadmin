@@ -13,7 +13,7 @@ export default function Transactiondetail() {
       </Text>
       <Headertransaksi />
       <Cardinfopembayaran />
-      <HStack>
+      <HStack spacing='8px'>
         <Carddetailorder />
         <Carddetailpelanggan />
       </HStack>
