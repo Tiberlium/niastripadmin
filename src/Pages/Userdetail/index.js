@@ -14,6 +14,14 @@ import { useParams } from "react-router-dom";
 import { db } from "../../Firebase";
 import Detailuser from "../../Component/Detailuser";
 
+const Empty = () => (
+  <Box>
+    <Text fontSize={20} color="blackAlpha.800" fontStyle="italic">
+      Belum ada pemesanan
+    </Text>
+  </Box>
+);
+
 export default function Userdetail() {
   const [data, setdata] = useState({});
   const { id } = useParams();
@@ -39,17 +47,18 @@ export default function Userdetail() {
         email={data.email}
         gambar={data.gambar}
       />
-
+      <Text fontSize="2xl" mb={5} color="blackAlpha.800">
+        Order History Penginapan
+      </Text>
       <Table variant="striped" size="md">
-        <TableCaption>Order History</TableCaption>
+        <TableCaption>Order History Penginapan</TableCaption>
         <Thead>
           <Th>No</Th>
           <Th>Nama</Th>
           <Th>Order id</Th>
-          <Th>Check IN</Th>
-          <Th>Check Out</Th>
-          <Th>Harga</Th>
-          <Th>Jumlah Orang</Th>
+          <Th>Check in</Th>
+          <Th>Check out</Th>
+          <Th>Tarif</Th>
         </Thead>
         <Tbody>
           {data["reservation"]?.map((doc, index) => (
@@ -64,6 +73,39 @@ export default function Userdetail() {
               <Td>{doc.checkIN}</Td>
               <Td>{doc.checkOUT}</Td>
               <Td>{doc.jumlah}</Td>
+              <Td>{doc.harga}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+
+      <Text fontSize="2xl" mb={5} color="blackAlpha.800">
+        Order History Event
+      </Text>
+
+      <Table variant="striped" size="md">
+        <TableCaption>Order History Event</TableCaption>
+        <Thead>
+          <Th>No</Th>
+          <Th>Nama</Th>
+          <Th>Order id</Th>
+          <Th>Jenis</Th>
+          <Th>Metode</Th>
+          <Th>Harga</Th>
+        </Thead>
+        <Tbody>
+          {data["reservation"]?.map((doc, index) => (
+            <Tr>
+              <Td>{index + 1}</Td>
+              <Td>{doc.nama}</Td>
+              <Td>
+                <Text isTruncated noOfLines={[1, 2, 3]}>
+                  {doc.orderid}
+                </Text>
+              </Td>
+              <Td>{doc.jenis}</Td>
+              <Td>{doc.metode}</Td>
+              <Td>{doc.tarif}</Td>
               <Td>{doc.harga}</Td>
             </Tr>
           ))}

@@ -31,15 +31,16 @@ export default function Managemakanan() {
   const toast = useToast();
   const { id } = useParams();
 
-  const get = () => {
+  const get = async () => {
     if (id) {
-      const docRef = db.collection("Makanan").doc(id).get();
+      const docRef = await db.collection("Makanan").doc(id).get();
       setnama(docRef.data().Nama);
       setdeskripsi(docRef.data().Deskripsi);
       seturl(docRef.data().Galery);
     } else {
       setnama("");
       setdeskripsi("");
+      seturl([]);
     }
   };
 
