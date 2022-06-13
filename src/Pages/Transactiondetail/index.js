@@ -11,7 +11,10 @@ export default function Transactiondetail() {
   const [data, setdata] = React.useState({});
   const { id } = useParams();
 
-  
+  const stringTruncate = (str, length) => {
+    const dots = str.length > length ? "..." : "";
+    return str.substring(0, length) + dots;
+  };
 
   const get = async () => {
     const docRef = await db.collection("Transaksi").doc(id).get();
@@ -47,7 +50,7 @@ export default function Transactiondetail() {
           telepon={data.customerphone}
           email={data.customeremail}
           alamat={data.customeraddress}
-          />
+        />
       </HStack>
     </Box>
   );
