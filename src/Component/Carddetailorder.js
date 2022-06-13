@@ -6,7 +6,13 @@ export default function Carddetailorder({
   jumlah,
   idtransaksi,
   waktu,
+  currency,
 }) {
+  const stringTruncate = (str, length) => {
+    const dots = str.length > length ? "..." : "";
+    return str.substring(0, length) + dots;
+  };
+
   return (
     <Box p="5" mt="16" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
@@ -17,7 +23,7 @@ export default function Carddetailorder({
           Order id
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          {orderid}
+          {stringTruncate(orderid, 30)}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
@@ -54,10 +60,10 @@ export default function Carddetailorder({
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
         <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Status
+          Currency
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Selesai
+          {currency}
         </Text>
       </HStack>
     </Box>
