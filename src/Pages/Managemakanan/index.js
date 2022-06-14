@@ -10,12 +10,14 @@ import {
   Center,
   useToast,
   Button,
-  Select,
+  Collapse,
+  useDisclosure,
+  Checkbox,
+  Stack,
+  CheckboxGroup,
 } from "@chakra-ui/react";
 
 import ImageUploading from "react-images-uploading";
-import { Map, Marker, ZoomControl } from "pigeon-maps";
-import { osm } from "pigeon-maps/providers";
 import { FiUpload } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
 import { useParams } from "react-router-dom";
@@ -23,8 +25,6 @@ import { db, storages } from "../../Firebase";
 
 export default function Managemakanan() {
   const [images, setimages] = useState([]);
-  const [latitude, setlatitude] = useState(0);
-  const [longitude, setlongitude] = useState(0);
   const [nama, setnama] = useState("");
   const [deskripsi, setdeskripsi] = useState("");
   const [url, seturl] = useState([]);
@@ -32,6 +32,8 @@ export default function Managemakanan() {
   const [rm, setrm] = useState([]);
   const toast = useToast();
   const { id } = useParams();
+  const { isOpen, onToggle } = useDisclosure();
+  const [available, setavailable] = useState([]);
 
   const get = async () => {
     if (id) {
@@ -39,6 +41,7 @@ export default function Managemakanan() {
       setnama(docRef.data().Nama);
       setdeskripsi(docRef.data().Deskripsi);
       seturl(docRef.data().Galery);
+      setavailable(docRef.data().Tersedia);
     } else {
       setnama("");
       setdeskripsi("");
@@ -73,16 +76,14 @@ export default function Managemakanan() {
               Deskripsi: deskripsi,
               Galery: filedownloadurl,
               Gambar: filedownloadurl[0],
-              lat: latitude,
-              long: longitude,
+              Tersedia: available,
               Kategori: "Makanan",
             })
             .then(() => {
               setimages([]);
               setnama("");
+              setavailable([]);
               setdeskripsi("");
-              setlatitude(0);
-              setlongitude(0);
               setloading(false);
               toast({
                 title: "Data ditambahkan",
@@ -115,8 +116,7 @@ export default function Managemakanan() {
                   Deskripsi: deskripsi,
                   Galery: filedownloadurl,
                   Gambar: filedownloadurl[0],
-                  lat: latitude,
-                  long: longitude,
+                  Tersedia: available,
                   Kategori: "Makanan",
                 })
                 .then(() => {
@@ -137,9 +137,8 @@ export default function Managemakanan() {
           .update({
             Nama: nama,
             Deskripsi: deskripsi,
-            lat: latitude,
-            long: longitude,
             Kategori: "Makanan",
+            Tersedia: available,
           })
           .then(() => {
             toast({
@@ -169,7 +168,6 @@ export default function Managemakanan() {
     setimages(imageList);
   };
 
-  console.log(rm);
   return (
     <Center>
       <Box width={"3xl"}>
@@ -204,45 +202,44 @@ export default function Managemakanan() {
               <FormLabel htmlFor="Available" mt={5}>
                 Tersedia di Tempat Makan
               </FormLabel>
-              <Select
-                size="md"
-                placeholder="Pilih tempat makan"
-                onChange={(e) => console.log(e.target.value)}
+              <Button
+                onClick={onToggle}
+                width="full"
+                fontWeight="normal"
+                color="blackAlpha.700"
               >
-                {rm.map((doc) => (
-                  <option
-                    value={[doc["data"]["Latitude"], doc["data"]["Longitude"]]}
+                Pilih tempat makan dimana tersedia makanan ini
+              </Button>
+              <Collapse in={isOpen} animateOpacity>
+                <Box
+                  p="40px"
+                  color="white"
+                  mt="4"
+                  bg="teal.500"
+                  rounded="md"
+                  shadow="md"
+                >
+                  <FormLabel mb={5}>Daftar Tempat Makan</FormLabel>
+                  <CheckboxGroup
+                    colorScheme="green"
+                    onChange={(res) => setavailable(res)}
                   >
-                    {doc["data"]["Nama"]}
-                  </option>
-                ))}
-              </Select>
+                    <Stack spacing={[1, 5]} direction={["column"]}>
+                      {rm.map((doc) => (
+                        <Checkbox value={doc["data"]["Nama"]}>
+                          {doc["data"]["Nama"]}
+                        </Checkbox>
+                      ))}
+                    </Stack>
+                  </CheckboxGroup>
+                </Box>
+              </Collapse>
               <FormHelperText>
                 Pilih tempat dimana makanan tersebut tersedia
               </FormHelperText>
             </FormControl>
           </Box>
         </Box>
-        <FormLabel mt={5}>Lokasi Wisata</FormLabel>
-        <Map
-          provider={osm}
-          height={400}
-          width={765}
-          dprs={[1, 2]}
-          defaultCenter={[1.1603381323455186, 97.52212877347822]}
-          center={[latitude, longitude]}
-          defaultZoom={12}
-          onClick={(e) => {
-            setlatitude(e.latLng[0]);
-            setlongitude(e.latLng[1]);
-          }}
-        >
-          <Marker color="red" width={40} />
-          <ZoomControl />
-        </Map>
-        <Text fontSize="sm" textColor={"GrayText"}>
-          Atur Marker dimana lokasi makanan berada
-        </Text>
         <Box>
           <FormLabel mt={5}>Gambar</FormLabel>
           <ImageUploading multiple value={images} onChange={onChange}>
