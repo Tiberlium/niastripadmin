@@ -13,14 +13,17 @@ import {
   Checkbox,
   CheckboxGroup,
   Button,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 
 import ImageUploading from "react-images-uploading";
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { osm } from "pigeon-maps/providers";
-import { FiUpload } from "react-icons/fi";
+import { FiUpload, FiChevronRight } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { db, storages } from "../../Firebase";
 
 export default function Managestaycation() {
@@ -198,8 +201,37 @@ export default function Managestaycation() {
     <Box>
       <Center>
         <Box width={"3xl"}>
+          <Breadcrumb
+            spacing="8px"
+            separator={<FiChevronRight color="gray.500" />}
+            mb={5}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink as={Link} to="/">
+                Home
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink as={Link} to="/Manage">
+                Manage
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink as={Link} to="/Staycation">
+                Tempat penginapan
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem isCurrentPage>
+              <BreadcrumbLink as={Link} to="#">
+                Form Penginapan
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
           <Box>
-            <Text fontSize={"4xl"}>Penginapan Form</Text>
+            <Text fontSize={"4xl"}>Form Penginapan</Text>
             <Box>
               <FormControl required width={"3xl"} mt={10}>
                 <FormLabel htmlFor="Nama wisata" mt={5}>

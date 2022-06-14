@@ -11,11 +11,15 @@ import {
   Text,
   Box,
   useToast,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import {
   BsFillPencilFill,
   BsFillTrashFill,
   BsFillPlusCircleFill,
+  BsChevronRight,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { db, storages } from "../../Firebase";
@@ -86,6 +90,25 @@ export default function Wisata() {
 
   return (
     <Box>
+      <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Manage">
+            Manage
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="/Wisata">
+            Wisata
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
         Daftar Tempat Wisata
       </Text>
