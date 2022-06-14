@@ -168,6 +168,8 @@ export default function Managemakanan() {
     setimages(imageList);
   };
 
+  console.log(available);
+
   return (
     <Center>
       <Box width={"3xl"}>
@@ -222,7 +224,9 @@ export default function Managemakanan() {
                   <FormLabel mb={5}>Daftar Tempat Makan</FormLabel>
                   <CheckboxGroup
                     colorScheme="green"
-                    onChange={(res) => setavailable(res)}
+                    onChange={(res) => {
+                      setavailable(res);
+                    }}
                   >
                     <Stack spacing={[1, 5]} direction={["column"]}>
                       {rm.map((doc) => (
