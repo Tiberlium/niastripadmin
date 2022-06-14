@@ -10,6 +10,7 @@ import {
   Center,
   useToast,
   Button,
+  Select,
 } from "@chakra-ui/react";
 
 import ImageUploading from "react-images-uploading";
@@ -28,6 +29,7 @@ export default function Managemakanan() {
   const [deskripsi, setdeskripsi] = useState("");
   const [url, seturl] = useState([]);
   const [loading, setloading] = useState(false);
+  const [rm, setrm] = useState([]);
   const toast = useToast();
   const { id } = useParams();
 
@@ -42,6 +44,18 @@ export default function Managemakanan() {
       setdeskripsi("");
       seturl([]);
     }
+  };
+
+  const getRM = async () => {
+    let x = [];
+    const docRef = await db.collection("Rm").get();
+    docRef.docs.map((doc) => {
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+    setrm(x);
   };
 
   const handleUpload = () => {
@@ -147,10 +161,15 @@ export default function Managemakanan() {
     get();
   }, []);
 
+  useEffect(() => {
+    getRM();
+  }, []);
+
   const onChange = (imageList) => {
     setimages(imageList);
   };
 
+  console.log(rm);
   return (
     <Center>
       <Box width={"3xl"}>
@@ -181,6 +200,25 @@ export default function Managemakanan() {
               />
               <FormHelperText>
                 masukkan deskripsi tentang makanan
+              </FormHelperText>
+              <FormLabel htmlFor="Available" mt={5}>
+                Tersedia di Tempat Makan
+              </FormLabel>
+              <Select
+                size="md"
+                placeholder="Pilih tempat makan"
+                onChange={(e) => console.log(e.target.value)}
+              >
+                {rm.map((doc) => (
+                  <option
+                    value={[doc["data"]["Latitude"], doc["data"]["Longitude"]]}
+                  >
+                    {doc["data"]["Nama"]}
+                  </option>
+                ))}
+              </Select>
+              <FormHelperText>
+                Pilih tempat dimana makanan tersebut tersedia
               </FormHelperText>
             </FormControl>
           </Box>
