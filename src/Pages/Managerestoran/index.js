@@ -41,7 +41,9 @@ export default function Managerestoran() {
       setloading(true);
       const taskUpload = images.map((doc) => {
         const dataRef = storages.ref(`Rm/${doc.file.name}`);
-        return dataRef.put(doc.file).then(() => dataRef.getDownloadURL());
+        return dataRef
+          .put(doc.file, { contentType: "image/jpeg" })
+          .then(() => dataRef.getDownloadURL());
       });
 
       Promise.all(taskUpload)
@@ -86,7 +88,9 @@ export default function Managerestoran() {
         const deleteimages = storages.refFromURL(url).delete();
         const uploadTask = images.map((doc) => {
           const docRef = storages.ref(`Rm/${doc.file.name}`);
-          return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+          return docRef
+            .put(doc.file, { contentType: "image/jpeg" })
+            .then(() => docRef.getDownloadURL());
         });
 
         Promise.all(deleteimages).then(() =>

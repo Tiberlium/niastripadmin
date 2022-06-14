@@ -65,7 +65,9 @@ export default function Managemakanan() {
     if (!id) {
       const uploadTask = images.map((doc) => {
         const docRef = storages.ref(`Makanan/${doc.file.name}`);
-        return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+        return docRef
+          .put(doc.file, { contentType: "image/jpeg" })
+          .then(() => docRef.getDownloadURL());
       });
 
       Promise.all(uploadTask)
@@ -103,7 +105,7 @@ export default function Managemakanan() {
 
         const uploadTask = images.map((doc) => {
           const docRef = storages.ref(`Makanan/${doc.file.name}`);
-          return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+          return docRef.put(doc.file,{contentType:'image/jpeg'}).then(() => docRef.getDownloadURL());
         });
 
         Promise.all(deleteTask)
@@ -156,6 +158,8 @@ export default function Managemakanan() {
     }
   };
 
+  console.log(images);
+
   useEffect(() => {
     get();
   }, []);
@@ -167,8 +171,6 @@ export default function Managemakanan() {
   const onChange = (imageList) => {
     setimages(imageList);
   };
-
-  console.log(available);
 
   return (
     <Center>
@@ -230,9 +232,11 @@ export default function Managemakanan() {
                   >
                     <Stack spacing={[1, 5]} direction={["column"]}>
                       {rm.map((doc) => (
-                        <Checkbox value={doc["data"]["Nama"]}>
-                          {doc["data"]["Nama"]}
-                        </Checkbox>
+                        <Box key={doc["id"]}>
+                          <Checkbox value={doc["data"]["Nama"]}>
+                            {doc["data"]["Nama"]}
+                          </Checkbox>
+                        </Box>
                       ))}
                     </Stack>
                   </CheckboxGroup>

@@ -102,7 +102,6 @@ export default function Makanan() {
               <Th>No</Th>
               <Th>Nama</Th>
               <Th>Kategori</Th>
-              <Th>Latitude/Longitude</Th>
               <Th>Aksi Edit</Th>
               <Th>Aksi Hapus</Th>
             </Tr>
@@ -113,9 +112,6 @@ export default function Makanan() {
                 <Td>{index}</Td>
                 <Td>{doc.data.Nama}</Td>
                 <Td>{doc.data.Kategori}</Td>
-                <Td>
-                  {doc.data.lat}/{doc.data.long}
-                </Td>
                 <Td>
                   <Link to={`/Editmakanan/${doc.id}`}>
                     <Button

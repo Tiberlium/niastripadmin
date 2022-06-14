@@ -68,7 +68,9 @@ export default function Managestaycation() {
     if (id) {
       const uploadTask = images.map((doc) => {
         const docRef = storages.ref(`Hotel/${doc.file.name}`);
-        return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+        return docRef
+          .put(doc.file, { contentType: "image/jpeg" })
+          .then(() => docRef.getDownloadURL());
       });
 
       Promise.all(uploadTask)
@@ -114,7 +116,9 @@ export default function Managestaycation() {
 
         const uploadTask = images.map((doc) => {
           const docRef = storages.ref(`Hotel/${doc.file.name}`);
-          return docRef.put(doc.file.name).then(() => docRef.getDownloadURL());
+          return docRef
+            .put(doc.file, { contentType: "image/jpeg" })
+            .then(() => docRef.getDownloadURL());
         });
 
         Promise.all(deleteTask)

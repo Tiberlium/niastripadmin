@@ -49,7 +49,9 @@ export default function Managewisata() {
       setloading(true);
       const promises = images.map((doc) => {
         const uploadTask = storages.ref(`Wisata/${doc.file.name}`);
-        return uploadTask.put(doc.file).then(() => uploadTask.getDownloadURL());
+        return uploadTask
+          .put(doc.file, { contentType: "image/jpeg" })
+          .then(() => uploadTask.getDownloadURL());
       });
 
       Promise.all(promises)
@@ -99,7 +101,7 @@ export default function Managewisata() {
         const uploadTask = images.map((doc) => {
           const uploadTask = storages.ref(`images/${doc.file.name}`);
           return uploadTask
-            .put(doc.file)
+            .put(doc.file, { contentType: "image/jpeg" })
             .then(() => uploadTask.getDownloadURL());
         });
 
