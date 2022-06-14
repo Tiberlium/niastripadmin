@@ -16,8 +16,8 @@ export default function Manage() {
       <Text fontWeight={"semibold"} fontSize={30} pb={5}>
         Manage
       </Text>
-      <VStack spacing={"10"}>
-        <HStack spacing={20}>
+      <VStack spacing={"5"}>
+        <HStack spacing={2}>
           <Link to="/Wisata">
             <Box
               h={"44"}
@@ -64,7 +64,7 @@ export default function Manage() {
             </Box>
           </Link>
         </HStack>
-        <HStack spacing={20}>
+        <HStack spacing={2}>
           <Link to="/Makanan">
             <Box
               h={"44"}
