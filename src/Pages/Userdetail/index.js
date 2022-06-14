@@ -9,10 +9,14 @@ import {
   TableCaption,
   Thead,
   Tbody,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { db } from "../../Firebase";
 import Detailuser from "../../Component/Detailuser";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Empty = () => (
   <Box>
@@ -41,6 +45,28 @@ export default function Userdetail() {
 
   return (
     <Box>
+      <Breadcrumb
+        spacing="8px"
+        separator={<IoIosArrowForward color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/User">
+            User
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="/Userdetail">
+            User detail
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Text fontSize="5xl">User Detail</Text>
       <Detailuser
         nama={data.name}

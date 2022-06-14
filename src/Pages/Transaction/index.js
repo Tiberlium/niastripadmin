@@ -10,11 +10,14 @@ import {
   TableCaption,
   Text,
   Button,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
 import { Link } from "react-router-dom";
-import { BsFillInfoCircleFill } from "react-icons/bs";
+import { BsFillInfoCircleFill, BsChevronRight } from "react-icons/bs";
 
 export default function Transaction() {
   const [data, setdata] = React.useState([]);
@@ -47,6 +50,23 @@ export default function Transaction() {
   }, []);
   return (
     <Box>
+      <Breadcrumb
+        spacing="8px"
+        separator={<BsChevronRight color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="/Transaction">
+            Transaksi
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Text fontSize={"5xl"} color="blackAlpha">
         Transaksi
       </Text>

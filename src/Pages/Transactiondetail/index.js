@@ -1,11 +1,19 @@
 import React from "react";
-import { Box, Text, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  HStack,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from "@chakra-ui/react";
 import Headertransaksi from "../../Component/Headertransaksi";
 import Cardinfopembayaran from "../../Component/Cardinfopembayaran";
 import Carddetailorder from "../../Component/Carddetailorder";
 import Carddetailpelanggan from "../../Component/Carddetailpelanggan";
 import { db } from "../../Firebase";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { BsChevronRight } from "react-icons/bs";
 
 export default function Transactiondetail() {
   const [data, setdata] = React.useState({});
@@ -27,6 +35,28 @@ export default function Transactiondetail() {
   }, []);
   return (
     <Box marginTop="-50">
+      <Breadcrumb
+        spacing="8px"
+        separator={<BsChevronRight color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Transaction">
+            Transaksi
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="/Detailtransaksi">
+            Detail transaksi
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Text fontSize="5xl" marginBottom="10">
         Detail Transaksi
       </Text>

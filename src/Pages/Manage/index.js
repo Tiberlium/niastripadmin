@@ -85,7 +85,7 @@ export default function Manage() {
             >
               <IoRestaurant color="white" size={50} />
               <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
-                Restoran
+                Tempat Makan
               </Text>
             </Box>
           </Link>
@@ -117,7 +117,7 @@ export default function Manage() {
             >
               <IoBed color="white" size={50} />
               <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
-                Staycation
+                Penginapan
               </Text>
             </Box>
           </Link>

@@ -11,8 +11,15 @@ import {
   Text,
   Box,
   TableContainer,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
-import { IoIosInformationCircle, IoMdTrash } from "react-icons/io";
+import {
+  IoIosInformationCircle,
+  IoMdTrash,
+  IoIosArrowForward
+} from "react-icons/io";
 import { Link } from "react-router-dom";
 import { db } from "../../Firebase";
 
@@ -44,6 +51,23 @@ export default function User() {
   };
   return (
     <Box>
+      <Breadcrumb
+        spacing="8px"
+        separator={<IoIosArrowForward color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="/User">
+            User
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Text fontSize={"5xl"} mt={10} ml={5}>
         List Pengguna
       </Text>
