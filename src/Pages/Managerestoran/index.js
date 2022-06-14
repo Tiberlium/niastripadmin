@@ -12,14 +12,17 @@ import {
   Center,
   useToast,
   Button,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { osm } from "pigeon-maps/providers";
 import { storages, db } from "../../Firebase";
 import ImageUploading from "react-images-uploading";
-import { FiUpload } from "react-icons/fi";
+import { FiUpload, FiChevronRight } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
 
 export default function Managerestoran() {
@@ -184,8 +187,37 @@ export default function Managerestoran() {
   return (
     <Center>
       <Box width={"3xl"}>
+        <Breadcrumb
+          spacing="8px"
+          separator={<FiChevronRight color="gray.500" />}
+          mb={5}
+        >
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/">
+              Home
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/Manage">
+              Manage
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/Restoran">
+              Tempat makan
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink as={Link} to="#">
+              Form Tempat makan
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
         <Box>
-          <Text fontSize={"4xl"}>Restoran Form</Text>
+          <Text fontSize={"4xl"}>Form Tempat Makan</Text>
           <Wrap>
             <WrapItem>
               <Box>

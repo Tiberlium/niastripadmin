@@ -15,12 +15,15 @@ import {
   Checkbox,
   Stack,
   CheckboxGroup,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 
 import ImageUploading from "react-images-uploading";
-import { FiUpload } from "react-icons/fi";
+import { FiUpload, FiChevronRight } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { db, storages } from "../../Firebase";
 
 export default function Managemakanan() {
@@ -177,8 +180,37 @@ export default function Managemakanan() {
   return (
     <Center>
       <Box width={"3xl"}>
+        <Breadcrumb
+          spacing="8px"
+          separator={<FiChevronRight color="gray.500" />}
+          mb={5}
+        >
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/">
+              Home
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/Manage">
+              Manage
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/Makanan">
+              Makanan
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink as={Link} to="#">
+              Form makanan
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
         <Box>
-          <Text fontSize={"4xl"}>Makanan Form</Text>
+          <Text fontSize={"4xl"}>Form Makanan Tradisional</Text>
           <Box>
             <FormControl required width={"3xl"} mt={10}>
               <FormLabel htmlFor="Nama makanan" mt={5}>
