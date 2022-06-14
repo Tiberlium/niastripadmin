@@ -92,7 +92,7 @@ export default function Managewisata() {
         .catch((err) => console.log(err));
     } else {
       setloading(true);
-      if (images.length !== 0) {
+      if (!images) {
         const deleteImagesFrom_Url = url.map((x) => {
           const imagesRef = storages.refFromURL(x);
           imagesRef.delete();

@@ -83,7 +83,7 @@ export default function Managerestoran() {
           console.error(e);
         });
     } else {
-      if (images.length !== 0) {
+      if (!images) {
         setloading(true);
         const deleteimages = storages.refFromURL(url).delete();
         const uploadTask = images.map((doc) => {

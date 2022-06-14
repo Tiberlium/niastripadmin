@@ -109,7 +109,7 @@ export default function Managestaycation() {
           console.error(e);
         });
     } else {
-      if (images !== 0) {
+      if (!images) {
         const deleteTask = url.map((doc) => {
           storages.refFromURL(doc).delete();
         });

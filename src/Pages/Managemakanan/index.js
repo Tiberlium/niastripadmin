@@ -98,14 +98,16 @@ export default function Managemakanan() {
         })
         .catch((e) => console.error(e));
     } else {
-      if (images !== 0) {
+      if (!images) {
         const deleteTask = url.map((doc) => {
           storages.refFromURL(doc).delete();
         });
 
         const uploadTask = images.map((doc) => {
           const docRef = storages.ref(`Makanan/${doc.file.name}`);
-          return docRef.put(doc.file,{contentType:'image/jpeg'}).then(() => docRef.getDownloadURL());
+          return docRef
+            .put(doc.file, { contentType: "image/jpeg" })
+            .then(() => docRef.getDownloadURL());
         });
 
         Promise.all(deleteTask)
@@ -229,6 +231,7 @@ export default function Managemakanan() {
                     onChange={(res) => {
                       setavailable(res);
                     }}
+                    value={available}
                   >
                     <Stack spacing={[1, 5]} direction={["column"]}>
                       {rm.map((doc) => (
