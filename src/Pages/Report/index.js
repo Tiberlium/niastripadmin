@@ -14,12 +14,35 @@ import {
   TableCaption,
   TableContainer,
   Text,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
+
+import { Link } from "react-router-dom";
+import { IoChevronForwardSharp } from "react-icons/io5";
 
 export default function Report() {
   return (
     <Box>
-      <Text fontSize={'5xl'} mb={5}>
+      <Breadcrumb
+        spacing="8px"
+        separator={<IoChevronForwardSharp color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/">
+            Home
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="/Manage">
+            Report
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+      <Text fontSize={"5xl"} mb={5}>
         Report
       </Text>
       <Tabs variant={"soft-rounded"} isFitted>
