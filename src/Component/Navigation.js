@@ -102,7 +102,7 @@ export default function Navigation() {
                     <IoCash color="white" size={20} />
                   </Box>
                   <Text fontWeight="bold" color="white">
-                    Transaction
+                    Transaksi
                   </Text>
                 </Flex>
               ) : (
@@ -116,7 +116,7 @@ export default function Navigation() {
                     <IoCashOutline color="blue" size={20} />
                   </Box>
                   <Text fontWeight="Regular" color={"blue"}>
-                    Transaction
+                    Transaksi
                   </Text>
                 </Flex>
               )
@@ -138,7 +138,7 @@ export default function Navigation() {
                     <IoPerson color="white" size={20} />
                   </Box>
                   <Text fontWeight="bold" color={"white"}>
-                    User
+                    Pengguna
                   </Text>
                 </Flex>
               ) : (
@@ -152,7 +152,7 @@ export default function Navigation() {
                     <IoPersonOutline color="blue" size={20} />
                   </Box>
                   <Text fontWeight="Regular" color={"blue"}>
-                    User
+                    Pengguna
                   </Text>
                 </Flex>
               )
@@ -174,7 +174,7 @@ export default function Navigation() {
                     <IoBuild color="white" size={20} />
                   </Box>
                   <Text fontWeight="bold" color={"white"}>
-                    Manage
+                    Kelola
                   </Text>
                 </Flex>
               ) : (
@@ -188,7 +188,7 @@ export default function Navigation() {
                     <IoBuildOutline color="blue" size={20} />
                   </Box>
                   <Text fontWeight="Regular" color={"blue"}>
-                    Manage
+                    Kelola
                   </Text>
                 </Flex>
               )
@@ -211,7 +211,7 @@ export default function Navigation() {
                     <IoNewspaper color="white" size={20} />
                   </Box>
                   <Text fontWeight="bold" color={"white"}>
-                    Report
+                    Laporan
                   </Text>
                 </Flex>
               ) : (
@@ -226,7 +226,7 @@ export default function Navigation() {
                     <IoNewspaperOutline color="blue" size={20} />
                   </Box>
                   <Text fontWeight="Regular" color={"blue"}>
-                    Report
+                    Laporan
                   </Text>
                 </Flex>
               )
