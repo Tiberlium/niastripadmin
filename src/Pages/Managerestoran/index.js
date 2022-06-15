@@ -199,7 +199,7 @@ export default function Managerestoran() {
 
           <BreadcrumbItem>
             <BreadcrumbLink as={Link} to="/Manage">
-              Manage
+              Kelola
             </BreadcrumbLink>
           </BreadcrumbItem>
 

@@ -35,12 +35,12 @@ export default function Manage() {
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="/Manage">
-            Manage
+            Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Text fontWeight={"semibold"} fontSize={30} pb={5}>
-        Manage
+        Kelola
       </Text>
       <VStack spacing={"5"}>
         <HStack spacing={2}>

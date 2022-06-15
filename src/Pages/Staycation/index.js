@@ -101,7 +101,7 @@ export default function Staycation() {
 
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Manage">
-            Manage
+            Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
 

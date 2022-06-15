@@ -93,7 +93,7 @@ export default function Event() {
 
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Manage">
-            Manage
+            Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
 

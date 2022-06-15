@@ -38,12 +38,12 @@ export default function Report() {
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="/Manage">
-            Report
+            Laporan
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Text fontSize={"5xl"} mb={5}>
-        Report
+        Laporan
       </Text>
       <Tabs variant={"soft-rounded"} isFitted>
         <TabList mb="1em">

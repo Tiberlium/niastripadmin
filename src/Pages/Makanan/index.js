@@ -103,7 +103,7 @@ export default function Makanan() {
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="/Makanan">
-            Makanan
+            Makanan Tradisional
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>

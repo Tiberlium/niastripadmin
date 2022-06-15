@@ -193,13 +193,13 @@ export default function Managemakanan() {
 
           <BreadcrumbItem>
             <BreadcrumbLink as={Link} to="/Manage">
-              Manage
+              Kelola
             </BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
             <BreadcrumbLink as={Link} to="/Makanan">
-              Makanan
+              Makanan Tradisional
             </BreadcrumbLink>
           </BreadcrumbItem>
 

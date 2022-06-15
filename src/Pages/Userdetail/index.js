@@ -58,16 +58,16 @@ export default function Userdetail() {
 
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/User">
-            User
+            Pengguna
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="/Userdetail">
-            User detail
+            Detail Pengguna
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Text fontSize="5xl">User Detail</Text>
+      <Text fontSize="5xl">Detail Pengguna</Text>
       <Detailuser
         nama={data.name}
         alamat={data.address}
