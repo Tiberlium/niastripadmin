@@ -89,7 +89,7 @@ export default function Navigation() {
         </ListItem>
         <ListItem>
           <NavLink
-            to="/Main/Transaction"
+            to="/Transaction"
             children={({ isActive }) =>
               isActive ? (
                 <Flex
@@ -125,7 +125,7 @@ export default function Navigation() {
         </ListItem>
         <ListItem>
           <NavLink
-            to="/Main/User"
+            to="/User"
             children={({ isActive }) =>
               isActive ? (
                 <Flex
@@ -161,7 +161,7 @@ export default function Navigation() {
         </ListItem>
         <ListItem>
           <NavLink
-            to="/Main/Manage"
+            to="/Manage"
             children={({ isActive }) =>
               isActive ? (
                 <Flex
@@ -197,7 +197,7 @@ export default function Navigation() {
         </ListItem>
         <ListItem>
           <NavLink
-            to="/Main/Report"
+            to="/Report"
             children={({ isActive }) =>
               isActive ? (
                 <Flex

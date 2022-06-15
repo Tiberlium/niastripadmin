@@ -75,7 +75,7 @@ export default function Userdetail() {
         nation={data.nation}
         gender={data.gender}
         email={data.email}
-        gambar={data.gambar}
+        gambar={data.img}
       />
       <Text fontSize="2xl" mb={5} color="blackAlpha.800">
         Order History Penginapan
@@ -90,6 +90,7 @@ export default function Userdetail() {
           <Th>Check out</Th>
           <Th>Jumlah</Th>
           <Th>Tarif</Th>
+          <Th>Total</Th>
         </Thead>
         <Tbody>
           {data["reservation"]?.map((doc, index) => (
@@ -98,13 +99,14 @@ export default function Userdetail() {
               <Td>{doc.nama}</Td>
               <Td>
                 <Text isTruncated noOfLines={[1, 2, 3]}>
-                  {trunctext(doc.orderId)}
+                  {trunctext(doc.orderid)}
                 </Text>
               </Td>
-              <Td>{doc.checkIN}</Td>
-              <Td>{doc.checkOUT}</Td>
+              <Td>{doc.checkin}</Td>
+              <Td>{doc.checkout}</Td>
               <Td>{doc.jumlah}</Td>
-              <Td>{doc.harga}</Td>
+              <Td>{doc.tarif}</Td>
+              <Td>{doc.total}</Td>
             </Tr>
           ))}
         </Tbody>

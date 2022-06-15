@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navigation from "../Component/Navigation";
 import {
   Managewisata,
@@ -25,55 +25,51 @@ import { Flex, Box, Center } from "@chakra-ui/react";
 
 function Main() {
   return (
-    <Flex>
-      <Navigation />
-      <Center w="100%">
-        <Box ml={"20"} display="flex" mt="20">
-          <Routes>
-            <Route path="/Main" element={<Dashboard />} />
-            <Route path="/Main/Wisata" element={<Wisata />} />
-            <Route
-              path="/Main/Tambahkandatawisata"
-              element={<Managewisata />}
-            />
-            <Route
-              path="/Main/Tambahkandatamakanan"
-              element={<Managemakanan />}
-            />
-            <Route path="/Main/Tambahkandataevent" element={<Manageevent />} />
-            <Route
-              path="/Main/Tambahkandatarestoran"
-              element={<Managerestoran />}
-            />
-            <Route path="/Main/Editwisata/:id" element={<Managewisata />} />
-            <Route path="/Main/Editrestoran/:id" element={<Managerestoran />} />
-            <Route path="/Main/Restoran" element={<Restoran />} />
-            <Route path="/Main/User" element={<User />} />
-            <Route path="/Main/Transaction" element={<Transaction />} />
-            <Route
-              path="/Main/Transactiondetail/:id"
-              element={<Transactiondetail />}
-            />
-            <Route path="/Main/Manage" element={<Manage />} />
-            <Route path="/Main/Report" element={<Report />} />
-            <Route path="/Main/Event" element={<Event />} />
-            <Route path="/Main/Makanan" element={<Makanan />} />
-            <Route path="/Main/Staycation" element={<Staycation />} />
-            <Route path="/Main/Editevent/:id" element={<Manageevent />} />
-            <Route path="/Main/Editmakanan/:id" element={<Managemakanan />} />
-            <Route
-              path="/Main/Editstaycation/:id"
-              element={<Managestaycation />}
-            />
-            <Route
-              path="/Main/Tambahkandatastaycation"
-              element={<Managestaycation />}
-            />
-            <Route path="/Main/Userdetail/:id" element={<Userdetail />} />
-          </Routes>
-        </Box>
-      </Center>
-    </Flex>
+    <BrowserRouter>
+      <Flex>
+        <Navigation />
+        <Center w="100%">
+          <Box ml={"20"} display="flex" mt="20">
+            <Routes>
+              <Route path="/Main" element={<Dashboard />} />
+              <Route path="/Wisata" element={<Wisata />} />
+              <Route path="/Tambahkandatawisata" element={<Managewisata />} />
+              <Route path="/Tambahkandatamakanan" element={<Managemakanan />} />
+              <Route path="/Tambahkandataevent" element={<Manageevent />} />
+              <Route
+                path="/Tambahkandatarestoran"
+                element={<Managerestoran />}
+              />
+              <Route path="/Editwisata/:id" element={<Managewisata />} />
+              <Route path="/Editrestoran/:id" element={<Managerestoran />} />
+              <Route path="/Restoran" element={<Restoran />} />
+              <Route path="/User" element={<User />} />
+              <Route path="/Transaction" element={<Transaction />} />
+              <Route
+                path="/Transactiondetail/:id"
+                element={<Transactiondetail />}
+              />
+              <Route path="/Manage" element={<Manage />} />
+              <Route path="/Report" element={<Report />} />
+              <Route path="/Event" element={<Event />} />
+              <Route path="/Makanan" element={<Makanan />} />
+              <Route path="/Staycation" element={<Staycation />} />
+              <Route path="/Editevent/:id" element={<Manageevent />} />
+              <Route path="/Editmakanan/:id" element={<Managemakanan />} />
+              <Route
+                path="/Editstaycation/:id"
+                element={<Managestaycation />}
+              />
+              <Route
+                path="/Tambahkandatastaycation"
+                element={<Managestaycation />}
+              />
+              <Route path="/Userdetail/:id" element={<Userdetail />} />
+            </Routes>
+          </Box>
+        </Center>
+      </Flex>
+    </BrowserRouter>
   );
 }
 
