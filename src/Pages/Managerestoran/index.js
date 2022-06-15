@@ -8,7 +8,6 @@ import {
   Box,
   Wrap,
   WrapItem,
-  Textarea,
   Center,
   useToast,
   Button,
@@ -234,7 +233,7 @@ export default function Managerestoran() {
                 </FormControl>
                 <FormControl required mt={5}>
                   <FormLabel htmlFor="Kontak">Kontak</FormLabel>
-                  <Textarea
+                  <Input
                     placeholder="masukkan Kontak"
                     variant={"filled"}
                     defaultValue={kontak || ""}
