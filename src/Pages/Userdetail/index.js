@@ -125,10 +125,10 @@ export default function Userdetail() {
           <Th>Jenis</Th>
           <Th>Metode</Th>
           <Th>Harga</Th>
-          <Th>Waktu</Th>
+          <Th>Waktu Pemesanan</Th>
         </Thead>
         <Tbody>
-          {data["reservation"]?.map((doc, index) => (
+          {data["tiket"]?.map((doc, index) => (
             <Tr>
               <Td>{index + 1}</Td>
               <Td>{doc.nama}</Td>

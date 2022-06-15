@@ -4,15 +4,15 @@ import { Image, Box, Text, Wrap, WrapItem, Center } from "@chakra-ui/react";
 export default class Detailuser extends Component {
   render() {
     return (
-      <Center padding={10}>
+      <Center padding={10} borderWidth={1} width='4xl' mb={10} borderRadius={10} bgColor='blackAlpha.100' boxShadow='base'>
         <Wrap spacing="100px">
           <WrapItem>
             <Image
-              boxSize={"150px"}
+              boxSize={"120px"}
               objectFit="cover"
               alt="theres no user image"
               src={this.props.gambar}
-              borderRadius={"full"}
+              borderRadius='md'
             />
           </WrapItem>
           <WrapItem>
