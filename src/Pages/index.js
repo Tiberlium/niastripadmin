@@ -1,5 +1,5 @@
 import Login from "./Login";
-import Home from "./Home";
+import Dashboard from "./Dashboard";
 import Wisata from "./Wisata";
 import Managewisata from "./Managewisata";
 import Manageevent from "./Manageevent";
@@ -13,12 +13,12 @@ import Userdetail from "./Userdetail";
 import Transaction from "./Transaction";
 import Report from "./Report";
 import Manage from "./Manage";
-import Managerestoran from './Managerestoran';
+import Managerestoran from "./Managerestoran";
 import Restoran from "./Restoran";
 import Transactiondetail from "./Transactiondetail";
 export {
   Login,
-  Home,
+  Dashboard,
   Wisata,
   Managewisata,
   Manageevent,

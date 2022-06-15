@@ -41,8 +41,8 @@ export default function Transactiondetail() {
         mb={5}
       >
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/">
-            Home
+          <BreadcrumbLink as={Link} to="/Dashboard">
+            Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 

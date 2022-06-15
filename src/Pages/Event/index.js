@@ -86,8 +86,8 @@ export default function Event() {
     <Box>
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/">
-            Home
+          <BreadcrumbLink as={Link} to="/Dashboard">
+            Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
