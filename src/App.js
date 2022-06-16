@@ -3,5 +3,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "./Pages";
 import Main from "./Main";
 export default function App() {
-  return <Main />;
+  return (
+    // <BrowserRouter>
+    //   {/* <Route path="/" element={<Login />} /> */}
+    //   {/* <Route path="Main" element={<Main />} /> */}
+    //   {Main}
+    // </BrowserRouter>
+    <Main/>
+  );
 }

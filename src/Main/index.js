@@ -21,7 +21,7 @@ import {
   Transactiondetail,
 } from "../Pages";
 
-import { Flex, Box, Center } from "@chakra-ui/react";
+import { Box, Center, Flex } from "@chakra-ui/react";
 
 function Main() {
   return (
@@ -31,6 +31,7 @@ function Main() {
         <Center w="100%">
           <Box ml={"20"} display="flex" mt="20">
             <Routes>
+              <Route path="/" element={<Dashboard />} />
               <Route path="/Main" element={<Dashboard />} />
               <Route path="/Wisata" element={<Wisata />} />
               <Route path="/Tambahkandatawisata" element={<Managewisata />} />
