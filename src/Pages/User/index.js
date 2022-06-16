@@ -18,7 +18,7 @@ import {
 import {
   IoIosInformationCircle,
   IoMdTrash,
-  IoIosArrowForward
+  IoIosArrowForward,
 } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { db } from "../../Firebase";
@@ -80,6 +80,7 @@ export default function User() {
               <Th>Id</Th>
               <Th>Nama</Th>
               <Th>Gender</Th>
+              <Th>Email</Th>
               <Th>Detail</Th>
               <Th>Hapus</Th>
             </Tr>
@@ -91,6 +92,7 @@ export default function User() {
                 <Td>{doc.data.id}</Td>
                 <Td>{doc.data.name}</Td>
                 <Td>{doc.data.gender}</Td>
+                <Td>{doc.data.email}</Td>
                 <Td>
                   <Link to={`/Userdetail/${doc.id}`}>
                     <Button
