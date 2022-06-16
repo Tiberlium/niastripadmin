@@ -105,7 +105,7 @@ export default function Report() {
         <TabPanels>
           <TabPanel>
             <TableContainer>
-              <Table variant={"striped"} size='sm'>
+              <Table variant={"striped"} size="sm">
                 <TableCaption>Data Report Penginapan</TableCaption>
                 <Thead>
                   <Th>No</Th>
@@ -138,7 +138,7 @@ export default function Report() {
           </TabPanel>
           <TabPanel>
             <TableContainer>
-              <Table variant={"striped"} size='sm'>
+              <Table variant={"striped"} size="sm">
                 <TableCaption>Data Report Event</TableCaption>
                 <Thead>
                   <Th>No</Th>
