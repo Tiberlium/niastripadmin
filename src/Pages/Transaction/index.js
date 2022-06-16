@@ -70,12 +70,13 @@ export default function Transaction() {
       <Text fontSize={"5xl"} color="blackAlpha">
         Transaksi
       </Text>
-      <Table variant={"striped"}>
+      <Table variant={"striped"} size='sm'>
         <TableCaption>Transaksi</TableCaption>
         <Thead>
           <Th>No</Th>
           <Th>Id order</Th>
           <Th>Pengguna</Th>
+          <Th>Email</Th>
           <Th>Metode pembayaran</Th>
           <Th>Jumlah</Th>
           <Th>Detail</Th>
@@ -86,6 +87,7 @@ export default function Transaction() {
               <Td>{index + 1}</Td>
               <Td>{stringTruncate(doc.data.orderid, 20)}</Td>
               <Td>{doc.data.customername}</Td>
+              <Td>{doc.data.customeremail}</Td>
               <Td>{doc.data.metode}</Td>
               <Td>{formmatter.format(doc.data.amount)}</Td>
               <Td>
