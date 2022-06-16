@@ -72,7 +72,7 @@ export default function User() {
         List Pengguna
       </Text>
       <TableContainer>
-        <Table variant="striped" w={[400, 500, 700]}>
+        <Table variant="striped" w={[400, 500, 700]} size='sm'>
           <TableCaption>PENGGUNA</TableCaption>
           <Thead>
             <Tr>
