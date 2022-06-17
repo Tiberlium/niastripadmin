@@ -25,6 +25,7 @@ export default function Transaction() {
   const formmatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
+    minimumFractionDigits:0,
   });
 
   const stringTruncate = (str, length) => {
