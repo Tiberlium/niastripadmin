@@ -1,6 +1,13 @@
 import { Box, Text, HStack } from "@chakra-ui/react";
 
 export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
+  function formatRupiah(uang) {
+    return new Intl.NumberFormat("ID-id", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(uang);
+  }
   return (
     <Box
       width={["2xs", "3xs", "3xl", "4xl"]}
@@ -35,7 +42,7 @@ export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
             Jumlah
           </Text>
           <Text fontSize="small" color="blackAlpha.900">
-            Rp {jumlah}
+            {formatRupiah(jumlah)}
           </Text>
         </Box>
         <Box

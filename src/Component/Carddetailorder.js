@@ -12,6 +12,14 @@ export default function Carddetailorder({
     return text?.length > 20 ? `${text.substr(0, 20)}...` : text;
   }
 
+  function formatRupiah(uang) {
+    return new Intl.NumberFormat("ID-id", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(uang);
+  }
+
   return (
     <Box p="5" mt="16" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
@@ -38,7 +46,7 @@ export default function Carddetailorder({
           Jumlah
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
-          Rp {jumlah}
+          {formatRupiah(jumlah)}
         </Text>
       </HStack>
       <HStack justifyContent="space-between" mt={2} mb={2}>
