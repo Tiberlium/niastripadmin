@@ -18,14 +18,6 @@ import { db } from "../../Firebase";
 import Detailuser from "../../Component/Detailuser";
 import { IoIosArrowForward } from "react-icons/io";
 
-const Empty = () => (
-  <Box>
-    <Text fontSize={20} color="blackAlpha.800" fontStyle="italic">
-      Belum ada pemesanan
-    </Text>
-  </Box>
-);
-
 function trunctext(text) {
   return text?.length > 20 ? `${text.substr(0, 20)}...` : text;
 }
@@ -42,6 +34,14 @@ export default function Userdetail() {
   useEffect(() => {
     get();
   }, []);
+
+  function formatRupiah(money) {
+    return new Intl.NumberFormat("ID-id", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(money);
+  }
 
   return (
     <Box>
