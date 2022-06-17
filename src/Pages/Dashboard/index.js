@@ -14,14 +14,16 @@ import { Link } from "react-router-dom";
 
 import { BsChevronRight } from "react-icons/bs";
 
-import { BiUserCircle, BiTransferAlt, BiMoney } from "react-icons/bi";
+import { BiUserCircle, BiTransferAlt} from "react-icons/bi";
 
 import { GiPayMoney } from "react-icons/gi";
 
+import {AiFillMoneyCollect} from 'react-icons/ai';
+
 const Card = ({ pendapatan, pengguna, transaksi, total }) => (
   <HStack>
-    <Stat borderWidth={1} p={5} w="2xs" borderRadius={10} boxShadow="base">
-      <BiMoney size={50} color="green" />
+    <Stat borderWidth={1} p={5} w='2xs' borderRadius={10} boxShadow="base">
+      <AiFillMoneyCollect size={50} color="green" />
       <StatLabel>Pendapatan</StatLabel>
       <StatNumber>{pendapatan}</StatNumber>
     </Stat>
