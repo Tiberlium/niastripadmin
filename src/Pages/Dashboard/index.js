@@ -14,15 +14,17 @@ import { Link } from "react-router-dom";
 
 import { BsChevronRight } from "react-icons/bs";
 
-import { BiUserCircle, BiTransferAlt} from "react-icons/bi";
+import { BiUserCircle, BiTransferAlt } from "react-icons/bi";
 
 import { GiPayMoney } from "react-icons/gi";
 
-import {AiFillMoneyCollect} from 'react-icons/ai';
+import { AiFillMoneyCollect } from "react-icons/ai";
+
+import { db } from "../../Firebase";
 
 const Card = ({ pendapatan, pengguna, transaksi, total }) => (
   <HStack>
-    <Stat borderWidth={1} p={5} w='2xs' borderRadius={10} boxShadow="base">
+    <Stat borderWidth={1} p={5} w="2xs" borderRadius={10} boxShadow="base">
       <AiFillMoneyCollect size={50} color="green" />
       <StatLabel>Pendapatan</StatLabel>
       <StatNumber>{pendapatan}</StatNumber>
@@ -59,13 +61,95 @@ const Navbread = () => (
 );
 
 export default function Dashboard() {
+  const [transact, settransact] = React.useState([]);
+  const [user, setuser] = React.useState([]);
+  const isMounted = React.useRef();
+  let totalTransaksi = 0;
+  let pendapatan = 0;
+
+  function formatRupiah(uang) {
+    return new Intl.NumberFormat("ID-id", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(uang);
+  }
+
+  function Percentage(num, per) {
+    return (num / 100) * per;
+  }
+
+  async function getTransaksi() {
+    let x = [];
+    const docRef = await db.collection("Transaksi").get();
+
+    docRef.docs.map((doc) => {
+      if (doc.exists) {
+        x.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      } else {
+        settransact([]);
+      }
+    });
+
+    if (isMounted.current) return settransact(x);
+  }
+
+  async function getuser() {
+    let y = [];
+
+    const docRef = await db.collection("Users").get();
+
+    docRef.docs.map((doc) => {
+      if (doc.exists) {
+        y.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      } else {
+        setuser([]);
+      }
+    });
+
+    if (isMounted.current) return setuser(y);
+  }
+
+  React.useEffect(() => {
+    isMounted.current = true;
+    getuser();
+    return () => (isMounted.current = false);
+  }, []);
+
+  React.useEffect(() => {
+    isMounted.current = true;
+    getTransaksi();
+    return () => (isMounted.current = false);
+  }, []);
+
+  const totalTransact = transact.map((doc) => {
+    return (totalTransaksi += Number(doc["data"]["amount"]));
+  });
+
+  //fungsi ini berguna untuk mengkalkulasi keuntungan 10% dari setiap transaksi dan menjumlahkan nya semua
+
+  const withdrawal = transact.map((doc) => {
+    return (pendapatan += Percentage(Number(doc["data"]["amount"]), 10));
+  });
+
   return (
     <Box>
       <Navbread />
       <Text fontSize="5xl" mb="12">
         Dashboard anda
       </Text>
-      <Card />
+      <Card
+        pengguna={user.length}
+        transaksi={transact.length}
+        total={formatRupiah(totalTransaksi)}
+        pendapatan={formatRupiah(pendapatan)}
+      />
     </Box>
   );
 }
