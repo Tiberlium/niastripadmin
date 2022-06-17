@@ -25,9 +25,13 @@ export default function Transactiondetail() {
     setdata(docRef.data());
   };
 
+
   React.useEffect(() => {
     get();
   }, []);
+
+
+  
   return (
     <Box marginTop="-50">
       <Breadcrumb
