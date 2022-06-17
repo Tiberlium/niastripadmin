@@ -68,7 +68,7 @@ export default function Transactiondetail() {
           jumlah={data.amount}
           idtransaksi={data.transactionid}
           waktu={data.transactiontime}
-          currency={data.currency}
+          jenis={data.jenis}
         />
         <Carddetailpelanggan
           nama={data.customername}
