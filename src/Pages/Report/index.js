@@ -34,6 +34,18 @@ export default function Report() {
     return str.substring(0, length) + dots;
   };
 
+  function Percentage(num, per) {
+    return (num / 100) * per;
+  }
+
+  function formatRupiah(uang) {
+    return new Intl.NumberFormat("ID-id", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(uang);
+  }
+
   async function getReservationdata() {
     let x = [];
     const docRef = await db
@@ -124,8 +136,10 @@ export default function Report() {
                       <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
                       <Td>{doc["data"]["nama"]}</Td>
                       <Td>{doc["data"]["jenis"]}</Td>
-                      <Td>{doc["data"]["amount"]}</Td>
-                      <Td>{doc["data"]["amount"]}</Td>
+                      <Td>{formatRupiah(doc["data"]["amount"])}</Td>
+                      <Td>
+                        {formatRupiah(Percentage(doc["data"]["amount"], 10))}
+                      </Td>
                       <Td>{doc["data"]["transactiontime"]}</Td>
                       <Td>
                         <Button colorScheme={"green"}>Detail</Button>
@@ -157,8 +171,10 @@ export default function Report() {
                       <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
                       <Td>{doc["data"]["nama"]}</Td>
                       <Td>{doc["data"]["jenis"]}</Td>
-                      <Td>{doc["data"]["amount"]}</Td>
-                      <Td>{doc["data"]["amount"]}</Td>
+                      <Td>{formatRupiah(doc["data"]["amount"])}</Td>
+                      <Td>
+                        {formatRupiah(Percentage(doc["data"]["amount"], 10))}
+                      </Td>
                       <Td>{doc["data"]["transactiontime"]}</Td>
                       <Td>
                         <Button colorScheme={"green"}>Detail</Button>
