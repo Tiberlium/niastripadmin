@@ -22,6 +22,8 @@ import { AiFillMoneyCollect } from "react-icons/ai";
 
 import { db } from "../../Firebase";
 
+import { ResponsiveBar } from "@nivo/bar";
+
 const Card = ({ pendapatan, pengguna, transaksi, total }) => (
   <HStack>
     <Stat borderWidth={1} p={5} w="2xs" borderRadius={10} boxShadow="base">
@@ -48,6 +50,60 @@ const Card = ({ pendapatan, pengguna, transaksi, total }) => (
       <StatNumber>{total}</StatNumber>
     </Stat>
   </HStack>
+);
+
+const data = [
+  {
+    day: "Monday",
+    degress: 59,
+  },
+  {
+    day: "Tuesday",
+    degress: 61,
+  },
+  {
+    day: "Wednesday",
+    degress: 55,
+  },
+  {
+    day: "Thursday",
+    degress: 78,
+  },
+  {
+    day: "Friday",
+    degress: 71,
+  },
+  {
+    day: "Saturday",
+    degress: 56,
+  },
+  {
+    day: "Sunday",
+    degress: 67,
+  },
+];
+
+const Bar = () => (
+  <Box h={'96'} w={"full"}>
+    <ResponsiveBar
+      data={data}
+      keys={["degress"]}
+      indexBy="day"
+      margin={{ top: 50, right: 150, bottom: 100, left: 60 }}
+      padding={0.7}
+      valueScale={{ type: "linear" }}
+      colors="#3182CE"
+      animate={true}
+      axisLeft={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: "degrees",
+        legendPosition: "middle",
+        legendOffset: -40,
+      }}
+    />
+  </Box>
 );
 
 const Navbread = () => (
@@ -150,6 +206,7 @@ export default function Dashboard() {
         total={formatRupiah(totalTransaksi)}
         pendapatan={formatRupiah(pendapatan)}
       />
+      <Bar />
     </Box>
   );
 }
