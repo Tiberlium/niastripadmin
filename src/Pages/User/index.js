@@ -14,6 +14,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Image,
 } from "@chakra-ui/react";
 import {
   IoIosInformationCircle,
@@ -68,17 +69,18 @@ export default function User() {
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Text fontSize={"5xl"} mt={10} ml={5}>
+      <Text fontSize={"5xl"} mt={10} mb={5}>
         List Pengguna
       </Text>
       <TableContainer>
-        <Table variant="striped" w={[400, 500, 700]} size='sm'>
+        <Table variant="striped" w={[400, 500, 800]} size="sm">
           <TableCaption>PENGGUNA</TableCaption>
           <Thead>
             <Tr>
               <Th>No</Th>
-              <Th>Id</Th>
+              <Th>Photo</Th>
               <Th>Nama</Th>
+              <Th>Id</Th>
               <Th>Gender</Th>
               <Th>Email</Th>
               <Th>Detail</Th>
@@ -89,8 +91,16 @@ export default function User() {
             {data.map((doc, index) => (
               <Tr>
                 <Td>{index + 1}</Td>
-                <Td>{doc.data.id}</Td>
+                <Td>
+                  <Image
+                    src={doc.data.img}
+                    height="10"
+                    width="10"
+                    borderRadius="full"
+                  />
+                </Td>
                 <Td>{doc.data.name}</Td>
+                <Td>{doc.data.id}</Td>
                 <Td>{doc.data.gender}</Td>
                 <Td>{doc.data.email}</Td>
                 <Td>
