@@ -5,17 +5,14 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  HStack,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-
 import { BsChevronRight } from "react-icons/bs";
-
 import { db } from "../../Firebase";
-
 import Card from "../../Component/Card";
-
-import { Bar } from "react-chartjs-2";
-import 'chart.js/auto';
+import { Line, Doughnut } from "react-chartjs-2";
+import "chart.js/auto";
 
 const Navbread = () => (
   <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
@@ -28,30 +25,42 @@ const Navbread = () => (
 );
 
 const data = {
-  labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ],
+  labels: ["senin", "selasa", "rabu", "kamis", "jumat", "sabtu", "minggu"],
   datasets: [
     {
-      label: "Average Salary Amount USD($)",
-      backgroundColor: "rgba(75,192,192,1)",
-      borderColor: "rgba(0,0,0,1)",
+      label: "Aktivitas",
+      backgroundColor: "#2DA6F4",
+      borderColor: "#2DA6F4",
       borderWidth: 2,
       data: [34, 65, 78, 89, 35, 56, 66, 84, 21, 67, 87, 78],
     },
   ],
 };
+
+const Linechart = () => (
+  <Box w="2xl">
+    <Line
+      data={data}
+      options={{
+        title: {
+          display: true,
+          text: "Average Employee Salary per Month",
+          fontSize: 20,
+        },
+        legend: {
+          display: true,
+          position: "right",
+        },
+      }}
+    />
+  </Box>
+);
+
+const Doughnutchar = ({ data }) => (
+  <Box>
+    <Doughnut data={data} />
+  </Box>
+);
 
 export default function Dashboard() {
   const [transact, settransact] = React.useState([]);
@@ -67,6 +76,16 @@ export default function Dashboard() {
       minimumFractionDigits: 0,
     }).format(uang);
   }
+
+  const totalTransact = transact.map((doc) => {
+    return (totalTransaksi += Number(doc["data"]["amount"]));
+  });
+
+  //fungsi ini berguna untuk mengkalkulasi keuntungan 10% dari setiap transaksi dan menjumlahkan nya semua
+
+  const withdrawal = transact.map((doc) => {
+    return (pendapatan += Percentage(Number(doc["data"]["amount"]), 10));
+  });
 
   function Percentage(num, per) {
     return (num / 100) * per;
@@ -113,15 +132,22 @@ export default function Dashboard() {
     return () => (isMounted.current = false);
   }, []);
 
-  const totalTransact = transact.map((doc) => {
-    return (totalTransaksi += Number(doc["data"]["amount"]));
-  });
-
-  //fungsi ini berguna untuk mengkalkulasi keuntungan 10% dari setiap transaksi dan menjumlahkan nya semua
-
-  const withdrawal = transact.map((doc) => {
-    return (pendapatan += Percentage(Number(doc["data"]["amount"]), 10));
-  });
+  const data2 = {
+    labels: ["Pendapatan", "Pengeluaran", "Total Transaksi"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [
+          Number(pendapatan),
+          Number(totalTransaksi - pendapatan),
+          Number(totalTransaksi),
+        ],
+        backgroundColor: ["#9AF573", "#F7984F", "#B3C7F3"],
+        borderColor: ["#9AF573", "#F7984F", "#B3C7F3"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
     <Box>
@@ -135,23 +161,20 @@ export default function Dashboard() {
         total={formatRupiah(totalTransaksi)}
         pendapatan={formatRupiah(pendapatan)}
       />
-      <Text fontSize="2xl" color="black" mt={10}>
-        Aktivitas Transaksi
-      </Text>
-      <Bar
-        data={data}
-        options={{
-          title: {
-            display: true,
-            text: "Average Employee Salary per Month",
-            fontSize: 20,
-          },
-          legend: {
-            display: true,
-            position: "right",
-          },
-        }}
-      />
+      <HStack>
+        <Box>
+          <Text fontSize="2xl" color="black" mt={10}>
+            Trafik pengguna
+          </Text>
+          <Linechart />
+        </Box>
+        <Box>
+          <Text fontSize="2xl" color="black" mt={10}>
+            Transaksi
+          </Text>
+          <Doughnutchar data={data2} />
+        </Box>
+      </HStack>
     </Box>
   );
 }
