@@ -2,10 +2,6 @@ import React from "react";
 import {
   Box,
   Text,
-  Stat,
-  StatLabel,
-  StatNumber,
-  HStack,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -14,43 +10,10 @@ import { Link } from "react-router-dom";
 
 import { BsChevronRight } from "react-icons/bs";
 
-import { BiUserCircle, BiTransferAlt } from "react-icons/bi";
-
-import { GiPayMoney } from "react-icons/gi";
-
-import { AiFillMoneyCollect } from "react-icons/ai";
-
 import { db } from "../../Firebase";
 
 import { ResponsiveBar } from "@nivo/bar";
-
-const Card = ({ pendapatan, pengguna, transaksi, total }) => (
-  <HStack>
-    <Stat borderWidth={1} p={5} w="2xs" borderRadius={10} boxShadow="base">
-      <AiFillMoneyCollect size={50} color="green" />
-      <StatLabel>Pendapatan</StatLabel>
-      <StatNumber>{pendapatan}</StatNumber>
-    </Stat>
-
-    <Stat borderWidth={1} p={5} w="2xs" borderRadius={10} boxShadow="base">
-      <BiUserCircle size={50} color="red" />
-      <StatLabel>Pengguna</StatLabel>
-      <StatNumber>{pengguna}</StatNumber>
-    </Stat>
-
-    <Stat borderWidth={1} p={5} w="2xs" borderRadius={10} boxShadow="base">
-      <BiTransferAlt size={50} color="orange" />
-      <StatLabel>Transaksi</StatLabel>
-      <StatNumber>{transaksi}</StatNumber>
-    </Stat>
-
-    <Stat borderWidth={1} p={5} w="2xs" borderRadius={10} boxShadow="base">
-      <GiPayMoney size={50} color="blue" />
-      <StatLabel>Total transaksi</StatLabel>
-      <StatNumber>{total}</StatNumber>
-    </Stat>
-  </HStack>
-);
+import Card from "../../Component/Card";
 
 const data = [
   {
@@ -84,7 +47,7 @@ const data = [
 ];
 
 const Bar = () => (
-  <Box h={'96'} w={"full"}>
+  <Box h={"96"} w={"full"}>
     <ResponsiveBar
       data={data}
       keys={["degress"]}
@@ -140,14 +103,10 @@ export default function Dashboard() {
     const docRef = await db.collection("Transaksi").get();
 
     docRef.docs.map((doc) => {
-      if (doc.exists) {
-        x.push({
-          id: doc.id,
-          data: doc.data(),
-        });
-      } else {
-        settransact([]);
-      }
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      });
     });
 
     if (isMounted.current) return settransact(x);
@@ -159,14 +118,10 @@ export default function Dashboard() {
     const docRef = await db.collection("Users").get();
 
     docRef.docs.map((doc) => {
-      if (doc.exists) {
-        y.push({
-          id: doc.id,
-          data: doc.data(),
-        });
-      } else {
-        setuser([]);
-      }
+      y.push({
+        id: doc.id,
+        data: doc.data(),
+      });
     });
 
     if (isMounted.current) return setuser(y);
@@ -206,6 +161,9 @@ export default function Dashboard() {
         total={formatRupiah(totalTransaksi)}
         pendapatan={formatRupiah(pendapatan)}
       />
+      <Text fontSize="2xl" color="black" mt={10}>
+        Aktivitas Pengguna
+      </Text>
       <Bar />
     </Box>
   );
