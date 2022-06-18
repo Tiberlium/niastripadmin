@@ -69,6 +69,7 @@ export default function Userdetail() {
       </Breadcrumb>
       <Text fontSize="5xl">Detail Pengguna</Text>
       <Detailuser
+        id={data.id}
         nama={data.name}
         alamat={data.address}
         phone={data.phoneNumber}

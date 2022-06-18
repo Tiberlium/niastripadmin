@@ -1,37 +1,84 @@
 import React, { Component } from "react";
-import { Image, Box, Text, Wrap, WrapItem, Center } from "@chakra-ui/react";
+import {
+  Image,
+  Box,
+  Text,
+  Wrap,
+  WrapItem,
+  Center,
+  VStack,
+} from "@chakra-ui/react";
 
 export default class Detailuser extends Component {
   render() {
     return (
-      <Center padding={10} borderWidth={1} width='4xl' mb={10} borderRadius={10} bgColor='white' boxShadow='md' mt={10}>
-        <Wrap spacing="100px">
+      <Center
+        paddingTop={10}
+        borderWidth={1}
+        width="3xl"
+        mb={10}
+        borderRadius={10}
+        bgColor="white"
+        boxShadow="md"
+        mt={10}
+      >
+        <Wrap spacing="10">
           <WrapItem>
             <Image
-              boxSize={"120px"}
+              boxSize={"150px"}
               objectFit="cover"
               alt="theres no user image"
               src={this.props.gambar}
-              borderRadius='md'
+              borderRadius="full"
             />
           </WrapItem>
           <WrapItem>
             <Box>
               <Box marginBottom={5}>
-                <Text fontWeight={"bold"}>Nama</Text>
-                <Text color={"gray.500"} textTransform="capitalize">
+                <Text fontWeight={"bold"} fontSize="sm">
+                  Id
+                </Text>
+                <Text
+                  color={"gray.500"}
+                  textTransform="capitalize"
+                  fontSize="sm"
+                >
+                  {this.props.id}
+                </Text>
+              </Box>
+              <Box marginBottom={5}>
+                <Text fontWeight={"bold"} fontSize="sm">
+                  Nama
+                </Text>
+                <Text
+                  color={"gray.500"}
+                  textTransform="capitalize"
+                  fontSize="sm"
+                >
                   {this.props.nama}
                 </Text>
               </Box>
               <Box marginBottom={5}>
-                <Text fontWeight={"bold"}>Alamat</Text>
-                <Text color={"gray.500"} textTransform="capitalize">
+                <Text fontWeight={"bold"} fontSize="sm">
+                  Alamat
+                </Text>
+                <Text
+                  color={"gray.500"}
+                  textTransform="capitalize"
+                  fontSize="sm"
+                >
                   {this.props.alamat}
                 </Text>
               </Box>
               <Box marginBottom={5}>
-                <Text fontWeight={"bold"}>Email</Text>
-                <Text color={"gray.500"} textTransform="capitalize">
+                <Text fontWeight={"bold"} fontSize="sm">
+                  Email
+                </Text>
+                <Text
+                  color={"gray.500"}
+                  textTransform="capitalize"
+                  fontSize="sm"
+                >
                   {this.props.email}
                 </Text>
               </Box>
@@ -40,18 +87,32 @@ export default class Detailuser extends Component {
           <WrapItem>
             <Box>
               <Box marginBottom={5}>
-                <Text fontWeight={"bold"}>Gender</Text>
-                <Text color={"gray.500"} textTransform="capitalize">
+                <Text fontWeight={"bold"} fontSize="sm">
+                  Gender
+                </Text>
+                <Text
+                  color={"gray.500"}
+                  textTransform="capitalize"
+                  fontSize="sm"
+                >
                   {this.props.gender}
                 </Text>
               </Box>
               <Box marginBottom={5}>
-                <Text fontWeight={"bold"}>Telephone</Text>
-                <Text color={"gray.500"}>{this.props.phone}</Text>
+                <Text fontWeight={"bold"} fontSize="sm">
+                  Telephone
+                </Text>
+                <Text color={"gray.500"} fontSize="sm">
+                  {this.props.phone}
+                </Text>
               </Box>
               <Box marginBottom={5}>
-                <Text fontWeight={"bold"}>Kewarganegaraan</Text>
-                <Text color={"gray.500"}>{this.props.nation}</Text>
+                <Text fontWeight={"bold"} fontSize="sm">
+                  Kewarganegaraan
+                </Text>
+                <Text color={"gray.500"} fontSize="sm">
+                  {this.props.nation}
+                </Text>
               </Box>
             </Box>
           </WrapItem>
