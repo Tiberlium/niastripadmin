@@ -14,6 +14,9 @@ import { db } from "../../Firebase";
 
 import Card from "../../Component/Card";
 
+import { Bar } from "react-chartjs-2";
+import 'chart.js/auto';
+
 const Navbread = () => (
   <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
     <BreadcrumbItem>
@@ -23,6 +26,32 @@ const Navbread = () => (
     </BreadcrumbItem>
   </Breadcrumb>
 );
+
+const data = {
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
+  datasets: [
+    {
+      label: "Average Salary Amount USD($)",
+      backgroundColor: "rgba(75,192,192,1)",
+      borderColor: "rgba(0,0,0,1)",
+      borderWidth: 2,
+      data: [34, 65, 78, 89, 35, 56, 66, 84, 21, 67, 87, 78],
+    },
+  ],
+};
 
 export default function Dashboard() {
   const [transact, settransact] = React.useState([]);
@@ -94,7 +123,6 @@ export default function Dashboard() {
     return (pendapatan += Percentage(Number(doc["data"]["amount"]), 10));
   });
 
-
   return (
     <Box>
       <Navbread />
@@ -110,6 +138,20 @@ export default function Dashboard() {
       <Text fontSize="2xl" color="black" mt={10}>
         Aktivitas Transaksi
       </Text>
+      <Bar
+        data={data}
+        options={{
+          title: {
+            display: true,
+            text: "Average Employee Salary per Month",
+            fontSize: 20,
+          },
+          legend: {
+            display: true,
+            position: "right",
+          },
+        }}
+      />
     </Box>
   );
 }
