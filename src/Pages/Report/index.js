@@ -31,6 +31,11 @@ import img from "../../Asset/Logo.png";
 export default function Report() {
   const [reservation, setreservation] = React.useState([]);
   const [eventtiket, seteventtiket] = React.useState([]);
+  let totalTransaksireservation = 0;
+  let pendapatanreservation = 0;
+
+  let totalTransaksievent = 0;
+  let pendapatanEvent = 0;
 
   const today = new Date();
 
@@ -42,6 +47,25 @@ export default function Report() {
   function Percentage(num, per) {
     return (num / 100) * per;
   }
+
+  const totalTransact = reservation.map((doc) => {
+    return (totalTransaksireservation += Number(doc["data"]["amount"]));
+  });
+
+  const withdrawal = reservation.map((doc) => {
+    return (pendapatanreservation += Percentage(
+      Number(doc["data"]["amount"]),
+      10
+    ));
+  });
+
+  const totalTransactevent = reservation.map((doc) => {
+    return (totalTransaksievent += Number(doc["data"]["amount"]));
+  });
+
+  const withdrawalevent = reservation.map((doc) => {
+    return (pendapatanEvent += Percentage(Number(doc["data"]["amount"]), 10));
+  });
 
   function formatRupiah(uang) {
     return new Intl.NumberFormat("ID-id", {
