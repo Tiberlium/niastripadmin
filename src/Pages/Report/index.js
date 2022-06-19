@@ -115,7 +115,13 @@ export default function Report() {
         {
           title: "Nama",
           style: {
-            width: 80,
+            width: 60,
+          },
+        },
+        {
+          title: "Jenis",
+          style: {
+            width: 50,
           },
         },
         { title: "Harga" },
@@ -126,6 +132,7 @@ export default function Report() {
         index + 1,
         stringTruncate(item["data"]["orderid"], 20),
         item["data"]["nama"],
+        item["data"]["jenis"],
         formatRupiah(item["data"]["amount"]),
         formatRupiah(Percentage(item["data"]["amount"], 10)),
         item["data"]["transactiontime"],
@@ -279,7 +286,7 @@ export default function Report() {
               </Table>
             </TableContainer>
             <Center>
-              <Button colorScheme="blue" size="md">
+              <Button colorScheme="blue" size="md" onClick={createpdf}>
                 Generate Laporan Penginapan
               </Button>
             </Center>
