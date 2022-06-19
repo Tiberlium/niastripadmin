@@ -59,11 +59,11 @@ export default function Report() {
     ));
   });
 
-  const totalTransactevent = reservation.map((doc) => {
+  const totalTransactevent = eventtiket.map((doc) => {
     return (totalTransaksievent += Number(doc["data"]["amount"]));
   });
 
-  const withdrawalevent = reservation.map((doc) => {
+  const withdrawalevent = eventtiket.map((doc) => {
     return (pendapatanEvent += Percentage(Number(doc["data"]["amount"]), 10));
   });
 
