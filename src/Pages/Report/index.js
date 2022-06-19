@@ -19,21 +19,21 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Button,
+  Center,
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 import { IoChevronForwardSharp } from "react-icons/io5";
 import { db } from "../../Firebase";
+import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
+import img from "../../Asset/Logo.png";
 
 export default function Report() {
   const [reservation, setreservation] = React.useState([]);
   const [eventtiket, seteventtiket] = React.useState([]);
 
-  function createpdf(){
-    alert('hallo');
-  }
+  const today = new Date();
 
-  
   const stringTruncate = (str, length) => {
     const dots = str?.length > length ? "..." : "";
     return str.substring(0, length) + dots;
@@ -49,6 +49,128 @@ export default function Report() {
       currency: "IDR",
       minimumFractionDigits: 0,
     }).format(uang);
+  }
+
+  let props = {
+    outputType: OutputType.Save,
+    returnJsPDFDocObject: true,
+    fileName: "Report 2022",
+    orientationLandscape: true,
+    compress: true,
+    logo: {
+      src: img,
+      width: 26.66, //aspect ratio = width/height
+      height: 26.66,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    stamp: {
+      inAllPages: true,
+      src: img,
+      width: 20, //aspect ratio = width/height
+      height: 20,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    business: {
+      name: "Nias trip",
+      address: "Medan, Sumatera utara, indonesia",
+      phone: "(+62) 069 11 11 111",
+      email: "niastrip@gmail.com",
+      email_1: "niastrip@gmail.al",
+      website: "www.niastrip.al",
+    },
+    // contact: {
+    //   label: "Reprt issued for:",
+    //   name: "Client Name",
+    //   address: "Albania, Tirane, Astir",
+    //   phone: "(+355) 069 22 22 222",
+    //   email: "client@website.al",
+    //   otherInfo: "www.website.al",
+    // },
+    invoice: {
+      label: "Report ###: ",
+      num: 19,
+      invDate: `Report Date: ${today.toDateString()}`,
+      invGenDate: `Generted Date: ${today.toDateString()}`,
+      headerBorder: true,
+      tableBodyBorder: true,
+      header: [
+        {
+          title: "No",
+          style: {
+            width: 10,
+          },
+        },
+        {
+          title: "Order id",
+          style: {
+            width: 50,
+          },
+        },
+        {
+          title: "Nama",
+          style: {
+            width: 80,
+          },
+        },
+        { title: "Harga" },
+        { title: "Komisi" },
+        { title: "tanggal transaksi" },
+      ],
+      table: reservation.map((item, index) => [
+        index + 1,
+        stringTruncate(item["data"]["orderid"], 20),
+        item["data"]["nama"],
+        formatRupiah(item["data"]["amount"]),
+        formatRupiah(Percentage(item["data"]["amount"], 10)),
+        item["data"]["transactiontime"],
+      ]),
+      additionalRows: [
+        {
+          col1: "Total:",
+          col2: "2.420.522",
+          col3: "ALL",
+          style: {
+            fontSize: 14, //optional, default 12
+          },
+        },
+        {
+          col1: "VAT:",
+          col2: "20",
+          col3: "%",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+        {
+          col1: "SubTotal:",
+          col2: "116,199.90",
+          col3: "ALL",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+      ],
+
+      invDescLabel: "Report Note",
+      invDesc:
+        "Copyright permission footnotes acknowledge the source of lengthy quotations, scale and test items, and figures and tables that have been reprinted or adapted.",
+    },
+    footer: {
+      text: "The Report is created on a computer and is valid without the signature and stamp.",
+    },
+    pageEnable: true,
+    pageLabel: "Page ",
+  };
+
+  function createpdf() {
+    const pdfObj = jsPDFInvoiceTemplate(props);
+    pdfObj.jsPDFDocObject.save();
   }
 
   async function getReservationdata() {
@@ -121,9 +243,11 @@ export default function Report() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <TableContainer>
+            <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
-                <TableCaption>Data Report Penginapan</TableCaption>
+                <TableCaption placement="top" mb={5}>
+                  Data Report Penginapan
+                </TableCaption>
                 <Thead>
                   <Th>No</Th>
                   <Th>Order id</Th>
@@ -154,11 +278,18 @@ export default function Report() {
                 </Tbody>
               </Table>
             </TableContainer>
+            <Center>
+              <Button colorScheme="blue" size="md">
+                Generate Laporan Penginapan
+              </Button>
+            </Center>
           </TabPanel>
           <TabPanel>
-            <TableContainer>
+            <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
-                <TableCaption>Data Report Event</TableCaption>
+                <TableCaption placement="top" mb={5}>
+                  Data Report Event
+                </TableCaption>
                 <Thead>
                   <Th>No</Th>
                   <Th>Order id</Th>
@@ -189,12 +320,14 @@ export default function Report() {
                 </Tbody>
               </Table>
             </TableContainer>
+            <Center>
+              <Button colorScheme="blue" size="md">
+                Generate Laporan Event
+              </Button>
+            </Center>
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Button colorScheme="blue" onClick={createpdf}>
-        Lihat
-      </Button>
     </Box>
   );
 }
