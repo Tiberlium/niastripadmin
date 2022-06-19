@@ -75,10 +75,134 @@ export default function Report() {
     }).format(uang);
   }
 
-  let props = {
+  let dataRes = {
     outputType: OutputType.Save,
     returnJsPDFDocObject: true,
-    fileName: "Report 2022",
+    fileName: `Report Reservation ${today.toDateString()}`,
+    orientationLandscape: true,
+    compress: true,
+    logo: {
+      src: img,
+      width: 26.66, //aspect ratio = width/height
+      height: 26.66,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    stamp: {
+      inAllPages: true,
+      src: img,
+      width: 20, //aspect ratio = width/height
+      height: 20,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    business: {
+      name: "Nias trip",
+      address: "Medan, Sumatera utara, indonesia",
+      phone: "(+62) 069 11 11 111",
+      email: "niastrip@gmail.com",
+      email_1: "niastrip@gmail.al",
+      website: "www.niastrip.al",
+    },
+    // contact: {
+    //   label: "Reprt issued for:",
+    //   name: "Client Name",
+    //   address: "Albania, Tirane, Astir",
+    //   phone: "(+355) 069 22 22 222",
+    //   email: "client@website.al",
+    //   otherInfo: "www.website.al",
+    // },
+    invoice: {
+      label: "Report ###: ",
+      num: 19,
+      invDate: `Report Date: ${today.toDateString()}`,
+      invGenDate: `Generted Date: ${today.toDateString()}`,
+      headerBorder: true,
+      tableBodyBorder: true,
+      header: [
+        {
+          title: "No",
+          style: {
+            width: 10,
+          },
+        },
+        {
+          title: "Order id",
+          style: {
+            width: 50,
+          },
+        },
+        {
+          title: "Nama",
+          style: {
+            width: 60,
+          },
+        },
+        {
+          title: "Jenis",
+          style: {
+            width: 50,
+          },
+        },
+        { title: "Harga" },
+        { title: "Komisi" },
+        { title: "tanggal transaksi" },
+      ],
+      table: eventtiket.map((item, index) => [
+        index + 1,
+        stringTruncate(item["data"]["orderid"], 20),
+        item["data"]["nama"],
+        item["data"]["jenis"],
+        formatRupiah(item["data"]["amount"]),
+        formatRupiah(Percentage(item["data"]["amount"], 10)),
+        item["data"]["transactiontime"],
+      ]),
+      additionalRows: [
+        {
+          col1: "Total:",
+          col2: `${formatRupiah(Number(totalTransaksireservation))}`,
+          col3: "ALL",
+          style: {
+            fontSize: 14, //optional, default 12
+          },
+        },
+        {
+          col1: "Potongan:",
+          col2: "10",
+          col3: "%",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+        {
+          col1: "Pendapatan:",
+          col2: `${formatRupiah(Number(pendapatanreservation))}`,
+          col3: "ALL",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+      ],
+
+      invDescLabel: "Report Note",
+      invDesc:
+        "Copyright permission footnotes acknowledge the source of lengthy quotations, scale and test items, and figures and tables that have been reprinted or adapted.",
+    },
+    footer: {
+      text: "The Report is created on a computer and is valid without the signature and stamp.",
+    },
+    pageEnable: true,
+    pageLabel: "Page ",
+  };
+
+  let dataEve = {
+    outputType: OutputType.Save,
+    returnJsPDFDocObject: true,
+    fileName: `Report Reservation ${today.toDateString()}`,
     orientationLandscape: true,
     compress: true,
     logo: {
@@ -200,7 +324,7 @@ export default function Report() {
   };
 
   function createpdf() {
-    const pdfObj = jsPDFInvoiceTemplate(props);
+    const pdfObj = jsPDFInvoiceTemplate(dataRes);
     pdfObj.jsPDFDocObject.save();
   }
 
