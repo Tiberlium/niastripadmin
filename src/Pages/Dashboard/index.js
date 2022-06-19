@@ -32,7 +32,7 @@ const data = {
       backgroundColor: "#2DA6F4",
       borderColor: "#2DA6F4",
       borderWidth: 2,
-      data: [34, 65, 78, 89, 35, 56, 66, 84, 21, 67, 87, 78],
+      data: [15, 8, 20, 32, 35, 56, 40, 25, 21, 30, 30, 10],
     },
   ],
 };
