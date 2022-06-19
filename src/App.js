@@ -7,7 +7,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="Main" element={<Main />} />
+        <Route index path="Main/*" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
