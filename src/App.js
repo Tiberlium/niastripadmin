@@ -4,11 +4,11 @@ import { Login } from "./Pages";
 import Main from "./Main";
 export default function App() {
   return (
-    // <BrowserRouter>
-    //   {/* <Route path="/" element={<Login />} /> */}
-    //   {/* <Route path="Main" element={<Main />} /> */}
-    //   {Main}
-    // </BrowserRouter>
-    <Main/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="Main" element={<Main />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
