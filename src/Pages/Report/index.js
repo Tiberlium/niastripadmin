@@ -29,6 +29,11 @@ export default function Report() {
   const [reservation, setreservation] = React.useState([]);
   const [eventtiket, seteventtiket] = React.useState([]);
 
+  function createpdf(){
+    alert('hallo');
+  }
+
+  
   const stringTruncate = (str, length) => {
     const dots = str?.length > length ? "..." : "";
     return str.substring(0, length) + dots;
@@ -187,6 +192,9 @@ export default function Report() {
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <Button colorScheme="blue" onClick={createpdf}>
+        Lihat
+      </Button>
     </Box>
   );
 }
