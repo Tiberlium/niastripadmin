@@ -152,7 +152,7 @@ export default function Report() {
         { title: "Komisi" },
         { title: "tanggal transaksi" },
       ],
-      table: eventtiket.map((item, index) => [
+      table: reservation.map((item, index) => [
         index + 1,
         stringTruncate(item["data"]["orderid"], 20),
         item["data"]["nama"],
@@ -202,7 +202,7 @@ export default function Report() {
   let dataEve = {
     outputType: OutputType.Save,
     returnJsPDFDocObject: true,
-    fileName: `Report Reservation ${today.toDateString()}`,
+    fileName: `Report event ${today.toDateString()}`,
     orientationLandscape: true,
     compress: true,
     logo: {
@@ -276,7 +276,7 @@ export default function Report() {
         { title: "Komisi" },
         { title: "tanggal transaksi" },
       ],
-      table: reservation.map((item, index) => [
+      table: eventtiket.map((item, index) => [
         index + 1,
         stringTruncate(item["data"]["orderid"], 20),
         item["data"]["nama"],
@@ -288,7 +288,7 @@ export default function Report() {
       additionalRows: [
         {
           col1: "Total:",
-          col2: `${formatRupiah(Number(totalTransaksireservation))}`,
+          col2: `${formatRupiah(Number(totalTransaksievent))}`,
           col3: "ALL",
           style: {
             fontSize: 14, //optional, default 12
@@ -304,7 +304,7 @@ export default function Report() {
         },
         {
           col1: "Pendapatan:",
-          col2: `${formatRupiah(Number(pendapatanreservation))}`,
+          col2: `${formatRupiah(Number(pendapatanEvent))}`,
           col3: "ALL",
           style: {
             fontSize: 10, //optional, default 12
