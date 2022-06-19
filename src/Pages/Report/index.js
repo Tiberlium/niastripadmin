@@ -323,8 +323,13 @@ export default function Report() {
     pageLabel: "Page ",
   };
 
-  function createpdf() {
+  function createpdfreservation() {
     const pdfObj = jsPDFInvoiceTemplate(dataRes);
+    pdfObj.jsPDFDocObject.save();
+  }
+
+  function createpdfevent() {
+    const pdfObj = jsPDFInvoiceTemplate(dataEve);
     pdfObj.jsPDFDocObject.save();
   }
 
@@ -434,7 +439,11 @@ export default function Report() {
               </Table>
             </TableContainer>
             <Center>
-              <Button colorScheme="blue" size="md" onClick={createpdf}>
+              <Button
+                colorScheme="blue"
+                size="md"
+                onClick={createpdfreservation}
+              >
                 Generate Laporan Penginapan
               </Button>
             </Center>
@@ -476,7 +485,7 @@ export default function Report() {
               </Table>
             </TableContainer>
             <Center>
-              <Button colorScheme="blue" size="md">
+              <Button colorScheme="blue" size="md" onClick={createpdfevent}>
                 Generate Laporan Event
               </Button>
             </Center>
