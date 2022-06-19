@@ -164,23 +164,23 @@ export default function Report() {
       additionalRows: [
         {
           col1: "Total:",
-          col2: "2.420.522",
+          col2: `${formatRupiah(Number(totalTransaksireservation))}`,
           col3: "ALL",
           style: {
             fontSize: 14, //optional, default 12
           },
         },
         {
-          col1: "VAT:",
-          col2: "20",
+          col1: "Potongan:",
+          col2: "10",
           col3: "%",
           style: {
             fontSize: 10, //optional, default 12
           },
         },
         {
-          col1: "SubTotal:",
-          col2: "116,199.90",
+          col1: "Pendapatan:",
+          col2: `${formatRupiah(Number(pendapatanreservation))}`,
           col3: "ALL",
           style: {
             fontSize: 10, //optional, default 12
