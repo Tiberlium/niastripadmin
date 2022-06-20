@@ -195,180 +195,178 @@ export default function Managestaycation() {
 
   useEffect(() => {
     Get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Box>
-      <Center>
-        <Box width={"3xl"}>
-          <Breadcrumb
-            spacing="8px"
-            separator={<FiChevronRight color="gray.500" />}
-            mb={5}
-          >
-            <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/Main">
-                Dashboard
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+      <Box width={"3xl"} mr='32'>
+        <Breadcrumb
+          spacing="8px"
+          separator={<FiChevronRight color="gray.500" />}
+          mb={5}
+        >
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/Main">
+              Dashboard
+            </BreadcrumbLink>
+          </BreadcrumbItem>
 
-            <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/Main/Manage">
-                Kelola
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/Main/Manage">
+              Kelola
+            </BreadcrumbLink>
+          </BreadcrumbItem>
 
-            <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/Main/Staycation">
-                Tempat penginapan
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+          <BreadcrumbItem>
+            <BreadcrumbLink as={Link} to="/Main/Staycation">
+              Tempat penginapan
+            </BreadcrumbLink>
+          </BreadcrumbItem>
 
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink as={Link} to="#">
-                Form Penginapan
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink as={Link} to="#">
+              Form Penginapan
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+        <Box>
+          <Text fontSize={"4xl"}>Form Penginapan</Text>
           <Box>
-            <Text fontSize={"4xl"}>Form Penginapan</Text>
-            <Box>
-              <FormControl required width={"3xl"} mt={10}>
-                <FormLabel htmlFor="Nama wisata" mt={5}>
-                  Nama Penginapan
-                </FormLabel>
-                <Input
-                  placeholder="Nama Wisata"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={nama || ""}
-                  onChange={(e) => setnama(e.target.value)}
-                />
-                <FormHelperText>masukkan nama Penginapan</FormHelperText>
+            <FormControl required width={"3xl"} mt={10}>
+              <FormLabel htmlFor="Nama wisata" mt={5}>
+                Nama Penginapan
+              </FormLabel>
+              <Input
+                placeholder="Nama Wisata"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={nama || ""}
+                onChange={(e) => setnama(e.target.value)}
+              />
+              <FormHelperText>masukkan nama Penginapan</FormHelperText>
 
-                <FormLabel htmlFor="Deskripsi" mt={5}>
-                  Deskripsi
-                </FormLabel>
-                <Textarea
-                  placeholder="masukkan deskripsi"
-                  variant={"filled"}
-                  defaultValue={deskripsi || ""}
-                  onChange={(e) => setdeskripsi(e.target.value)}
-                />
-                <FormHelperText>
-                  masukkan deskripsi tentang penginapan
-                </FormHelperText>
-                <FormLabel htmlFor="Kabupaten" mt={5}>
-                  Kabupaten
-                </FormLabel>
-                <Input
-                  placeholder="Kabupaten"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={kabupaten || ""}
-                  onChange={(e) => setkabupaten(e.target.value)}
-                />
-                <FormHelperText>
-                  masukkan kabupaten dimana tempat penginapan berada
-                </FormHelperText>
-                <FormLabel htmlFor="Tarif" mt={5}>
-                  Tarif per Malam
-                </FormLabel>
-                <Input
-                  placeholder="ex Rp.123456789"
-                  variant={"filled"}
-                  type={"number"}
-                  defaultValue={tarif || ""}
-                  onChange={(e) => settarif(e.target.value)}
-                />
-                <FormHelperText>
-                  Masukkan Tarif permalam untuk penggunaan penginapan
-                </FormHelperText>
+              <FormLabel htmlFor="Deskripsi" mt={5}>
+                Deskripsi
+              </FormLabel>
+              <Textarea
+                placeholder="masukkan deskripsi"
+                variant={"filled"}
+                defaultValue={deskripsi || ""}
+                onChange={(e) => setdeskripsi(e.target.value)}
+              />
+              <FormHelperText>
+                masukkan deskripsi tentang penginapan
+              </FormHelperText>
+              <FormLabel htmlFor="Kabupaten" mt={5}>
+                Kabupaten
+              </FormLabel>
+              <Input
+                placeholder="Kabupaten"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={kabupaten || ""}
+                onChange={(e) => setkabupaten(e.target.value)}
+              />
+              <FormHelperText>
+                masukkan kabupaten dimana tempat penginapan berada
+              </FormHelperText>
+              <FormLabel htmlFor="Tarif" mt={5}>
+                Tarif per Malam
+              </FormLabel>
+              <Input
+                placeholder="ex Rp.123456789"
+                variant={"filled"}
+                type={"number"}
+                defaultValue={tarif || ""}
+                onChange={(e) => settarif(e.target.value)}
+              />
+              <FormHelperText>
+                Masukkan Tarif permalam untuk penggunaan penginapan
+              </FormHelperText>
 
-                <CheckboxGroup
-                  colorScheme="green"
-                  defaultValue={fasilitas}
-                  onChange={(res) => setfasilitas(res)}
-                >
-                  <FormLabel htmlFor="Fasilitas" mt={5}>
-                    Fasilitas
-                  </FormLabel>
-                  <Stack spacing={[1, 5]} direction={["column", "row"]}>
-                    <Checkbox value="Bed">Bed</Checkbox>
-                    <Checkbox value="Ac">Ac</Checkbox>
-                    <Checkbox value="Fan">Fan</Checkbox>
-                    <Checkbox value="Breakfast">Breakfast</Checkbox>
-                    <Checkbox value="Television">Television</Checkbox>
-                    <Checkbox value="Wifi">Wifi</Checkbox>
-                  </Stack>
-                </CheckboxGroup>
-              </FormControl>
-            </Box>
+              <CheckboxGroup
+                colorScheme="green"
+                defaultValue={fasilitas}
+                onChange={(res) => setfasilitas(res)}
+              >
+                <FormLabel htmlFor="Fasilitas" mt={5}>
+                  Fasilitas
+                </FormLabel>
+                <Stack spacing={[1, 5]} direction={["column", "row"]}>
+                  <Checkbox value="Bed">Bed</Checkbox>
+                  <Checkbox value="Ac">Ac</Checkbox>
+                  <Checkbox value="Fan">Fan</Checkbox>
+                  <Checkbox value="Breakfast">Breakfast</Checkbox>
+                  <Checkbox value="Television">Television</Checkbox>
+                  <Checkbox value="Wifi">Wifi</Checkbox>
+                </Stack>
+              </CheckboxGroup>
+            </FormControl>
           </Box>
-          <FormLabel mt={5}>Lokasi Penginapan</FormLabel>
-          <Map
-            provider={osm}
-            height={400}
-            width={765}
-            dprs={[1, 2]}
-            defaultCenter={[1.1603381323455186, 97.52212877347822]}
-            center={[latitude, longitude]}
-            defaultZoom={12}
-            onClick={(e) => {
-              setlatitude(e.latLng[0]);
-              setlongitude(e.latLng[1]);
-            }}
-          >
-            <Marker color="red" width={40} />
-            <ZoomControl />
-          </Map>
-          <Text fontSize="sm" textColor={"GrayText"}>
-            Atur Marker dimana letak penginapan berada
-          </Text>
-          <Box>
-            <FormLabel mt={5}>Gambar</FormLabel>
-            <ImageUploading multiple value={images} onChange={onChange}>
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                <Box>
-                  <Button
-                    width={"full"}
-                    leftIcon={<FiUpload />}
-                    colorScheme={isDragging ? "red" : "teal"}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    Click or Drop here
-                  </Button>
-                  {imageList.map((image, index) => (
-                    <Imagescard
-                      key={index}
-                      label={image.file.name}
-                      onClick={() => onImageRemove(index)}
-                    />
-                  ))}
-                </Box>
-              )}
-            </ImageUploading>
-          </Box>
-          <Button
-            colorScheme={"blue"}
-            marginTop={"6"}
-            width={"full"}
-            alignSelf={"center"}
-            isLoading={loading}
-            onClick={handleUpload}
-          >
-            {id ? "Update" : "Submit"}
-          </Button>
         </Box>
-      </Center>
+        <FormLabel mt={5}>Lokasi Penginapan</FormLabel>
+        <Map
+          provider={osm}
+          height={400}
+          width={765}
+          dprs={[1, 2]}
+          defaultCenter={[1.1603381323455186, 97.52212877347822]}
+          center={[latitude, longitude]}
+          defaultZoom={12}
+          onClick={(e) => {
+            setlatitude(e.latLng[0]);
+            setlongitude(e.latLng[1]);
+          }}
+        >
+          <Marker color="red" width={40} />
+          <ZoomControl />
+        </Map>
+        <Text fontSize="sm" textColor={"GrayText"}>
+          Atur Marker dimana letak penginapan berada
+        </Text>
+        <Box>
+          <FormLabel mt={5}>Gambar</FormLabel>
+          <ImageUploading multiple value={images} onChange={onChange}>
+            {({
+              imageList,
+              onImageUpload,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) => (
+              <Box>
+                <Button
+                  width={"full"}
+                  leftIcon={<FiUpload />}
+                  colorScheme={isDragging ? "red" : "teal"}
+                  onClick={onImageUpload}
+                  {...dragProps}
+                >
+                  Click or Drop here
+                </Button>
+                {imageList.map((image, index) => (
+                  <Imagescard
+                    key={index}
+                    label={image.file.name}
+                    onClick={() => onImageRemove(index)}
+                  />
+                ))}
+              </Box>
+            )}
+          </ImageUploading>
+        </Box>
+        <Button
+          colorScheme={"blue"}
+          marginTop={"6"}
+          width={"full"}
+          alignSelf={"center"}
+          isLoading={loading}
+          onClick={handleUpload}
+        >
+          {id ? "Update" : "Submit"}
+        </Button>
+      </Box>
     </Box>
   );
 }

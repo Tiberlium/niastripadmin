@@ -165,12 +165,12 @@ export default function Managemakanan() {
 
   useEffect(() => {
     get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     getRM();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChange = (imageList) => {
@@ -178,153 +178,149 @@ export default function Managemakanan() {
   };
 
   return (
-    <Center>
-      <Box width={"3xl"}>
-        <Breadcrumb
-          spacing="8px"
-          separator={<FiChevronRight color="gray.500" />}
-          mb={5}
-        >
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main">
-              Dashboard
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+    <Box width={"3xl"} mr='36'>
+      <Breadcrumb
+        spacing="8px"
+        separator={<FiChevronRight color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main">
+            Dashboard
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main/Manage">
-              Kelola
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main/Manage">
+            Kelola
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main/Makanan">
-              Makanan Tradisional
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main/Makanan">
+            Makanan Tradisional
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink as={Link} to="#">
-              Form makanan
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="#">
+            Form makanan
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+      <Box>
+        <Text fontSize={"4xl"}>Form Makanan Tradisional</Text>
         <Box>
-          <Text fontSize={"4xl"}>Form Makanan Tradisional</Text>
-          <Box>
-            <FormControl required width={"3xl"} mt={10}>
-              <FormLabel htmlFor="Nama makanan" mt={5}>
-                Nama Makanan
-              </FormLabel>
-              <Input
-                placeholder="Nama Wisata"
-                variant={"filled"}
-                type={"text"}
-                defaultValue={nama || ""}
-                onChange={(e) => setnama(e.target.value)}
-              />
-              <FormHelperText>masukkan nama makanan</FormHelperText>
+          <FormControl required width={"3xl"} mt={10}>
+            <FormLabel htmlFor="Nama makanan" mt={5}>
+              Nama Makanan
+            </FormLabel>
+            <Input
+              placeholder="Nama Wisata"
+              variant={"filled"}
+              type={"text"}
+              defaultValue={nama || ""}
+              onChange={(e) => setnama(e.target.value)}
+            />
+            <FormHelperText>masukkan nama makanan</FormHelperText>
 
-              <FormLabel htmlFor="Deskripsi" mt={5}>
-                Deskripsi
-              </FormLabel>
-              <Textarea
-                placeholder="masukkan deskripsi"
-                variant={"filled"}
-                defaultValue={deskripsi || ""}
-                onChange={(e) => setdeskripsi(e.target.value)}
-              />
-              <FormHelperText>
-                masukkan deskripsi tentang makanan
-              </FormHelperText>
-              <FormLabel htmlFor="Available" mt={5}>
-                Tersedia di Tempat Makan
-              </FormLabel>
-              <Button
-                onClick={onToggle}
-                width="full"
-                fontWeight="normal"
-                color="blackAlpha.700"
+            <FormLabel htmlFor="Deskripsi" mt={5}>
+              Deskripsi
+            </FormLabel>
+            <Textarea
+              placeholder="masukkan deskripsi"
+              variant={"filled"}
+              defaultValue={deskripsi || ""}
+              onChange={(e) => setdeskripsi(e.target.value)}
+            />
+            <FormHelperText>masukkan deskripsi tentang makanan</FormHelperText>
+            <FormLabel htmlFor="Available" mt={5}>
+              Tersedia di Tempat Makan
+            </FormLabel>
+            <Button
+              onClick={onToggle}
+              width="full"
+              fontWeight="normal"
+              color="blackAlpha.700"
+            >
+              Pilih tempat makan dimana tersedia makanan ini
+            </Button>
+            <Collapse in={isOpen} animateOpacity>
+              <Box
+                p="40px"
+                color="white"
+                mt="4"
+                bg="teal.500"
+                rounded="md"
+                shadow="md"
               >
-                Pilih tempat makan dimana tersedia makanan ini
-              </Button>
-              <Collapse in={isOpen} animateOpacity>
-                <Box
-                  p="40px"
-                  color="white"
-                  mt="4"
-                  bg="teal.500"
-                  rounded="md"
-                  shadow="md"
+                <FormLabel mb={5}>Daftar Tempat Makan</FormLabel>
+                <CheckboxGroup
+                  colorScheme="green"
+                  onChange={(res) => {
+                    setavailable(res);
+                  }}
+                  value={available}
                 >
-                  <FormLabel mb={5}>Daftar Tempat Makan</FormLabel>
-                  <CheckboxGroup
-                    colorScheme="green"
-                    onChange={(res) => {
-                      setavailable(res);
-                    }}
-                    value={available}
-                  >
-                    <Stack spacing={[1, 5]} direction={["column"]}>
-                      {rm.map((doc) => (
-                        <Box key={doc["id"]}>
-                          <Checkbox value={doc["data"]["Nama"]}>
-                            {doc["data"]["Nama"]}
-                          </Checkbox>
-                        </Box>
-                      ))}
-                    </Stack>
-                  </CheckboxGroup>
-                </Box>
-              </Collapse>
-              <FormHelperText>
-                Pilih tempat dimana makanan tersebut tersedia
-              </FormHelperText>
-            </FormControl>
-          </Box>
-        </Box>
-        <Box>
-          <FormLabel mt={5}>Gambar</FormLabel>
-          <ImageUploading multiple value={images} onChange={onChange}>
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              <Box>
-                <Button
-                  width={"full"}
-                  leftIcon={<FiUpload />}
-                  colorScheme={isDragging ? "red" : "teal"}
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  Click or Drop here
-                </Button>
-                {imageList.map((image, index) => (
-                  <Imagescard
-                    key={index}
-                    label={image.file.name}
-                    onClick={() => onImageRemove(index)}
-                  />
-                ))}
+                  <Stack spacing={[1, 5]} direction={["column"]}>
+                    {rm.map((doc) => (
+                      <Box key={doc["id"]}>
+                        <Checkbox value={doc["data"]["Nama"]}>
+                          {doc["data"]["Nama"]}
+                        </Checkbox>
+                      </Box>
+                    ))}
+                  </Stack>
+                </CheckboxGroup>
               </Box>
-            )}
-          </ImageUploading>
+            </Collapse>
+            <FormHelperText>
+              Pilih tempat dimana makanan tersebut tersedia
+            </FormHelperText>
+          </FormControl>
         </Box>
-        <Button
-          colorScheme={"blue"}
-          marginTop={"6"}
-          width={"full"}
-          alignSelf={"center"}
-          isLoading={loading}
-          onClick={handleUpload}
-        >
-          {id ? "Update" : "Submit"}
-        </Button>
       </Box>
-    </Center>
+      <Box>
+        <FormLabel mt={5}>Gambar</FormLabel>
+        <ImageUploading multiple value={images} onChange={onChange}>
+          {({
+            imageList,
+            onImageUpload,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            <Box>
+              <Button
+                width={"full"}
+                leftIcon={<FiUpload />}
+                colorScheme={isDragging ? "red" : "teal"}
+                onClick={onImageUpload}
+                {...dragProps}
+              >
+                Click or Drop here
+              </Button>
+              {imageList.map((image, index) => (
+                <Imagescard
+                  key={index}
+                  label={image.file.name}
+                  onClick={() => onImageRemove(index)}
+                />
+              ))}
+            </Box>
+          )}
+        </ImageUploading>
+      </Box>
+      <Button
+        colorScheme={"blue"}
+        marginTop={"6"}
+        width={"full"}
+        alignSelf={"center"}
+        isLoading={loading}
+        onClick={handleUpload}
+      >
+        {id ? "Update" : "Submit"}
+      </Button>
+    </Box>
   );
 }

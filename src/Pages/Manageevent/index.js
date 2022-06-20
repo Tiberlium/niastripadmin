@@ -20,7 +20,7 @@ import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { osm } from "pigeon-maps/providers";
 import { FiUpload, FiChevronRight } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
-import { useParams,Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { db, storages } from "../../Firebase";
 
 export default function Manageevent() {
@@ -172,159 +172,157 @@ export default function Manageevent() {
 
   useState(() => {
     get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChange = (imagelist) => {
     setimages(imagelist);
   };
   return (
-    <Center>
-      <Box width={"3xl"}>
-        <Breadcrumb
-          spacing="8px"
-          separator={<FiChevronRight color="gray.500" />}
-          mb={5}
-        >
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main">
-              Dashboard
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+    <Box width={"3xl"} mr="32">
+      <Breadcrumb
+        spacing="8px"
+        separator={<FiChevronRight color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main">
+            Dashboard
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main/Manage">
-              Kelola
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main/Manage">
+            Kelola
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main/Event">
-              Event
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main/Event">
+            Event
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink as={Link} to="#">
-              Form event
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="#">
+            Form event
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+      <Box>
+        <Text fontSize={"4xl"}>Form event</Text>
         <Box>
-          <Text fontSize={"4xl"}>Form event</Text>
-          <Box>
-            <FormControl required width={"3xl"} mt={10}>
-              <FormLabel htmlFor="Nama makanan" mt={5}>
-                Nama Event
-              </FormLabel>
-              <Input
-                placeholder="Nama Event"
-                variant={"filled"}
-                type={"text"}
-                defaultValue={nama || ""}
-                onChange={(e) => setnama(e.target.value)}
-              />
-              <FormHelperText>masukkan nama Event</FormHelperText>
+          <FormControl required width={"3xl"} mt={10}>
+            <FormLabel htmlFor="Nama makanan" mt={5}>
+              Nama Event
+            </FormLabel>
+            <Input
+              placeholder="Nama Event"
+              variant={"filled"}
+              type={"text"}
+              defaultValue={nama || ""}
+              onChange={(e) => setnama(e.target.value)}
+            />
+            <FormHelperText>masukkan nama Event</FormHelperText>
 
-              <FormLabel htmlFor="Deskripsi" mt={5}>
-                Deskripsi
-              </FormLabel>
-              <Textarea
-                placeholder="masukkan deskripsi"
-                variant={"filled"}
-                defaultValue={deskripsi || ""}
-                onChange={(e) => setdeskripsi(e.target.value)}
-              />
-              <FormHelperText>masukkan deskripsi tentang Event</FormHelperText>
-              <FormLabel htmlFor="Kabupaten" mt={5}>
-                Kabupaten
-              </FormLabel>
-              <Input
-                type={"text"}
-                placeholder="masukkan kabupaten"
-                variant={"filled"}
-                defaultValue={kabupaten || ""}
-                onChange={(e) => setkabupaten(e.target.value)}
-              />
-              <FormHelperText>
-                masukkan kabupaten diamana event akan di adakan
-              </FormHelperText>
-              <FormLabel htmlFor="Kabupaten" mt={5}>
-                Tarif tiket
-              </FormLabel>
-              <Input
-                type={"number"}
-                placeholder="masukkan tarif"
-                variant={"filled"}
-                defaultValue={tarif || ""}
-                onChange={(e) => settarif(e.target.value)}
-              />
-              <FormHelperText>masukkan tarif tiket event</FormHelperText>
-            </FormControl>
-          </Box>
+            <FormLabel htmlFor="Deskripsi" mt={5}>
+              Deskripsi
+            </FormLabel>
+            <Textarea
+              placeholder="masukkan deskripsi"
+              variant={"filled"}
+              defaultValue={deskripsi || ""}
+              onChange={(e) => setdeskripsi(e.target.value)}
+            />
+            <FormHelperText>masukkan deskripsi tentang Event</FormHelperText>
+            <FormLabel htmlFor="Kabupaten" mt={5}>
+              Kabupaten
+            </FormLabel>
+            <Input
+              type={"text"}
+              placeholder="masukkan kabupaten"
+              variant={"filled"}
+              defaultValue={kabupaten || ""}
+              onChange={(e) => setkabupaten(e.target.value)}
+            />
+            <FormHelperText>
+              masukkan kabupaten diamana event akan di adakan
+            </FormHelperText>
+            <FormLabel htmlFor="Kabupaten" mt={5}>
+              Tarif tiket
+            </FormLabel>
+            <Input
+              type={"number"}
+              placeholder="masukkan tarif"
+              variant={"filled"}
+              defaultValue={tarif || ""}
+              onChange={(e) => settarif(e.target.value)}
+            />
+            <FormHelperText>masukkan tarif tiket event</FormHelperText>
+          </FormControl>
         </Box>
-        <FormLabel mt={5}>Lokasi Event</FormLabel>
-        <Map
-          provider={osm}
-          height={400}
-          width={765}
-          dprs={[1, 2]}
-          defaultCenter={[1.1603381323455186, 97.52212877347822]}
-          center={[latitude, longitude]}
-          defaultZoom={12}
-          onClick={(e) => {
-            setlatitude(e.latLng[0]);
-            setlongitude(e.latLng[1]);
-          }}
-        >
-          <Marker color="red" width={40} />
-          <ZoomControl />
-        </Map>
-        <Text fontSize="sm" textColor={"GrayText"}>
-          Atur Marker dimana lokasi event akan diadakan
-        </Text>
-        <Box>
-          <FormLabel mt={5}>Gambar</FormLabel>
-          <ImageUploading multiple value={images} onChange={onChange}>
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              <Box>
-                <Button
-                  width={"full"}
-                  leftIcon={<FiUpload />}
-                  colorScheme={isDragging ? "red" : "teal"}
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  Click or Drop here
-                </Button>
-                {imageList.map((image, index) => (
-                  <Imagescard
-                    key={index}
-                    label={image.file.name}
-                    onClick={() => onImageRemove(index)}
-                  />
-                ))}
-              </Box>
-            )}
-          </ImageUploading>
-        </Box>
-        <Button
-          colorScheme={"blue"}
-          marginTop={"6"}
-          width={"full"}
-          alignSelf={"center"}
-          isLoading={loading}
-          onClick={handleUpload}
-        >
-          {id ? "Update" : "Submit"}
-        </Button>
       </Box>
-    </Center>
+      <FormLabel mt={5}>Lokasi Event</FormLabel>
+      <Map
+        provider={osm}
+        height={400}
+        width={765}
+        dprs={[1, 2]}
+        defaultCenter={[1.1603381323455186, 97.52212877347822]}
+        center={[latitude, longitude]}
+        defaultZoom={12}
+        onClick={(e) => {
+          setlatitude(e.latLng[0]);
+          setlongitude(e.latLng[1]);
+        }}
+      >
+        <Marker color="red" width={40} />
+        <ZoomControl />
+      </Map>
+      <Text fontSize="sm" textColor={"GrayText"}>
+        Atur Marker dimana lokasi event akan diadakan
+      </Text>
+      <Box>
+        <FormLabel mt={5}>Gambar</FormLabel>
+        <ImageUploading multiple value={images} onChange={onChange}>
+          {({
+            imageList,
+            onImageUpload,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            <Box>
+              <Button
+                width={"full"}
+                leftIcon={<FiUpload />}
+                colorScheme={isDragging ? "red" : "teal"}
+                onClick={onImageUpload}
+                {...dragProps}
+              >
+                Click or Drop here
+              </Button>
+              {imageList.map((image, index) => (
+                <Imagescard
+                  key={index}
+                  label={image.file.name}
+                  onClick={() => onImageRemove(index)}
+                />
+              ))}
+            </Box>
+          )}
+        </ImageUploading>
+      </Box>
+      <Button
+        colorScheme={"blue"}
+        marginTop={"6"}
+        width={"full"}
+        alignSelf={"center"}
+        isLoading={loading}
+        onClick={handleUpload}
+      >
+        {id ? "Update" : "Submit"}
+      </Button>
+    </Box>
   );
 }

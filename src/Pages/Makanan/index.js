@@ -88,7 +88,7 @@ export default function Makanan() {
   };
 
   return (
-    <Box>
+    <Box mr='52'>
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main">
