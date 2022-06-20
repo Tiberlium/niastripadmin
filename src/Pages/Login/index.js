@@ -1,18 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Box,
-  FormControl,
-  FormLabel,
   Input,
   Image,
   Button,
   Center,
   Text,
+  InputGroup,
+  InputRightElement,
+  FormLabel,
 } from "@chakra-ui/react";
 
 import Logo from "../../Asset/Logo.png";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 export default function Login() {
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
+
   return (
     <div>
       <Center padding={10}>
@@ -37,12 +42,19 @@ export default function Login() {
           <Text align="center" color="grey">
             Silakan Login untuk mendapatkan akses
           </Text>
-          <FormControl id="email" pt={6}>
-            <FormLabel>Password</FormLabel>
-            <Input type="password" />
-          </FormControl>
-          <Center pt={10}>
-            <Button colorScheme="blue">Masuk</Button>
+          <Center>
+            <InputGroup size="md" w="80" mt={10}>
+              <Input
+                pr="4.5rem"
+                type={show ? "text" : "password"}
+                placeholder="Enter password"
+              />
+              <InputRightElement width="4.5rem">
+                <Button h="1.75rem" size="sm" onClick={handleClick}>
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
           </Center>
         </Box>
       </Center>
