@@ -21,9 +21,9 @@ import {
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 import { osm } from "pigeon-maps/providers";
 import { storages, db } from "../../Firebase";
-import { useParams,Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ImageUploading from "react-images-uploading";
-import { FiUpload,FiChevronRight } from "react-icons/fi";
+import { FiUpload, FiChevronRight } from "react-icons/fi";
 import Imagescard from "../../Component/Imagescard";
 
 export default function Managewisata() {
@@ -45,7 +45,7 @@ export default function Managewisata() {
 
   useEffect(() => {
     Get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleUpload() {
@@ -198,181 +198,179 @@ export default function Managewisata() {
   const isError = Input === "" && images === [];
 
   return (
-    <Center>
-      <Box width={"3xl"}>
-         <Breadcrumb
-          spacing="8px"
-          separator={<FiChevronRight color="gray.500" />}
-          mb={5}
-        >
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main">
-              Dashboard
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+    <Box>
+      <Breadcrumb
+        spacing="8px"
+        separator={<FiChevronRight color="gray.500" />}
+        mb={5}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main">
+            Dashboard
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main/Manage">
-              Kelola
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main/Manage">
+            Kelola
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Main/Wisata">
-              Tempat wisata
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/Main/Wisata">
+            Tempat wisata
+          </BreadcrumbLink>
+        </BreadcrumbItem>
 
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink as={Link} to="#">
-              Form Tempat wisata
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb>
-        <Box>
-          <Text fontSize={"4xl"}>Form Wisata</Text>
-          <Wrap>
-            <WrapItem>
-              <Box>
-                <FormControl required width={"3xl"} mt={10} isInvalid={isError}>
-                  <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
-                  <Input
-                    placeholder="Nama Wisata"
-                    variant={"filled"}
-                    type={"text"}
-                    defaultValue={nama || ""}
-                    onChange={(e) => setnama(e.target.value)}
-                  />
-                  <FormHelperText>masukkan nama tempat wisata</FormHelperText>
-                </FormControl>
-                <FormControl required mt={5}>
-                  <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
-                  <Textarea
-                    placeholder="masukkan deskripsi"
-                    variant={"filled"}
-                    defaultValue={deskripsi || ""}
-                    onChange={(e) => setdeskripsi(e.target.value)}
-                  />
-                  <FormHelperText>
-                    masukkan deskripsi tempat wisata
-                  </FormHelperText>
-                </FormControl>
-                <FormControl required mt={5}>
-                  <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
-                  <Input
-                    placeholder="Kabupaten"
-                    variant={"filled"}
-                    type={"text"}
-                    defaultValue={kabupaten || ""}
-                    onChange={(e) => setkabupaten(e.target.value)}
-                  />
-                  <FormHelperText>
-                    masukkan kabupaten dimana tempat wisata berada
-                  </FormHelperText>
-                </FormControl>
-                <FormControl mt={5}>
-                  <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
-                  <Input
-                    placeholder="Kecamatan"
-                    variant={"filled"}
-                    type={"text"}
-                    defaultValue={kecamatan || ""}
-                    onChange={(e) => setkecamatan(e.target.value)}
-                  />
-                  <FormHelperText>
-                    Masukkan nama kecamatan tempat wisata berada
-                  </FormHelperText>
-                </FormControl>
-                <FormControl display="flex" alignItems="center" mt={5}>
-                  <FormLabel htmlFor="editor" mb="0">
-                    Jadikan sebagai rekomendasi editor?
-                  </FormLabel>
-                  <Switch
-                    id="editor"
-                    isChecked={disable}
-                    onChange={() =>
-                      disable === false ? setdisable(true) : setdisable(false)
-                    }
-                  />
-                </FormControl>
-                <FormControl mt={5}>
-                  <FormLabel htmlFor="Kecamatan">Alasan Editor</FormLabel>
-                  <Textarea
-                    isDisabled={!disable}
-                    placeholder="Masukkan alasan anda memilih tempat ini sebagai rekomendasi"
-                    variant={"filled"}
-                    type={"text"}
-                    defaultValue={rekomendasi || ""}
-                    onChange={(e) => setrekomendasi(e.target.value)}
-                  />
-                  <FormHelperText>
-                    Masukkan alasan anda sebagai editor untuk rekomendasi tempat
-                    ini
-                  </FormHelperText>
-                </FormControl>
-              </Box>
-            </WrapItem>
-          </Wrap>
-        </Box>
-        <FormLabel mt={5}>Lokasi Wisata</FormLabel>
-        <Map
-          provider={osm}
-          height={400}
-          width={765}
-          dprs={[1, 2]}
-          defaultCenter={[1.1603381323455186, 97.52212877347822]}
-          center={[latitude, longitude]}
-          defaultZoom={12}
-          onClick={(e) => {
-            setlatitude(e.latLng[0]);
-            setlongitude(e.latLng[1]);
-          }}
-        >
-          <Marker color="red" width={40} />
-          <ZoomControl />
-        </Map>
-        <Box>
-          <FormLabel mt={5}>Gambar</FormLabel>
-          <ImageUploading multiple value={images} onChange={onChange}>
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              <Box>
-                <Button
-                  width={"full"}
-                  leftIcon={<FiUpload />}
-                  colorScheme={isDragging ? "red" : "teal"}
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  Click or Drop here
-                </Button>
-                {imageList.map((image, index) => (
-                  <Imagescard
-                    key={index}
-                    label={image.file.name}
-                    onClick={() => onImageRemove(index)}
-                  />
-                ))}
-              </Box>
-            )}
-          </ImageUploading>
-        </Box>
-        <Button
-          colorScheme={"blue"}
-          marginTop={"6"}
-          width={"full"}
-          alignSelf={"center"}
-          onClick={handleUpload}
-          isLoading={loading}
-        >
-          {id ? "Update" : "Submit"}
-        </Button>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={Link} to="#">
+            Form Tempat wisata
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+      <Box>
+        <Text fontSize={"4xl"}>Form Wisata</Text>
+        <Wrap>
+          <WrapItem>
+            <Box>
+              <FormControl required width={"3xl"} mt={10} isInvalid={isError}>
+                <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
+                <Input
+                  placeholder="Nama Wisata"
+                  variant={"filled"}
+                  type={"text"}
+                  defaultValue={nama || ""}
+                  onChange={(e) => setnama(e.target.value)}
+                />
+                <FormHelperText>masukkan nama tempat wisata</FormHelperText>
+              </FormControl>
+              <FormControl required mt={5}>
+                <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
+                <Textarea
+                  placeholder="masukkan deskripsi"
+                  variant={"filled"}
+                  defaultValue={deskripsi || ""}
+                  onChange={(e) => setdeskripsi(e.target.value)}
+                />
+                <FormHelperText>
+                  masukkan deskripsi tempat wisata
+                </FormHelperText>
+              </FormControl>
+              <FormControl required mt={5}>
+                <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
+                <Input
+                  placeholder="Kabupaten"
+                  variant={"filled"}
+                  type={"text"}
+                  defaultValue={kabupaten || ""}
+                  onChange={(e) => setkabupaten(e.target.value)}
+                />
+                <FormHelperText>
+                  masukkan kabupaten dimana tempat wisata berada
+                </FormHelperText>
+              </FormControl>
+              <FormControl mt={5}>
+                <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
+                <Input
+                  placeholder="Kecamatan"
+                  variant={"filled"}
+                  type={"text"}
+                  defaultValue={kecamatan || ""}
+                  onChange={(e) => setkecamatan(e.target.value)}
+                />
+                <FormHelperText>
+                  Masukkan nama kecamatan tempat wisata berada
+                </FormHelperText>
+              </FormControl>
+              <FormControl display="flex" alignItems="center" mt={5}>
+                <FormLabel htmlFor="editor" mb="0">
+                  Jadikan sebagai rekomendasi editor?
+                </FormLabel>
+                <Switch
+                  id="editor"
+                  isChecked={disable}
+                  onChange={() =>
+                    disable === false ? setdisable(true) : setdisable(false)
+                  }
+                />
+              </FormControl>
+              <FormControl mt={5}>
+                <FormLabel htmlFor="Kecamatan">Alasan Editor</FormLabel>
+                <Textarea
+                  isDisabled={!disable}
+                  placeholder="Masukkan alasan anda memilih tempat ini sebagai rekomendasi"
+                  variant={"filled"}
+                  type={"text"}
+                  defaultValue={rekomendasi || ""}
+                  onChange={(e) => setrekomendasi(e.target.value)}
+                />
+                <FormHelperText>
+                  Masukkan alasan anda sebagai editor untuk rekomendasi tempat
+                  ini
+                </FormHelperText>
+              </FormControl>
+            </Box>
+          </WrapItem>
+        </Wrap>
       </Box>
-    </Center>
+      <FormLabel mt={5}>Lokasi Wisata</FormLabel>
+      <Map
+        provider={osm}
+        height={400}
+        width={765}
+        dprs={[1, 2]}
+        defaultCenter={[1.1603381323455186, 97.52212877347822]}
+        center={[latitude, longitude]}
+        defaultZoom={12}
+        onClick={(e) => {
+          setlatitude(e.latLng[0]);
+          setlongitude(e.latLng[1]);
+        }}
+      >
+        <Marker color="red" width={40} />
+        <ZoomControl />
+      </Map>
+      <Box>
+        <FormLabel mt={5}>Gambar</FormLabel>
+        <ImageUploading multiple value={images} onChange={onChange}>
+          {({
+            imageList,
+            onImageUpload,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            <Box>
+              <Button
+                width={"full"}
+                leftIcon={<FiUpload />}
+                colorScheme={isDragging ? "red" : "teal"}
+                onClick={onImageUpload}
+                {...dragProps}
+              >
+                Click or Drop here
+              </Button>
+              {imageList.map((image, index) => (
+                <Imagescard
+                  key={index}
+                  label={image.file.name}
+                  onClick={() => onImageRemove(index)}
+                />
+              ))}
+            </Box>
+          )}
+        </ImageUploading>
+      </Box>
+      <Button
+        colorScheme={"blue"}
+        marginTop={"6"}
+        width={"full"}
+        alignSelf={"center"}
+        onClick={handleUpload}
+        isLoading={loading}
+      >
+        {id ? "Update" : "Submit"}
+      </Button>
+    </Box>
   );
 }
