@@ -48,6 +48,7 @@ export default function Transaction() {
 
   React.useEffect(() => {
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
   return (
     <Box>

@@ -46,6 +46,7 @@ export default function Staycation() {
 
   useEffect(() => {
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   const onRemove = (id) => {

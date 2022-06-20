@@ -195,6 +195,7 @@ export default function Managestaycation() {
 
   useEffect(() => {
     Get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   return (

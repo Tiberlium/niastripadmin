@@ -368,10 +368,12 @@ export default function Report() {
 
   React.useEffect(() => {
     getReservationdata();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   React.useEffect(() => {
     getTiketevent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   return (

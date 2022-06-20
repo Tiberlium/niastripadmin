@@ -42,6 +42,7 @@ export default function User() {
 
   useEffect(() => {
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   const onRemove = (id) => {

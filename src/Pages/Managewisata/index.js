@@ -45,6 +45,7 @@ export default function Managewisata() {
 
   useEffect(() => {
     Get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   async function handleUpload() {

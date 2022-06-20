@@ -163,14 +163,14 @@ export default function Managemakanan() {
     }
   };
 
-  console.log(images);
-
   useEffect(() => {
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   useEffect(() => {
     getRM();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   const onChange = (imageList) => {

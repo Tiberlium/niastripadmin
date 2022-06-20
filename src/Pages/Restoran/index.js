@@ -42,8 +42,13 @@ export default function Restoran() {
     setdata(x);
   }
 
+  function remove(id){
+    console.log(id);
+  }
+
   useEffect(() => {
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -119,6 +124,7 @@ export default function Restoran() {
                     variant="solid"
                     size="sm"
                     leftIcon={<BsFillTrashFill />}
+                    onClick={() => remove(doc.id)}
                   >
                     Delete
                   </Button>

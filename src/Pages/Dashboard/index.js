@@ -124,12 +124,14 @@ export default function Dashboard() {
     isMounted.current = true;
     getuser();
     return () => (isMounted.current = false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   React.useEffect(() => {
     isMounted.current = true;
     getTransaksi();
     return () => (isMounted.current = false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   const data2 = {

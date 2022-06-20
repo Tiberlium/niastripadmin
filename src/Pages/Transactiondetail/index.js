@@ -28,6 +28,7 @@ export default function Transactiondetail() {
 
   React.useEffect(() => {
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
 

@@ -172,6 +172,7 @@ export default function Manageevent() {
 
   useState(() => {
     get();
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   const onChange = (imagelist) => {
