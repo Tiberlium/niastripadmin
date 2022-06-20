@@ -198,7 +198,7 @@ export default function Managewisata() {
   const isError = Input === "" && images === [];
 
   return (
-    <Box>
+    <Box w='3xl'>
       <Breadcrumb
         spacing="8px"
         separator={<FiChevronRight color="gray.500" />}
