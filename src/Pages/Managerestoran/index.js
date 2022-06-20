@@ -215,62 +215,58 @@ export default function Managerestoran() {
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Box>
-        <Text fontSize={"4xl"}>Form Tempat Makan</Text>
-        <Wrap>
-          <WrapItem>
-            <Box>
-              <FormControl required width={"3xl"} mt={10}>
-                <FormLabel htmlFor="Nama restoran">Nama Restoran</FormLabel>
-                <Input
-                  placeholder="Nama Restoran"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={nama || ""}
-                  onChange={(e) => setnama(e.target.value)}
-                />
-                <FormHelperText>masukkan nama tempat restoran</FormHelperText>
-              </FormControl>
-              <FormControl required mt={5}>
-                <FormLabel htmlFor="Kontak">Kontak</FormLabel>
-                <Input
-                  placeholder="masukkan Kontak"
-                  variant={"filled"}
-                  defaultValue={kontak || ""}
-                  onChange={(e) => setkontak(e.target.value)}
-                />
-                <FormHelperText>masukkan kontak restoran</FormHelperText>
-              </FormControl>
-              <FormControl required mt={5}>
-                <FormLabel htmlFor="Lokasi">Lokasi</FormLabel>
-                <Input
-                  placeholder="Lokasi"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={alamat || ""}
-                  onChange={(e) => setalamat(e.target.value)}
-                />
-                <FormHelperText>
-                  masukkan nama jalan dimana restoran berada
-                </FormHelperText>
-              </FormControl>
-              <FormControl mt={5}>
-                <FormLabel htmlFor="Jam Operasional">Jam operasional</FormLabel>
-                <Input
-                  placeholder="Jam operasional"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={operasional || ""}
-                  onChange={(e) => setoperasional(e.target.value)}
-                />
-                <FormHelperText>
-                  Masukkan jam operasional restoran
-                </FormHelperText>
-              </FormControl>
-            </Box>
-          </WrapItem>
-        </Wrap>
-      </Box>
+      <Text fontSize={"4xl"}>Form Tempat Makan</Text>
+      <Wrap>
+        <WrapItem>
+          <Box>
+            <FormControl required width={"3xl"} mt={10}>
+              <FormLabel htmlFor="Nama restoran">Nama Restoran</FormLabel>
+              <Input
+                placeholder="Nama Restoran"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={nama || ""}
+                onChange={(e) => setnama(e.target.value)}
+              />
+              <FormHelperText>masukkan nama tempat restoran</FormHelperText>
+            </FormControl>
+            <FormControl required mt={5}>
+              <FormLabel htmlFor="Kontak">Kontak</FormLabel>
+              <Input
+                placeholder="masukkan Kontak"
+                variant={"filled"}
+                defaultValue={kontak || ""}
+                onChange={(e) => setkontak(e.target.value)}
+              />
+              <FormHelperText>masukkan kontak restoran</FormHelperText>
+            </FormControl>
+            <FormControl required mt={5}>
+              <FormLabel htmlFor="Lokasi">Lokasi</FormLabel>
+              <Input
+                placeholder="Lokasi"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={alamat || ""}
+                onChange={(e) => setalamat(e.target.value)}
+              />
+              <FormHelperText>
+                masukkan nama jalan dimana restoran berada
+              </FormHelperText>
+            </FormControl>
+            <FormControl mt={5}>
+              <FormLabel htmlFor="Jam Operasional">Jam operasional</FormLabel>
+              <Input
+                placeholder="Jam operasional"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={operasional || ""}
+                onChange={(e) => setoperasional(e.target.value)}
+              />
+              <FormHelperText>Masukkan jam operasional restoran</FormHelperText>
+            </FormControl>
+          </Box>
+        </WrapItem>
+      </Wrap>
       <FormLabel mt={5}>Lokasi Wisata</FormLabel>
       <Map
         provider={osm}
