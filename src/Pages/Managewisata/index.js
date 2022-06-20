@@ -15,6 +15,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Center,
 } from "@chakra-ui/react";
 
 import { Map, Marker, ZoomControl } from "pigeon-maps";

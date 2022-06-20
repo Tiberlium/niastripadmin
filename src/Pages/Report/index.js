@@ -22,7 +22,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoChevronForwardSharp } from "react-icons/io5";
 import { db } from "../../Firebase";
 import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
@@ -36,6 +36,8 @@ export default function Report() {
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
+
+  const navigation = useNavigate();
 
   const today = new Date();
 
@@ -368,12 +370,12 @@ export default function Report() {
 
   React.useEffect(() => {
     getReservationdata();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
     getTiketevent();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -431,7 +433,7 @@ export default function Report() {
                     <Tr key={doc["id"]}>
                       <Td>{index + 1}</Td>
                       <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
-                      <Td>{doc["data"]["nama"]}</Td>
+                      <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
                       <Td>{doc["data"]["jenis"]}</Td>
                       <Td>{formatRupiah(doc["data"]["amount"])}</Td>
                       <Td>
@@ -477,7 +479,7 @@ export default function Report() {
                     <Tr key={doc["id"]}>
                       <Td>{index + 1}</Td>
                       <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
-                      <Td>{doc["data"]["nama"]}</Td>
+                      <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
                       <Td>{doc["data"]["jenis"]}</Td>
                       <Td>{formatRupiah(doc["data"]["amount"])}</Td>
                       <Td>
