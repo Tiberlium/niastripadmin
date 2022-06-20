@@ -15,6 +15,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Image,
+  useToast,
 } from "@chakra-ui/react";
 import {
   IoIosInformationCircle,
@@ -22,10 +23,12 @@ import {
   IoIosArrowForward,
 } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { db } from "../../Firebase";
+import { db, storages } from "../../Firebase";
 
 export default function User() {
   const [data, setdata] = useState([]);
+  const toast = useToast();
+  const [img, setimg] = useState("");
 
   const get = async () => {
     let x = [];
@@ -42,14 +45,44 @@ export default function User() {
 
   useEffect(() => {
     get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onRemove = (id) => {
-    db.collection("Users")
-      .doc(id)
-      .delete()
-      .then(() => get());
+    const docRef = db.collection("User").doc(id);
+
+    docRef
+      .get()
+      .then((doc) => {
+        setimg(doc.data.img);
+      })
+      .then(() => {
+        const deleteImages = storages.refFromURL(img).delete();
+
+        deleteImages.then(() => {
+          docRef
+            .delete()
+            .then(() => {
+              toast({
+                title: "Data di hapus.",
+                description: "Data telah di berhasil hapus",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
+              get();
+            })
+            .catch(() => {
+              toast({
+                title: "Data gagal di hapus.",
+                description: "Ada kesalahan data gagal di hapus",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+              });
+            });
+        });
+      });
   };
   return (
     <Box>
