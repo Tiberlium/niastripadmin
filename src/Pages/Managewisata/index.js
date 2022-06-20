@@ -228,7 +228,6 @@ export default function Managewisata() {
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-
       <Text fontSize={"4xl"}>Form Wisata</Text>
       <Wrap>
         <WrapItem>

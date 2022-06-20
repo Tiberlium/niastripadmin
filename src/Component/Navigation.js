@@ -37,7 +37,7 @@ export default function Navigation() {
         w="fit-content"
         p="10"
         ref={stickref}
-        height="3xl"
+        height="2xl"
         position="absolute"
         top={0}
       >
@@ -240,7 +240,7 @@ export default function Navigation() {
         </List>
       </Box>
       <Spacer />
-      <Box mt='32' w='container.lg'>
+      <Box mt="32" w="container.lg">
         <Outlet />
       </Box>
     </Flex>
