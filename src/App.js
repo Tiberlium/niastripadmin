@@ -31,6 +31,7 @@ export default function App() {
         <Route index element={<Login />} />
 
         <Route path="Main" element={<Navigation />}>
+          <Route index element={<Dashboard />} />
           <Route path="Home" element={<Dashboard />} />
           <Route path="Wisata" element={<Wisata />} />
           <Route path="Tambahkandatawisata" element={<Managewisata />} />
