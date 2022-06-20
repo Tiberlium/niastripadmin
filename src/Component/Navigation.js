@@ -240,7 +240,7 @@ export default function Navigation() {
         </List>
       </Box>
       <Spacer />
-      <Box mt="32" w="container.lg">
+      <Box mt="20" w="fit-content">
         <Outlet />
       </Box>
     </Flex>

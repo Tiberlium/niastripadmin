@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 
 export default function Manage() {
   return (
-    <Box>
+    <Box mr={"10"}>
       <Breadcrumb
         spacing="8px"
         separator={<IoChevronForwardSharp color="gray.500" />}
