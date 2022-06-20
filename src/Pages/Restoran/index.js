@@ -29,6 +29,8 @@ import { Link } from "react-router-dom";
 
 export default function Restoran() {
   const [data, setdata] = useState([]);
+  const [alterData, setalterData] = useState([]);
+  const toast = useToast();
 
   async function get() {
     let x = [];
@@ -42,9 +44,45 @@ export default function Restoran() {
     setdata(x);
   }
 
-  function remove(id){
-    console.log(id);
-  }
+   const onRemove = (id) => {
+    const docRef = db.collection("Rm").doc(id);
+
+    docRef
+      .get()
+      .then((doc) => {
+        setalterData(doc.data.Galery);
+      })
+      .then(() => {
+        const deleteImages = alterData.map((doc) => {
+          storages.refFromURL(doc).delete();
+        });
+
+        Promise.all(deleteImages).then(() => {
+          docRef
+            .delete()
+            .then(() => {
+              toast({
+                title: "Data di hapus.",
+                description: "Data telah di berhasil hapus",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              });
+              get();
+            })
+            .catch(() => {
+              toast({
+                title: "Data gagal di hapus.",
+                description: "Ada kesalahan data gagal di hapus",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+              });
+            });
+        });
+      });
+  };
+
 
   useEffect(() => {
     get();
@@ -124,7 +162,7 @@ export default function Restoran() {
                     variant="solid"
                     size="sm"
                     leftIcon={<BsFillTrashFill />}
-                    onClick={() => remove(doc.id)}
+                    onClick={() => onRemove(doc.id)}
                   >
                     Delete
                   </Button>
