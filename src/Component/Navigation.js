@@ -8,7 +8,7 @@ import {
   Box,
   Image,
   Center,
-  HStack,
+  Spacer,
 } from "@chakra-ui/react";
 
 import {
@@ -31,13 +31,15 @@ import { NavLink, Outlet } from "react-router-dom";
 export default function Navigation() {
   const stickref = useStickyBox({ offsetTop: 0, offsetBottom: 0 });
   return (
-    <HStack spacing="20">
+    <Flex>
       <Box
         backgroundColor="#342F2A"
         w="fit-content"
         p="10"
         ref={stickref}
         height="3xl"
+        position="absolute"
+        top={0}
       >
         <List spacing={4}>
           <Center>
@@ -237,7 +239,8 @@ export default function Navigation() {
           </ListItem>
         </List>
       </Box>
+      <Spacer />
       <Outlet />
-    </HStack>
+    </Flex>
   );
 }

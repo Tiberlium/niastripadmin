@@ -397,7 +397,7 @@ export default function Report() {
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="#">
-            Repoort
+            Report
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
