@@ -25,7 +25,7 @@ export default function Transaction() {
   const formmatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
-    minimumFractionDigits:0,
+    minimumFractionDigits: 0,
   });
 
   const stringTruncate = (str, length) => {
@@ -57,21 +57,21 @@ export default function Transaction() {
         mb={5}
       >
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Transaction">
+          <BreadcrumbLink as={Link} to="/Main/Transaction">
             Transaksi
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Text fontSize={"5xl"} color="blackAlpha">
+      <Text fontSize={"5xl"} height='auto'>
         Transaksi
       </Text>
-      <Table variant={"striped"} size='sm'>
+      <Table variant={"striped"} size="sm">
         <TableCaption>Transaksi</TableCaption>
         <Thead>
           <Th>No</Th>
@@ -92,7 +92,7 @@ export default function Transaction() {
               <Td>{doc.data.metode}</Td>
               <Td>{formmatter.format(doc.data.amount)}</Td>
               <Td>
-                <Link to={`/Transactiondetail/${doc.id}`}>
+                <Link to={`/Main/Transactiondetail/${doc.id}`}>
                   <Button
                     colorScheme={"green"}
                     variant="solid"

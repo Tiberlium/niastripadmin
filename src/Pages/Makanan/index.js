@@ -90,19 +90,19 @@ export default function Makanan() {
     <Box>
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Manage">
+          <BreadcrumbLink as={Link} to="/Main/Manage">
             Manage
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Makanan">
+          <BreadcrumbLink as={Link} to="#">
             Makanan Tradisional
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -111,7 +111,7 @@ export default function Makanan() {
         Daftar Makanan Tradisional
       </Text>
       <Box pl={10} pr={10} pt={5}>
-        <Link to="/Tambahkandatamakanan">
+        <Link to="/Main/Tambahkandatamakanan">
           <Button colorScheme="blue" mb={5} leftIcon={<BsFillPlusCircleFill />}>
             Tambahkan yang baru
           </Button>
@@ -136,7 +136,7 @@ export default function Makanan() {
                 <Td>{doc.data.Nama}</Td>
                 <Td>{doc.data.Kategori}</Td>
                 <Td>
-                  <Link to={`/Editmakanan/${doc.id}`}>
+                  <Link to={`/Main/Editmakanan/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

@@ -92,19 +92,19 @@ export default function Wisata() {
     <Box>
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Manage">
+          <BreadcrumbLink as={Link} to="/Main/Manage">
             Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Wisata">
+          <BreadcrumbLink as={Link} to="#">
             Wisata
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -113,7 +113,7 @@ export default function Wisata() {
         Daftar Tempat Wisata
       </Text>
       <Box pl={10} pr={10} pt={5}>
-        <Link to="/Tambahkandatawisata">
+        <Link to="/Main/Tambahkandatawisata">
           <Button colorScheme="blue" mb={5} leftIcon={<BsFillPlusCircleFill />}>
             Tambahkan yang baru
           </Button>
@@ -146,7 +146,7 @@ export default function Wisata() {
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editwisata/${doc.id}`}>
+                  <Link to={`/Main/Editwisata/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

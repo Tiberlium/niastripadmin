@@ -40,18 +40,18 @@ export default function Transactiondetail() {
         mb={5}
       >
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Transaction">
+          <BreadcrumbLink as={Link} to="/Main/Transaction">
             Transaksi
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Detailtransaksi">
+          <BreadcrumbLink as={Link} to="#">
             Detail transaksi
           </BreadcrumbLink>
         </BreadcrumbItem>

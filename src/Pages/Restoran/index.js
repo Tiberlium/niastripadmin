@@ -50,19 +50,19 @@ export default function Restoran() {
     <Box>
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Manage">
+          <BreadcrumbLink as={Link} to="/Main/Manage">
             Manage
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Restoran">
+          <BreadcrumbLink as={Link} to="#">
             Tempat makan
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -71,7 +71,7 @@ export default function Restoran() {
         Daftar Tempat Makan
       </Text>
       <Box pl={10} pr={10} pt={5}>
-        <Link to="/Tambahkandatarestoran">
+        <Link to="/Main/Tambahkandatarestoran">
           <Button colorScheme="blue" mb={5} leftIcon={<BsFillPlusCircleFill />}>
             Tambahkan yang baru
           </Button>
@@ -102,7 +102,7 @@ export default function Restoran() {
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editrestoran/${doc.id}`}>
+                  <Link to={`/Main/Editrestoran/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

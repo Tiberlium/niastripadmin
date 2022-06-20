@@ -28,13 +28,13 @@ export default function Manage() {
         mb={5}
       >
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Manage">
+          <BreadcrumbLink as={Link} to="#">
             Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -44,7 +44,7 @@ export default function Manage() {
       </Text>
       <VStack spacing={"5"}>
         <HStack spacing={2}>
-          <Link to="/Wisata">
+          <Link to="/Main/Wisata">
             <Box
               h={"44"}
               width={"80"}
@@ -59,7 +59,7 @@ export default function Manage() {
               </Text>
             </Box>
           </Link>
-          <Link to="/Event">
+          <Link to="/Main/Event">
             <Box
               h={"44"}
               width={"80"}
@@ -74,7 +74,7 @@ export default function Manage() {
               </Text>
             </Box>
           </Link>
-          <Link to="/Restoran">
+          <Link to="/Main/Restoran">
             <Box
               h={"44"}
               w={"80"}
@@ -91,7 +91,7 @@ export default function Manage() {
           </Link>
         </HStack>
         <HStack spacing={2}>
-          <Link to="/Makanan">
+          <Link to="/Main/Makanan">
             <Box
               h={"44"}
               width={"80"}
@@ -106,7 +106,7 @@ export default function Manage() {
               </Text>
             </Box>
           </Link>
-          <Link to="/Staycation">
+          <Link to="/Main/Staycation">
             <Box
               h={"44"}
               width={"80"}

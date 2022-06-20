@@ -58,13 +58,13 @@ export default function User() {
         mb={5}
       >
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/User">
+          <BreadcrumbLink as={Link} to="#">
             User
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -104,7 +104,7 @@ export default function User() {
                 <Td>{doc.data.gender}</Td>
                 <Td>{doc.data.email}</Td>
                 <Td>
-                  <Link to={`/Userdetail/${doc.id}`}>
+                  <Link to={`/Main/Userdetail/${doc.id}`}>
                     <Button
                       colorScheme="green"
                       size="sm"

@@ -86,19 +86,19 @@ export default function Event() {
     <Box>
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Manage">
+          <BreadcrumbLink as={Link} to="/Main/Manage">
             Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Event">
+          <BreadcrumbLink as={Link} to="/Main/Event">
             Event
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -107,7 +107,7 @@ export default function Event() {
         Daftar Event
       </Text>
       <Box pl={10} pr={10} pt={5}>
-        <Link to="/Tambahkandataevent">
+        <Link to="/Main/Tambahkandataevent">
           <Button colorScheme="blue" mb={5} leftIcon={<BsFillPlusCircleFill />}>
             Tambahkan yang baru
           </Button>
@@ -138,7 +138,7 @@ export default function Event() {
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editevent/${doc.id}`}>
+                  <Link to={`/Main/Editevent/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

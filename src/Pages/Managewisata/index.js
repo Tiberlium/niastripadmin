@@ -205,19 +205,19 @@ export default function Managewisata() {
           mb={5}
         >
           <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Dashboard">
+            <BreadcrumbLink as={Link} to="/Main">
               Dashboard
             </BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Manage">
+            <BreadcrumbLink as={Link} to="/Main/Manage">
               Kelola
             </BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/Wisata">
+            <BreadcrumbLink as={Link} to="/Main/Wisata">
               Tempat wisata
             </BreadcrumbLink>
           </BreadcrumbItem>

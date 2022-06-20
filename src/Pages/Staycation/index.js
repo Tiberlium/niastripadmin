@@ -94,19 +94,19 @@ export default function Staycation() {
     <Box>
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Manage">
+          <BreadcrumbLink as={Link} to="/Main/Manage">
             Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Staycation">
+          <BreadcrumbLink as={Link} to="/Main/Staycation">
             Penginapan
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -115,7 +115,7 @@ export default function Staycation() {
         Daftar Staycation
       </Text>
       <Box pl={10} pr={10} pt={5}>
-        <Link to="/Tambahkandatastaycation">
+        <Link to="/Main/Tambahkandatastaycation">
           <Button colorScheme="blue" mb={5} leftIcon={<BsFillPlusCircleFill />}>
             Tambahkan yang baru
           </Button>
@@ -146,7 +146,7 @@ export default function Staycation() {
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
                 <Td>
-                  <Link to={`/Editstaycation/${doc.id}`}>
+                  <Link to={`/Main/Editstaycation/${doc.id}`}>
                     <Button
                       colorScheme={"blue"}
                       variant="solid"

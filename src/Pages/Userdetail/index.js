@@ -51,20 +51,17 @@ export default function Userdetail() {
         mb={5}
       >
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Dashboard">
+          <BreadcrumbLink as={Link} to="/Main">
             Dashboard
           </BreadcrumbLink>
         </BreadcrumbItem>
-
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/User">
+          <BreadcrumbLink as={Link} to="/Main/User">
             Pengguna
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={Link} to="/Userdetail">
-            Detail Pengguna
-          </BreadcrumbLink>
+        <BreadcrumbItem isCurrentPage to="#">
+          <BreadcrumbLink as={Link}>Detail Pengguna</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Text fontSize="5xl">Detail Pengguna</Text>
