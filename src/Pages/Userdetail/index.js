@@ -35,14 +35,6 @@ export default function Userdetail() {
     get();
   }, []);
 
-  function formatRupiah(money) {
-    return new Intl.NumberFormat("ID-id", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(money);
-  }
-
   return (
     <Box>
       <Breadcrumb
