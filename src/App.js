@@ -42,6 +42,7 @@ export default function App() {
           <Route path="Editrestoran/:id" element={<Managerestoran />} />
           <Route path="Restoran" element={<Restoran />} />
           <Route path="User" element={<User />} />
+          <Route path="Userdetail/:id" element={<Userdetail />} />
           <Route path="Transaction" element={<Transaction />} />
           <Route path="Transactiondetail/:id" element={<Transactiondetail />} />
           <Route path="Manage" element={<Manage />} />
@@ -56,7 +57,6 @@ export default function App() {
             path="Tambahkandatastaycation"
             element={<Managestaycation />}
           />
-          <Route path="Userdetail/:id" element={<Userdetail />} />
         </Route>
       </Routes>
     </BrowserRouter>
