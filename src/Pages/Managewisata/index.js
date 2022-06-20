@@ -198,7 +198,7 @@ export default function Managewisata() {
   const isError = Input === "" && images === [];
 
   return (
-    <Box w='3xl'>
+    <Box w="3xl">
       <Breadcrumb
         spacing="8px"
         separator={<FiChevronRight color="gray.500" />}
@@ -228,91 +228,87 @@ export default function Managewisata() {
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Box>
-        <Text fontSize={"4xl"}>Form Wisata</Text>
-        <Wrap>
-          <WrapItem>
-            <Box>
-              <FormControl required width={"3xl"} mt={10} isInvalid={isError}>
-                <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
-                <Input
-                  placeholder="Nama Wisata"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={nama || ""}
-                  onChange={(e) => setnama(e.target.value)}
-                />
-                <FormHelperText>masukkan nama tempat wisata</FormHelperText>
-              </FormControl>
-              <FormControl required mt={5}>
-                <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
-                <Textarea
-                  placeholder="masukkan deskripsi"
-                  variant={"filled"}
-                  defaultValue={deskripsi || ""}
-                  onChange={(e) => setdeskripsi(e.target.value)}
-                />
-                <FormHelperText>
-                  masukkan deskripsi tempat wisata
-                </FormHelperText>
-              </FormControl>
-              <FormControl required mt={5}>
-                <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
-                <Input
-                  placeholder="Kabupaten"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={kabupaten || ""}
-                  onChange={(e) => setkabupaten(e.target.value)}
-                />
-                <FormHelperText>
-                  masukkan kabupaten dimana tempat wisata berada
-                </FormHelperText>
-              </FormControl>
-              <FormControl mt={5}>
-                <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
-                <Input
-                  placeholder="Kecamatan"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={kecamatan || ""}
-                  onChange={(e) => setkecamatan(e.target.value)}
-                />
-                <FormHelperText>
-                  Masukkan nama kecamatan tempat wisata berada
-                </FormHelperText>
-              </FormControl>
-              <FormControl display="flex" alignItems="center" mt={5}>
-                <FormLabel htmlFor="editor" mb="0">
-                  Jadikan sebagai rekomendasi editor?
-                </FormLabel>
-                <Switch
-                  id="editor"
-                  isChecked={disable}
-                  onChange={() =>
-                    disable === false ? setdisable(true) : setdisable(false)
-                  }
-                />
-              </FormControl>
-              <FormControl mt={5}>
-                <FormLabel htmlFor="Kecamatan">Alasan Editor</FormLabel>
-                <Textarea
-                  isDisabled={!disable}
-                  placeholder="Masukkan alasan anda memilih tempat ini sebagai rekomendasi"
-                  variant={"filled"}
-                  type={"text"}
-                  defaultValue={rekomendasi || ""}
-                  onChange={(e) => setrekomendasi(e.target.value)}
-                />
-                <FormHelperText>
-                  Masukkan alasan anda sebagai editor untuk rekomendasi tempat
-                  ini
-                </FormHelperText>
-              </FormControl>
-            </Box>
-          </WrapItem>
-        </Wrap>
-      </Box>
+
+      <Text fontSize={"4xl"}>Form Wisata</Text>
+      <Wrap>
+        <WrapItem>
+          <Box>
+            <FormControl required width={"3xl"} mt={10} isInvalid={isError}>
+              <FormLabel htmlFor="Nama wisata">Nama Wisata</FormLabel>
+              <Input
+                placeholder="Nama Wisata"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={nama || ""}
+                onChange={(e) => setnama(e.target.value)}
+              />
+              <FormHelperText>masukkan nama tempat wisata</FormHelperText>
+            </FormControl>
+            <FormControl required mt={5}>
+              <FormLabel htmlFor="Deskripsi">Deskripsi</FormLabel>
+              <Textarea
+                placeholder="masukkan deskripsi"
+                variant={"filled"}
+                defaultValue={deskripsi || ""}
+                onChange={(e) => setdeskripsi(e.target.value)}
+              />
+              <FormHelperText>masukkan deskripsi tempat wisata</FormHelperText>
+            </FormControl>
+            <FormControl required mt={5}>
+              <FormLabel htmlFor="Kabupaten">Kabupaten</FormLabel>
+              <Input
+                placeholder="Kabupaten"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={kabupaten || ""}
+                onChange={(e) => setkabupaten(e.target.value)}
+              />
+              <FormHelperText>
+                masukkan kabupaten dimana tempat wisata berada
+              </FormHelperText>
+            </FormControl>
+            <FormControl mt={5}>
+              <FormLabel htmlFor="Kecamatan">Kecamatan</FormLabel>
+              <Input
+                placeholder="Kecamatan"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={kecamatan || ""}
+                onChange={(e) => setkecamatan(e.target.value)}
+              />
+              <FormHelperText>
+                Masukkan nama kecamatan tempat wisata berada
+              </FormHelperText>
+            </FormControl>
+            <FormControl display="flex" alignItems="center" mt={5}>
+              <FormLabel htmlFor="editor" mb="0">
+                Jadikan sebagai rekomendasi editor?
+              </FormLabel>
+              <Switch
+                id="editor"
+                isChecked={disable}
+                onChange={() =>
+                  disable === false ? setdisable(true) : setdisable(false)
+                }
+              />
+            </FormControl>
+            <FormControl mt={5}>
+              <FormLabel htmlFor="Kecamatan">Alasan Editor</FormLabel>
+              <Textarea
+                isDisabled={!disable}
+                placeholder="Masukkan alasan anda memilih tempat ini sebagai rekomendasi"
+                variant={"filled"}
+                type={"text"}
+                defaultValue={rekomendasi || ""}
+                onChange={(e) => setrekomendasi(e.target.value)}
+              />
+              <FormHelperText>
+                Masukkan alasan anda sebagai editor untuk rekomendasi tempat ini
+              </FormHelperText>
+            </FormControl>
+          </Box>
+        </WrapItem>
+      </Wrap>
       <FormLabel mt={5}>Lokasi Wisata</FormLabel>
       <Map
         provider={osm}
