@@ -23,7 +23,7 @@ export default function Login() {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      if (pass !== "223334444") {
+      if (pass !== "admin") {
         setinvalid(true);
       } else {
         navigation("/Main");
@@ -32,7 +32,7 @@ export default function Login() {
   };
 
   const submit = () => {
-    if (pass !== "jambu") {
+    if (pass !== "admin") {
       setinvalid(true);
     } else {
       navigation("/Main");
