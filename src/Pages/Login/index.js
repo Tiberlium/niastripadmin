@@ -26,7 +26,7 @@ export default function Login() {
       if (pass != "admin") {
         setinvalid(true);
       } else {
-        navigation("/Main");
+        navigation("/Main", { replace: true });
       }
     }
   };
@@ -35,7 +35,7 @@ export default function Login() {
     if (pass != "admin") {
       setinvalid(true);
     } else {
-      navigation("/Main");
+      navigation("/Main", { replace: true });
     }
   };
 

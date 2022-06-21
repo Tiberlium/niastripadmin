@@ -60,7 +60,7 @@ const Alertcomponent = ({ isOp, cancref, oncl, onclose }) => (
   </AlertDialog>
 );
 
-export default function Navigation() {
+export default function Navigation({ user }) {
   const stickref = useStickyBox({ offsetTop: 0, offsetBottom: 0 });
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,6 +73,7 @@ export default function Navigation() {
         w="fit-content"
         p="10"
         ref={stickref}
+        b
         height="2xl"
         position="absolute"
         top={0}
@@ -295,7 +296,7 @@ export default function Navigation() {
           isOp={isOpen}
           cancref={cancelRef}
           oncl={onClose}
-          onclose={() => navigate("/")}
+          onclose={() => navigate("/", { replace: true })}
         />
       </Box>
     </Flex>
