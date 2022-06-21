@@ -379,7 +379,7 @@ export default function Report() {
   }, []);
 
   return (
-    <Box mr={10}>
+    <Box mr={5}>
       <Breadcrumb
         spacing="8px"
         separator={<IoChevronForwardSharp color="gray.500" />}
