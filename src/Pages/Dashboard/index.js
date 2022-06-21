@@ -124,14 +124,14 @@ export default function Dashboard() {
     isMounted.current = true;
     getuser();
     return () => (isMounted.current = false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
     isMounted.current = true;
     getTransaksi();
     return () => (isMounted.current = false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const data2 = {
@@ -152,31 +152,33 @@ export default function Dashboard() {
   };
 
   return (
-    <Box>
-      <Navbread />
-      <Text fontSize="5xl" mb="12">
-        Dashboard anda
-      </Text>
-      <Card
-        pengguna={user.length}
-        transaksi={transact.length}
-        total={formatRupiah(totalTransaksi)}
-        pendapatan={formatRupiah(pendapatan)}
-      />
-      <HStack>
-        <Box>
-          <Text fontSize="2xl" color="black" mt={10}>
-            Trafik pengguna
-          </Text>
-          <Linechart />
-        </Box>
-        <Box>
-          <Text fontSize="2xl" color="black" mt={10}>
-            Transaksi
-          </Text>
-          <Doughnutchar data={data2} />
-        </Box>
-      </HStack>
-    </Box>
+    <>
+      <Box>
+        <Navbread />
+        <Text fontSize="5xl" mb="12">
+          Dashboard anda
+        </Text>
+        <Card
+          pengguna={user.length}
+          transaksi={transact.length}
+          total={formatRupiah(totalTransaksi)}
+          pendapatan={formatRupiah(pendapatan)}
+        />
+        <HStack>
+          <Box>
+            <Text fontSize="2xl" color="black" mt={10}>
+              Trafik pengguna
+            </Text>
+            <Linechart />
+          </Box>
+          <Box>
+            <Text fontSize="2xl" color="black" mt={10}>
+              Transaksi
+            </Text>
+            <Doughnutchar data={data2} />
+          </Box>
+        </HStack>
+      </Box>
+    </>
   );
 }
