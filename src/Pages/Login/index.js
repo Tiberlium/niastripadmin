@@ -11,20 +11,32 @@ import {
 } from "@chakra-ui/react";
 
 import Logo from "../../Asset/Logo.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [pass, setPass] = useState("");
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const [invalid, setinvalid] = useState(false);
+
+  const navigation = useNavigate();
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      console.log("do validate");
+      if (pass !== "223334444") {
+        setinvalid(true);
+      } else {
+        navigation("/Main");
+      }
     }
   };
 
   const submit = () => {
-    alert("hallo");
+    if (pass !== "jambu") {
+      setinvalid(true);
+    } else {
+      navigation("/Main");
+    }
   };
 
   return (
@@ -56,7 +68,7 @@ export default function Login() {
               size="md"
               w="80"
               mt={10}
-              onChange={setPass}
+              onChange={(e) => setPass(e.target.value)}
               value={pass}
               onKeyDown={handleKeyDown}
             >
@@ -64,6 +76,8 @@ export default function Login() {
                 pr="4.5rem"
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
+                errorBorderColor="crimson"
+                isInvalid={invalid}
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>

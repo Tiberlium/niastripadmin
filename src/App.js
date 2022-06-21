@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "./Pages";
 import Navigation from "../src/Component/Navigation";
-import { Box, Center, Flex } from "@chakra-ui/react";
+import { Box, Center, Flex, Text } from "@chakra-ui/react";
 
 import {
   Managewisata,
@@ -29,7 +29,6 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Login />} />
-
         <Route path="Main" element={<Navigation />}>
           <Route index element={<Dashboard />} />
           <Route path="Home" element={<Dashboard />} />
@@ -57,7 +56,9 @@ export default function App() {
             path="Tambahkandatastaycation"
             element={<Managestaycation />}
           />
+          <Route path="*" element={<Text>There's nothing to here: 404</Text>} />
         </Route>
+        <Route path="*" element={<Text>There's nothing to here: 404</Text>} />
       </Routes>
     </BrowserRouter>
   );
