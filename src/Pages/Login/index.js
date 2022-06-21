@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Input,
@@ -8,15 +8,24 @@ import {
   Text,
   InputGroup,
   InputRightElement,
-  FormLabel,
 } from "@chakra-ui/react";
 
 import Logo from "../../Asset/Logo.png";
-import { IoEye, IoEyeOff } from "react-icons/io5";
 
 export default function Login() {
-  const [show, setShow] = React.useState(false);
+  const [pass, setPass] = useState("");
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      console.log("do validate");
+    }
+  };
+
+  const submit = () => {
+    alert("hallo");
+  };
 
   return (
     <div>
@@ -43,7 +52,14 @@ export default function Login() {
             Silakan Login untuk mendapatkan akses
           </Text>
           <Center>
-            <InputGroup size="md" w="80" mt={10}>
+            <InputGroup
+              size="md"
+              w="80"
+              mt={10}
+              onChange={setPass}
+              value={pass}
+              onKeyDown={handleKeyDown}
+            >
               <Input
                 pr="4.5rem"
                 type={show ? "text" : "password"}
@@ -55,6 +71,11 @@ export default function Login() {
                 </Button>
               </InputRightElement>
             </InputGroup>
+          </Center>
+          <Center>
+            <Button colorScheme="blue" mt="10" w="36" onClick={submit}>
+              Masuk
+            </Button>
           </Center>
         </Box>
       </Center>
