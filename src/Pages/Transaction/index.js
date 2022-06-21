@@ -48,10 +48,10 @@ export default function Transaction() {
 
   React.useEffect(() => {
     get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <Box>
+    <Box mr={10}>
       <Breadcrumb
         spacing="8px"
         separator={<BsChevronRight color="gray.500" />}
@@ -69,7 +69,7 @@ export default function Transaction() {
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Text fontSize={"5xl"} height='auto'>
+      <Text fontSize={"5xl"} height="auto">
         Transaksi
       </Text>
       <Table variant={"striped"} size="sm">

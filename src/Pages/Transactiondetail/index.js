@@ -34,7 +34,7 @@ export default function Transactiondetail() {
 
   
   return (
-    <Box marginTop="-50">
+    <Box mr={10}>
       <Breadcrumb
         spacing="8px"
         separator={<BsChevronRight color="gray.500" />}

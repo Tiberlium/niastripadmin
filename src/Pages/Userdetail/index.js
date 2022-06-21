@@ -37,7 +37,7 @@ export default function Userdetail() {
   }, []);
 
   return (
-    <Box>
+    <Box mr={10}>
       <Breadcrumb
         spacing="8px"
         separator={<IoIosArrowForward color="gray.500" />}
@@ -75,7 +75,7 @@ export default function Userdetail() {
       <Text fontSize="2xl" mb={5} color="blackAlpha.800">
         Order History Penginapan
       </Text>
-      <Table variant="striped" size="md">
+      <Table variant="striped" size="sm">
         <TableCaption>Order History Penginapan</TableCaption>
         <Thead>
           <Th>No</Th>
@@ -111,7 +111,7 @@ export default function Userdetail() {
         Order History Event
       </Text>
 
-      <Table variant="striped" size="md" w="full">
+      <Table variant="striped" size="sm" w="full">
         <TableCaption>Order History Event</TableCaption>
         <Thead>
           <Th>No</Th>
