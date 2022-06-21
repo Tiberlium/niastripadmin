@@ -9,7 +9,7 @@ import {
   Image,
   Center,
   Spacer,
-  HStack,
+  Button,
 } from "@chakra-ui/react";
 
 import {
@@ -23,14 +23,16 @@ import {
   IoPersonOutline,
   IoBuildOutline,
   IoNewspaperOutline,
+  IoLogOutOutline,
 } from "react-icons/io5";
 
 import Logo from "../Asset/Logo.png";
 import { useStickyBox } from "react-sticky-box";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 export default function Navigation() {
   const stickref = useStickyBox({ offsetTop: 0, offsetBottom: 0 });
+  const navigate = useNavigate();
   return (
     <Flex>
       <Box
@@ -237,6 +239,19 @@ export default function Navigation() {
                 )
               }
             />
+          </ListItem>
+          <ListItem>
+            <Button
+              backgroundColor={"antiquewhite"}
+              p={2}
+              mt="14"
+              borderRadius={10}
+              w={"52"}
+              leftIcon={<IoLogOutOutline color="blue" size={20} />}
+              onClick={() => navigate("/")}
+            >
+              Log out
+            </Button>
           </ListItem>
         </List>
       </Box>
