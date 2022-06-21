@@ -379,7 +379,7 @@ export default function Report() {
   }, []);
 
   return (
-    <Box>
+    <Box mr={10}>
       <Breadcrumb
         spacing="8px"
         separator={<IoChevronForwardSharp color="gray.500" />}
@@ -407,9 +407,9 @@ export default function Report() {
         Laporan
       </Text>
       <Tabs variant={"soft-rounded"} isFitted>
-        <TabList mb="1em">
-          <Tab>Penginapan</Tab>
-          <Tab>Event</Tab>
+        <TabList mb="1em" w="4xl">
+          <Tab _selected={{ color: "white", bg: "blue.500" }}>Penginapan</Tab>
+          <Tab _selected={{ color: "white", bg: "green.400" }}>Event</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -442,7 +442,7 @@ export default function Report() {
                       <Td>{doc["data"]["transactiontime"]}</Td>
                       <Td>
                         <Link to={`/Main/Transactiondetail/${doc.id}`}>
-                          <Button colorScheme={"green"}>Detail</Button>
+                          <Button colorScheme={"blue"}>Detail</Button>
                         </Link>
                       </Td>
                     </Tr>
@@ -502,7 +502,7 @@ export default function Report() {
               </Table>
             </TableContainer>
             <Center>
-              <Button colorScheme="blue" size="md" onClick={createpdfevent}>
+              <Button colorScheme="green" size="md" onClick={createpdfevent}>
                 Generate Laporan Event
               </Button>
             </Center>
