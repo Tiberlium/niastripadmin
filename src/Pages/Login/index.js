@@ -61,7 +61,7 @@ export default function Login() {
             />
           </Center>
           <Text align="center" color="grey">
-            Silakan Login untuk mendapatkan akses
+            Nias Trip Admin
           </Text>
           <Center>
             <InputGroup
