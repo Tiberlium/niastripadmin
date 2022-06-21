@@ -22,8 +22,8 @@ export default function Login() {
   const navigation = useNavigate();
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      if (pass !== "admin") {
+    if (event.key == "Enter") {
+      if (pass != "admin") {
         setinvalid(true);
       } else {
         navigation("/Main");
@@ -32,7 +32,7 @@ export default function Login() {
   };
 
   const submit = () => {
-    if (pass !== "admin") {
+    if (pass != "admin") {
       setinvalid(true);
     } else {
       navigation("/Main");

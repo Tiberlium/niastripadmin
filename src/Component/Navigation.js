@@ -10,6 +10,13 @@ import {
   Center,
   Spacer,
   Button,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import {
@@ -30,9 +37,35 @@ import Logo from "../Asset/Logo.png";
 import { useStickyBox } from "react-sticky-box";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
+const Alertcomponent = ({ isOp, cancref, oncl, onclose }) => (
+  <AlertDialog isOpen={isOp} leastDestructiveRef={cancref} onClose={oncl}>
+    <AlertDialogOverlay>
+      <AlertDialogContent>
+        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+          Log out
+        </AlertDialogHeader>
+
+        <AlertDialogBody>Apakah anda ingin keluar?</AlertDialogBody>
+
+        <AlertDialogFooter>
+          <Button ref={cancref} onClick={oncl}>
+            Batalkan
+          </Button>
+          <Button colorScheme="red" onClick={onclose} ml={3}>
+            Logout
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialogOverlay>
+  </AlertDialog>
+);
+
 export default function Navigation() {
   const stickref = useStickyBox({ offsetTop: 0, offsetBottom: 0 });
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
+
   return (
     <Flex>
       <Box
@@ -248,7 +281,7 @@ export default function Navigation() {
               borderRadius={10}
               w={"52"}
               leftIcon={<IoLogOutOutline color="blue" size={20} />}
-              onClick={() => navigate("/")}
+              onClick={onOpen}
             >
               Log out
             </Button>
@@ -258,6 +291,12 @@ export default function Navigation() {
       <Spacer />
       <Box mt="20" w="fit-content">
         <Outlet />
+        <Alertcomponent
+          isOp={isOpen}
+          cancref={cancelRef}
+          oncl={onClose}
+          onclose={() => navigate("/")}
+        />
       </Box>
     </Flex>
   );
