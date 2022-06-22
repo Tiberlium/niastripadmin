@@ -23,6 +23,7 @@ import {
   Managerestoran,
   Restoran,
   Transactiondetail,
+  Change,
 } from "../src/Pages";
 
 const Emptypage = () => (
@@ -69,6 +70,7 @@ export default function App() {
               path="Tambahkandatastaycation"
               element={<Managestaycation />}
             />
+            <Route path="Change" element={<Change />} />
             <Route path="*" element={<Emptypage />} />
           </Route>
         </Route>

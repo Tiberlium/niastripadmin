@@ -276,34 +276,57 @@ export default function Navigation({ user }) {
               }
             />
           </ListItem>
-          <Box>
-            <ListItem>
-              <Button
-                backgroundColor={"antiquewhite"}
-                p={2}
-                mt="10"
-                borderRadius={10}
-                w={"52"}
-                leftIcon={<IoLockClosedOutline color="blue" size={20} />}
-                onClick={onOpen}
-              >
-                Ganti sandi
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button
-                backgroundColor={"antiquewhite"}
-                p={2}
-                mt="5"
-                borderRadius={10}
-                w={"52"}
-                leftIcon={<IoLogOutOutline color="blue" size={20} />}
-                onClick={onOpen}
-              >
-                Log out
-              </Button>
-            </ListItem>
-          </Box>
+          <ListItem>
+            <NavLink
+              to="Change"
+              children={({ isActive }) =>
+                isActive ? (
+                  <Flex
+                    backgroundColor={"blue.400"}
+                    p={2}
+                    mb={5}
+                    borderRadius={10}
+                    w={"52"}
+                  >
+                    <Box mr={5}>
+                      <IoLockClosedSharp color="white" size={20} />
+                    </Box>
+                    <Text fontWeight="bold" color={"white"}>
+                      Ganti Sandi
+                    </Text>
+                  </Flex>
+                ) : (
+                  <Flex
+                    backgroundColor={"antiquewhite"}
+                    p={2}
+                    mb={5}
+                    borderRadius={10}
+                    w={"52"}
+                  >
+                    <Box mr={5}>
+                      <IoLockClosedOutline color="blue" size={20} />
+                    </Box>
+                    <Text fontWeight="Regular" color={"blue"}>
+                      Ganti Sandi
+                    </Text>
+                  </Flex>
+                )
+              }
+            />
+          </ListItem>
+          <ListItem>
+            <Button
+              backgroundColor={"antiquewhite"}
+              p={2}
+              mt="5"
+              borderRadius={10}
+              w={"52"}
+              leftIcon={<IoLogOutOutline color="blue" size={20} />}
+              onClick={onOpen}
+            >
+              Log out
+            </Button>
+          </ListItem>
         </List>
       </Box>
       <Spacer />
