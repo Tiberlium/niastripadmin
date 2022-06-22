@@ -31,6 +31,8 @@ import {
   IoBuildOutline,
   IoNewspaperOutline,
   IoLogOutOutline,
+  IoLockClosedOutline,
+  IoLockClosedSharp,
 } from "react-icons/io5";
 
 import Logo from "../Asset/Logo.png";
@@ -274,19 +276,34 @@ export default function Navigation({ user }) {
               }
             />
           </ListItem>
-          <ListItem>
-            <Button
-              backgroundColor={"antiquewhite"}
-              p={2}
-              mt="14"
-              borderRadius={10}
-              w={"52"}
-              leftIcon={<IoLogOutOutline color="blue" size={20} />}
-              onClick={onOpen}
-            >
-              Log out
-            </Button>
-          </ListItem>
+          <Box>
+            <ListItem>
+              <Button
+                backgroundColor={"antiquewhite"}
+                p={2}
+                mt="10"
+                borderRadius={10}
+                w={"52"}
+                leftIcon={<IoLockClosedOutline color="blue" size={20} />}
+                onClick={onOpen}
+              >
+                Ganti sandi
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                backgroundColor={"antiquewhite"}
+                p={2}
+                mt="5"
+                borderRadius={10}
+                w={"52"}
+                leftIcon={<IoLogOutOutline color="blue" size={20} />}
+                onClick={onOpen}
+              >
+                Log out
+              </Button>
+            </ListItem>
+          </Box>
         </List>
       </Box>
       <Spacer />

@@ -8,6 +8,7 @@ import {
   Text,
   InputGroup,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 
 import Logo from "../../Asset/Logo.png";
@@ -19,12 +20,21 @@ export default function Login() {
   const handleClick = () => setShow(!show);
   const [invalid, setinvalid] = useState(false);
 
+  const toast = useToast();
+
   const navigation = useNavigate();
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       if (pass != "admin") {
         setinvalid(true);
+        toast({
+          title: "Gagal masuk",
+          description: "Sandi tidak cocok ",
+          status: "failed",
+          duration: 9000,
+          isClosable: true,
+        });
       } else {
         localStorage.setItem("token", "true");
         navigation("/Main", { replace: true });
@@ -35,11 +45,20 @@ export default function Login() {
   const submit = () => {
     if (pass !== "admin") {
       setinvalid(true);
+      toast({
+        title: "Gagal masuk",
+        description: "Sandi tidak cocok ",
+        status: "failed",
+        duration: 9000,
+        isClosable: true,
+      });
     } else {
       localStorage.setItem("token", "true");
       navigation("/Main", { replace: true });
     }
   };
+
+  const isError = pass === "" || pass !== "admin";
 
   return (
     <div>
