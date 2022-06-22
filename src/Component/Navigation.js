@@ -277,44 +277,6 @@ export default function Navigation({ user }) {
             />
           </ListItem>
           <ListItem>
-            <NavLink
-              to="Change"
-              children={({ isActive }) =>
-                isActive ? (
-                  <Flex
-                    backgroundColor={"blue.400"}
-                    p={2}
-                    mb={5}
-                    borderRadius={10}
-                    w={"52"}
-                  >
-                    <Box mr={5}>
-                      <IoLockClosedSharp color="white" size={20} />
-                    </Box>
-                    <Text fontWeight="bold" color={"white"}>
-                      Ganti Sandi
-                    </Text>
-                  </Flex>
-                ) : (
-                  <Flex
-                    backgroundColor={"antiquewhite"}
-                    p={2}
-                    mb={5}
-                    borderRadius={10}
-                    w={"52"}
-                  >
-                    <Box mr={5}>
-                      <IoLockClosedOutline color="blue" size={20} />
-                    </Box>
-                    <Text fontWeight="Regular" color={"blue"}>
-                      Ganti Sandi
-                    </Text>
-                  </Flex>
-                )
-              }
-            />
-          </ListItem>
-          <ListItem>
             <Button
               backgroundColor={"antiquewhite"}
               p={2}

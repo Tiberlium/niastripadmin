@@ -21,13 +21,12 @@ export default function Login() {
   const [invalid, setinvalid] = useState(false);
 
   const toast = useToast();
-  const user = localStorage.getItem("user");
 
   const navigation = useNavigate();
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      if (pass != user) {
+      if (pass != "admin") {
         toast({
           title: "Gagal masuk",
           description: "Sandi tidak cocok ",
@@ -45,7 +44,7 @@ export default function Login() {
   };
 
   const submit = () => {
-    if (pass !== user) {
+    if (pass !== "admin") {
       toast({
         title: "Gagal masuk",
         description: "Sandi tidak cocok",

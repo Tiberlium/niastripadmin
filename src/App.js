@@ -23,7 +23,6 @@ import {
   Managerestoran,
   Restoran,
   Transactiondetail,
-  Change,
 } from "../src/Pages";
 
 const Emptypage = () => (
@@ -70,11 +69,18 @@ export default function App() {
               path="Tambahkandatastaycation"
               element={<Managestaycation />}
             />
-            <Route path="Change" element={<Change />} />
-            <Route path="*" element={<Emptypage />} />
+            <Route
+              path="*"
+              element={
+                <Box w="4xl">
+                  <Text fontSize="4xl" textAlign="center">
+                    Halaman tidak ditemukan : 404
+                  </Text>
+                </Box>
+              }
+            />
           </Route>
         </Route>
-
         <Route path="*" element={<Emptypage />} />
       </Routes>
     </BrowserRouter>
