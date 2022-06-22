@@ -26,6 +26,7 @@ export default function Login() {
       if (pass != "admin") {
         setinvalid(true);
       } else {
+        localStorage.setItem("token", "true");
         navigation("/Main", { replace: true });
       }
     }
@@ -35,6 +36,7 @@ export default function Login() {
     if (pass !== "admin") {
       setinvalid(true);
     } else {
+      localStorage.setItem("token", "true");
       navigation("/Main", { replace: true });
     }
   };

@@ -296,7 +296,10 @@ export default function Navigation({ user }) {
           isOp={isOpen}
           cancref={cancelRef}
           oncl={onClose}
-          onclose={() => navigate("/", { replace: true })}
+          onclose={() => {
+            localStorage.setItem("token", "false");
+            navigate("/", { replace: true });
+          }}
         />
       </Box>
     </Flex>
