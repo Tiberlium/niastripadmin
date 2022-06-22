@@ -28,14 +28,14 @@ export default function Login() {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       if (pass != user) {
-        setinvalid(true);
         toast({
           title: "Gagal masuk",
           description: "Sandi tidak cocok ",
-          status: "failed",
+          status: "error",
           duration: 9000,
           isClosable: true,
         });
+        setinvalid(true);
       } else {
         localStorage.setItem("token", "true");
         navigation("/Main", { replace: true });
@@ -45,14 +45,14 @@ export default function Login() {
 
   const submit = () => {
     if (pass !== user) {
-      setinvalid(true);
       toast({
         title: "Gagal masuk",
-        description: "Sandi tidak cocok ",
-        status: "failed",
+        description: "Sandi tidak cocok",
+        status: "error",
         duration: 9000,
         isClosable: true,
       });
+      setinvalid(true);
     } else {
       localStorage.setItem("token", "true");
       navigation("/Main", { replace: true });
