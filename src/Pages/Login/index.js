@@ -36,6 +36,7 @@ export default function Login() {
           isClosable: true,
         });
         setinvalid(true);
+        setPass("");
       } else {
         localStorage.setItem("token", "true");
         navigation("/Main", { replace: true });
@@ -53,13 +54,13 @@ export default function Login() {
         isClosable: true,
       });
       setinvalid(true);
+      setPass("");
     } else {
       localStorage.setItem("token", "true");
       navigation("/Main", { replace: true });
     }
   };
 
-  const isError = pass === "" || pass !== "admin";
 
   return (
     <div>
