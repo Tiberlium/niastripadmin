@@ -14,6 +14,15 @@ import { Link } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
 
 export default function Change() {
+  const Currentpass = () => {
+    return (
+      <FormControl w="2xs" mt="5">
+        <FormLabel>Masukkan Sandi Sekarang</FormLabel>
+        <Input id="password" type="password" placeholder="sandi" />
+      </FormControl>
+    );
+  };
+
   return (
     <Box w={"3xl"}>
       <Breadcrumb
@@ -34,10 +43,7 @@ export default function Change() {
         </BreadcrumbItem>
       </Breadcrumb>
       <Text fontSize="5xl">Ubah sandi</Text>
-      <FormControl w="2xs" mt="5">
-        <FormLabel>Masukkan Sandi Sekarang</FormLabel>
-        <Input id="password" type="password" placeholder="sandi" />
-      </FormControl>
+      <Currentpass />
       <Button mt="5" colorScheme="blue">
         Submit
       </Button>
