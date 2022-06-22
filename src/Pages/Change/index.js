@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Text,
@@ -9,19 +9,40 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  useToast,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
 
 export default function Change() {
-  const Currentpass = () => {
-    return (
-      <FormControl w="2xs" mt="5">
-        <FormLabel>Masukkan Sandi Sekarang</FormLabel>
-        <Input id="password" type="password" placeholder="sandi" />
-      </FormControl>
-    );
-  };
+  const [pass, setpass] = useState("");
+  const [repass, setrepass] = useState("");
+
+  const toast = useToast();
+  const navigate = useNavigate();
+
+  function changepass() {
+    if (pass === repass) {
+      localStorage.setItem("user", pass);
+      toast({
+        title: "password berhasil admin diganti",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      navigate("/");
+      localStorage.setItem("token", "false");
+    } else {
+      toast({
+        title: "Kesalahan",
+        description: "Password tidak sama",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return false;
+    }
+  }
 
   return (
     <Box w={"3xl"}>
@@ -38,15 +59,32 @@ export default function Change() {
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="#">
-            Sandi Sekarang
+            Sandi
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Text fontSize="5xl">Ubah sandi</Text>
-      <Currentpass />
-      <Button mt="5" colorScheme="blue">
-        Submit
-      </Button>
+      <FormControl w="2xs" mt="5">
+        <FormLabel>Masukkan sandi baru</FormLabel>
+        <Input
+          id="password"
+          type="password"
+          placeholder="sandi baru"
+          value={pass}
+          onChange={(e) => setpass(e.target.value)}
+        />
+        <FormLabel mt="10">Ulangi Sandi baru</FormLabel>
+        <Input
+          id="password"
+          type="password"
+          placeholder="ulangi sandi baru"
+          value={repass}
+          onChange={(e) => setrepass(e.target.value)}
+        />
+        <Button mt="5" colorScheme="blue" onClick={changepass}>
+          Submit
+        </Button>
+      </FormControl>
     </Box>
   );
 }
