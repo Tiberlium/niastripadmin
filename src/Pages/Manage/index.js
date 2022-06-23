@@ -39,7 +39,7 @@ export default function Manage() {
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Text fontWeight={"semibold"} fontSize={30} pb={5}>
+      <Text fontSize="5xl" pb={5}>
         Kelola
       </Text>
       <VStack spacing={"5"}>
