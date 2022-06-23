@@ -112,7 +112,7 @@ export default function Managestaycation() {
           console.error(e);
         });
     } else {
-      if (!images) {
+      if (images.length !== 0) {
         const deleteTask = url.map((doc) => {
           storages.refFromURL(doc).delete();
         });
@@ -200,7 +200,7 @@ export default function Managestaycation() {
 
   return (
     <Box>
-      <Box width={"3xl"} mr='32'>
+      <Box width={"3xl"} mr="32">
         <Breadcrumb
           spacing="8px"
           separator={<FiChevronRight color="gray.500" />}
@@ -277,8 +277,8 @@ export default function Managestaycation() {
               <Input
                 placeholder="ex Rp.123456789"
                 variant={"filled"}
-                type={"number"}
-                defaultValue={tarif || ""}
+                type="number"
+                value={tarif || 0}
                 onChange={(e) => settarif(e.target.value)}
               />
               <FormHelperText>

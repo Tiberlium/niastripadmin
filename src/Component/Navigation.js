@@ -289,8 +289,8 @@ export default function Navigation({ user }) {
           </ListItem>
         </List>
       </Box>
-      <Box w={['10','24','32']} />
-      <Box mt="10" w={["3xs", "3xl", "4xl"]}>
+      <Box w={["10", "24", "32"]} />
+      <Box mt="20" w={["3xs", "3xl", "4xl"]}>
         <Outlet />
         <Alertcomponent
           isOp={isOpen}
