@@ -31,8 +31,6 @@ import {
   IoBuildOutline,
   IoNewspaperOutline,
   IoLogOutOutline,
-  IoLockClosedOutline,
-  IoLockClosedSharp,
 } from "react-icons/io5";
 
 import Logo from "../Asset/Logo.png";
@@ -75,8 +73,7 @@ export default function Navigation({ user }) {
         w="fit-content"
         p="10"
         ref={stickref}
-        b
-        height="2xl"
+        height='4xl'
         position="absolute"
         top={0}
       >
