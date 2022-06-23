@@ -22,6 +22,14 @@ function trunctext(text) {
   return text?.length > 20 ? `${text.substr(0, 20)}...` : text;
 }
 
+function formatRupiah(uang) {
+  return new Intl.NumberFormat("ID-id", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(uang);
+}
+
 export default function Userdetail() {
   const [data, setdata] = useState({});
   const { id } = useParams();
@@ -100,8 +108,8 @@ export default function Userdetail() {
               <Td>{doc.checkin}</Td>
               <Td>{doc.checkout}</Td>
               <Td>{doc.jumlah}</Td>
-              <Td>{doc.tarif}</Td>
-              <Td>{doc.total}</Td>
+              <Td>{formatRupiah(doc.tarif)}</Td>
+              <Td>{formatRupiah(doc.total)}</Td>
             </Tr>
           ))}
         </Tbody>
@@ -132,9 +140,8 @@ export default function Userdetail() {
               </Td>
               <Td>{doc.jenis}</Td>
               <Td>{doc.metode}</Td>
-              <Td>{doc.tarif}</Td>
+              <Td>{formatRupiah(doc.tarif)}</Td>
               <Td>{doc.time}</Td>
-              <Td>{doc.harga}</Td>
             </Tr>
           ))}
         </Tbody>
