@@ -127,15 +127,15 @@ export default function Managewisata() {
                   Galery: filedownloadurl,
                   Gambar: filedownloadurl[0],
                 })
-                .then(() =>
+                .then(() => {
                   toast({
                     title: "Data di perbarui",
                     description: "Data telah berhasil di perbarui",
                     status: "success",
                     duration: 9000,
                     isClosable: true,
-                  })
-                )
+                  });
+                })
                 .catch((e) => console.log(e));
             })
             .catch((err) => console.error(err))
@@ -157,6 +157,14 @@ export default function Managewisata() {
           Longitude: longitude,
         })
         .then(() => {
+          setnama("");
+          setkecamatan("");
+          setdeskripsi("");
+          setkabupaten("");
+          setdisable(false);
+          setrekomendasi("");
+          setlatitude(0);
+          setlongitude(0);
           setloading(false);
           toast({
             title: "Data di perbarui",
@@ -166,7 +174,24 @@ export default function Managewisata() {
             isClosable: true,
           });
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          setnama("");
+          setkecamatan("");
+          setdeskripsi("");
+          setkabupaten("");
+          setdisable(false);
+          setrekomendasi("");
+          setlatitude(0);
+          setlongitude(0);
+          setloading(false);
+          toast({
+            title: "Terjadi kesalahan",
+            description: "Terjadi sebuah kesalahan",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        });
     }
   }
 
