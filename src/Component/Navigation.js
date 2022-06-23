@@ -69,11 +69,11 @@ export default function Navigation({ user }) {
   return (
     <Flex>
       <Box
-        backgroundColor="#342F2A"
+        backgroundColor="#4BA0CD"
         w="fit-content"
         p="10"
         ref={stickref}
-        height='4xl'
+        height={["3xs", "3xl", "4xl"]}
         position="absolute"
         top={0}
       >
@@ -97,7 +97,7 @@ export default function Navigation({ user }) {
               children={({ isActive }) =>
                 isActive ? (
                   <Flex
-                    backgroundColor={"blue.400"}
+                    backgroundColor={"#FF8C70"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -117,9 +117,9 @@ export default function Navigation({ user }) {
                     w={"52"}
                   >
                     <Box mr={5}>
-                      <IoHomeOutline color="blue" size={20} />
+                      <IoHomeOutline color="#FF8C70" size={20} />
                     </Box>
-                    <Text fontWeight="Regular" color={"blue"}>
+                    <Text fontWeight="Regular" color={"#FF8C70"}>
                       Home
                     </Text>
                   </Flex>
@@ -133,7 +133,7 @@ export default function Navigation({ user }) {
               children={({ isActive }) =>
                 isActive ? (
                   <Flex
-                    backgroundColor={"blue.400"}
+                    backgroundColor={"#FF8C70"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -153,9 +153,9 @@ export default function Navigation({ user }) {
                     w={"52"}
                   >
                     <Box mr={5}>
-                      <IoCashOutline color="blue" size={20} />
+                      <IoCashOutline color="#FF8C70" size={20} />
                     </Box>
-                    <Text fontWeight="Regular" color={"blue"}>
+                    <Text fontWeight="Regular" color={"#FF8C70"}>
                       Transaksi
                     </Text>
                   </Flex>
@@ -169,7 +169,7 @@ export default function Navigation({ user }) {
               children={({ isActive }) =>
                 isActive ? (
                   <Flex
-                    backgroundColor={"blue.400"}
+                    backgroundColor={"#FF8C70"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -189,9 +189,9 @@ export default function Navigation({ user }) {
                     w={"52"}
                   >
                     <Box mr={5}>
-                      <IoPersonOutline color="blue" size={20} />
+                      <IoPersonOutline color="#FF8C70" size={20} />
                     </Box>
-                    <Text fontWeight="Regular" color={"blue"}>
+                    <Text fontWeight="Regular" color={"#FF8C70"}>
                       Pengguna
                     </Text>
                   </Flex>
@@ -205,7 +205,7 @@ export default function Navigation({ user }) {
               children={({ isActive }) =>
                 isActive ? (
                   <Flex
-                    backgroundColor={"blue.400"}
+                    backgroundColor={"#FF8C70"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -225,9 +225,9 @@ export default function Navigation({ user }) {
                     w={"52"}
                   >
                     <Box mr={5}>
-                      <IoBuildOutline color="blue" size={20} />
+                      <IoBuildOutline color="#FF8C70" size={20} />
                     </Box>
-                    <Text fontWeight="Regular" color={"blue"}>
+                    <Text fontWeight="Regular" color={"#FF8C70"}>
                       Kelola
                     </Text>
                   </Flex>
@@ -241,7 +241,7 @@ export default function Navigation({ user }) {
               children={({ isActive }) =>
                 isActive ? (
                   <Flex
-                    backgroundColor={"blue.400"}
+                    backgroundColor={"#FF8C70"}
                     p={2}
                     mb={5}
                     borderRadius={10}
@@ -263,9 +263,9 @@ export default function Navigation({ user }) {
                     w={"52"}
                   >
                     <Box mr={5}>
-                      <IoNewspaperOutline color="blue" size={20} />
+                      <IoNewspaperOutline color="#FF8C70" size={20} />
                     </Box>
-                    <Text fontWeight="Regular" color={"blue"}>
+                    <Text fontWeight="Regular" color={"#FF8C70"}>
                       Laporan
                     </Text>
                   </Flex>
@@ -275,21 +275,22 @@ export default function Navigation({ user }) {
           </ListItem>
           <ListItem>
             <Button
-              backgroundColor={"antiquewhite"}
+              backgroundColor={"whiteAlpha.900"}
               p={2}
               mt="5"
               borderRadius={10}
               w={"52"}
-              leftIcon={<IoLogOutOutline color="blue" size={20} />}
+              leftIcon={<IoLogOutOutline color="#FF8C70" size={20} />}
               onClick={onOpen}
+              color="#FF8C70"
             >
               Log out
             </Button>
           </ListItem>
         </List>
       </Box>
-      <Spacer />
-      <Box mt="20" w="fit-content">
+      <Box w={['10','24','32']} />
+      <Box mt="10" w={["3xs", "3xl", "4xl"]}>
         <Outlet />
         <Alertcomponent
           isOp={isOpen}
