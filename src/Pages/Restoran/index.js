@@ -44,7 +44,7 @@ export default function Restoran() {
     setdata(x);
   }
 
-   const onRemove = (id) => {
+  const onRemove = (id) => {
     const docRef = db.collection("Rm").doc(id);
 
     docRef
@@ -82,7 +82,6 @@ export default function Restoran() {
         });
       });
   };
-
 
   useEffect(() => {
     get();
