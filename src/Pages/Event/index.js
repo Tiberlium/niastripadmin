@@ -44,9 +44,17 @@ export default function Event() {
     setdata(x);
   };
 
+  function formatRupiah(uang) {
+    return new Intl.NumberFormat("ID-id", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(uang);
+  }
+
   useEffect(() => {
     get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onRemove = (id) => {
@@ -136,7 +144,7 @@ export default function Event() {
                 <Td>{doc.data.Nama}</Td>
                 <Td>{doc.data.Kabupaten}</Td>
                 <Td>{doc.data.Kategori}</Td>
-                  <Td>{doc.data.Harga}</Td>
+                <Td>{formatRupiah(doc.data.Harga)}</Td>
                 <Td>
                   {doc.data.Latitude}/{doc.data.Longitude}
                 </Td>
