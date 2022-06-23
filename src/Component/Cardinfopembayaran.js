@@ -18,12 +18,7 @@ export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
     >
       <Text fontSize="large">Informasi Pembayaran</Text>
       <HStack mt={5}>
-        <Box
-          padding={2}
-          backgroundColor="gray.100"
-          w="full"
-          borderRadius={10}
-        >
+        <Box padding={2} backgroundColor="gray.100" w="full" borderRadius={10}>
           <Text fontSize="medium" color="GrayText">
             Orderid
           </Text>
@@ -31,12 +26,7 @@ export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
             {orderid}
           </Text>
         </Box>
-        <Box
-          padding={2}
-          backgroundColor="gray.100"
-          w="full"
-          borderRadius={10}
-        >
+        <Box padding={2} backgroundColor="gray.100" w="full" borderRadius={10}>
           <Text fontSize="medium" color="GrayText">
             Jumlah
           </Text>
