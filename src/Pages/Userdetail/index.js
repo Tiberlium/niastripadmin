@@ -45,7 +45,7 @@ export default function Userdetail() {
       >
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main">
-            Dashboard
+            Home
           </BreadcrumbLink>
         </BreadcrumbItem>
 

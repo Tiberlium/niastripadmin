@@ -29,7 +29,7 @@ export default function Manage() {
       >
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main">
-            Dashboard
+            Home
           </BreadcrumbLink>
         </BreadcrumbItem>
 

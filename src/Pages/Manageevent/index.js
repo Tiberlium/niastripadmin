@@ -186,7 +186,7 @@ export default function Manageevent() {
       >
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main">
-            Dashboard
+            Home
           </BreadcrumbLink>
         </BreadcrumbItem>
 

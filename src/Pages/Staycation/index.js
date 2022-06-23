@@ -96,7 +96,7 @@ export default function Staycation() {
       <Breadcrumb spacing="8px" separator={<BsChevronRight color="gray.500" />}>
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main">
-            Dashboard
+            Home
           </BreadcrumbLink>
         </BreadcrumbItem>
 

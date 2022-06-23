@@ -387,19 +387,13 @@ export default function Report() {
       >
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main">
-            Dashboard
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-
-        <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/Main/Manage">
-            Main
+            Home
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="#">
-            Report
+            Laporan
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>

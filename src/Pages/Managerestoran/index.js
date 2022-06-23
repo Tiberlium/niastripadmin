@@ -193,7 +193,7 @@ export default function Managerestoran() {
       >
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main">
-            Dashboard
+            Home
           </BreadcrumbLink>
         </BreadcrumbItem>
 
