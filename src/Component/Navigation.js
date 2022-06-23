@@ -111,7 +111,7 @@ export default function Navigation({ user }) {
                   </Flex>
                 ) : (
                   <Flex
-                    backgroundColor={"antiquewhite"}
+                    backgroundColor={"white"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -147,7 +147,7 @@ export default function Navigation({ user }) {
                   </Flex>
                 ) : (
                   <Flex
-                    backgroundColor={"antiquewhite"}
+                    backgroundColor={"white"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -183,7 +183,7 @@ export default function Navigation({ user }) {
                   </Flex>
                 ) : (
                   <Flex
-                    backgroundColor={"antiquewhite"}
+                    backgroundColor={"white"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -219,7 +219,7 @@ export default function Navigation({ user }) {
                   </Flex>
                 ) : (
                   <Flex
-                    backgroundColor={"antiquewhite"}
+                    backgroundColor={"white"}
                     p={2}
                     borderRadius={10}
                     w={"52"}
@@ -256,7 +256,7 @@ export default function Navigation({ user }) {
                   </Flex>
                 ) : (
                   <Flex
-                    backgroundColor={"antiquewhite"}
+                    backgroundColor={"white"}
                     p={2}
                     mb={5}
                     borderRadius={10}
@@ -275,7 +275,7 @@ export default function Navigation({ user }) {
           </ListItem>
           <ListItem>
             <Button
-              backgroundColor={"whiteAlpha.900"}
+              backgroundColor={"white"}
               p={2}
               mt="5"
               borderRadius={10}
