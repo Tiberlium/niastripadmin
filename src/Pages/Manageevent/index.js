@@ -56,7 +56,7 @@ export default function Manageevent() {
               Latitude: latitude,
               Longitude: longitude,
               Gambar: filedownloadurl[0],
-              Tarif: tarif,
+              Harga: tarif,
             })
             .then(() => {
               setimages([]);
@@ -101,7 +101,7 @@ export default function Manageevent() {
                 Latitude: latitude,
                 Longitude: longitude,
                 Gambar: filedownloadurl[0],
-                Tarif: tarif,
+                Harga: tarif,
               })
               .then(() => {
                 setloading(false);
@@ -125,7 +125,7 @@ export default function Manageevent() {
             Deskripsi: deskripsi,
             Latitude: latitude,
             Longitude: longitude,
-            Tarif: tarif,
+            Harga: tarif,
           })
           .then(() => {
             setloading(true);
@@ -159,7 +159,7 @@ export default function Manageevent() {
       setlatitude(docRef.data().Latitude);
       setlongitude(docRef.data().Longitude);
       seturl(docRef.data().Gambar);
-      settarif(docRef.data().Tarif);
+      settarif(docRef.data().Harga);
     } else {
       setnama("");
       setkabupaten("");
@@ -254,7 +254,7 @@ export default function Manageevent() {
               type={"number"}
               placeholder="masukkan tarif"
               variant={"filled"}
-              defaultValue={tarif || ""}
+              value={tarif || 0}
               onChange={(e) => settarif(e.target.value)}
             />
             <FormHelperText>masukkan tarif tiket event</FormHelperText>

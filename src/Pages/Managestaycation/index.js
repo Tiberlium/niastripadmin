@@ -8,7 +8,6 @@ import {
   Box,
   Stack,
   Textarea,
-  Center,
   useToast,
   Checkbox,
   CheckboxGroup,
@@ -68,7 +67,7 @@ export default function Managestaycation() {
 
   const handleUpload = () => {
     setloading(true);
-    if (id) {
+    if (!id) {
       const uploadTask = images.map((doc) => {
         const docRef = storages.ref(`Hotel/${doc.file.name}`);
         return docRef
@@ -112,7 +111,7 @@ export default function Managestaycation() {
           console.error(e);
         });
     } else {
-      if (images.length !== 0) {
+      if (!images) {
         const deleteTask = url.map((doc) => {
           storages.refFromURL(doc).delete();
         });
@@ -150,8 +149,8 @@ export default function Managestaycation() {
                   setlongitude(0);
                   setloading(false);
                   toast({
-                    title: "Data ditambahkan",
-                    description: "Data telah berhasil di tambahkan",
+                    title: "Data diperbarui",
+                    description: "Data telah berhasil di perbarui",
                     status: "success",
                     duration: 9000,
                     isClosable: true,
@@ -182,8 +181,8 @@ export default function Managestaycation() {
             setlongitude(0);
             setloading(false);
             toast({
-              title: "Data ditambahkan",
-              description: "Data telah berhasil di tambahkan",
+              title: "Data diperbarui",
+              description: "Data telah berhasil di perbarui",
               status: "success",
               duration: 9000,
               isClosable: true,
