@@ -105,6 +105,12 @@ export default function Manageevent() {
               })
               .then(() => {
                 setloading(false);
+                setimages([]);
+                setnama("");
+                setdeskripsi("");
+                setkabupaten("");
+                setlatitude(0);
+                setlongitude(0);
                 toast({
                   title: "Data di perbarui",
                   description: "Data telah berhasil di perbarui",
@@ -128,7 +134,12 @@ export default function Manageevent() {
             Harga: tarif,
           })
           .then(() => {
-            setloading(true);
+            setnama("");
+            setdeskripsi("");
+            setkabupaten("");
+            setlatitude(0);
+            setlongitude(0);
+            setloading(false);
             toast({
               title: "Data di perbarui",
               description: "Data telah berhasil di perbarui",
@@ -138,6 +149,13 @@ export default function Manageevent() {
             });
           })
           .catch(() => {
+            setimages([]);
+            setnama("");
+            setdeskripsi("");
+            setkabupaten("");
+            setlatitude(0);
+            setlongitude(0);
+            setloading(false);
             toast({
               title: "Terjadi kesalahan",
               description: "Terjadi sebuah kesalahan",
