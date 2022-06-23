@@ -38,7 +38,7 @@ const data = {
 };
 
 const Linechart = () => (
-  <Box w="2xl">
+  <Box w={["2xs", "2xl"]}>
     <Line
       data={data}
       options={{
