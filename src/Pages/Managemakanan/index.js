@@ -127,6 +127,11 @@ export default function Managemakanan() {
                   Kategori: "Makanan",
                 })
                 .then(() => {
+                  setimages([]);
+                  setnama("");
+                  setavailable([]);
+                  setdeskripsi("");
+                  setloading(false);
                   toast({
                     title: "Data di perbarui",
                     description: "Data telah berhasil di perbarui",
@@ -148,6 +153,11 @@ export default function Managemakanan() {
             Tersedia: available,
           })
           .then(() => {
+            setimages([]);
+            setnama("");
+            setavailable([]);
+            setdeskripsi("");
+            setloading(false);
             toast({
               title: "Data di perbarui",
               description: "Data telah berhasil di perbarui",
@@ -157,7 +167,18 @@ export default function Managemakanan() {
             });
           })
           .catch((e) => {
-            console.error(e);
+            setimages([]);
+            setnama("");
+            setavailable([]);
+            setdeskripsi("");
+            setloading(false);
+            toast({
+              title: "Terjadi kesalahan",
+              description: "Terjadi sebuah kesalahan",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
           });
       }
     }
@@ -178,7 +199,7 @@ export default function Managemakanan() {
   };
 
   return (
-    <Box width={"3xl"} mr='36'>
+    <Box width={"3xl"} mr="36">
       <Breadcrumb
         spacing="8px"
         separator={<FiChevronRight color="gray.500" />}

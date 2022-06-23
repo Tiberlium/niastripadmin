@@ -112,6 +112,14 @@ export default function Managerestoran() {
               })
               .then(() => {
                 setloading(false);
+                setimages([]);
+                setnama("");
+                setkontak(0);
+                setoperasional("");
+                setalamat("");
+                setlatitude(0);
+                setlongitude(0);
+                setloading(false);
                 toast({
                   title: "Data di perbarui",
                   description: "Data telah berhasil di perbarui",
@@ -137,6 +145,13 @@ export default function Managerestoran() {
           })
           .then(() => {
             setloading(true);
+            setnama("");
+            setkontak(0);
+            setoperasional("");
+            setalamat("");
+            setlatitude(0);
+            setlongitude(0);
+            setloading(false);
             toast({
               title: "Data di perbarui",
               description: "Data telah berhasil di perbarui",
@@ -146,6 +161,13 @@ export default function Managerestoran() {
             });
           })
           .catch(() => {
+            setnama("");
+            setkontak(0);
+            setoperasional("");
+            setalamat("");
+            setlatitude(0);
+            setlongitude(0);
+            setloading(false);
             toast({
               title: "Terjadi kesalahan",
               description: "Terjadi sebuah kesalahan",
