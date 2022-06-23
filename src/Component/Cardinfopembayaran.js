@@ -21,7 +21,7 @@ export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
         <Box
           padding={2}
           backgroundColor="gray.100"
-          w="fit-content"
+          w="full"
           borderRadius={10}
         >
           <Text fontSize="medium" color="GrayText">
@@ -34,9 +34,8 @@ export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
         <Box
           padding={2}
           backgroundColor="gray.100"
-          w="fit-content"
+          w="full"
           borderRadius={10}
-          width="2xs"
         >
           <Text fontSize="medium" color="GrayText">
             Jumlah
@@ -48,9 +47,8 @@ export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
         <Box
           padding={2}
           backgroundColor="gray.100"
-          w="fit-content"
           borderRadius={10}
-          width="2xs"
+          width="full"
         >
           <Text fontSize="medium" color="GrayText">
             Metode Pembayaran
