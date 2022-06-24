@@ -57,6 +57,7 @@ export default function Manageevent() {
               Longitude: longitude,
               Gambar: filedownloadurl[0],
               Harga: tarif,
+              Rating:0,
             })
             .then(() => {
               setimages([]);

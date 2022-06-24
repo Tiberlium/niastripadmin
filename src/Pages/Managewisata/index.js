@@ -72,6 +72,7 @@ export default function Managewisata() {
             Longitude: longitude,
             Galery: filedownloadurl,
             Gambar: filedownloadurl[0],
+            Rating:0,
           });
         })
         .then(() => {

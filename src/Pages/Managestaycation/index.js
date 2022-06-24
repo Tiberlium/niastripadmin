@@ -88,6 +88,7 @@ export default function Managestaycation() {
             Fasilitas: fasilitas,
             Galery: filedownloadurl,
             Gambar: filedownloadurl[0],
+            Rating:0,
           });
         })
         .then(() => {

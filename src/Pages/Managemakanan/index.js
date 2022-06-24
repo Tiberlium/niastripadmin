@@ -83,6 +83,7 @@ export default function Managemakanan() {
               Gambar: filedownloadurl[0],
               Tersedia: available,
               Kategori: "Makanan",
+              Rating:0,
             })
             .then(() => {
               setimages([]);
