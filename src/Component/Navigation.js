@@ -69,7 +69,7 @@ export default function Navigation({ user }) {
   return (
     <Flex>
       <Box
-        backgroundColor="#4BA0CD"
+        backgroundColor='blue.600'
         w="fit-content"
         p="10"
         ref={stickref}
