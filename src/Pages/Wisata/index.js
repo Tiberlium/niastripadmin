@@ -121,7 +121,7 @@ export default function Wisata() {
         </Link>
         <Table variant={"striped"} colorScheme="telegram" size="sm">
           <TableCaption fontWeight={"bold"} fontSize={"20"}>
-            Wisata List
+            Daftar Wisata
           </TableCaption>
           <Thead>
             <Tr>

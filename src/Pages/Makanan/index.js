@@ -98,7 +98,7 @@ export default function Makanan() {
 
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main/Manage">
-            Manage
+            Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
 
@@ -119,7 +119,7 @@ export default function Makanan() {
         </Link>
         <Table variant={"striped"} colorScheme="telegram" size="sm">
           <TableCaption fontWeight={"bold"} fontSize={"20"}>
-            Makanan Tradisional list
+           Daftar Makanan Tradisional 
           </TableCaption>
           <Thead>
             <Tr>

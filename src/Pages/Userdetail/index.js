@@ -59,13 +59,13 @@ export default function Userdetail() {
 
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main/User">
-            User
+            Pengguna
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="#">
-            Userdetail
+            Detail pengguna
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>

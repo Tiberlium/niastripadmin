@@ -99,7 +99,7 @@ export default function Restoran() {
 
         <BreadcrumbItem>
           <BreadcrumbLink as={Link} to="/Main/Manage">
-            Manage
+            Kelola
           </BreadcrumbLink>
         </BreadcrumbItem>
 
@@ -120,7 +120,7 @@ export default function Restoran() {
         </Link>
         <Table variant={"striped"} colorScheme="telegram" size="sm">
           <TableCaption fontWeight={"bold"} fontSize={"20"}>
-            Restoran list
+            Daftar Restoran
           </TableCaption>
           <Thead>
             <Tr>

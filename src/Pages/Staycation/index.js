@@ -108,12 +108,12 @@ export default function Staycation() {
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="/Main/Staycation">
-            Penginapan
+            Tempat menginap
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Text fontSize={"5xl"} pb={5} pl={10} pt={5}>
-        Daftar Staycation
+        Daftar Tempat menginap
       </Text>
       <Box pl={10} pr={10} pt={5}>
         <Link to="/Main/Tambahkandatastaycation">
@@ -123,7 +123,7 @@ export default function Staycation() {
         </Link>
         <Table variant={"striped"} colorScheme="telegram" size="sm">
           <TableCaption fontWeight={"bold"} fontSize={"20"}>
-            Staycation list
+            Daftar Tempat menginap
           </TableCaption>
           <Thead>
             <Tr>

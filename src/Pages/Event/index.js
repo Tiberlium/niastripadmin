@@ -123,7 +123,7 @@ export default function Event() {
         </Link>
         <Table variant={"striped"} colorScheme="telegram" size="sm">
           <TableCaption fontWeight={"bold"} fontSize={"20"}>
-            Event list
+            Daftar Event
           </TableCaption>
           <Thead>
             <Tr>

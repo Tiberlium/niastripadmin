@@ -99,16 +99,16 @@ export default function User() {
 
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={Link} to="#">
-            User
+            Pengguna
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Text fontSize={"5xl"} mt={10} mb={5}>
-        List Pengguna
+        Daftar Pengguna
       </Text>
       <TableContainer>
         <Table variant="striped" w={[400, 500, 800]} size="sm">
-          <TableCaption>PENGGUNA</TableCaption>
+          <TableCaption>DAFTAR PENGGUNA</TableCaption>
           <Thead>
             <Tr>
               <Th>No</Th>

@@ -117,7 +117,7 @@ export default function Manage() {
             >
               <IoBed color="white" size={50} />
               <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
-                Penginapan
+                Tempat menginap
               </Text>
             </Box>
           </Link>
