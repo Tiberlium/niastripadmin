@@ -79,6 +79,7 @@ export default function Transaction() {
           <Th>Id order</Th>
           <Th>Pengguna</Th>
           <Th>Email</Th>
+          <Th>Jenis</Th>
           <Th>Metode pembayaran</Th>
           <Th>Jumlah</Th>
           <Th>Detail</Th>
@@ -90,6 +91,7 @@ export default function Transaction() {
               <Td>{stringTruncate(doc.data.orderid, 20)}</Td>
               <Td>{doc.data.customername}</Td>
               <Td>{doc.data.customeremail}</Td>
+              <Td>{doc.data.jenis}</Td>
               <Td>{doc.data.metode}</Td>
               <Td>{formmatter.format(doc.data.amount)}</Td>
               <Td>
