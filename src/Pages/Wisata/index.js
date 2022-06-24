@@ -166,7 +166,7 @@ export default function Wisata() {
                     leftIcon={<BsFillTrashFill />}
                     onClick={() => remove(doc.id)}
                   >
-                    Delete
+                    Hapus
                   </Button>
                 </Td>
               </Tr>

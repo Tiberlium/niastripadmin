@@ -163,7 +163,7 @@ export default function Restoran() {
                     leftIcon={<BsFillTrashFill />}
                     onClick={() => onRemove(doc.id)}
                   >
-                    Delete
+                    Hapus
                   </Button>
                 </Td>
               </Tr>

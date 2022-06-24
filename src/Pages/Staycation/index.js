@@ -166,7 +166,7 @@ export default function Staycation() {
                     leftIcon={<BsFillTrashFill />}
                     onClick={() => onRemove(doc.id)}
                   >
-                    Delete
+                    Hapus
                   </Button>
                 </Td>
               </Tr>

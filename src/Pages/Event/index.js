@@ -168,7 +168,7 @@ export default function Event() {
                     leftIcon={<BsFillTrashFill />}
                     onChange={() => onRemove(doc.id)}
                   >
-                    Delete
+                    Hapus
                   </Button>
                 </Td>
               </Tr>

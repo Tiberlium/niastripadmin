@@ -156,7 +156,7 @@ export default function Makanan() {
                     leftIcon={<BsFillTrashFill />}
                     onClick={() => onRemove(doc.id)}
                   >
-                    Delete
+                    Hapus
                   </Button>
                 </Td>
               </Tr>
