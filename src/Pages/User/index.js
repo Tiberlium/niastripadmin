@@ -23,12 +23,13 @@ import {
   IoIosArrowForward,
 } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { db, storages } from "../../Firebase";
+import { db } from "../../Firebase";
 
 export default function User() {
   const [data, setdata] = useState([]);
   const toast = useToast();
-  const [img, setimg] = useState("");
+
+  const isMounted = React.useRef();
 
   const get = async () => {
     let x = [];
@@ -40,49 +41,47 @@ export default function User() {
       });
     });
 
-    setdata(x);
+    if (isMounted.current) return setdata(x);
   };
 
   useEffect(() => {
+    isMounted.current = true;
     get();
+    return () => (isMounted.current = false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onRemove = (id) => {
-    const docRef = db.collection("User").doc(id);
+  const onRemove = async (id) => {
+    const docRef = await db.collection("User").doc(id).delete();
+
+    const doctransact = await db
+      .collection("Transaksi")
+      .where("customerid", "==", id);
 
     docRef
-      .get()
-      .then((doc) => {
-        setimg(doc.data.img);
-      })
       .then(() => {
-        const deleteImages = storages.refFromURL(img).delete();
-
-        deleteImages.then(() => {
-          docRef
-            .delete()
-            .then(() => {
-              toast({
-                title: "Data di hapus.",
-                description: "Data telah di berhasil hapus",
-                status: "success",
-                duration: 9000,
-                isClosable: true,
-              });
-              get();
-            })
-            .catch(() => {
-              toast({
-                title: "Data gagal di hapus.",
-                description: "Ada kesalahan data gagal di hapus",
-                status: "error",
-                duration: 9000,
-                isClosable: true,
-              });
-            });
+        doctransact.get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => doc.ref.delete());
+        });
+        toast({
+          title: "Data di hapus.",
+          description: "Data telah di berhasil hapus",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      })
+      .catch(() => {
+        toast({
+          title: "Data gagal di hapus.",
+          description: "Ada kesalahan data gagal di hapus",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
         });
       });
+
+    get();
   };
   return (
     <Box>

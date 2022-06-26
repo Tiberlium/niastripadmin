@@ -483,12 +483,9 @@ export default function Report() {
                       </Td>
                       <Td>{doc["data"]["transactiontime"]}</Td>
                       <Td>
-                        <Button
-                          colorScheme={"green"}
-                          onClick={`/Main/Transactiondetail/${doc.id}`}
-                        >
-                          Detail
-                        </Button>
+                        <Link to={`/Main/Transactiondetail/${doc.id}`}>
+                          <Button colorScheme={"green"}>Detail</Button>
+                        </Link>
                       </Td>
                     </Tr>
                   ))}
