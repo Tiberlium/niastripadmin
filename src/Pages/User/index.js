@@ -44,21 +44,15 @@ export default function User() {
     if (isMounted.current) return setdata(x);
   };
 
-  useEffect(() => {
-    isMounted.current = true;
-    get();
-    return () => (isMounted.current = false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const onRemove = async (id) => {
-    const docRef = await db.collection("User").doc(id).delete();
+    const docRef = db.collection("Users").doc(id);
 
-    const doctransact = await db
+    const doctransact = db
       .collection("Transaksi")
       .where("customerid", "==", id);
 
     docRef
+      .delete()
       .then(() => {
         doctransact.get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => doc.ref.delete());
@@ -70,6 +64,7 @@ export default function User() {
           duration: 9000,
           isClosable: true,
         });
+        get();
       })
       .catch(() => {
         toast({
@@ -80,9 +75,14 @@ export default function User() {
           isClosable: true,
         });
       });
-
-    get();
   };
+
+  useEffect(() => {
+    isMounted.current = true;
+    get();
+    return () => (isMounted.current = false);
+  }, []);
+
   return (
     <Box>
       <Breadcrumb
@@ -122,7 +122,7 @@ export default function User() {
           </Thead>
           <Tbody>
             {data.map((doc, index) => (
-              <Tr>
+              <Tr key={doc["id"]}>
                 <Td>{index + 1}</Td>
                 <Td>
                   <Image
