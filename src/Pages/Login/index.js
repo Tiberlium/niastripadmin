@@ -97,7 +97,7 @@ export default function Login() {
               <Input
                 pr="4.5rem"
                 type={show ? "text" : "password"}
-                placeholder="Enter password"
+                placeholder="Masukkan sandi"
                 errorBorderColor="crimson"
                 isInvalid={invalid}
               />

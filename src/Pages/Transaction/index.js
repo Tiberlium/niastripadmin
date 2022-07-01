@@ -76,7 +76,7 @@ export default function Transaction() {
         <TableCaption>Transaksi</TableCaption>
         <Thead>
           <Th>No</Th>
-          <Th>Id order</Th>
+          <Th>Id pesanan</Th>
           <Th>Pengguna</Th>
           <Th>Email</Th>
           <Th>Jenis</Th>

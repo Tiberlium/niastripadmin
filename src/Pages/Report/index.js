@@ -410,11 +410,11 @@ export default function Report() {
             <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
                 <TableCaption placement="top" mb={5}>
-                  Data Report Penginapan
+                  Data Laporan Penginapan
                 </TableCaption>
                 <Thead>
                   <Th>No</Th>
-                  <Th>Order id</Th>
+                  <Th>Id pesanan</Th>
                   <Th>Nama</Th>
                   <Th>Kategori</Th>
                   <Th>Biaya</Th>
@@ -450,7 +450,7 @@ export default function Report() {
                 size="md"
                 onClick={createpdfreservation}
               >
-                Generate Laporan Penginapan
+                Hasilkan Laporan Penginapan
               </Button>
             </Center>
           </TabPanel>
@@ -458,11 +458,11 @@ export default function Report() {
             <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
                 <TableCaption placement="top" mb={5}>
-                  Data Report Event
+                  Data Laporan Event
                 </TableCaption>
                 <Thead>
                   <Th>No</Th>
-                  <Th>Order id</Th>
+                  <Th>Id pesanan</Th>
                   <Th>Nama</Th>
                   <Th>Kategori</Th>
                   <Th>Biaya</Th>
@@ -494,7 +494,7 @@ export default function Report() {
             </TableContainer>
             <Center>
               <Button colorScheme="green" size="md" onClick={createpdfevent}>
-                Generate Laporan Event
+                Hasilkan Laporan Event
               </Button>
             </Center>
           </TabPanel>

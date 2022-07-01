@@ -73,7 +73,7 @@ export default function Navigation({ user }) {
         w="fit-content"
         p="10"
         ref={stickref}
-        height={["3xs", "3xl", "4xl"]}
+        height={["3xs", "3xl"]}
         position="absolute"
         top={0}
       >

@@ -111,10 +111,10 @@ export default function User() {
           <Thead>
             <Tr>
               <Th>No</Th>
-              <Th>Photo</Th>
+              <Th>Gambar</Th>
               <Th>Nama</Th>
               <Th>Id</Th>
-              <Th>Gender</Th>
+              <Th>Kelamin</Th>
               <Th>Email</Th>
               <Th>Detail</Th>
               <Th>Hapus</Th>
