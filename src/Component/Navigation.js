@@ -289,7 +289,7 @@ export default function Navigation({ user }) {
           </ListItem>
         </List>
       </Box>
-      <Box w={["10", "24", "32"]} />
+      <Box w={['10','20','40']} />
       <Box mt="20" w={["2xl", "3xl", "4xl", "5xl"]}>
         <Outlet />
         <Alertcomponent
