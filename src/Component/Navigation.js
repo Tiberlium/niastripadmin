@@ -73,9 +73,10 @@ export default function Navigation({ user }) {
         w="fit-content"
         p="10"
         ref={stickref}
-        height={["3xs", "3xl"]}
         position="absolute"
         top={0}
+        bottom={0}
+        height={'3xl'}
       >
         <List spacing={4}>
           <Center>
@@ -289,7 +290,7 @@ export default function Navigation({ user }) {
           </ListItem>
         </List>
       </Box>
-      <Box w={['10','20','40']} />
+      <Box w={["10", "20", "40"]} />
       <Box mt="20" w={["2xl", "3xl", "4xl", "5xl"]}>
         <Outlet />
         <Alertcomponent
