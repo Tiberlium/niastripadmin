@@ -23,11 +23,11 @@ export default function Carddetailorder({
   return (
     <Box p="5" mt="16" boxShadow="base" width="full" borderRadius={10}>
       <Text fontSize="large" marginBottom="5">
-        Detail Order
+        Detail pemesanan
       </Text>
       <HStack justifyContent="space-between" mt={2} mb={2}>
         <Text fontWeight="semibold" color="blackAlpha.800" fontSize="medium">
-          Order id
+          Id pemesanan
         </Text>
         <Text color="blackAlpha.600" fontSize="small">
           {trunctext(orderid)}

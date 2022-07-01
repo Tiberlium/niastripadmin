@@ -20,7 +20,7 @@ export default function Cardinfopembayaran({ orderid, jumlah, metode }) {
       <HStack mt={5}>
         <Box padding={2} backgroundColor="gray.100" w="full" borderRadius={10}>
           <Text fontSize="medium" color="GrayText">
-            Orderid
+            Id pemesanan
           </Text>
           <Text fontSize="small" color="blackAlpha.900">
             {orderid}
