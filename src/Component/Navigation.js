@@ -284,7 +284,7 @@ export default function Navigation({ user }) {
               onClick={onOpen}
               color="#FF5F7E"
             >
-              Log out
+              Keluar
             </Button>
           </ListItem>
         </List>
