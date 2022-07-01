@@ -69,7 +69,7 @@ export default function Navigation({ user }) {
   return (
     <Flex>
       <Box
-        backgroundColor='blue.600'
+        backgroundColor="blue.600"
         w="fit-content"
         p="10"
         ref={stickref}
@@ -290,7 +290,7 @@ export default function Navigation({ user }) {
         </List>
       </Box>
       <Box w={["10", "24", "32"]} />
-      <Box mt="20" w={["3xs", "3xl", "4xl"]}>
+      <Box mt="20" w={["2xl", "3xl", "4xl", "5xl"]}>
         <Outlet />
         <Alertcomponent
           isOp={isOpen}
