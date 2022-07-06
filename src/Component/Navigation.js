@@ -76,7 +76,7 @@ export default function Navigation({ user }) {
         position="absolute"
         top={0}
         bottom={0}
-        height={'4xl'}
+        height={"100vh"}
       >
         <List spacing={4}>
           <Center>
