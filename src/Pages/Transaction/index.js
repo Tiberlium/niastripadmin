@@ -18,6 +18,7 @@ import {
   TabPanel,
   TabPanels,
   Tab,
+  TableContainer,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
@@ -401,51 +402,47 @@ export default function Transaction() {
 
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            <TableContainer mb={10}>
+              <Table variant={"striped"} size="sm">
+                <TableCaption placement="top" mb={5}>
+                  Data Laporan Penginapan
+                </TableCaption>
+                <Thead>
+                  <Th>No</Th>
+                  <Th>Id pesanan</Th>
+                  <Th>Nama</Th>
+                  <Th>Kategori</Th>
+                  <Th>Biaya</Th>
+                  <Th>Metode bayar</Th>
+                  <Th>Tanggal Transaksi</Th>
+                  <Th>Detail</Th>
+                </Thead>
+                <Tbody>
+                  {reservation.map((doc, index) => (
+                    <Tr key={doc["id"]}>
+                      <Td>{index + 1}</Td>
+                      <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
+                      <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
+                      <Td>{doc["data"]["jenis"]}</Td>
+                      <Td>{formatter(doc["data"]["amount"])}</Td>
+                      <Td>{doc["data"]["metode"]}</Td>
+                      <Td>{doc["data"]["transactiontime"]}</Td>
+                      <Td>
+                        <Link to={`/Main/Transactiondetail/${doc.id}`}>
+                          <Button colorScheme={"blue"}>Detail</Button>
+                        </Link>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
           </TabPanel>
           <TabPanel>
             <p>two!</p>
           </TabPanel>
         </TabPanels>
       </Tabs>
-      {/* <Table variant={"striped"} size="sm">
-        <TableCaption>Transaksi</TableCaption>
-        <Thead>
-          <Th>No</Th>
-          <Th>Id pesanan</Th>
-          <Th>Pengguna</Th>
-          <Th>Email</Th>
-          <Th>Jenis</Th>
-          <Th>Metode pembayaran</Th>
-          <Th>Jumlah</Th>
-          <Th>Detail</Th>
-        </Thead>
-        <Tbody>
-          {data.map((doc, index) => (
-            <Tr key={doc.id}>
-              <Td>{index + 1}</Td>
-              <Td>{stringTruncate(doc.data.orderid, 20)}</Td>
-              <Td>{doc.data.customername}</Td>
-              <Td>{doc.data.customeremail}</Td>
-              <Td>{doc.data.jenis}</Td>
-              <Td>{doc.data.metode}</Td>
-              <Td>{formmatter.format(doc.data.amount)}</Td>
-              <Td>
-                <Link to={`/Main/Transactiondetail/${doc.id}`}>
-                  <Button
-                    colorScheme={"green"}
-                    variant="solid"
-                    size="sm"
-                    leftIcon={<BsFillInfoCircleFill />}
-                  >
-                    Detail
-                  </Button>
-                </Link>
-              </Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table> */}
     </Box>
   );
 }
