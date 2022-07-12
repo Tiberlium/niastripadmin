@@ -340,7 +340,10 @@ export default function Transaction() {
 
   const getevent = async () => {
     let x = [];
-    const docRef = await db.collection("Transaksi", "==", "Event").get();
+    const docRef = await db
+      .collection("Transaksi")
+      .where("jenis", "==", "Event")
+      .get();
     docRef.docs.map((doc) => {
       x.push({
         id: doc.id,
@@ -405,7 +408,7 @@ export default function Transaction() {
             <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
                 <TableCaption placement="top" mb={5}>
-                  Data Laporan Penginapan
+                  Data Transaksi Penginapan
                 </TableCaption>
                 <Thead>
                   <Th>No</Th>
@@ -439,7 +442,41 @@ export default function Transaction() {
             </TableContainer>
           </TabPanel>
           <TabPanel>
-            <p>two!</p>
+            <TableContainer mb={10}>
+              <Table variant={"striped"} size="sm">
+                <TableCaption placement="top" mb={5}>
+                  Data Laporan Event
+                </TableCaption>
+                <Thead>
+                  <Th>No</Th>
+                  <Th>Id pesanan</Th>
+                  <Th>Nama</Th>
+                  <Th>Kategori</Th>
+                  <Th>Biaya</Th>
+                  <Th>Komisi (10%)</Th>
+                  <Th>Tanggal Transaksi</Th>
+                  <Th>Detail</Th>
+                </Thead>
+                <Tbody>
+                  {event.map((doc, index) => (
+                    <Tr key={doc["id"]}>
+                      <Td>{index + 1}</Td>
+                      <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
+                      <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
+                      <Td>{doc["data"]["jenis"]}</Td>
+                      <Td>{formatter(doc["data"]["amount"])}</Td>
+                      <Td>{doc["data"]["metode"]}</Td>
+                      <Td>{doc["data"]["transactiontime"]}</Td>
+                      <Td>
+                        <Link to={`/Main/Transactiondetail/${doc.id}`}>
+                          <Button colorScheme={"green"}>Detail</Button>
+                        </Link>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
           </TabPanel>
         </TabPanels>
       </Tabs>
