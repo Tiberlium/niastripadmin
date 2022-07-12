@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Table,
@@ -13,19 +13,60 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Tabs,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tab,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
 import { Link } from "react-router-dom";
 import { BsFillInfoCircleFill, BsChevronRight } from "react-icons/bs";
+import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
+import img from "../../Asset/Logo.png";
 
 export default function Transaction() {
-  const [data, setdata] = React.useState([]);
+  const [reservation, setreservation] = useState([]);
+  const [event, setevent] = useState([]);
 
-  const formmatter = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
+  let totalTransaksievent = 0;
+  let pendapatanEvent = 0;
+
+  let totalTransaksireservation = 0;
+  let pendapatanreservation = 0;
+
+  const today = new Date();
+
+  function Percentage(num, per) {
+    return (num / 100) * per;
+  }
+
+  function formatter(uang) {
+    return new Intl.NumberFormat("ID-id", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(uang);
+  }
+
+  const totalTransact = reservation.map((doc) => {
+    return (totalTransaksireservation += Number(doc["data"]["amount"]));
+  });
+
+  const withdrawal = reservation.map((doc) => {
+    return (pendapatanreservation += Percentage(
+      Number(doc["data"]["amount"]),
+      10
+    ));
+  });
+
+  const totalTransactevent = event.map((doc) => {
+    return (totalTransaksievent += Number(doc["data"]["amount"]));
+  });
+
+  const withdrawalevent = event.map((doc) => {
+    return (pendapatanEvent += Percentage(Number(doc["data"]["amount"]), 10));
   });
 
   const stringTruncate = (str, length) => {
@@ -33,9 +74,272 @@ export default function Transaction() {
     return str.substring(0, length) + dots;
   };
 
-  const get = async () => {
+  let dataRes = {
+    outputType: OutputType.Save,
+    returnJsPDFDocObject: true,
+    fileName: `Report Reservation ${today.toDateString()}`,
+    orientationLandscape: true,
+    compress: true,
+    logo: {
+      src: img,
+      width: 26.66, //aspect ratio = width/height
+      height: 26.66,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    stamp: {
+      inAllPages: true,
+      src: img,
+      width: 20, //aspect ratio = width/height
+      height: 20,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    business: {
+      name: "Nias trip",
+      address: "Medan, Sumatera utara, indonesia",
+      phone: "(+62) 069 11 11 111",
+      email: "niastrip@gmail.com",
+      email_1: "niastrip@gmail.al",
+      website: "www.niastrip.al",
+    },
+    // contact: {
+    //   label: "Reprt issued for:",
+    //   name: "Client Name",
+    //   address: "Albania, Tirane, Astir",
+    //   phone: "(+355) 069 22 22 222",
+    //   email: "client@website.al",
+    //   otherInfo: "www.website.al",
+    // },
+    invoice: {
+      label: "Report ###: ",
+      num: 19,
+      invDate: `Report Date: ${today.toDateString()}`,
+      invGenDate: `Generted Date: ${today.toDateString()}`,
+      headerBorder: true,
+      tableBodyBorder: true,
+      header: [
+        {
+          title: "No",
+          style: {
+            width: 10,
+          },
+        },
+        {
+          title: "Order id",
+          style: {
+            width: 50,
+          },
+        },
+        {
+          title: "Nama",
+          style: {
+            width: 60,
+          },
+        },
+        {
+          title: "Jenis",
+          style: {
+            width: 50,
+          },
+        },
+        { title: "Harga" },
+        { title: "Komisi" },
+        { title: "tanggal transaksi" },
+      ],
+      table: reservation.map((item, index) => [
+        index + 1,
+        stringTruncate(item["data"]["orderid"], 20),
+        item["data"]["nama"],
+        item["data"]["jenis"],
+        formatter(item["data"]["amount"]),
+        formatter(Percentage(item["data"]["amount"], 10)),
+        item["data"]["transactiontime"],
+      ]),
+      additionalRows: [
+        {
+          col1: "Total:",
+          col2: `${formatter(Number(totalTransaksireservation))}`,
+          col3: "ALL",
+          style: {
+            fontSize: 14, //optional, default 12
+          },
+        },
+        {
+          col1: "Potongan:",
+          col2: "10",
+          col3: "%",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+        {
+          col1: "Pendapatan:",
+          col2: `${formatter(Number(pendapatanreservation))}`,
+          col3: "ALL",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+      ],
+
+      invDescLabel: "Report Note",
+      invDesc:
+        "Copyright permission footnotes acknowledge the source of lengthy quotations, scale and test items, and figures and tables that have been reprinted or adapted.",
+    },
+    footer: {
+      text: "The Report is created on a computer and is valid without the signature and stamp.",
+    },
+    pageEnable: true,
+    pageLabel: "Page ",
+  };
+
+  let dataEve = {
+    outputType: OutputType.Save,
+    returnJsPDFDocObject: true,
+    fileName: `Report event ${today.toDateString()}`,
+    orientationLandscape: true,
+    compress: true,
+    logo: {
+      src: img,
+      width: 26.66, //aspect ratio = width/height
+      height: 26.66,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    stamp: {
+      inAllPages: true,
+      src: img,
+      width: 20, //aspect ratio = width/height
+      height: 20,
+      margin: {
+        top: 0, //negative or positive num, from the current position
+        left: 0, //negative or positive num, from the current position
+      },
+    },
+    business: {
+      name: "Nias trip",
+      address: "Medan, Sumatera utara, indonesia",
+      phone: "(+62) 069 11 11 111",
+      email: "niastrip@gmail.com",
+      email_1: "niastrip@gmail.al",
+      website: "www.niastrip.al",
+    },
+    // contact: {
+    //   label: "Reprt issued for:",
+    //   name: "Client Name",
+    //   address: "Albania, Tirane, Astir",
+    //   phone: "(+355) 069 22 22 222",
+    //   email: "client@website.al",
+    //   otherInfo: "www.website.al",
+    // },
+    invoice: {
+      label: "Report ###: ",
+      num: 19,
+      invDate: `Report Date: ${today.toDateString()}`,
+      invGenDate: `Generted Date: ${today.toDateString()}`,
+      headerBorder: true,
+      tableBodyBorder: true,
+      header: [
+        {
+          title: "No",
+          style: {
+            width: 10,
+          },
+        },
+        {
+          title: "Order id",
+          style: {
+            width: 50,
+          },
+        },
+        {
+          title: "Nama",
+          style: {
+            width: 60,
+          },
+        },
+        {
+          title: "Jenis",
+          style: {
+            width: 50,
+          },
+        },
+        { title: "Harga" },
+        { title: "Komisi" },
+        { title: "tanggal transaksi" },
+      ],
+      table: event.map((item, index) => [
+        index + 1,
+        stringTruncate(item["data"]["orderid"], 20),
+        item["data"]["nama"],
+        item["data"]["jenis"],
+        formatter(item["data"]["amount"]),
+        formatter(Percentage(item["data"]["amount"], 10)),
+        item["data"]["transactiontime"],
+      ]),
+      additionalRows: [
+        {
+          col1: "Total:",
+          col2: `${formatter(Number(totalTransaksievent))}`,
+          col3: "ALL",
+          style: {
+            fontSize: 14, //optional, default 12
+          },
+        },
+        {
+          col1: "Potongan:",
+          col2: "10",
+          col3: "%",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+        {
+          col1: "Pendapatan:",
+          col2: `${formatter(Number(pendapatanEvent))}`,
+          col3: "ALL",
+          style: {
+            fontSize: 10, //optional, default 12
+          },
+        },
+      ],
+
+      invDescLabel: "Report Note",
+      invDesc:
+        "Copyright permission footnotes acknowledge the source of lengthy quotations, scale and test items, and figures and tables that have been reprinted or adapted.",
+    },
+    footer: {
+      text: "The Report is created on a computer and is valid without the signature and stamp.",
+    },
+    pageEnable: true,
+    pageLabel: "Page ",
+  };
+
+  const getreservation = async () => {
     let x = [];
-    const docRef = await db.collection("Transaksi").get();
+    const docRef = await db
+      .collection("Transaksi")
+      .where("jenis", "==", "Penginapan")
+      .get();
+    docRef.docs.map((doc) => {
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+    setreservation(x);
+  };
+
+  const getevent = async () => {
+    let x = [];
+    const docRef = await db.collection("Transaksi", "==", "Event").get();
     docRef.docs.map((doc) => {
       x.push({
         id: doc.id,
@@ -43,13 +347,29 @@ export default function Transaction() {
       });
     });
 
-    setdata(x);
+    setevent(x);
   };
 
-  React.useEffect(() => {
-    get();
+  function createpdfreservation() {
+    const pdfObj = jsPDFInvoiceTemplate(dataRes);
+    pdfObj.jsPDFDocObject.save();
+  }
+
+  function createpdfevent() {
+    const pdfObj = jsPDFInvoiceTemplate(dataEve);
+    pdfObj.jsPDFDocObject.save();
+  }
+
+  useEffect(() => {
+    getreservation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    getevent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -72,7 +392,23 @@ export default function Transaction() {
       <Text fontSize={"5xl"} height="auto">
         Transaksi
       </Text>
-      <Table variant={"striped"} size="sm">
+
+      <Tabs isFitted mt={"10"}>
+        <TabList mb="1em" w="4xl">
+          <Tab>Penginapan</Tab>
+          <Tab>Event</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <p>one!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+      {/* <Table variant={"striped"} size="sm">
         <TableCaption>Transaksi</TableCaption>
         <Thead>
           <Th>No</Th>
@@ -109,7 +445,7 @@ export default function Transaction() {
             </Tr>
           ))}
         </Tbody>
-      </Table>
+      </Table> */}
     </Box>
   );
 }

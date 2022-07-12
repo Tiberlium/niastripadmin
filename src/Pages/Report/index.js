@@ -22,22 +22,22 @@ import {
   Center,
 } from "@chakra-ui/react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoChevronForwardSharp } from "react-icons/io5";
 import { db } from "../../Firebase";
 import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
 import img from "../../Asset/Logo.png";
 
-export default function Report() {
+export default function Report({ navigation }) {
   const [reservation, setreservation] = React.useState([]);
   const [eventtiket, seteventtiket] = React.useState([]);
+
+  
   let totalTransaksireservation = 0;
   let pendapatanreservation = 0;
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
-
-  const navigation = useNavigate();
 
   const today = new Date();
 
