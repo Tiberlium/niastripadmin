@@ -19,7 +19,6 @@ import {
   Dashboard,
   Manage,
   Transaction,
-  Report,
   Managerestoran,
   Restoran,
   Transactiondetail,
@@ -58,7 +57,6 @@ export default function App() {
               element={<Transactiondetail />}
             />
             <Route path="Manage" element={<Manage />} />
-            <Route path="Report" element={<Report />} />
             <Route path="Event" element={<Event />} />
             <Route path="Makanan" element={<Makanan />} />
             <Route path="Staycation" element={<Staycation />} />

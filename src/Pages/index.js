@@ -11,7 +11,6 @@ import Event from "./Event";
 import User from "./User";
 import Userdetail from "./Userdetail";
 import Transaction from "./Transaction";
-import Report from "./Report";
 import Manage from "./Manage";
 import Managerestoran from "./Managerestoran";
 import Restoran from "./Restoran";
@@ -32,7 +31,6 @@ export {
   User,
   Userdetail,
   Transaction,
-  Report,
   Manage,
   Managerestoran,
   Restoran,

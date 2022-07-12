@@ -237,44 +237,6 @@ export default function Navigation({ user }) {
             />
           </ListItem>
           <ListItem>
-            <NavLink
-              to="Report"
-              children={({ isActive }) =>
-                isActive ? (
-                  <Flex
-                    backgroundColor={"#FF5F7E"}
-                    p={2}
-                    mb={5}
-                    borderRadius={10}
-                    w={"52"}
-                  >
-                    <Box mr={5}>
-                      <IoNewspaper color="white" size={20} />
-                    </Box>
-                    <Text fontWeight="bold" color={"white"}>
-                      Laporan
-                    </Text>
-                  </Flex>
-                ) : (
-                  <Flex
-                    backgroundColor={"white"}
-                    p={2}
-                    mb={5}
-                    borderRadius={10}
-                    w={"52"}
-                  >
-                    <Box mr={5}>
-                      <IoNewspaperOutline color="#FF5F7E" size={20} />
-                    </Box>
-                    <Text fontWeight="Regular" color={"#FF5F7E"}>
-                      Laporan
-                    </Text>
-                  </Flex>
-                )
-              }
-            />
-          </ListItem>
-          <ListItem>
             <Button
               backgroundColor={"white"}
               p={2}

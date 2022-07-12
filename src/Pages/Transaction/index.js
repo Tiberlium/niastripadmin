@@ -19,6 +19,7 @@ import {
   TabPanels,
   Tab,
   TableContainer,
+  Center,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
@@ -407,7 +408,7 @@ export default function Transaction() {
           <TabPanel>
             <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
-                <TableCaption placement="top" mb={5}>
+                <TableCaption placement="bottom" mb={5}>
                   Data Transaksi Penginapan
                 </TableCaption>
                 <Thead>
@@ -416,7 +417,7 @@ export default function Transaction() {
                   <Th>Nama</Th>
                   <Th>Kategori</Th>
                   <Th>Biaya</Th>
-                  <Th>Metode bayar</Th>
+                  <Th>Metode</Th>
                   <Th>Tanggal Transaksi</Th>
                   <Th>Detail</Th>
                 </Thead>
@@ -432,7 +433,12 @@ export default function Transaction() {
                       <Td>{doc["data"]["transactiontime"]}</Td>
                       <Td>
                         <Link to={`/Main/Transactiondetail/${doc.id}`}>
-                          <Button colorScheme={"blue"}>Detail</Button>
+                          <Button
+                            colorScheme={"blue"}
+                            leftIcon={<BsFillInfoCircleFill />}
+                          >
+                            Detail
+                          </Button>
                         </Link>
                       </Td>
                     </Tr>
@@ -440,12 +446,21 @@ export default function Transaction() {
                 </Tbody>
               </Table>
             </TableContainer>
+            <Center>
+              <Button
+                colorScheme="blue"
+                size="md"
+                onClick={createpdfreservation}
+              >
+                Hasilkan Laporan Penginapan
+              </Button>
+            </Center>
           </TabPanel>
           <TabPanel>
             <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
-                <TableCaption placement="top" mb={5}>
-                  Data Laporan Event
+                <TableCaption placement="bottom" mb={5}>
+                  Data Transaksi Event
                 </TableCaption>
                 <Thead>
                   <Th>No</Th>
@@ -453,7 +468,7 @@ export default function Transaction() {
                   <Th>Nama</Th>
                   <Th>Kategori</Th>
                   <Th>Biaya</Th>
-                  <Th>Komisi (10%)</Th>
+                  <Th>Metode</Th>
                   <Th>Tanggal Transaksi</Th>
                   <Th>Detail</Th>
                 </Thead>
@@ -469,7 +484,12 @@ export default function Transaction() {
                       <Td>{doc["data"]["transactiontime"]}</Td>
                       <Td>
                         <Link to={`/Main/Transactiondetail/${doc.id}`}>
-                          <Button colorScheme={"green"}>Detail</Button>
+                          <Button
+                            colorScheme={"green"}
+                            leftIcon={<BsFillInfoCircleFill />}
+                          >
+                            Detail
+                          </Button>
                         </Link>
                       </Td>
                     </Tr>
@@ -477,6 +497,11 @@ export default function Transaction() {
                 </Tbody>
               </Table>
             </TableContainer>
+            <Center>
+              <Button colorScheme="green" size="md" onClick={createpdfevent}>
+                Hasilkan Laporan Event
+              </Button>
+            </Center>
           </TabPanel>
         </TabPanels>
       </Tabs>
