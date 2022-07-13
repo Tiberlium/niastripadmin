@@ -27,10 +27,17 @@ import { Link } from "react-router-dom";
 import { BsFillInfoCircleFill, BsChevronRight } from "react-icons/bs";
 import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
 import img from "../../Asset/Logo.png";
+import dayjs from "dayjs";
+
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import { id } from "date-fns/locale";
 
 export default function Transaction() {
   const [reservation, setreservation] = useState([]);
   const [event, setevent] = useState([]);
+
+  const [selected, setselected] = useState(new Date());
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -375,6 +382,8 @@ export default function Transaction() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(dayjs(selected).format("YYYY-MM-DD"));
+
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -403,10 +412,15 @@ export default function Transaction() {
           <Tab>Penginapan</Tab>
           <Tab>Event</Tab>
         </TabList>
-
         <TabPanels>
           <TabPanel>
             <TableContainer mb={10}>
+              <DayPicker
+                mode="single"
+                selected={selected}
+                onSelect={setselected}
+                locale={id}
+              />
               <Table variant={"striped"} size="sm">
                 <TableCaption placement="bottom" mb={5}>
                   Data Transaksi Penginapan
@@ -418,31 +432,39 @@ export default function Transaction() {
                   <Th>Kategori</Th>
                   <Th>Biaya</Th>
                   <Th>Metode</Th>
-                  <Th>Tanggal Transaksi</Th>
+                  <Th>Tanggal</Th>
+                  <Th>Waktu</Th>
                   <Th>Detail</Th>
                 </Thead>
                 <Tbody>
-                  {reservation.map((doc, index) => (
-                    <Tr key={doc["id"]}>
-                      <Td>{index + 1}</Td>
-                      <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
-                      <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
-                      <Td>{doc["data"]["jenis"]}</Td>
-                      <Td>{formatter(doc["data"]["amount"])}</Td>
-                      <Td>{doc["data"]["metode"]}</Td>
-                      <Td>{doc["data"]["transactiontime"]}</Td>
-                      <Td>
-                        <Link to={`/Main/Transactiondetail/${doc.id}`}>
-                          <Button
-                            colorScheme={"blue"}
-                            leftIcon={<BsFillInfoCircleFill />}
-                          >
-                            Detail
-                          </Button>
-                        </Link>
-                      </Td>
-                    </Tr>
-                  ))}
+                  {reservation.map((doc, index) => {
+                    let datetran = doc["data"]["transactiontime"];
+                    let splitdate = new Array();
+                    splitdate = datetran.split(" ");
+
+                    return (
+                      <Tr key={doc["id"]}>
+                        <Td>{index + 1}</Td>
+                        <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
+                        <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
+                        <Td>{doc["data"]["jenis"]}</Td>
+                        <Td>{formatter(doc["data"]["amount"])}</Td>
+                        <Td>{doc["data"]["metode"]}</Td>
+                        <Td>{splitdate[0]}</Td>
+                        <Td>{splitdate[1]}</Td>
+                        <Td>
+                          <Link to={`/Main/Transactiondetail/${doc.id}`}>
+                            <Button
+                              colorScheme={"blue"}
+                              leftIcon={<BsFillInfoCircleFill />}
+                            >
+                              Detail
+                            </Button>
+                          </Link>
+                        </Td>
+                      </Tr>
+                    );
+                  })}
                 </Tbody>
               </Table>
             </TableContainer>
@@ -481,7 +503,7 @@ export default function Transaction() {
                       <Td>{doc["data"]["jenis"]}</Td>
                       <Td>{formatter(doc["data"]["amount"])}</Td>
                       <Td>{doc["data"]["metode"]}</Td>
-                      <Td>{doc["data"]["transactiontime"]}</Td>
+                      <Td>{["data"]["transactiontime"]}</Td>
                       <Td>
                         <Link to={`/Main/Transactiondetail/${doc.id}`}>
                           <Button
