@@ -24,12 +24,10 @@ import {
   IoPerson,
   IoCash,
   IoBuild,
-  IoNewspaper,
   IoHomeOutline,
   IoCashOutline,
   IoPersonOutline,
   IoBuildOutline,
-  IoNewspaperOutline,
   IoLogOutOutline,
 } from "react-icons/io5";
 
@@ -252,8 +250,8 @@ export default function Navigation({ user }) {
           </ListItem>
         </List>
       </Box>
-      <Box w={["10", "20", "40"]} />
-      <Box mt="20" w={["2xl", "3xl", "4xl", "5xl"]}>
+      <Box w={'40'} />
+      <Box mt="20" w={'5xl'}>
         <Outlet />
         <Alertcomponent
           isOp={isOpen}

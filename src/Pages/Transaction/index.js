@@ -20,18 +20,22 @@ import {
   Tab,
   TableContainer,
   Center,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
 import { Link } from "react-router-dom";
-import { BsFillInfoCircleFill, BsChevronRight } from "react-icons/bs";
+import {
+  BsFillInfoCircleFill,
+  BsChevronRight,
+  BsFillFileEarmarkPdfFill,
+} from "react-icons/bs";
 import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
 import img from "../../Asset/Logo.png";
+import Datepicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
-
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { id } from "date-fns/locale";
 
 export default function Transaction() {
   const [reservation, setreservation] = useState([]);
@@ -414,13 +418,45 @@ export default function Transaction() {
         </TabList>
         <TabPanels>
           <TabPanel>
+            <Flex>
+              <Box>
+                <Text fontWeight={"semibold"} mb={2}>
+                  Tampilkan berdasarkan Tanggal
+                </Text>
+                <Box
+                  w={"fit-content"}
+                  borderColor="blackAlpha.400"
+                  borderWidth={1}
+                  borderRadius={5}
+                  p={1}
+                  textAlign={"center"}
+                  mb={10}
+                >
+                  <Datepicker
+                    selected={selected}
+                    onChange={(date) => setselected(date)}
+                  />
+                </Box>
+              </Box>
+              <Spacer />
+              <Box>
+                <Text fontWeight={"semibold"} mb={2}>
+                  Laporan penginapan
+                </Text>
+                <Button
+                  colorScheme="blue"
+                  size="sm"
+                  onClick={createpdfreservation}
+                  w={"full"}
+                  h={10}
+                  leftIcon={<BsFillFileEarmarkPdfFill />}
+                >
+                  Hasilkan pdf
+                </Button>
+              </Box>
+            </Flex>
+
             <TableContainer mb={10}>
-              <DayPicker
-                mode="single"
-                selected={selected}
-                onSelect={setselected}
-                locale={id}
-              />
               <Table variant={"striped"} size="sm">
                 <TableCaption placement="bottom" mb={5}>
                   Data Transaksi Penginapan
@@ -441,7 +477,6 @@ export default function Transaction() {
                     let datetran = doc["data"]["transactiontime"];
                     let splitdate = new Array();
                     splitdate = datetran.split(" ");
-
                     return (
                       <Tr key={doc["id"]}>
                         <Td>{index + 1}</Td>
@@ -468,15 +503,6 @@ export default function Transaction() {
                 </Tbody>
               </Table>
             </TableContainer>
-            <Center>
-              <Button
-                colorScheme="blue"
-                size="md"
-                onClick={createpdfreservation}
-              >
-                Hasilkan Laporan Penginapan
-              </Button>
-            </Center>
           </TabPanel>
           <TabPanel>
             <TableContainer mb={10}>
