@@ -42,7 +42,8 @@ export default function Transaction() {
   const [event, setevent] = useState([]);
 
   const [selected, setselected] = useState(new Date());
-  let filteredDate = [];
+  let newArrReservation = [];
+  let newArrEvent = [];
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -387,6 +388,25 @@ export default function Transaction() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  reservation.map((doc) => {
+    let data = doc["data"]["transactiontime"];
+    let splitdate = new Array();
+    splitdate = data.split(" ");
+
+    return newArrReservation.push({
+      id: doc["id"],
+      orderid: doc["data"]["orderid"],
+      nama: doc["data"]["nama"],
+      jenis: doc["data"]["jenis"],
+      amount: doc["data"]["amount"],
+      metode: doc["data"]["metode"],
+      tanggal: splitdate[0],
+      waktu: splitdate[1],
+    });
+  });
+
+  console.log(newArrReservation);
+
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -472,20 +492,17 @@ export default function Transaction() {
                   <Th>Detail</Th>
                 </Thead>
                 <Tbody>
-                  {reservation.map((doc, index) => {
-                    let datetran = doc["data"]["transactiontime"];
-                    let splitdate = new Array();
-                    splitdate = datetran.split(" ");
+                  {newArrReservation.map((doc, index) => {
                     return (
                       <Tr key={doc["id"]}>
                         <Td>{index + 1}</Td>
-                        <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
-                        <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
-                        <Td>{doc["data"]["jenis"]}</Td>
-                        <Td>{formatter(doc["data"]["amount"])}</Td>
-                        <Td>{doc["data"]["metode"]}</Td>
-                        <Td>{splitdate[0]}</Td>
-                        <Td>{splitdate[1]}</Td>
+                        <Td>{stringTruncate(doc["orderid"], 20)}</Td>
+                        <Td>{stringTruncate(doc["nama"], 9)}</Td>
+                        <Td>{doc["jenis"]}</Td>
+                        <Td>{formatter(doc["amount"])}</Td>
+                        <Td>{doc["metode"]}</Td>
+                        <Td>{doc["tanggal"]}</Td>
+                        <Td>{doc["waktu"]}</Td>
                         <Td>
                           <Link to={`/Main/Transactiondetail/${doc.id}`}>
                             <Button
