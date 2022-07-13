@@ -405,8 +405,6 @@ export default function Transaction() {
     });
   });
 
-  console.log(newArrReservation);
-
   return (
     <Box mr={10}>
       <Breadcrumb
