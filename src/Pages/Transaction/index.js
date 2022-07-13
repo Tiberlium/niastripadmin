@@ -42,6 +42,7 @@ export default function Transaction() {
   const [event, setevent] = useState([]);
 
   const [selected, setselected] = useState(new Date());
+  let filteredDate = [];
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -385,8 +386,6 @@ export default function Transaction() {
     getevent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(dayjs(selected).format("YYYY-MM-DD"));
 
   return (
     <Box mr={10}>
