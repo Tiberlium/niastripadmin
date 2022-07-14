@@ -594,9 +594,85 @@ export default function Transaction() {
             </TableContainer>
           </TabPanel>
           <TabPanel>
+            <Flex>
+              <Box>
+                <Text fontWeight={"semibold"} mb={3}>
+                  Tampilkan berdasarkan Tanggal
+                </Text>
+                <Flex>
+                  <Text mt={2}>Tanggal awal</Text>
+                  <Box w={5} />
+                  <Input
+                    w={"fit-content"}
+                    placeholder="Tanggal awal"
+                    value={startdateevent}
+                    onChange={(e) => setstartdateevent(e.target.value)}
+                    type={"date"}
+                    mb={5}
+                  />
+                </Flex>
+                <Flex>
+                  <Text mt={2}>Tanggal akhir</Text>
+                  <Box w={5} />
+                  <Input
+                    w={"fit-content"}
+                    placeholder="Tanggal akhir"
+                    value={enddateevent}
+                    onChange={(e) => setenddateevent(e.target.value)}
+                    type={"date"}
+                    mb={5}
+                  />
+                </Flex>
+
+                <Button
+                  colorScheme="blue"
+                  mb={5}
+                  w={"full"}
+                  onClick={filterreservationbydate}
+                >
+                  Tampilkan
+                </Button>
+              </Box>
+              <Spacer />
+              <Box w={"80"}>
+                <Text fontWeight={"semibold"} mb={2}>
+                  Laporan Event
+                </Text>
+                <Button
+                  colorScheme="blue"
+                  size="sm"
+                  onClick={createpdfreservation}
+                  w={"full"}
+                  h={10}
+                  leftIcon={<BsFillFileEarmarkPdfFill />}
+                >
+                  Hasilkan pdf
+                </Button>
+
+                <Box mt={"12"}>
+                  <Text mb={2} fontWeight="semibold">
+                    Pencarian
+                  </Text>
+                  <InputGroup>
+                    <InputRightElement
+                      pointerEvents={"none"}
+                      children={<BsSearch />}
+                    />
+                    <Input
+                      placeholder="Pencarian"
+                      borderColor={"blackAlpha.400"}
+                      type="search"
+                      value={Queryevent}
+                      onChange={(e) => setQueryevent(e.target.value)}
+                    />
+                  </InputGroup>
+                </Box>
+              </Box>
+            </Flex>
+
             <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
-                <TableCaption placement="bottom" mb={5}>
+                <TableCaption placement="top" mb={5}>
                   Data Transaksi Event
                 </TableCaption>
                 <Thead>
@@ -611,28 +687,32 @@ export default function Transaction() {
                   <Th>Detail</Th>
                 </Thead>
                 <Tbody>
-                  {event.map((doc, index) => (
-                    <Tr key={doc["id"]}>
-                      <Td>{index + 1}</Td>
-                      <Td>{stringTruncate(doc["orderid"], 20)}</Td>
-                      <Td>{stringTruncate(doc["nama"], 9)}</Td>
-                      <Td>{doc["jenis"]}</Td>
-                      <Td>{formatter(doc["amount"])}</Td>
-                      <Td>{doc["metode"]}</Td>
-                      <Td>{doc["tanggal"]}</Td>
-                      <Td>{doc["waktu"]}</Td>
-                      <Td>
-                        <Link to={`/Main/Transactiondetail/${doc.id}`}>
-                          <Button
-                            colorScheme={"green"}
-                            leftIcon={<BsFillInfoCircleFill />}
-                          >
-                            Detail
-                          </Button>
-                        </Link>
-                      </Td>
-                    </Tr>
-                  ))}
+                  {event
+                    .filter((doc) =>
+                      doc["nama"].toLowerCase().match(Queryevent.toLowerCase())
+                    )
+                    .map((doc, index) => (
+                      <Tr key={doc["id"]}>
+                        <Td>{index + 1}</Td>
+                        <Td>{stringTruncate(doc["orderid"], 20)}</Td>
+                        <Td>{stringTruncate(doc["nama"], 9)}</Td>
+                        <Td>{doc["jenis"]}</Td>
+                        <Td>{formatter(doc["amount"])}</Td>
+                        <Td>{doc["metode"]}</Td>
+                        <Td>{doc["tanggal"]}</Td>
+                        <Td>{doc["waktu"]}</Td>
+                        <Td>
+                          <Link to={`/Main/Transactiondetail/${doc.id}`}>
+                            <Button
+                              colorScheme={"green"}
+                              leftIcon={<BsFillInfoCircleFill />}
+                            >
+                              Detail
+                            </Button>
+                          </Link>
+                        </Td>
+                      </Tr>
+                    ))}
                 </Tbody>
               </Table>
             </TableContainer>
