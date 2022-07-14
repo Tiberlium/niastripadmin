@@ -23,6 +23,8 @@ import {
   Flex,
   Spacer,
   Input,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
@@ -31,6 +33,7 @@ import {
   BsFillInfoCircleFill,
   BsChevronRight,
   BsFillFileEarmarkPdfFill,
+  BsSearch,
 } from "react-icons/bs";
 import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
 import img from "../../Asset/Logo.png";
@@ -42,6 +45,8 @@ export default function Transaction() {
 
   const [startdate, setstartdate] = useState(new Date());
   const [endate, setendate] = useState(new Date());
+
+  const [Query, setQuery] = useState("");
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -411,6 +416,8 @@ export default function Transaction() {
     setreservation(activities);
   }
 
+  console.log(Query);
+
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -481,7 +488,7 @@ export default function Transaction() {
                 </Button>
               </Box>
               <Spacer />
-              <Box>
+              <Box w={"80"}>
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan penginapan
                 </Text>
@@ -495,6 +502,22 @@ export default function Transaction() {
                 >
                   Hasilkan pdf
                 </Button>
+
+                <Box mt={"12"}>
+                  <Text mb={2} fontWeight="semibold">
+                    Pencarian
+                  </Text>
+                  <InputGroup>
+                  <InputRightElement pointerEvents={'none'} children={<BsSearch/>}/>
+                    <Input
+                      placeholder="Pencarian"
+                      borderColor={"blackAlpha.400"}
+                      type="search"
+                      value={Query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                  </InputGroup>
+                </Box>
               </Box>
             </Flex>
 
