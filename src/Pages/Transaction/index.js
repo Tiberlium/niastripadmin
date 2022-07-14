@@ -22,6 +22,7 @@ import {
   Center,
   Flex,
   Spacer,
+  Input,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
@@ -33,8 +34,6 @@ import {
 } from "react-icons/bs";
 import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
 import img from "../../Asset/Logo.png";
-import Datepicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import dayjs from "dayjs";
 
 export default function Transaction() {
@@ -448,40 +447,28 @@ export default function Transaction() {
                   Tampilkan berdasarkan Tanggal
                 </Text>
                 <Flex>
-                  <Text>Tanggal awal</Text>
+                  <Text mt={2}>Tanggal awal</Text>
                   <Box w={5} />
-                  <Box
+                  <Input
                     w={"fit-content"}
-                    borderColor="blackAlpha.400"
-                    borderWidth={1}
-                    borderRadius={5}
-                    p={1}
-                    textAlign={"center"}
+                    placeholder="Tanggal awal"
+                    value={startdate}
+                    onChange={(e) => setstartdate(e.target.value)}
+                    type={"date"}
                     mb={5}
-                  >
-                    <Datepicker
-                      selected={startdate}
-                      onChange={(date) => setstartdate(date)}
-                    />
-                  </Box>
+                  />
                 </Flex>
                 <Flex>
-                  <Text>Tanggal akhir</Text>
+                  <Text mt={2}>Tanggal akhir</Text>
                   <Box w={5} />
-                  <Box
+                  <Input
                     w={"fit-content"}
-                    borderColor="blackAlpha.400"
-                    borderWidth={1}
-                    borderRadius={5}
-                    p={1}
-                    textAlign={"center"}
+                    placeholder="Tanggal akhir"
+                    value={endate}
+                    onChange={(e) => setendate(e.target.value)}
+                    type={"date"}
                     mb={5}
-                  >
-                    <Datepicker
-                      selected={endate}
-                      onChange={(date) => setendate(date)}
-                    />
-                  </Box>
+                  />
                 </Flex>
 
                 <Button
