@@ -625,7 +625,7 @@ export default function Transaction() {
                 </Flex>
 
                 <Button
-                  colorScheme="blue"
+                  colorScheme="green"
                   mb={5}
                   w={"full"}
                   onClick={filterreservationbydate}
@@ -639,7 +639,7 @@ export default function Transaction() {
                   Laporan Event
                 </Text>
                 <Button
-                  colorScheme="blue"
+                  colorScheme="green"
                   size="sm"
                   onClick={createpdfreservation}
                   w={"full"}
@@ -716,11 +716,6 @@ export default function Transaction() {
                 </Tbody>
               </Table>
             </TableContainer>
-            <Center>
-              <Button colorScheme="green" size="md" onClick={createpdfevent}>
-                Hasilkan Laporan Event
-              </Button>
-            </Center>
           </TabPanel>
         </TabPanels>
       </Tabs>
