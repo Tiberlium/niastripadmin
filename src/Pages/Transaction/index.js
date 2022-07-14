@@ -41,9 +41,7 @@ export default function Transaction() {
   const [reservation, setreservation] = useState([]);
   const [event, setevent] = useState([]);
 
-  const [selected, setselected] = useState(new Date());
-  let newArrReservation = [];
-  let newArrEvent = [];
+  const [startdate, setstartdate] = useState(new Date());
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -66,14 +64,11 @@ export default function Transaction() {
   }
 
   const totalTransact = reservation.map((doc) => {
-    return (totalTransaksireservation += Number(doc["data"]["amount"]));
+    return (totalTransaksireservation += Number(doc["amount"]));
   });
 
   const withdrawal = reservation.map((doc) => {
-    return (pendapatanreservation += Percentage(
-      Number(doc["data"]["amount"]),
-      10
-    ));
+    return (pendapatanreservation += Percentage(Number(doc["amount"]), 10));
   });
 
   const totalTransactevent = event.map((doc) => {
@@ -168,12 +163,12 @@ export default function Transaction() {
       ],
       table: reservation.map((item, index) => [
         index + 1,
-        stringTruncate(item["data"]["orderid"], 20),
-        item["data"]["nama"],
-        item["data"]["jenis"],
-        formatter(item["data"]["amount"]),
-        formatter(Percentage(item["data"]["amount"], 10)),
-        item["data"]["transactiontime"],
+        stringTruncate(item["orderid"], 20),
+        item["nama"],
+        item["jenis"],
+        formatter(item["amount"]),
+        formatter(Percentage(item["amount"], 10)),
+        item["transactiontime"],
       ]),
       additionalRows: [
         {
@@ -339,6 +334,7 @@ export default function Transaction() {
 
   const getreservation = async () => {
     let x = [];
+    let reservedata = [];
     const docRef = await db
       .collection("Transaksi")
       .where("jenis", "==", "Penginapan")
@@ -349,7 +345,24 @@ export default function Transaction() {
         data: doc.data(),
       });
     });
-    setreservation(x);
+    x.map((doc) => {
+      let data = doc["data"]["transactiontime"];
+      let splitdate = new Array();
+      splitdate = data.split(" ");
+
+      reservedata.push({
+        id: doc["id"],
+        orderid: doc["data"]["orderid"],
+        nama: doc["data"]["nama"],
+        jenis: doc["data"]["jenis"],
+        amount: doc["data"]["amount"],
+        metode: doc["data"]["metode"],
+        tanggal: splitdate[0],
+        waktu: splitdate[1],
+      });
+    });
+
+    setreservation(reservedata);
   };
 
   const getevent = async () => {
@@ -388,22 +401,12 @@ export default function Transaction() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  reservation.map((doc) => {
-    let data = doc["data"]["transactiontime"];
-    let splitdate = new Array();
-    splitdate = data.split(" ");
-
-    return newArrReservation.push({
-      id: doc["id"],
-      orderid: doc["data"]["orderid"],
-      nama: doc["data"]["nama"],
-      jenis: doc["data"]["jenis"],
-      amount: doc["data"]["amount"],
-      metode: doc["data"]["metode"],
-      tanggal: splitdate[0],
-      waktu: splitdate[1],
-    });
-  });
+  function filterreservationbydate() {
+    const sorted = [...reservation].filter(
+      (doc) => doc["tanggal"] === dayjs(startdate).format("YYYY-MM-DD")
+    );
+    setreservation(sorted);
+  }
 
   return (
     <Box mr={10}>
@@ -440,6 +443,7 @@ export default function Transaction() {
                 <Text fontWeight={"semibold"} mb={2}>
                   Tampilkan berdasarkan Tanggal
                 </Text>
+
                 <Box
                   w={"fit-content"}
                   borderColor="blackAlpha.400"
@@ -447,13 +451,22 @@ export default function Transaction() {
                   borderRadius={5}
                   p={1}
                   textAlign={"center"}
-                  mb={10}
+                  mb={5}
                 >
                   <Datepicker
-                    selected={selected}
-                    onChange={(date) => setselected(date)}
+                    selected={startdate}
+                    onChange={(date) => setstartdate(date)}
                   />
                 </Box>
+
+                <Button
+                  colorScheme="blue"
+                  mb={5}
+                  w={"48"}
+                  onClick={filterreservationbydate}
+                >
+                  Tampilkan
+                </Button>
               </Box>
               <Spacer />
               <Box>
@@ -475,8 +488,8 @@ export default function Transaction() {
 
             <TableContainer mb={10}>
               <Table variant={"striped"} size="sm">
-                <TableCaption placement="bottom" mb={5}>
-                  Data Transaksi Penginapan
+                <TableCaption placement="top" mb={5}>
+                  Tabel Transaksi Penginapan
                 </TableCaption>
                 <Thead>
                   <Th>No</Th>
@@ -490,7 +503,7 @@ export default function Transaction() {
                   <Th>Detail</Th>
                 </Thead>
                 <Tbody>
-                  {newArrReservation.map((doc, index) => {
+                  {reservation.map((doc, index) => {
                     return (
                       <Tr key={doc["id"]}>
                         <Td>{index + 1}</Td>
