@@ -415,9 +415,6 @@ export default function Transaction() {
 
     setreservation(activities);
   }
-
-  console.log(Query);
-
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -508,7 +505,10 @@ export default function Transaction() {
                     Pencarian
                   </Text>
                   <InputGroup>
-                  <InputRightElement pointerEvents={'none'} children={<BsSearch/>}/>
+                    <InputRightElement
+                      pointerEvents={"none"}
+                      children={<BsSearch />}
+                    />
                     <Input
                       placeholder="Pencarian"
                       borderColor={"blackAlpha.400"}
@@ -538,30 +538,34 @@ export default function Transaction() {
                   <Th>Detail</Th>
                 </Thead>
                 <Tbody>
-                  {reservation.map((doc, index) => {
-                    return (
-                      <Tr key={doc["id"]}>
-                        <Td>{index + 1}</Td>
-                        <Td>{stringTruncate(doc["orderid"], 20)}</Td>
-                        <Td>{stringTruncate(doc["nama"], 9)}</Td>
-                        <Td>{doc["jenis"]}</Td>
-                        <Td>{formatter(doc["amount"])}</Td>
-                        <Td>{doc["metode"]}</Td>
-                        <Td>{doc["tanggal"]}</Td>
-                        <Td>{doc["waktu"]}</Td>
-                        <Td>
-                          <Link to={`/Main/Transactiondetail/${doc.id}`}>
-                            <Button
-                              colorScheme={"blue"}
-                              leftIcon={<BsFillInfoCircleFill />}
-                            >
-                              Detail
-                            </Button>
-                          </Link>
-                        </Td>
-                      </Tr>
-                    );
-                  })}
+                  {reservation
+                    .filter((doc) =>
+                      doc["nama"]?.toLowerCase().match(Query.toLowerCase())
+                    )
+                    .map((doc, index) => {
+                      return (
+                        <Tr key={doc["id"]}>
+                          <Td>{index + 1}</Td>
+                          <Td>{stringTruncate(doc["orderid"], 20)}</Td>
+                          <Td>{stringTruncate(doc["nama"], 9)}</Td>
+                          <Td>{doc["jenis"]}</Td>
+                          <Td>{formatter(doc["amount"])}</Td>
+                          <Td>{doc["metode"]}</Td>
+                          <Td>{doc["tanggal"]}</Td>
+                          <Td>{doc["waktu"]}</Td>
+                          <Td>
+                            <Link to={`/Main/Transactiondetail/${doc.id}`}>
+                              <Button
+                                colorScheme={"blue"}
+                                leftIcon={<BsFillInfoCircleFill />}
+                              >
+                                Detail
+                              </Button>
+                            </Link>
+                          </Td>
+                        </Tr>
+                      );
+                    })}
                 </Tbody>
               </Table>
             </TableContainer>
