@@ -42,6 +42,7 @@ export default function Transaction() {
   const [event, setevent] = useState([]);
 
   const [startdate, setstartdate] = useState(new Date());
+  const [endate, setendate] = useState(new Date());
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -402,10 +403,13 @@ export default function Transaction() {
   }, []);
 
   function filterreservationbydate() {
-    const sorted = [...reservation].filter(
-      (doc) => doc["tanggal"] === dayjs(startdate).format("YYYY-MM-DD")
+    const activities = [...reservation].filter(
+      (doc) =>
+        doc["tanggal"] >= dayjs(startdate).format("YYYY-MM-DD") &&
+        doc["tanggal"] <= dayjs(endate).format("YYYY-MM-DD")
     );
-    setreservation(sorted);
+
+    setreservation(activities);
   }
 
   return (
@@ -440,29 +444,50 @@ export default function Transaction() {
           <TabPanel>
             <Flex>
               <Box>
-                <Text fontWeight={"semibold"} mb={2}>
+                <Text fontWeight={"semibold"} mb={3}>
                   Tampilkan berdasarkan Tanggal
                 </Text>
-
-                <Box
-                  w={"fit-content"}
-                  borderColor="blackAlpha.400"
-                  borderWidth={1}
-                  borderRadius={5}
-                  p={1}
-                  textAlign={"center"}
-                  mb={5}
-                >
-                  <Datepicker
-                    selected={startdate}
-                    onChange={(date) => setstartdate(date)}
-                  />
-                </Box>
+                <Flex>
+                  <Text>Tanggal awal</Text>
+                  <Box w={5} />
+                  <Box
+                    w={"fit-content"}
+                    borderColor="blackAlpha.400"
+                    borderWidth={1}
+                    borderRadius={5}
+                    p={1}
+                    textAlign={"center"}
+                    mb={5}
+                  >
+                    <Datepicker
+                      selected={startdate}
+                      onChange={(date) => setstartdate(date)}
+                    />
+                  </Box>
+                </Flex>
+                <Flex>
+                  <Text>Tanggal akhir</Text>
+                  <Box w={5} />
+                  <Box
+                    w={"fit-content"}
+                    borderColor="blackAlpha.400"
+                    borderWidth={1}
+                    borderRadius={5}
+                    p={1}
+                    textAlign={"center"}
+                    mb={5}
+                  >
+                    <Datepicker
+                      selected={endate}
+                      onChange={(date) => setendate(date)}
+                    />
+                  </Box>
+                </Flex>
 
                 <Button
                   colorScheme="blue"
                   mb={5}
-                  w={"48"}
+                  w={"full"}
                   onClick={filterreservationbydate}
                 >
                   Tampilkan
