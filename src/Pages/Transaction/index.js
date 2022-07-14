@@ -19,7 +19,9 @@ import {
   TabPanels,
   Tab,
   TableContainer,
-  Center,
+  Stat,
+  StatLabel,
+  StatNumber,
   Flex,
   Spacer,
   Input,
@@ -35,6 +37,7 @@ import {
   BsFillFileEarmarkPdfFill,
   BsSearch,
 } from "react-icons/bs";
+import { FcMoneyTransfer } from "react-icons/fc";
 import jsPDFInvoiceTemplate, { OutputType } from "jspdf-invoice-template";
 import img from "../../Asset/Logo.png";
 import dayjs from "dayjs";
@@ -505,7 +508,26 @@ export default function Transaction() {
                   Tampilkan
                 </Button>
               </Box>
-              <Spacer />
+              <Box w={20} />
+              <Stat
+                borderWidth={1}
+                p={5}
+                w="52"
+                borderRadius={10}
+                boxShadow="base"
+                h={"48"}
+              >
+                <FcMoneyTransfer size={30} color="green" />
+                <StatLabel>Pendapatan</StatLabel>
+                <StatNumber>
+                  {formatter(Number(pendapatanreservation))}
+                </StatNumber>
+                <StatLabel mt={2}>total transaksi</StatLabel>
+                <StatNumber>
+                  {formatter(Number(totalTransaksireservation))}
+                </StatNumber>
+              </Stat>
+              <Box w={20} />
               <Box w={"80"}>
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan penginapan
@@ -633,7 +655,24 @@ export default function Transaction() {
                   Tampilkan
                 </Button>
               </Box>
-              <Spacer />
+              <Box w={20} />
+              <Stat
+                borderWidth={1}
+                p={5}
+                w="52"
+                borderRadius={10}
+                boxShadow="base"
+                h={"48"}
+              >
+                <FcMoneyTransfer size={30} color="green" />
+                <StatLabel>Pendapatan</StatLabel>
+                <StatNumber>{formatter(Number(pendapatanEvent))}</StatNumber>
+                <StatLabel mt={2}>total transaksi</StatLabel>
+                <StatNumber>
+                  {formatter(Number(totalTransaksievent))}
+                </StatNumber>
+              </Stat>
+              <Box w={20} />
               <Box w={"80"}>
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan Event

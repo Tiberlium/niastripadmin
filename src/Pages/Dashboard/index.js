@@ -25,20 +25,26 @@ const Navbread = () => (
 );
 
 const data = {
-  labels: ["senin", "selasa", "rabu", "kamis", "jumat", "sabtu", "minggu"],
+  labels: [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+  ],
   datasets: [
     {
       label: "Aktivitas",
       backgroundColor: "#2DA6F4",
       borderColor: "#2DA6F4",
-      borderWidth: 2,
-      data: [15, 8, 20, 32, 35, 56, 40, 25, 21, 30, 30, 10],
+      borderWidth: 1,
+      data: [
+        15, 8, 20, 32, 35, 42, 40, 25, 21, 30, 30, 10, 21, 23, 43, 34, 12, 32,
+        21, 11, 19, 18, 16, 20, 28, 28, 29, 2, 10, 7, 12, 32,
+      ],
     },
   ],
 };
 
 const Linechart = () => (
-  <Box w={["2xs", "2xl"]}>
+  <Box w={["2xs", "3xl"]}>
     <Line
       data={data}
       options={{
@@ -164,20 +170,12 @@ export default function Dashboard() {
           total={formatRupiah(totalTransaksi)}
           pendapatan={formatRupiah(pendapatan)}
         />
-        <HStack>
-          <Box>
-            <Text fontSize="2xl" color="black" mt={10}>
-              Trafik pengguna
-            </Text>
-            <Linechart />
-          </Box>
-          <Box>
-            <Text fontSize="2xl" color="black" mt={10}>
-              Transaksi
-            </Text>
-            <Doughnutchar data={data2} />
-          </Box>
-        </HStack>
+        <Box>
+          <Text fontSize="2xl" color="black" mt={10}>
+            Trafik pengguna
+          </Text>
+          <Linechart />
+        </Box>
       </Box>
     </>
   );
