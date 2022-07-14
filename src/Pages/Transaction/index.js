@@ -46,6 +46,9 @@ export default function Transaction() {
   const [startdatereserve, setstartdatereserve] = useState(new Date());
   const [endatereserve, setendatereserve] = useState(new Date());
 
+  const [startdateevent, setstartdateevent] = useState(new Date());
+  const [enddateevent, setenddateevent] = useState(new Date());
+
   const [Queryreserve, setQueryreserve] = useState("");
   const [Queryevent, setQueryevent] = useState("");
 
@@ -78,11 +81,11 @@ export default function Transaction() {
   });
 
   const totalTransactevent = event.map((doc) => {
-    return (totalTransaksievent += Number(doc["data"]["amount"]));
+    return (totalTransaksievent += Number(doc["amount"]));
   });
 
   const withdrawalevent = event.map((doc) => {
-    return (pendapatanEvent += Percentage(Number(doc["data"]["amount"]), 10));
+    return (pendapatanEvent += Percentage(Number(doc["amount"]), 10));
   });
 
   const stringTruncate = (str, length) => {
@@ -174,7 +177,7 @@ export default function Transaction() {
         item["jenis"],
         formatter(item["amount"]),
         formatter(Percentage(item["amount"], 10)),
-        item["transactiontime"],
+        item["tanggal"],
       ]),
       additionalRows: [
         {
@@ -293,12 +296,12 @@ export default function Transaction() {
       ],
       table: event.map((item, index) => [
         index + 1,
-        stringTruncate(item["data"]["orderid"], 20),
-        item["data"]["nama"],
-        item["data"]["jenis"],
-        formatter(item["data"]["amount"]),
-        formatter(Percentage(item["data"]["amount"], 10)),
-        item["data"]["transactiontime"],
+        stringTruncate(item["orderid"], 20),
+        item["nama"],
+        item["jenis"],
+        formatter(item["amount"]),
+        formatter(Percentage(item["amount"], 10)),
+        item["tanggal"],
       ]),
       additionalRows: [
         {
@@ -373,6 +376,7 @@ export default function Transaction() {
 
   const getevent = async () => {
     let x = [];
+    let eventdata = [];
     const docRef = await db
       .collection("Transaksi")
       .where("jenis", "==", "Event")
@@ -384,7 +388,23 @@ export default function Transaction() {
       });
     });
 
-    setevent(x);
+    x.map((doc) => {
+      let tgl = doc["data"]["transactiontime"];
+      let splitdate = new Array();
+      splitdate = tgl.split(" ");
+      eventdata.push({
+        id: doc["id"],
+        orderid: doc["data"]["orderid"],
+        nama: doc["data"]["nama"],
+        jenis: doc["data"]["jenis"],
+        amount: doc["data"]["amount"],
+        metode: doc["data"]["metode"],
+        tanggal: splitdate[0],
+        waktu: splitdate[1],
+      });
+    });
+
+    setevent(eventdata);
   };
 
   function createpdfreservation() {
@@ -586,19 +606,21 @@ export default function Transaction() {
                   <Th>Kategori</Th>
                   <Th>Biaya</Th>
                   <Th>Metode</Th>
-                  <Th>Tanggal Transaksi</Th>
+                  <Th>Tanggal</Th>
+                  <Th>Waktu</Th>
                   <Th>Detail</Th>
                 </Thead>
                 <Tbody>
                   {event.map((doc, index) => (
                     <Tr key={doc["id"]}>
                       <Td>{index + 1}</Td>
-                      <Td>{stringTruncate(doc["data"]["orderid"], 20)}</Td>
-                      <Td>{stringTruncate(doc["data"]["nama"], 9)}</Td>
-                      <Td>{doc["data"]["jenis"]}</Td>
-                      <Td>{formatter(doc["data"]["amount"])}</Td>
-                      <Td>{doc["data"]["metode"]}</Td>
-                      <Td>{["data"]["transactiontime"]}</Td>
+                      <Td>{stringTruncate(doc["orderid"], 20)}</Td>
+                      <Td>{stringTruncate(doc["nama"], 9)}</Td>
+                      <Td>{doc["jenis"]}</Td>
+                      <Td>{formatter(doc["amount"])}</Td>
+                      <Td>{doc["metode"]}</Td>
+                      <Td>{doc["tanggal"]}</Td>
+                      <Td>{doc["waktu"]}</Td>
                       <Td>
                         <Link to={`/Main/Transactiondetail/${doc.id}`}>
                           <Button
