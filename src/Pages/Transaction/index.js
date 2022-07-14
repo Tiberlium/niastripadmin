@@ -43,10 +43,11 @@ export default function Transaction() {
   const [reservation, setreservation] = useState([]);
   const [event, setevent] = useState([]);
 
-  const [startdate, setstartdate] = useState(new Date());
-  const [endate, setendate] = useState(new Date());
+  const [startdatereserve, setstartdatereserve] = useState(new Date());
+  const [endatereserve, setendatereserve] = useState(new Date());
 
-  const [Query, setQuery] = useState("");
+  const [Queryreserve, setQueryreserve] = useState("");
+  const [Queryevent, setQueryevent] = useState("");
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -409,8 +410,8 @@ export default function Transaction() {
   function filterreservationbydate() {
     const activities = [...reservation].filter(
       (doc) =>
-        doc["tanggal"] >= dayjs(startdate).format("YYYY-MM-DD") &&
-        doc["tanggal"] <= dayjs(endate).format("YYYY-MM-DD")
+        doc["tanggal"] >= dayjs(startdatereserve).format("YYYY-MM-DD") &&
+        doc["tanggal"] <= dayjs(endatereserve).format("YYYY-MM-DD")
     );
 
     setreservation(activities);
@@ -456,8 +457,8 @@ export default function Transaction() {
                   <Input
                     w={"fit-content"}
                     placeholder="Tanggal awal"
-                    value={startdate}
-                    onChange={(e) => setstartdate(e.target.value)}
+                    value={startdatereserve}
+                    onChange={(e) => setstartdatereserve(e.target.value)}
                     type={"date"}
                     mb={5}
                   />
@@ -468,8 +469,8 @@ export default function Transaction() {
                   <Input
                     w={"fit-content"}
                     placeholder="Tanggal akhir"
-                    value={endate}
-                    onChange={(e) => setendate(e.target.value)}
+                    value={endatereserve}
+                    onChange={(e) => setendatereserve(e.target.value)}
                     type={"date"}
                     mb={5}
                   />
@@ -513,8 +514,8 @@ export default function Transaction() {
                       placeholder="Pencarian"
                       borderColor={"blackAlpha.400"}
                       type="search"
-                      value={Query}
-                      onChange={(e) => setQuery(e.target.value)}
+                      value={Queryreserve}
+                      onChange={(e) => setQueryreserve(e.target.value)}
                     />
                   </InputGroup>
                 </Box>
@@ -540,7 +541,9 @@ export default function Transaction() {
                 <Tbody>
                   {reservation
                     .filter((doc) =>
-                      doc["nama"]?.toLowerCase().match(Query.toLowerCase())
+                      doc["nama"]
+                        ?.toLowerCase()
+                        .match(Queryreserve.toLowerCase())
                     )
                     .map((doc, index) => {
                       return (
