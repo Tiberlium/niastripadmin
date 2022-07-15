@@ -102,7 +102,7 @@ export default function Managemakanan() {
         })
         .catch((e) => console.error(e));
     } else {
-      if (!images) {
+      if (images.length !== 0) {
         const deleteTask = url.map((doc) => {
           storages.refFromURL(doc).delete();
         });

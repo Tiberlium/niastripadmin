@@ -88,7 +88,7 @@ export default function Managestaycation() {
             Fasilitas: fasilitas,
             Galery: filedownloadurl,
             Gambar: filedownloadurl[0],
-            Rating:0,
+            Rating: 0,
           });
         })
         .then(() => {
@@ -112,7 +112,7 @@ export default function Managestaycation() {
           console.error(e);
         });
     } else {
-      if (!images) {
+      if (images.length !== 0) {
         const deleteTask = url.map((doc) => {
           storages.refFromURL(doc).delete();
         });

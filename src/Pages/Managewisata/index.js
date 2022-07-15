@@ -72,7 +72,7 @@ export default function Managewisata() {
             Longitude: longitude,
             Galery: filedownloadurl,
             Gambar: filedownloadurl[0],
-            Rating:0,
+            Rating: 0,
           });
         })
         .then(() => {
@@ -97,7 +97,7 @@ export default function Managewisata() {
         .catch((err) => console.log(err));
     } else {
       setloading(true);
-      if (!images) {
+      if (images.length !== 0) {
         const deleteImagesFrom_Url = url.map((x) => {
           const imagesRef = storages.refFromURL(x);
           imagesRef.delete();

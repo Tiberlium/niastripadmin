@@ -57,7 +57,7 @@ export default function Manageevent() {
               Longitude: longitude,
               Gambar: filedownloadurl[0],
               Harga: tarif,
-              Rating:0,
+              Rating: 0,
             })
             .then(() => {
               setimages([]);
@@ -80,7 +80,7 @@ export default function Manageevent() {
           console.error(e);
         });
     } else {
-      if (!images) {
+      if (images.length !== 0) {
         setloading(true);
         const deleteimages = storages.refFromURL(url).delete();
         const uploadTask = images.map((doc) => {
