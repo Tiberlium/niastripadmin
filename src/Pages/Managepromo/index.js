@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   Input,
@@ -17,13 +17,39 @@ import {
 import { FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { Select } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+import { db } from "../../Firebase";
 
 export default function Managepromo() {
+  const [data, setdata] = useState([]);
   const [nama, setnama] = useState("");
-  const [deskripsi, setdeskripsi] = useState("");
   const [potongan, setpotongan] = useState(0);
   const [kode, setkode] = useState("");
   const [date, setdate] = useState(new Date());
+  const [tempat, settempat] = useState("");
+  const [couponid, setcouponid] = useState("");
+
+  const { id } = useParams();
+
+  console.log(tempat, couponid);
+
+  const get = async () => {
+    let x = [];
+    const docRef = await db.collection("Staycation").get();
+    docRef.docs.map((doc) => {
+      x.push({
+        id: doc.id,
+        data: doc.data(),
+      });
+    });
+
+    setdata(x);
+  };
+
+  useEffect(() => {
+    get();
+  }, []);
+
   return (
     <Box>
       <Breadcrumb
@@ -70,17 +96,6 @@ export default function Managepromo() {
               onChange={(e) => setnama(e.target.value)}
             />
             <FormHelperText>masukkan nama promo</FormHelperText>
-
-            <FormLabel htmlFor="Deskripsi promo" mt={5}>
-              Deskripsi promo
-            </FormLabel>
-            <Textarea
-              placeholder="masukkan deskripsi promo"
-              variant={"filled"}
-              defaultValue={deskripsi || ""}
-              onChange={(e) => setdeskripsi(e.target.value)}
-            />
-            <FormHelperText>masukkan deskripsi tentang promo</FormHelperText>
             <FormLabel htmlFor="Potongan" mt={5}>
               Potongan
             </FormLabel>
@@ -106,10 +121,15 @@ export default function Managepromo() {
             <FormLabel htmlFor="Kabupaten" mt={5}>
               Tempat tujuan promo
             </FormLabel>
-            <Select placeholder="Select option">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+            <Select
+              placeholder="Pilih tempat"
+              onChange={(e) => settempat(e.target.value)}
+            >
+              {data.map((doc) => (
+                <option value={doc["data"]["Nama"]}>
+                  {doc["data"]["Nama"]}
+                </option>
+              ))}
             </Select>
             <FormHelperText>Tempat tersedianya promo</FormHelperText>
             <FormLabel htmlFor="Batas waktu promo" mt={5}>
@@ -126,7 +146,7 @@ export default function Managepromo() {
               width={"full"}
               alignSelf={"center"}
             >
-              Submit
+              {id ? "Update" : "Submit"}
             </Button>
           </FormControl>
         </Box>
