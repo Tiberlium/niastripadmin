@@ -120,6 +120,14 @@ export default function Managepromo() {
               onChange={(e) => setdate(e.target.value)}
               value={date}
             />
+            <Button
+              colorScheme={"blue"}
+              marginTop={"6"}
+              width={"full"}
+              alignSelf={"center"}
+            >
+              Submit
+            </Button>
           </FormControl>
         </Box>
       </Box>
