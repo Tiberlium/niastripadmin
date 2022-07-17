@@ -40,7 +40,7 @@ export default function Managestaycation() {
   const toast = useToast();
   const { id } = useParams();
 
-  const [disable, setdisable] = useState(true);
+  const [isdisable, setisdisable] = useState(false);
 
   const onChange = (imageList) => {
     setimages(imageList);
@@ -310,10 +310,12 @@ export default function Managestaycation() {
                   Tambahkan Promo?
                 </FormLabel>
                 <Switch
-                  id="editor"
-                  isChecked={disable}
+                  id="promo"
+                  isChecked={isdisable}
                   onChange={() =>
-                    disable === !false ? setdisable(false) : setdisable(true)
+                    isdisable === false
+                      ? setisdisable(true)
+                      : setisdisable(false)
                   }
                 />
               </FormControl>
@@ -323,7 +325,7 @@ export default function Managestaycation() {
                   type="text"
                   variant={"filled"}
                   placeholder="ex. Diskon pengguna pertama"
-                  isDisabled={disable}
+                  disabled={!isdisable}
                 />
                 <FormHelperText>Masukkan Nama promo</FormHelperText>
                 <FormLabel htmlFor="Detail promo" mt={5}>
@@ -333,7 +335,7 @@ export default function Managestaycation() {
                   type="text"
                   variant={"filled"}
                   placeholder="ex. promo ini hanya berlaku bagi para pengguna pertama"
-                  isDisabled={disable}
+                  disabled={!isdisable}
                 />
                 <FormHelperText>Masukkan Detail promo</FormHelperText>
                 <FormLabel htmlFor="Potongan" mt={5}>
@@ -343,7 +345,7 @@ export default function Managestaycation() {
                   type="number"
                   variant={"filled"}
                   placeholder="ex 40000"
-                  isDisabled={disable}
+                  disabled={!isdisable}
                 />
                 <FormHelperText>Masukkan besaran potongan promo</FormHelperText>
               </FormControl>
