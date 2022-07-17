@@ -37,6 +37,7 @@ export default function Managestaycation() {
   const [longitude, setlongitude] = useState(0);
   const [url, seturl] = useState([]);
   const [loading, setloading] = useState(false);
+  const [promo, setpromo] = useState({ nama: "", detail: "", potongan: 0 });
   const toast = useToast();
   const { id } = useParams();
 
@@ -326,6 +327,8 @@ export default function Managestaycation() {
                   variant={"filled"}
                   placeholder="ex. Diskon pengguna pertama"
                   disabled={!isdisable}
+                  value={promo.nama}
+                  onChange={(e) => setpromo({ nama: e.target.value })}
                 />
                 <FormHelperText>Masukkan Nama promo</FormHelperText>
                 <FormLabel htmlFor="Detail promo" mt={5}>
@@ -336,6 +339,8 @@ export default function Managestaycation() {
                   variant={"filled"}
                   placeholder="ex. promo ini hanya berlaku bagi para pengguna pertama"
                   disabled={!isdisable}
+                  value={promo.detail}
+                  onChange={(e) => setpromo({ detail: e.target.value })}
                 />
                 <FormHelperText>Masukkan Detail promo</FormHelperText>
                 <FormLabel htmlFor="Potongan" mt={5}>
@@ -346,6 +351,8 @@ export default function Managestaycation() {
                   variant={"filled"}
                   placeholder="ex 40000"
                   disabled={!isdisable}
+                  value={promo.potongan}
+                  onChange={(e) => setpromo({ potongan: e.target.value })}
                 />
                 <FormHelperText>Masukkan besaran potongan promo</FormHelperText>
               </FormControl>
