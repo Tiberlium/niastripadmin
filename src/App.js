@@ -66,8 +66,8 @@ export default function App() {
             <Route path="Editmakanan/:id" element={<Managemakanan />} />
             <Route path="Editstaycation/:id" element={<Managestaycation />} />
             <Route path="Promo" element={<Promo />} />
-            <Route path="Editpromo/:id" element={<Promo />} />
-            <Route path="Tambahpromo" element={<Promo />} />
+            <Route path="Editpromo/:id" element={<Managepromo />} />
+            <Route path="Tambahkandatapromo" element={<Managepromo />} />
             <Route
               path="Tambahkandatastaycation"
               element={<Managestaycation />}

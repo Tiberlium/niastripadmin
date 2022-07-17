@@ -46,7 +46,7 @@ export default function Promo() {
           Daftar Promo
         </Text>
         <Box pl={10} pr={10} pt={5}>
-          <Link to="/Main/Tambahkandatamakanan">
+          <Link to="/Main/Tambahkandatapromo">
             <Button
               colorScheme="blue"
               mb={5}
