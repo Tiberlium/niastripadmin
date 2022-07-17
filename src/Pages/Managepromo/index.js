@@ -40,8 +40,18 @@ export default function Managepromo() {
         data: doc.data(),
       });
     });
-
     setdata(x);
+  };
+
+  const getdate = async () => {
+    if (id) {
+      const docRef = await db.collection("Promo").doc(id).get();
+      setnama(docRef.data().Nama);
+      setpotongan(docRef.data().Potongan);
+      setkode(docRef.data().Kode);
+      setdate(docRef.data().Waktu);
+      settempat(docRef.data().Tempat);
+    }
   };
 
   async function submit() {
@@ -129,6 +139,10 @@ export default function Managepromo() {
     get();
   }, []);
 
+  useEffect(() => {
+    getdate();
+  }, []);
+
   return (
     <Box>
       <Breadcrumb
@@ -197,7 +211,7 @@ export default function Managepromo() {
               onChange={(e) => setkode(e.target.value)}
             />
             <FormHelperText>masukkan kode unik promo anda</FormHelperText>
-            <FormLabel htmlFor="Kabupaten" mt={5}>
+            <FormLabel htmlFor="tempat tujuan" mt={5}>
               Tempat tujuan promo
             </FormLabel>
             <Select
@@ -225,6 +239,7 @@ export default function Managepromo() {
               marginTop={"6"}
               width={"full"}
               alignSelf={"center"}
+              onClick={submit}
             >
               {id ? "Update" : "Submit"}
             </Button>
