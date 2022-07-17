@@ -37,11 +37,8 @@ export default function Managestaycation() {
   const [longitude, setlongitude] = useState(0);
   const [url, seturl] = useState([]);
   const [loading, setloading] = useState(false);
-  const [promo, setpromo] = useState({ nama: "", detail: "", potongan: 0 });
   const toast = useToast();
   const { id } = useParams();
-
-  const [isdisable, setisdisable] = useState(false);
 
   const onChange = (imageList) => {
     setimages(imageList);
@@ -306,56 +303,6 @@ export default function Managestaycation() {
                   <Checkbox value="Wifi">Wifi</Checkbox>
                 </Stack>
               </CheckboxGroup>
-              <FormControl display="flex" alignItems="center" mt={5}>
-                <FormLabel htmlFor="editor" mb="0">
-                  Tambahkan Promo?
-                </FormLabel>
-                <Switch
-                  id="promo"
-                  isChecked={isdisable}
-                  onChange={() =>
-                    isdisable === false
-                      ? setisdisable(true)
-                      : setisdisable(false)
-                  }
-                />
-              </FormControl>
-              <FormControl mt={5}>
-                <FormLabel htmlFor="Nama promo">Nama promo</FormLabel>
-                <Input
-                  type="text"
-                  variant={"filled"}
-                  placeholder="ex. Diskon pengguna pertama"
-                  disabled={!isdisable}
-                  value={promo.nama}
-                  onChange={(e) => setpromo({ nama: e.target.value })}
-                />
-                <FormHelperText>Masukkan Nama promo</FormHelperText>
-                <FormLabel htmlFor="Detail promo" mt={5}>
-                  Detail promo
-                </FormLabel>
-                <Input
-                  type="text"
-                  variant={"filled"}
-                  placeholder="ex. promo ini hanya berlaku bagi para pengguna pertama"
-                  disabled={!isdisable}
-                  value={promo.detail}
-                  onChange={(e) => setpromo({ detail: e.target.value })}
-                />
-                <FormHelperText>Masukkan Detail promo</FormHelperText>
-                <FormLabel htmlFor="Potongan" mt={5}>
-                  Potongan promo
-                </FormLabel>
-                <Input
-                  type="number"
-                  variant={"filled"}
-                  placeholder="ex 40000"
-                  disabled={!isdisable}
-                  value={promo.potongan}
-                  onChange={(e) => setpromo({ potongan: e.target.value })}
-                />
-                <FormHelperText>Masukkan besaran potongan promo</FormHelperText>
-              </FormControl>
             </FormControl>
           </Box>
         </Box>
