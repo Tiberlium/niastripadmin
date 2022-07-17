@@ -6,7 +6,6 @@ import {
   FormControl,
   FormHelperText,
   Box,
-  Textarea,
   useToast,
   Button,
   Breadcrumb,
@@ -27,11 +26,10 @@ export default function Managepromo() {
   const [kode, setkode] = useState("");
   const [date, setdate] = useState(new Date());
   const [tempat, settempat] = useState("");
-  const [couponid, setcouponid] = useState("");
+
+  const toast = useToast();
 
   const { id } = useParams();
-
-  console.log(tempat, couponid);
 
   const get = async () => {
     let x = [];
@@ -45,6 +43,87 @@ export default function Managepromo() {
 
     setdata(x);
   };
+
+  async function submit() {
+    if (!id) {
+      await db
+        .collection("Promo")
+        .add({
+          Nama: nama,
+          Potongan: potongan,
+          Kode: kode.toUpperCase(),
+          Waktu: date,
+          Tempat: tempat,
+        })
+        .then(() => {
+          setnama("");
+          setdate(new Date());
+          setkode("");
+          setpotongan(0);
+          settempat("");
+          toast({
+            title: "Data ditambahkan",
+            description: "Data telah berhasil di tambahkan",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .catch(() => {
+          setnama("");
+          setdate(new Date());
+          setkode("");
+          setpotongan(0);
+          settempat("");
+          toast({
+            title: "Terjadi kesalahan",
+            description: "Terjadi sebuah kesalahan",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        });
+    } else {
+      await db
+        .collection("Promo")
+        .doc(id)
+        .update({
+          Nama: nama,
+          Potongan: potongan,
+          Kode: kode.toUpperCase(),
+          Waktu: date,
+          Tempat: tempat,
+        })
+        .then(() => {
+          setnama("");
+          setdate(new Date());
+          setkode("");
+          setpotongan(0);
+          settempat("");
+          toast({
+            title: "Data di perbarui",
+            description: "Data telah berhasil di perbarui",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        })
+        .catch(() => {
+          setnama("");
+          setdate(new Date());
+          setkode("");
+          setpotongan(0);
+          settempat("");
+          toast({
+            title: "Terjadi kesalahan",
+            description: "Terjadi sebuah kesalahan",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        });
+    }
+  }
 
   useEffect(() => {
     get();
@@ -122,6 +201,7 @@ export default function Managepromo() {
               Tempat tujuan promo
             </FormLabel>
             <Select
+              value={tempat}
               placeholder="Pilih tempat"
               onChange={(e) => settempat(e.target.value)}
             >
