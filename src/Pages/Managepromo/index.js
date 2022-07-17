@@ -22,6 +22,8 @@ export default function Managepromo() {
   const [nama, setnama] = useState("");
   const [deskripsi, setdeskripsi] = useState("");
   const [potongan, setpotongan] = useState(0);
+  const [kode, setkode] = useState("");
+  const [date, setdate] = useState(new Date());
   return (
     <Box>
       <Breadcrumb
@@ -90,6 +92,17 @@ export default function Managepromo() {
               onChange={(e) => setpotongan(e.target.value)}
             />
             <FormHelperText>masukkan potongan promo anda</FormHelperText>
+            <FormLabel htmlFor="Potongan" mt={5}>
+              Kode unik
+            </FormLabel>
+            <Input
+              type={"text"}
+              placeholder="masukkan kode unik promo"
+              variant={"filled"}
+              defaultValue={kode || ""}
+              onChange={(e) => setkode(e.target.value)}
+            />
+            <FormHelperText>masukkan kode unik promo anda</FormHelperText>
             <FormLabel htmlFor="Kabupaten" mt={5}>
               Tempat tujuan promo
             </FormLabel>
@@ -99,6 +112,14 @@ export default function Managepromo() {
               <option value="option3">Option 3</option>
             </Select>
             <FormHelperText>Tempat tersedianya promo</FormHelperText>
+            <FormLabel htmlFor="Batas waktu promo" mt={5}>
+              Batas waktu promo
+            </FormLabel>
+            <Input
+              type={"date"}
+              onChange={(e) => setdate(e.target.value)}
+              value={date}
+            />
           </FormControl>
         </Box>
       </Box>

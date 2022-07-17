@@ -63,10 +63,10 @@ export default function Promo() {
               <Tr>
                 <Th>No</Th>
                 <Th>Nama Promo</Th>
-                <Th>Tanggal aktif</Th>
+                <Th>Batas aktif</Th>
                 <Th>Kode unik</Th>
                 <Th>Potongan</Th>
-                <Th>Kategori</Th>
+                <Th>Tempat berlaku</Th>
                 <Th>Aksi Edit</Th>
                 <Th>Aksi Hapus</Th>
               </Tr>
