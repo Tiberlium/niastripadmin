@@ -17,6 +17,8 @@ import {
   IoChevronForwardSharp,
 } from "react-icons/io5";
 
+import { RiCoupon2Fill } from "react-icons/ri";
+
 import { Link } from "react-router-dom";
 
 export default function Manage() {
@@ -118,6 +120,21 @@ export default function Manage() {
               <IoBed color="white" size={50} />
               <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
                 Tempat menginap
+              </Text>
+            </Box>
+          </Link>
+          <Link to="/Main/Promo">
+            <Box
+              h={"44"}
+              width={"80"}
+              borderWidth={1}
+              borderRadius={20}
+              p={5}
+              backgroundColor="orange"
+            >
+              <RiCoupon2Fill size={50} color="white" />
+              <Text fontSize={"2xl"} fontWeight={"medium"} mt={5} color="white">
+                Promo
               </Text>
             </Box>
           </Link>

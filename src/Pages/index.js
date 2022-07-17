@@ -15,7 +15,7 @@ import Manage from "./Manage";
 import Managerestoran from "./Managerestoran";
 import Restoran from "./Restoran";
 import Transactiondetail from "./Transactiondetail";
-
+import Promo from './Promo';
 
 export {
   Login,
@@ -35,5 +35,5 @@ export {
   Managerestoran,
   Restoran,
   Transactiondetail,
- 
+  Promo,
 };

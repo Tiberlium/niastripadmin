@@ -22,6 +22,7 @@ import {
   Managerestoran,
   Restoran,
   Transactiondetail,
+  Promo,
 } from "../src/Pages";
 
 const Emptypage = () => (
@@ -63,6 +64,7 @@ export default function App() {
             <Route path="Editevent/:id" element={<Manageevent />} />
             <Route path="Editmakanan/:id" element={<Managemakanan />} />
             <Route path="Editstaycation/:id" element={<Managestaycation />} />
+            <Route path="Promo" element={<Promo />} />
             <Route
               path="Tambahkandatastaycation"
               element={<Managestaycation />}
