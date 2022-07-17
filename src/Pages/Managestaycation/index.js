@@ -15,6 +15,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Switch,
 } from "@chakra-ui/react";
 
 import ImageUploading from "react-images-uploading";
@@ -38,6 +39,8 @@ export default function Managestaycation() {
   const [loading, setloading] = useState(false);
   const toast = useToast();
   const { id } = useParams();
+
+  const [disable, setdisable] = useState(true);
 
   const onChange = (imageList) => {
     setimages(imageList);
@@ -302,6 +305,48 @@ export default function Managestaycation() {
                   <Checkbox value="Wifi">Wifi</Checkbox>
                 </Stack>
               </CheckboxGroup>
+              <FormControl display="flex" alignItems="center" mt={5}>
+                <FormLabel htmlFor="editor" mb="0">
+                  Tambahkan Promo?
+                </FormLabel>
+                <Switch
+                  id="editor"
+                  isChecked={disable}
+                  onChange={() =>
+                    disable === !false ? setdisable(false) : setdisable(true)
+                  }
+                />
+              </FormControl>
+              <FormControl mt={5}>
+                <FormLabel htmlFor="Nama promo">Nama promo</FormLabel>
+                <Input
+                  type="text"
+                  variant={"filled"}
+                  placeholder="ex. Diskon pengguna pertama"
+                  isDisabled={disable}
+                />
+                <FormHelperText>Masukkan Nama promo</FormHelperText>
+                <FormLabel htmlFor="Detail promo" mt={5}>
+                  Detail promo
+                </FormLabel>
+                <Input
+                  type="text"
+                  variant={"filled"}
+                  placeholder="ex. promo ini hanya berlaku bagi para pengguna pertama"
+                  isDisabled={disable}
+                />
+                <FormHelperText>Masukkan Detail promo</FormHelperText>
+                <FormLabel htmlFor="Potongan" mt={5}>
+                  Potongan promo
+                </FormLabel>
+                <Input
+                  type="number"
+                  variant={"filled"}
+                  placeholder="ex 40000"
+                  isDisabled={disable}
+                />
+                <FormHelperText>Masukkan besaran potongan promo</FormHelperText>
+              </FormControl>
             </FormControl>
           </Box>
         </Box>

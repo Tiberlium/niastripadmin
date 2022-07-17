@@ -44,7 +44,7 @@ const data = {
 };
 
 const Linechart = () => (
-  <Box w={["2xs", "3xl"]}>
+  <Box w={"2xl"}>
     <Line
       data={data}
       options={{
@@ -170,12 +170,20 @@ export default function Dashboard() {
           total={formatRupiah(totalTransaksi)}
           pendapatan={formatRupiah(pendapatan)}
         />
-        <Box>
-          <Text fontSize="2xl" color="black" mt={10}>
-            Trafik pengguna
-          </Text>
-          <Linechart />
-        </Box>
+        <HStack>
+          <Box>
+            <Text fontSize="2xl" color="black" mt={10}>
+              Trafik pengguna
+            </Text>
+            <Linechart />
+          </Box>
+          <Box>
+            <Text fontSize="2xl" color="black" mt={10}>
+            Keuangan
+            </Text>
+            <Doughnutchar data={data2} />
+          </Box>
+        </HStack>
       </Box>
     </>
   );
