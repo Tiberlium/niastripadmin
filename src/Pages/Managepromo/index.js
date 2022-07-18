@@ -208,6 +208,7 @@ export default function Managepromo() {
               placeholder="masukkan kode unik promo"
               variant={"filled"}
               defaultValue={kode || ""}
+              maxLength={15}
               onChange={(e) => setkode(e.target.value)}
             />
             <FormHelperText>masukkan kode unik promo anda</FormHelperText>
