@@ -196,10 +196,11 @@ export default function Managepromo() {
               type={"number"}
               placeholder="masukkan potongan promo"
               variant={"filled"}
+              maxLength={2}
               defaultValue={potongan || ""}
               onChange={(e) => setpotongan(e.target.value)}
             />
-            <FormHelperText>masukkan potongan promo anda</FormHelperText>
+            <FormHelperText>masukkan potongan promo anda yang dihitung dalam persen</FormHelperText>
             <FormLabel htmlFor="Potongan" mt={5}>
               Kode unik
             </FormLabel>
