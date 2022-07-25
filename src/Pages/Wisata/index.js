@@ -27,7 +27,7 @@ import { db, storages } from "../../Firebase";
 export default function Wisata() {
   const [data, setdata] = useState([]);
   const toast = useToast();
-  const [alterdata, setalterdata] = useState({});
+  const [alterdata, setalterdata] = useState([]);
 
   async function get() {
     let x = [];
@@ -46,10 +46,10 @@ export default function Wisata() {
     docRef
       .get()
       .then((doc) => {
-        setalterdata(doc.data());
+        setalterdata(doc.data().Galery);
       })
       .then(() => {
-        const deleteUri = alterdata.Galery.map((x) => {
+        const deleteUri = alterdata.map((x) => {
           const ref = storages.refFromURL(x);
           ref
             .delete()
@@ -86,7 +86,7 @@ export default function Wisata() {
 
   useEffect(() => {
     get();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
