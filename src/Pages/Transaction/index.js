@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  Select,
   Box,
   Table,
   Thead,
@@ -469,10 +470,10 @@ export default function Transaction() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Flex>
+            {/* <Flex>
               <Box>
                 <Text fontWeight={"semibold"} mb={3}>
-                  Tampilkan berdasarkan Tanggal
+                  Filter
                 </Text>
                 <Flex>
                   <Text mt={2}>Tanggal awal</Text>
@@ -562,6 +563,35 @@ export default function Transaction() {
                   </InputGroup>
                 </Box>
               </Box>
+            </Flex> */}
+            <Text fontWeight={"semibold"} mb={3}>
+              Filter berdasarkan
+            </Text>
+            <Flex>
+              <Select placeholder="Nama penginapan">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+              </Select>
+              <Box w={10} />
+              <Flex>
+                <Text>Tanggal awal</Text>
+                <Input type={"date"} />
+              </Flex>
+              <Box w={10} />
+              <Flex>
+                <Text>Tanggal akhir</Text>
+                <Input type={"date"} />
+              </Flex>
+              <Box w={10} />
+              <Button
+                w={"full"}
+                colorScheme="blue"
+                mb={5}
+                onClick={filterreservationbydate}
+              >
+                Tampilkan
+              </Button>
             </Flex>
 
             <TableContainer mb={10}>
