@@ -565,6 +565,22 @@ export default function Transaction() {
               </Box>
             </Flex> */}
             <Text fontWeight={"semibold"} mb={3}>
+              Pencarian
+            </Text>
+            <InputGroup mb={3}>
+              <InputRightElement
+                pointerEvents={"none"}
+                children={<BsSearch />}
+              />
+              <Input
+                placeholder="Pencarian"
+                borderColor={"blackAlpha.400"}
+                type="search"
+                value={Queryreserve}
+                onChange={(e) => setQueryreserve(e.target.value)}
+              />
+            </InputGroup>
+            <Text fontWeight={"semibold"} mb={3}>
               Filter berdasarkan
             </Text>
             <Flex>
@@ -573,24 +589,24 @@ export default function Transaction() {
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </Select>
-              <Box w={10} />
+              <Box w={"12"} />
               <Flex>
                 <Text>Tanggal awal</Text>
                 <Input type={"date"} />
               </Flex>
-              <Box w={10} />
+              <Box w={"12"} />
               <Flex>
                 <Text>Tanggal akhir</Text>
                 <Input type={"date"} />
               </Flex>
-              <Box w={10} />
+              <Box w={"12"} />
               <Button
                 w={"full"}
                 colorScheme="blue"
                 mb={5}
                 onClick={filterreservationbydate}
               >
-                Tampilkan
+                Filter
               </Button>
             </Flex>
 
