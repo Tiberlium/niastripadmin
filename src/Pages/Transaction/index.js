@@ -431,6 +431,7 @@ export default function Transaction() {
         nama: doc.data().Nama,
       });
     });
+    setreservationname(x);
   }
 
   function createpdfreservation() {
@@ -461,6 +462,7 @@ export default function Transaction() {
   function filterreservationbydate() {
     const activities = [...reservation].filter(
       (doc) =>
+        doc["nama"] === Queryreserve &&
         doc["tanggal"] >= dayjs(startdatereserve).format("YYYY-MM-DD") &&
         doc["tanggal"] <= dayjs(endatereserve).format("YYYY-MM-DD")
     );
@@ -559,7 +561,11 @@ export default function Transaction() {
               Tampilkan berdasarkan
             </Text>
             <Flex>
-              <Select placeholder="Nama penginapan">
+              <Select
+                placeholder="Nama penginapan"
+                value={Queryreserve}
+                onChange={(e) => setQueryreserve(e.target.value)}
+              >
                 {reservationname.map((doc) => (
                   <option value={doc["nama"]}>{doc["nama"]}</option>
                 ))}
