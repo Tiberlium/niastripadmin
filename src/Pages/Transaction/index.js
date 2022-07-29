@@ -416,12 +416,12 @@ export default function Transaction() {
 
   async function gethotelname() {
     let x = [];
-    const docrefs = await db.collection('Staycation').get();
-    docrefs.docs.map((doc)=>{
+    const docrefs = await db.collection("Staycation").get();
+    docrefs.docs.map((doc) => {
       x.push({
-        nama :doc.data().Nama
-      })
-    })
+        nama: doc.data().Nama,
+      });
+    });
   }
 
   function createpdfreservation() {
@@ -584,28 +584,12 @@ export default function Transaction() {
               </Box>
             </Flex> */}
             <Text fontWeight={"semibold"} mb={3}>
-              Pencarian
-            </Text>
-            <InputGroup mb={3}>
-              <InputRightElement
-                pointerEvents={"none"}
-                children={<BsSearch />}
-              />
-              <Input
-                placeholder="Pencarian"
-                borderColor={"blackAlpha.400"}
-                type="search"
-                value={Queryreserve}
-                onChange={(e) => setQueryreserve(e.target.value)}
-              />
-            </InputGroup>
-            <Text fontWeight={"semibold"} mb={3}>
               Filter berdasarkan
             </Text>
             <Flex>
               <Select placeholder="Nama penginapan">
                 {reservationname.map((doc) => (
-                  <option value={doc['nama']}>{doc['nama']}</option>
+                  <option value={doc["nama"]}>{doc["nama"]}</option>
                 ))}
               </Select>
               <Box w={"12"} />
@@ -627,6 +611,41 @@ export default function Transaction() {
               >
                 Filter
               </Button>
+            </Flex>
+
+            <Flex>
+              <Box w={'full'}>
+                <Text fontWeight={"semibold"} mb={2}>
+                  Laporan penginapan
+                </Text>
+                <Button
+                  size="md"
+                  onClick={createpdfreservation}
+                  w={"full"}
+                  h={10}
+                >
+                  Buat laporan
+                </Button>
+              </Box>
+              <Box w={'14'}/>
+              <Box w={'full'}>
+                <Text fontWeight={"semibold"} mb={2}>
+                  Pencarian
+                </Text>
+                <InputGroup mb={3} w={'full'}>
+                  <InputRightElement
+                    pointerEvents={"none"}
+                    children={<BsSearch />}
+                  />
+                  <Input
+                    placeholder="Pencarian"
+                    borderColor={"blackAlpha.400"}
+                    type="search"
+                    value={Queryreserve}
+                    onChange={(e) => setQueryreserve(e.target.value)}
+                  />
+                </InputGroup>
+              </Box>
             </Flex>
 
             <TableContainer mb={10}>
