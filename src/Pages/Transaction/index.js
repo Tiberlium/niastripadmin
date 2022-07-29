@@ -27,6 +27,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -34,7 +35,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   FormLabel,
   FormControl,
 } from "@chakra-ui/react";
@@ -68,19 +68,18 @@ export default function Transaction() {
   const [Queryreserve, setQueryreserve] = useState("");
   const [Queryevent, setQueryevent] = useState("");
 
-  const [contactreserve, setcontactreserve] = useState({
-    nama: "",
-    alamat: "",
-    telepon: 0,
-    email: "",
-  });
+  const [contactreservename, setcontactreservename] = useState("");
+  const [contactreserveaddress, setcontactreserveaddress] = useState("");
+  const [contactreservephone, setcontactreservephone] = useState(0);
+  const [contactreserveemail, setcontactreserveemail] = useState("");
 
-  const [contactevent, setcontactevent] = useState({
-    nama: "",
-    alamat: "",
-    telepon: 0,
-    email: "",
-  });
+  const [contacteventname, setcontacteventname] = useState("");
+  const [contacteventaddress, setcontacteventaddress] = useState("");
+  const [contacteventphone, setcontacteventphone] = useState("");
+  const [contacteventemail, setcontacteventemail] = useState("");
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
 
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
@@ -158,10 +157,10 @@ export default function Transaction() {
     },
     contact: {
       label: "Report issued for:",
-      name: contactreserve.nama,
-      address: contactreserve.alamat,
-      phone: contactreserve.telepon,
-      email: contactreserve.email,
+      name: contactreservename,
+      address: contactreserveaddress,
+      phone: contactreservephone,
+      email: contactreserveemail,
     },
     invoice: {
       label: "Report ###: ",
@@ -281,10 +280,10 @@ export default function Transaction() {
     },
     contact: {
       label: "Report issued for:",
-      name: contactevent.nama,
-      address: contactevent.alamat,
-      phone: contactevent.telepon,
-      email: contactevent.email,
+      name: contacteventname,
+      address: contacteventaddress,
+      phone: contacteventphone,
+      email: contacteventemail,
     },
     invoice: {
       label: "Report ###: ",
@@ -483,7 +482,6 @@ export default function Transaction() {
   }
 
   const ModalLaporanresevation = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
     return (
       <Box w={"full"}>
         <Text fontWeight={"semibold"} mb={2}>
@@ -499,19 +497,19 @@ export default function Transaction() {
         >
           Buat laporan
         </Button>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Buat laporan kepada</ModalHeader>
+            <ModalHeader>Modal Title</ModalHeader>
             <ModalCloseButton />
-            <ModalBody pb={6}>
+            <ModalBody>
               <FormControl>
                 <FormLabel>Nama</FormLabel>
                 <Input
                   type={"text"}
                   placeholder="ex. Jhon cruyff"
-                  value={contactreserve.nama}
-                  onChange={(e) => setcontactreserve({ nama: e.target.value })}
+                  value={contactreservename}
+                  onChange={(e) => setcontactreservename(e.target.value)}
                 />
               </FormControl>
               <FormControl mt={"5"}>
@@ -519,10 +517,8 @@ export default function Transaction() {
                 <Input
                   type={"text"}
                   placeholder="ex. St joseph london"
-                  value={contactreserve.alamat}
-                  onChange={(e) =>
-                    setcontactreserve({ alamat: e.target.value })
-                  }
+                  value={contactreserveaddress}
+                  onChange={(e) => setcontactreserveaddress(e.target.value)}
                 />
               </FormControl>
               <FormControl mt={"5"}>
@@ -530,10 +526,8 @@ export default function Transaction() {
                 <Input
                   type={"number"}
                   placeholder="ex. +022 32424"
-                  value={contactreserve.telepon}
-                  onChange={(e) =>
-                    setcontactreserve({ telepon: e.target.value })
-                  }
+                  value={contactreservephone}
+                  onChange={(e) => setcontactreservephone(e.target.value)}
                 />
               </FormControl>
               <FormControl mt={"5"}>
@@ -541,99 +535,21 @@ export default function Transaction() {
                 <Input
                   type={"email"}
                   placeholder="ex. cruyfff@outlook.co.uk"
-                  value={contactreserve.email}
-                  onChange={(e) => setcontactreserve({ email: e.target.value })}
+                  value={contactreserveemail}
+                  onChange={(e) => setcontactreserveemail(e.target.value)}
                 />
               </FormControl>
             </ModalBody>
 
-            <ModalFooter>
+            <ModalFooter w={"full"}>
               <Button
                 colorScheme="blue"
                 mr={3}
-                w={"full"}
-                leftIcon={<BsFillFileEarmarkPdfFill />}
                 onClick={createpdfreservation}
-              >
-                Hasilkan pdf
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Box>
-    );
-  };
-
-  const ModalLaporanevent = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    return (
-      <Box w={"full"}>
-        <Text fontWeight={"semibold"} mb={2}>
-          Laporan Event
-        </Text>
-        <Button
-          colorScheme={"blue"}
-          size="md"
-          onClick={onOpen}
-          w={"full"}
-          h={10}
-          borderColor={"blackAlpha.400"}
-        >
-          Buat laporan
-        </Button>
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Buat laporan kepada</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Nama</FormLabel>
-                <Input
-                  type={"text"}
-                  placeholder="ex. Jhon cruyff"
-                  value={contactevent.nama}
-                  onChange={(e) => setcontactevent({ nama: e.target.value })}
-                />
-              </FormControl>
-              <FormControl mt={"5"}>
-                <FormLabel>Alamat</FormLabel>
-                <Input
-                  type={"text"}
-                  placeholder="ex. St joseph london"
-                  value={contactevent.alamat}
-                  onChange={(e) => setcontactevent({ alamat: e.target.value })}
-                />
-              </FormControl>
-              <FormControl mt={"5"}>
-                <FormLabel>Telepon</FormLabel>
-                <Input
-                  type={"number"}
-                  placeholder="ex. +022 32424"
-                  value={contactevent.telepon}
-                  onChange={(e) => setcontactevent({ telepon: e.target.value })}
-                />
-              </FormControl>
-              <FormControl mt={"5"}>
-                <FormLabel>Email</FormLabel>
-                <Input
-                  type={"email"}
-                  placeholder="ex. cruyfff@outlook.co.uk"
-                  value={contactevent.email}
-                  onChange={(e) => setcontactevent({ email: e.target.value })}
-                />
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button
-                colorScheme="blue"
-                mr={3}
-                w={"full"}
                 leftIcon={<BsFillFileEarmarkPdfFill />}
-                onClick={createpdfevent}
+                w={"full"}
               >
-                Hasilkan pdf
+                Hasilkan Laporan
               </Button>
             </ModalFooter>
           </ModalContent>
