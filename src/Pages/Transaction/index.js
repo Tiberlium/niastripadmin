@@ -592,17 +592,25 @@ export default function Transaction() {
                   <option value={doc["nama"]}>{doc["nama"]}</option>
                 ))}
               </Select>
-              <Box w={"12"} />
+              <Box w={'16'} />
               <Flex>
                 <Text>Tanggal awal</Text>
-                <Input type={"date"} />
+                <Input
+                  type={"date"}
+                  value={startdatereserve}
+                  onChange={(e) => setstartdatereserve(e.target.value)}
+                />
               </Flex>
-              <Box w={"12"} />
+              <Box w={"16"} />
               <Flex>
                 <Text>Tanggal akhir</Text>
-                <Input type={"date"} />
+                <Input
+                  type={"date"}
+                  value={endatereserve}
+                  onChange={(e) => setendatereserve(e.target.value)}
+                />
               </Flex>
-              <Box w={"12"} />
+              <Box w={"16"} />
               <Button
                 w={"full"}
                 colorScheme="blue"
@@ -614,25 +622,27 @@ export default function Transaction() {
             </Flex>
 
             <Flex>
-              <Box w={'full'}>
+              <Box w={"full"}>
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan penginapan
                 </Text>
                 <Button
+                  colorScheme={"blue"}
                   size="md"
                   onClick={createpdfreservation}
                   w={"full"}
                   h={10}
+                  borderColor={"blackAlpha.400"}
                 >
                   Buat laporan
                 </Button>
               </Box>
-              <Box w={'14'}/>
-              <Box w={'full'}>
+              <Box w={"14"} />
+              <Box w={"full"}>
                 <Text fontWeight={"semibold"} mb={2}>
                   Pencarian
                 </Text>
-                <InputGroup mb={3} w={'full'}>
+                <InputGroup mb={3} w={"full"}>
                   <InputRightElement
                     pointerEvents={"none"}
                     children={<BsSearch />}
