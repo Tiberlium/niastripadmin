@@ -584,7 +584,7 @@ export default function Transaction() {
               </Box>
             </Flex> */}
             <Text fontWeight={"semibold"} mb={3}>
-              Filter berdasarkan
+              Tampilkan berdasarkan
             </Text>
             <Flex>
               <Select placeholder="Nama penginapan">
