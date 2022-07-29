@@ -27,6 +27,14 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
@@ -458,6 +466,44 @@ export default function Transaction() {
     setreservation(activities);
   }
 
+  const ModalLaporanresevation = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    return (
+      <Box w={"full"}>
+        <Text fontWeight={"semibold"} mb={2}>
+          Laporan penginapan
+        </Text>
+        <Button
+          colorScheme={"blue"}
+          size="md"
+          onClick={onOpen}
+          w={"full"}
+          h={10}
+          borderColor={"blackAlpha.400"}
+        >
+          Buat laporan
+        </Button>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Buat laporan kepada</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <Text>hallo</Text>
+            </ModalBody>
+
+            <ModalFooter>
+              <Flex>
+                <Button colorScheme="blue" mr={3}>
+                  Hasilkan pdf
+                </Button>
+              </Flex>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
+    );
+  };
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -488,100 +534,6 @@ export default function Transaction() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            {/* <Flex>
-              <Box>
-                <Text fontWeight={"semibold"} mb={3}>
-                  Filter
-                </Text>
-                <Flex>
-                  <Text mt={2}>Tanggal awal</Text>
-                  <Box w={5} />
-                  <Input
-                    w={"fit-content"}
-                    placeholder="Tanggal awal"
-                    value={startdatereserve}
-                    onChange={(e) => setstartdatereserve(e.target.value)}
-                    type={"date"}
-                    mb={5}
-                  />
-                </Flex>
-                <Flex>
-                  <Text mt={2}>Tanggal akhir</Text>
-                  <Box w={5} />
-                  <Input
-                    w={"fit-content"}
-                    placeholder="Tanggal akhir"
-                    value={endatereserve}
-                    onChange={(e) => setendatereserve(e.target.value)}
-                    type={"date"}
-                    mb={5}
-                  />
-                </Flex>
-
-                <Button
-                  colorScheme="blue"
-                  mb={5}
-                  w={"full"}
-                  onClick={filterreservationbydate}
-                >
-                  Tampilkan
-                </Button>
-              </Box>
-              <Box w={20} />
-              <Stat
-                borderWidth={1}
-                p={5}
-                w="52"
-                borderRadius={10}
-                boxShadow="base"
-                h={"48"}
-              >
-                <FcMoneyTransfer size={30} color="green" />
-                <StatLabel>Pendapatan</StatLabel>
-                <StatNumber>
-                  {formatter(Number(pendapatanreservation))}
-                </StatNumber>
-                <StatLabel mt={2}>total transaksi</StatLabel>
-                <StatNumber>
-                  {formatter(Number(totalTransaksireservation))}
-                </StatNumber>
-              </Stat>
-              <Box w={20} />
-              <Box w={"80"}>
-                <Text fontWeight={"semibold"} mb={2}>
-                  Laporan penginapan
-                </Text>
-                <Button
-                  colorScheme="blue"
-                  size="sm"
-                  onClick={createpdfreservation}
-                  w={"full"}
-                  h={10}
-                  leftIcon={<BsFillFileEarmarkPdfFill />}
-                >
-                  Hasilkan pdf
-                </Button>
-
-                <Box mt={"12"}>
-                  <Text mb={2} fontWeight="semibold">
-                    Pencarian
-                  </Text>
-                  <InputGroup>
-                    <InputRightElement
-                      pointerEvents={"none"}
-                      children={<BsSearch />}
-                    />
-                    <Input
-                      placeholder="Pencarian"
-                      borderColor={"blackAlpha.400"}
-                      type="search"
-                      value={Queryreserve}
-                      onChange={(e) => setQueryreserve(e.target.value)}
-                    />
-                  </InputGroup>
-                </Box>
-              </Box>
-            </Flex> */}
             <Text fontWeight={"semibold"} mb={3}>
               Tampilkan berdasarkan
             </Text>
@@ -619,23 +571,8 @@ export default function Transaction() {
                 Filter
               </Button>
             </Flex>
-
-            <Flex mt={'1.5'}>
-              <Box w={"full"}>
-                <Text fontWeight={"semibold"} mb={2}>
-                  Laporan penginapan
-                </Text>
-                <Button
-                  colorScheme={"blue"}
-                  size="md"
-                  onClick={createpdfreservation}
-                  w={"full"}
-                  h={10}
-                  borderColor={"blackAlpha.400"}
-                >
-                  Buat laporan
-                </Button>
-              </Box>
+            <Flex mt={"1.5"}>
+              <ModalLaporanresevation />
               <Box w={"14"} />
               <Box w={"full"}>
                 <Text fontWeight={"semibold"} mb={2}>
