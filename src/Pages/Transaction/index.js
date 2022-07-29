@@ -24,7 +24,6 @@ import {
   StatLabel,
   StatNumber,
   Flex,
-  Spacer,
   Input,
   InputGroup,
   InputRightElement,
