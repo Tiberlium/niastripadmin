@@ -47,6 +47,9 @@ export default function Transaction() {
   const [reservation, setreservation] = useState([]);
   const [event, setevent] = useState([]);
 
+  const [reservationname, setreservationname] = useState([]);
+  const [eventname, seteventname] = useState([]);
+
   const [startdatereserve, setstartdatereserve] = useState(new Date());
   const [endatereserve, setendatereserve] = useState(new Date());
 
@@ -411,6 +414,16 @@ export default function Transaction() {
     setevent(eventdata);
   };
 
+  async function gethotelname() {
+    let x = [];
+    const docrefs = await db.collection('Staycation').get();
+    docrefs.docs.map((doc)=>{
+      x.push({
+        nama :doc.data().Nama
+      })
+    })
+  }
+
   function createpdfreservation() {
     const pdfObj = jsPDFInvoiceTemplate(dataRes);
     pdfObj.jsPDFDocObject.save();
@@ -420,6 +433,11 @@ export default function Transaction() {
     const pdfObj = jsPDFInvoiceTemplate(dataEve);
     pdfObj.jsPDFDocObject.save();
   }
+
+  useEffect(() => {
+    gethotelname();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     getreservation();
@@ -440,6 +458,7 @@ export default function Transaction() {
 
     setreservation(activities);
   }
+
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -585,9 +604,9 @@ export default function Transaction() {
             </Text>
             <Flex>
               <Select placeholder="Nama penginapan">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                {reservationname.map((doc) => (
+                  <option value={doc['nama']}>{doc['nama']}</option>
+                ))}
               </Select>
               <Box w={"12"} />
               <Flex>
