@@ -35,6 +35,8 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  FormLabel,
+  FormControl,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
@@ -489,21 +491,40 @@ export default function Transaction() {
             <ModalHeader>Buat laporan kepada</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
-              <Text>hallo</Text>
+              <FormControl>
+                <FormLabel>Nama</FormLabel>
+                <Input type={"text"} placeholder="ex. Jhon cruyff" />
+              </FormControl>
+              <FormControl mt={"5"}>
+                <FormLabel>Alamat</FormLabel>
+                <Input type={"text"} placeholder="ex. St joseph london" />
+              </FormControl>
+              <FormControl mt={"5"}>
+                <FormLabel>Telepon</FormLabel>
+                <Input type={"number"} placeholder="ex. +022 32424" />
+              </FormControl>
+              <FormControl mt={"5"}>
+                <FormLabel>Email</FormLabel>
+                <Input type={"email"} placeholder="ex. cruyfff@outlook.co.uk" />
+              </FormControl>
             </ModalBody>
 
             <ModalFooter>
-              <Flex>
-                <Button colorScheme="blue" mr={3}>
-                  Hasilkan pdf
-                </Button>
-              </Flex>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                w={"full"}
+                leftIcon={<BsFillFileEarmarkPdfFill />}
+              >
+                Hasilkan pdf
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
       </Box>
     );
   };
+
   return (
     <Box mr={10}>
       <Breadcrumb
