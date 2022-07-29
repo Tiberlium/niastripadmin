@@ -68,6 +68,20 @@ export default function Transaction() {
   const [Queryreserve, setQueryreserve] = useState("");
   const [Queryevent, setQueryevent] = useState("");
 
+  const [contactreserve, setcontactreserve] = useState({
+    nama: "",
+    alamat: "",
+    telepon: 0,
+    email: "",
+  });
+
+  const [contactevent, setcontactevent] = useState({
+    nama: "",
+    alamat: "",
+    telepon: 0,
+    email: "",
+  });
+
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
 
@@ -142,14 +156,13 @@ export default function Transaction() {
       email_1: "niastrip@gmail.al",
       website: "www.niastrip.al",
     },
-    // contact: {
-    //   label: "Reprt issued for:",
-    //   name: "Client Name",
-    //   address: "Albania, Tirane, Astir",
-    //   phone: "(+355) 069 22 22 222",
-    //   email: "client@website.al",
-    //   otherInfo: "www.website.al",
-    // },
+    contact: {
+      label: "Report issued for:",
+      name: contactreserve.nama,
+      address: contactreserve.alamat,
+      phone: contactreserve.telepon,
+      email: contactreserve.email,
+    },
     invoice: {
       label: "Report ###: ",
       num: 19,
@@ -266,14 +279,13 @@ export default function Transaction() {
       email_1: "niastrip@gmail.al",
       website: "www.niastrip.al",
     },
-    // contact: {
-    //   label: "Reprt issued for:",
-    //   name: "Client Name",
-    //   address: "Albania, Tirane, Astir",
-    //   phone: "(+355) 069 22 22 222",
-    //   email: "client@website.al",
-    //   otherInfo: "www.website.al",
-    // },
+    contact: {
+      label: "Report issued for:",
+      name: contactevent.nama,
+      address: contactevent.alamat,
+      phone: contactevent.telepon,
+      email: contactevent.email,
+    },
     invoice: {
       label: "Report ###: ",
       num: 19,
@@ -495,19 +507,43 @@ export default function Transaction() {
             <ModalBody pb={6}>
               <FormControl>
                 <FormLabel>Nama</FormLabel>
-                <Input type={"text"} placeholder="ex. Jhon cruyff" />
+                <Input
+                  type={"text"}
+                  placeholder="ex. Jhon cruyff"
+                  value={contactreserve.nama}
+                  onChange={(e) => setcontactreserve({ nama: e.target.value })}
+                />
               </FormControl>
               <FormControl mt={"5"}>
                 <FormLabel>Alamat</FormLabel>
-                <Input type={"text"} placeholder="ex. St joseph london" />
+                <Input
+                  type={"text"}
+                  placeholder="ex. St joseph london"
+                  value={contactreserve.alamat}
+                  onChange={(e) =>
+                    setcontactreserve({ alamat: e.target.value })
+                  }
+                />
               </FormControl>
               <FormControl mt={"5"}>
                 <FormLabel>Telepon</FormLabel>
-                <Input type={"number"} placeholder="ex. +022 32424" />
+                <Input
+                  type={"number"}
+                  placeholder="ex. +022 32424"
+                  value={contactreserve.telepon}
+                  onChange={(e) =>
+                    setcontactreserve({ telepon: e.target.value })
+                  }
+                />
               </FormControl>
               <FormControl mt={"5"}>
                 <FormLabel>Email</FormLabel>
-                <Input type={"email"} placeholder="ex. cruyfff@outlook.co.uk" />
+                <Input
+                  type={"email"}
+                  placeholder="ex. cruyfff@outlook.co.uk"
+                  value={contactreserve.email}
+                  onChange={(e) => setcontactreserve({ email: e.target.value })}
+                />
               </FormControl>
             </ModalBody>
 
@@ -517,6 +553,85 @@ export default function Transaction() {
                 mr={3}
                 w={"full"}
                 leftIcon={<BsFillFileEarmarkPdfFill />}
+                onClick={createpdfreservation}
+              >
+                Hasilkan pdf
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
+    );
+  };
+
+  const ModalLaporanevent = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    return (
+      <Box w={"full"}>
+        <Text fontWeight={"semibold"} mb={2}>
+          Laporan Event
+        </Text>
+        <Button
+          colorScheme={"blue"}
+          size="md"
+          onClick={onOpen}
+          w={"full"}
+          h={10}
+          borderColor={"blackAlpha.400"}
+        >
+          Buat laporan
+        </Button>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Buat laporan kepada</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <FormControl>
+                <FormLabel>Nama</FormLabel>
+                <Input
+                  type={"text"}
+                  placeholder="ex. Jhon cruyff"
+                  value={contactevent.nama}
+                  onChange={(e) => setcontactevent({ nama: e.target.value })}
+                />
+              </FormControl>
+              <FormControl mt={"5"}>
+                <FormLabel>Alamat</FormLabel>
+                <Input
+                  type={"text"}
+                  placeholder="ex. St joseph london"
+                  value={contactevent.alamat}
+                  onChange={(e) => setcontactevent({ alamat: e.target.value })}
+                />
+              </FormControl>
+              <FormControl mt={"5"}>
+                <FormLabel>Telepon</FormLabel>
+                <Input
+                  type={"number"}
+                  placeholder="ex. +022 32424"
+                  value={contactevent.telepon}
+                  onChange={(e) => setcontactevent({ telepon: e.target.value })}
+                />
+              </FormControl>
+              <FormControl mt={"5"}>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  type={"email"}
+                  placeholder="ex. cruyfff@outlook.co.uk"
+                  value={contactevent.email}
+                  onChange={(e) => setcontactevent({ email: e.target.value })}
+                />
+              </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                w={"full"}
+                leftIcon={<BsFillFileEarmarkPdfFill />}
+                onClick={createpdfevent}
               >
                 Hasilkan pdf
               </Button>
