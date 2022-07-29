@@ -592,7 +592,7 @@ export default function Transaction() {
                   <option value={doc["nama"]}>{doc["nama"]}</option>
                 ))}
               </Select>
-              <Box w={'16'} />
+              <Box w={"28"} />
               <Flex>
                 <Text>Tanggal awal</Text>
                 <Input
@@ -601,7 +601,7 @@ export default function Transaction() {
                   onChange={(e) => setstartdatereserve(e.target.value)}
                 />
               </Flex>
-              <Box w={"16"} />
+              <Box w={"28"} />
               <Flex>
                 <Text>Tanggal akhir</Text>
                 <Input
@@ -610,7 +610,7 @@ export default function Transaction() {
                   onChange={(e) => setendatereserve(e.target.value)}
                 />
               </Flex>
-              <Box w={"16"} />
+              <Box w={"28"} />
               <Button
                 w={"full"}
                 colorScheme="blue"
@@ -621,7 +621,7 @@ export default function Transaction() {
               </Button>
             </Flex>
 
-            <Flex>
+            <Flex mt={'1.5'}>
               <Box w={"full"}>
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan penginapan
