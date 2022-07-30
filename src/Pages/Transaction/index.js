@@ -27,16 +27,19 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormLabel,
   FormControl,
+  FormLabel,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+  useDisclosure,
+  Portal,
 } from "@chakra-ui/react";
 
 import { db } from "../../Firebase";
@@ -68,24 +71,16 @@ export default function Transaction() {
   const [Queryreserve, setQueryreserve] = useState("");
   const [Queryevent, setQueryevent] = useState("");
 
-  const [contactreservename, setcontactreservename] = useState("");
-  const [contactreserveaddress, setcontactreserveaddress] = useState("");
-  const [contactreservephone, setcontactreservephone] = useState(0);
-  const [contactreserveemail, setcontactreserveemail] = useState("");
-
-  const [contacteventname, setcontacteventname] = useState("");
-  const [contacteventaddress, setcontacteventaddress] = useState("");
-  const [contacteventphone, setcontacteventphone] = useState("");
-  const [contacteventemail, setcontacteventemail] = useState("");
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
-
   let totalTransaksievent = 0;
   let pendapatanEvent = 0;
 
   let totalTransaksireservation = 0;
   let pendapatanreservation = 0;
+
+  const [contactreservename, setcontactreservename] = useState("");
+  const [contactreserveaddress, setcontactreserveaddress] = useState("");
+  const [contactreservephone, setcontactreservephone] = useState(0);
+  const [contactreserveemail, setcontactreserveemail] = useState("");
 
   const today = new Date();
 
@@ -278,13 +273,13 @@ export default function Transaction() {
       email_1: "niastrip@gmail.al",
       website: "www.niastrip.al",
     },
-    contact: {
-      label: "Report issued for:",
-      name: contacteventname,
-      address: contacteventaddress,
-      phone: contacteventphone,
-      email: contacteventemail,
-    },
+    // contact: {
+    //   label: "Report issued for:",
+    //   name: contacteventname,
+    //   address: contacteventaddress,
+    //   phone: contacteventphone,
+    //   email: contacteventemail,
+    // },
     invoice: {
       label: "Report ###: ",
       num: 19,
@@ -481,83 +476,6 @@ export default function Transaction() {
     setreservation(activities);
   }
 
-  const ModalLaporanresevation = () => {
-    return (
-      <Box w={"full"}>
-        <Text fontWeight={"semibold"} mb={2}>
-          Laporan penginapan
-        </Text>
-        <Button
-          colorScheme={"blue"}
-          size="md"
-          onClick={onOpen}
-          w={"full"}
-          h={10}
-          borderColor={"blackAlpha.400"}
-        >
-          Buat laporan
-        </Button>
-        <Modal isOpen={isOpen} onClose={onClose} finalFocusRef={btnRef}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <FormControl>
-                <FormLabel>Nama</FormLabel>
-                <Input
-                  type={"text"}
-                  placeholder="ex. Jhon cruyff"
-                  value={contactreservename}
-                  onChange={(e) => setcontactreservename(e.target.value)}
-                />
-              </FormControl>
-              <FormControl mt={"5"}>
-                <FormLabel>Alamat</FormLabel>
-                <Input
-                  type={"text"}
-                  placeholder="ex. St joseph london"
-                  value={contactreserveaddress}
-                  onChange={(e) => setcontactreserveaddress(e.target.value)}
-                />
-              </FormControl>
-              <FormControl mt={"5"}>
-                <FormLabel>Telepon</FormLabel>
-                <Input
-                  type={"number"}
-                  placeholder="ex. +022 32424"
-                  value={contactreservephone}
-                  onChange={(e) => setcontactreservephone(e.target.value)}
-                />
-              </FormControl>
-              <FormControl mt={"5"}>
-                <FormLabel>Email</FormLabel>
-                <Input
-                  type={"email"}
-                  placeholder="ex. cruyfff@outlook.co.uk"
-                  value={contactreserveemail}
-                  onChange={(e) => setcontactreserveemail(e.target.value)}
-                />
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter w={"full"}>
-              <Button
-                colorScheme="blue"
-                mr={3}
-                onClick={createpdfreservation}
-                leftIcon={<BsFillFileEarmarkPdfFill />}
-                w={"full"}
-              >
-                Hasilkan Laporan
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Box>
-    );
-  };
-
   return (
     <Box mr={10}>
       <Breadcrumb
@@ -630,7 +548,95 @@ export default function Transaction() {
               </Button>
             </Flex>
             <Flex mt={"1.5"}>
-              <ModalLaporanresevation />
+              <Box w={"full"}>
+                <Text fontWeight={"semibold"} mb={2}>
+                  Laporan penginapan
+                </Text>
+                <Popover isLazy>
+                  <PopoverTrigger>
+                    <Button
+                      colorScheme={"blue"}
+                      size="md"
+                      w={"full"}
+                      h={10}
+                      borderColor={"blackAlpha.400"}
+                    >
+                      Buat laporan
+                    </Button>
+                  </PopoverTrigger>
+                  <Portal>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>Hasilkan Laporan</PopoverHeader>
+                      <PopoverBody>
+                        <FormControl
+                          onChange={(e) =>
+                            setcontactreservename(e.target.value)
+                          }
+                        >
+                          <FormLabel>Nama</FormLabel>
+                          <Input
+                            type={"text"}
+                            placeholder="ex. Jhon cruyff"
+                            value={contactreservename}
+                          />
+                        </FormControl>
+                        <FormControl
+                          mt={"5"}
+                          onChange={(e) =>
+                            setcontactreserveaddress(e.target.value)
+                          }
+                        >
+                          <FormLabel>Alamat</FormLabel>
+                          <Input
+                            type={"text"}
+                            placeholder="ex. St joseph london"
+                            value={contactreserveaddress}
+                          />
+                        </FormControl>
+                        <FormControl
+                          mt={"5"}
+                          onChange={(e) =>
+                            setcontactreservephone(e.target.value)
+                          }
+                        >
+                          <FormLabel>Telepon</FormLabel>
+                          <Input
+                            type={"number"}
+                            placeholder="ex. +022 32424"
+                            value={contactreservephone}
+                          />
+                        </FormControl>
+                        <FormControl
+                          mt={"5"}
+                          onChange={(e) =>
+                            setcontactreserveemail(e.target.value)
+                          }
+                        >
+                          <FormLabel>Email</FormLabel>
+                          <Input
+                            type={"email"}
+                            placeholder="ex. cruyfff@outlook.co.uk"
+                            value={contactreserveemail}
+                          />
+                        </FormControl>
+                      </PopoverBody>
+                      <PopoverFooter>
+                        <Button
+                          w={"full"}
+                          colorScheme={"blue"}
+                          leftIcon={<BsFillFileEarmarkPdfFill />}
+                          onClick={createpdfreservation}
+                        >
+                          Hasilkan pdf
+                        </Button>
+                      </PopoverFooter>
+                    </PopoverContent>
+                  </Portal>
+                </Popover>
+              </Box>
+
               <Box w={"14"} />
               <Box w={"full"}>
                 <Text fontWeight={"semibold"} mb={2}>
