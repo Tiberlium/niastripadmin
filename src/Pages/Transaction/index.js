@@ -37,8 +37,6 @@ import {
   PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
-  useDisclosure,
   Portal,
 } from "@chakra-ui/react";
 
@@ -81,6 +79,11 @@ export default function Transaction() {
   const [contactreserveaddress, setcontactreserveaddress] = useState("");
   const [contactreservephone, setcontactreservephone] = useState(0);
   const [contactreserveemail, setcontactreserveemail] = useState("");
+
+  const [contacteventname, setcontacteventname] = useState("");
+  const [contacteventaddress, setcontacteventaddress] = useState("");
+  const [contacteventphone, setcontacteventphone] = useState(0);
+  const [contacteventemail, setcontacteventemail] = useState("");
 
   const today = new Date();
 
@@ -212,7 +215,7 @@ export default function Transaction() {
           },
         },
         {
-          col1: "Potongan:",
+          col1: "Persentase potongan komisi:",
           col2: "10",
           col3: "%",
           style: {
@@ -220,7 +223,7 @@ export default function Transaction() {
           },
         },
         {
-          col1: "Pendapatan:",
+          col1: "Jumlah potongan komisi:",
           col2: `${formatter(Number(pendapatanreservation))}`,
           col3: "ALL",
           style: {
@@ -273,13 +276,13 @@ export default function Transaction() {
       email_1: "niastrip@gmail.al",
       website: "www.niastrip.al",
     },
-    // contact: {
-    //   label: "Report issued for:",
-    //   name: contacteventname,
-    //   address: contacteventaddress,
-    //   phone: contacteventphone,
-    //   email: contacteventemail,
-    // },
+    contact: {
+      label: "Report issued for:",
+      name: contacteventname,
+      address: contacteventaddress,
+      phone: contacteventphone,
+      email: contacteventemail,
+    },
     invoice: {
       label: "Report ###: ",
       num: 19,
@@ -335,7 +338,7 @@ export default function Transaction() {
           },
         },
         {
-          col1: "Potongan:",
+          col1: "Persentase Potongan Komisi:",
           col2: "10",
           col3: "%",
           style: {
@@ -343,7 +346,7 @@ export default function Transaction() {
           },
         },
         {
-          col1: "Pendapatan:",
+          col1: "Jumlah Potongan Komisi:",
           col2: `${formatter(Number(pendapatanEvent))}`,
           col3: "ALL",
           style: {
@@ -440,6 +443,18 @@ export default function Transaction() {
     setreservationname(x);
   }
 
+  async function geteventname() {
+    let x = [];
+    const docrefs = await db.collection("Event").get();
+    docrefs.docs.map((doc) => {
+      x.push({
+        nama: doc.data().Nama,
+      });
+    });
+
+    seteventname(x);
+  }
+
   function createpdfreservation() {
     const pdfObj = jsPDFInvoiceTemplate(dataRes);
     pdfObj.jsPDFDocObject.save();
@@ -452,6 +467,11 @@ export default function Transaction() {
 
   useEffect(() => {
     gethotelname();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    geteventname();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -474,6 +494,17 @@ export default function Transaction() {
     );
 
     setreservation(activities);
+  }
+
+  function filtereventbydate() {
+    const activities = [...event].filter(
+      (doc) =>
+        doc["nama"] === Queryevent &&
+        doc["tanggal"] >= dayjs(startdateevent).format("YYYY-MM-DD") &&
+        doc["tanggal"] <= dayjs(enddateevent).format("YYYY-MM-DD")
+    );
+
+    setevent(activities);
   }
 
   return (
@@ -506,6 +537,24 @@ export default function Transaction() {
         </TabList>
         <TabPanels>
           <TabPanel>
+            <Flex pb={10}>
+              <Stat borderWidth={1} p={5} borderRadius={10} boxShadow="base">
+                <FcMoneyTransfer size={30} color="green" />
+                <StatLabel>Pendapatan</StatLabel>
+                <StatNumber>
+                  {formatter(Number(pendapatanreservation))}
+                </StatNumber>
+              </Stat>
+              <Box w={"14"} />
+              <Stat borderWidth={1} p={5} borderRadius={10} boxShadow="base">
+                <FcMoneyTransfer size={30} color="green" />
+                <StatLabel mt={2}>total transaksi</StatLabel>
+                <StatNumber>
+                  {formatter(Number(totalTransaksireservation))}
+                </StatNumber>
+              </Stat>
+              <Box w={"2xs"} />
+            </Flex>
             <Text fontWeight={"semibold"} mb={3}>
               Tampilkan berdasarkan
             </Text>
@@ -552,7 +601,7 @@ export default function Transaction() {
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan penginapan
                 </Text>
-                <Popover placement='right-end'>
+                <Popover placement="right-end">
                   <PopoverTrigger>
                     <Button
                       colorScheme={"blue"}
@@ -561,7 +610,7 @@ export default function Transaction() {
                       h={10}
                       borderColor={"blackAlpha.400"}
                     >
-                      Buat laporan 
+                      Buat laporan
                     </Button>
                   </PopoverTrigger>
                   <Portal>
@@ -571,54 +620,48 @@ export default function Transaction() {
                       <PopoverHeader>Hasilkan Laporan Kepada</PopoverHeader>
                       <PopoverBody>
                         <FormControl
-                          onChange={(e) =>
-                            setcontactreservename(e.target.value)
-                          }
+                          onChange={(e) => setcontacteventname(e.target.value)}
                         >
                           <FormLabel>Nama</FormLabel>
                           <Input
                             type={"text"}
                             placeholder="ex. Jhon cruyff"
-                            value={contactreservename}
+                            value={contacteventname}
                           />
                         </FormControl>
                         <FormControl
                           mt={"5"}
                           onChange={(e) =>
-                            setcontactreserveaddress(e.target.value)
+                            setcontacteventaddress(e.target.value)
                           }
                         >
                           <FormLabel>Alamat</FormLabel>
                           <Input
                             type={"text"}
                             placeholder="ex. St joseph london"
-                            value={contactreserveaddress}
+                            value={contacteventaddress}
                           />
                         </FormControl>
                         <FormControl
                           mt={"5"}
-                          onChange={(e) =>
-                            setcontactreservephone(e.target.value)
-                          }
+                          onChange={(e) => setcontacteventphone(e.target.value)}
                         >
                           <FormLabel>Telepon</FormLabel>
                           <Input
                             type={"number"}
                             placeholder="ex. +022 32424"
-                            value={contactreservephone}
+                            value={contacteventphone}
                           />
                         </FormControl>
                         <FormControl
                           mt={"5"}
-                          onChange={(e) =>
-                            setcontactreserveemail(e.target.value)
-                          }
+                          onChange={(e) => setcontacteventemail(e.target.value)}
                         >
                           <FormLabel>Email</FormLabel>
                           <Input
                             type={"email"}
                             placeholder="ex. cruyfff@outlook.co.uk"
-                            value={contactreserveemail}
+                            value={contacteventemail}
                           />
                         </FormControl>
                       </PopoverBody>
@@ -710,96 +753,167 @@ export default function Transaction() {
             </TableContainer>
           </TabPanel>
           <TabPanel>
-            <Flex>
-              <Box>
-                <Text fontWeight={"semibold"} mb={3}>
-                  Tampilkan berdasarkan Tanggal
-                </Text>
-                <Flex>
-                  <Text mt={2}>Tanggal awal</Text>
-                  <Box w={5} />
-                  <Input
-                    w={"fit-content"}
-                    placeholder="Tanggal awal"
-                    value={startdateevent}
-                    onChange={(e) => setstartdateevent(e.target.value)}
-                    type={"date"}
-                    mb={5}
-                  />
-                </Flex>
-                <Flex>
-                  <Text mt={2}>Tanggal akhir</Text>
-                  <Box w={5} />
-                  <Input
-                    w={"fit-content"}
-                    placeholder="Tanggal akhir"
-                    value={enddateevent}
-                    onChange={(e) => setenddateevent(e.target.value)}
-                    type={"date"}
-                    mb={5}
-                  />
-                </Flex>
-
-                <Button
-                  colorScheme="green"
-                  mb={5}
-                  w={"full"}
-                  onClick={filterreservationbydate}
-                >
-                  Tampilkan
-                </Button>
-              </Box>
-              <Box w={20} />
-              <Stat
-                borderWidth={1}
-                p={5}
-                w="52"
-                borderRadius={10}
-                boxShadow="base"
-                h={"48"}
-              >
+            <Flex pb={10}>
+              <Stat borderWidth={1} p={5} borderRadius={10} boxShadow="base">
                 <FcMoneyTransfer size={30} color="green" />
                 <StatLabel>Pendapatan</StatLabel>
                 <StatNumber>{formatter(Number(pendapatanEvent))}</StatNumber>
+              </Stat>
+              <Box w={"14"} />
+              <Stat borderWidth={1} p={5} borderRadius={10} boxShadow="base">
+                <FcMoneyTransfer size={30} color="green" />
                 <StatLabel mt={2}>total transaksi</StatLabel>
                 <StatNumber>
                   {formatter(Number(totalTransaksievent))}
                 </StatNumber>
               </Stat>
-              <Box w={20} />
-              <Box w={"80"}>
+              <Box w={"2xs"} />
+            </Flex>
+            <Text fontWeight={"semibold"} mb={3}>
+              Tampilkan berdasarkan
+            </Text>
+            <Flex>
+              <Select
+                placeholder="Nama event"
+                value={Queryevent}
+                onChange={(e) => setQueryevent(e.target.value)}
+              >
+                {eventname.map((doc) => (
+                  <option value={doc["nama"]}>{doc["nama"]}</option>
+                ))}
+              </Select>
+              <Box w={"28"} />
+              <Flex>
+                <Text>Tanggal awal</Text>
+                <Input
+                  type={"date"}
+                  value={startdateevent}
+                  onChange={(e) => setstartdateevent(e.target.value)}
+                />
+              </Flex>
+              <Box w={"28"} />
+              <Flex>
+                <Text>Tanggal akhir</Text>
+                <Input
+                  type={"date"}
+                  value={enddateevent}
+                  onChange={(e) => setenddateevent(e.target.value)}
+                />
+              </Flex>
+              <Box w={"28"} />
+              <Button
+                w={"full"}
+                colorScheme="blue"
+                mb={5}
+                onClick={filtereventbydate}
+              >
+                Filter
+              </Button>
+            </Flex>
+            <Flex mt={"1.5"}>
+              <Box w={"full"}>
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan Event
                 </Text>
-                <Button
-                  colorScheme="green"
-                  size="sm"
-                  onClick={createpdfreservation}
-                  w={"full"}
-                  h={10}
-                  leftIcon={<BsFillFileEarmarkPdfFill />}
-                >
-                  Hasilkan pdf
-                </Button>
-
-                <Box mt={"12"}>
-                  <Text mb={2} fontWeight="semibold">
-                    Pencarian
-                  </Text>
-                  <InputGroup>
-                    <InputRightElement
-                      pointerEvents={"none"}
-                      children={<BsSearch />}
-                    />
-                    <Input
-                      placeholder="Pencarian"
+                <Popover placement="right-end">
+                  <PopoverTrigger>
+                    <Button
+                      colorScheme={"blue"}
+                      size="md"
+                      w={"full"}
+                      h={10}
                       borderColor={"blackAlpha.400"}
-                      type="search"
-                      value={Queryevent}
-                      onChange={(e) => setQueryevent(e.target.value)}
-                    />
-                  </InputGroup>
-                </Box>
+                    >
+                      Buat laporan
+                    </Button>
+                  </PopoverTrigger>
+                  <Portal>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>Hasilkan Laporan Kepada</PopoverHeader>
+                      <PopoverBody>
+                        <FormControl
+                          onChange={(e) => setcontacteventname(e.target.value)}
+                        >
+                          <FormLabel>Nama</FormLabel>
+                          <Input
+                            type={"text"}
+                            placeholder="ex. Jhon cruyff"
+                            value={contacteventname}
+                          />
+                        </FormControl>
+                        <FormControl
+                          mt={"5"}
+                          onChange={(e) =>
+                            setcontacteventaddress(e.target.value)
+                          }
+                        >
+                          <FormLabel>Alamat</FormLabel>
+                          <Input
+                            type={"text"}
+                            placeholder="ex. St joseph london"
+                            value={contacteventaddress}
+                          />
+                        </FormControl>
+                        <FormControl
+                          mt={"5"}
+                          onChange={(e) =>
+                            setcontacteventaddress(e.target.value)
+                          }
+                        >
+                          <FormLabel>Telepon</FormLabel>
+                          <Input
+                            type={"number"}
+                            placeholder="ex. +022 32424"
+                            value={contacteventphone}
+                          />
+                        </FormControl>
+                        <FormControl
+                          mt={"5"}
+                          onChange={(e) => setcontacteventemail(e.target.value)}
+                        >
+                          <FormLabel>Email</FormLabel>
+                          <Input
+                            type={"email"}
+                            placeholder="ex. cruyfff@outlook.co.uk"
+                            value={contacteventemail}
+                          />
+                        </FormControl>
+                      </PopoverBody>
+                      <PopoverFooter>
+                        <Button
+                          w={"full"}
+                          colorScheme={"blue"}
+                          leftIcon={<BsFillFileEarmarkPdfFill />}
+                          onClick={createpdfevent}
+                        >
+                          Hasilkan pdf
+                        </Button>
+                      </PopoverFooter>
+                    </PopoverContent>
+                  </Portal>
+                </Popover>
+              </Box>
+
+              <Box w={"14"} />
+              <Box w={"full"}>
+                <Text fontWeight={"semibold"} mb={2}>
+                  Pencarian
+                </Text>
+                <InputGroup mb={3} w={"full"}>
+                  <InputRightElement
+                    pointerEvents={"none"}
+                    children={<BsSearch />}
+                  />
+                  <Input
+                    placeholder="Pencarian"
+                    borderColor={"blackAlpha.400"}
+                    type="search"
+                    value={Queryevent}
+                    onChange={(e) => setQueryevent(e.target.value)}
+                  />
+                </InputGroup>
               </Box>
             </Flex>
 
