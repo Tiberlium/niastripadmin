@@ -548,7 +548,7 @@ export default function Transaction() {
               <Box w={"14"} />
               <Stat borderWidth={1} p={5} borderRadius={10} boxShadow="base">
                 <FcMoneyTransfer size={30} color="green" />
-                <StatLabel mt={2}>total transaksi</StatLabel>
+                <StatLabel>total transaksi</StatLabel>
                 <StatNumber>
                   {formatter(Number(totalTransaksireservation))}
                 </StatNumber>
@@ -762,7 +762,7 @@ export default function Transaction() {
               <Box w={"14"} />
               <Stat borderWidth={1} p={5} borderRadius={10} boxShadow="base">
                 <FcMoneyTransfer size={30} color="green" />
-                <StatLabel mt={2}>total transaksi</StatLabel>
+                <StatLabel>total transaksi</StatLabel>
                 <StatNumber>
                   {formatter(Number(totalTransaksievent))}
                 </StatNumber>
@@ -803,7 +803,7 @@ export default function Transaction() {
               <Box w={"28"} />
               <Button
                 w={"full"}
-                colorScheme="blue"
+                colorScheme="green"
                 mb={5}
                 onClick={filtereventbydate}
               >
@@ -818,7 +818,7 @@ export default function Transaction() {
                 <Popover placement="right-end">
                   <PopoverTrigger>
                     <Button
-                      colorScheme={"blue"}
+                      colorScheme={"green"}
                       size="md"
                       w={"full"}
                       h={10}
@@ -884,7 +884,7 @@ export default function Transaction() {
                       <PopoverFooter>
                         <Button
                           w={"full"}
-                          colorScheme={"blue"}
+                          colorScheme={"green"}
                           leftIcon={<BsFillFileEarmarkPdfFill />}
                           onClick={createpdfevent}
                         >
