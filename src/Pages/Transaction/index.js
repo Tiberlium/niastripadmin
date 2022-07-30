@@ -552,7 +552,7 @@ export default function Transaction() {
                 <Text fontWeight={"semibold"} mb={2}>
                   Laporan penginapan
                 </Text>
-                <Popover isLazy>
+                <Popover placement='right-end'>
                   <PopoverTrigger>
                     <Button
                       colorScheme={"blue"}
@@ -561,14 +561,14 @@ export default function Transaction() {
                       h={10}
                       borderColor={"blackAlpha.400"}
                     >
-                      Buat laporan
+                      Buat laporan 
                     </Button>
                   </PopoverTrigger>
                   <Portal>
                     <PopoverContent>
                       <PopoverArrow />
                       <PopoverCloseButton />
-                      <PopoverHeader>Hasilkan Laporan</PopoverHeader>
+                      <PopoverHeader>Hasilkan Laporan Kepada</PopoverHeader>
                       <PopoverBody>
                         <FormControl
                           onChange={(e) =>
