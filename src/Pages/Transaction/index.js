@@ -859,7 +859,7 @@ export default function Transaction() {
                         <FormControl
                           mt={"5"}
                           onChange={(e) =>
-                            setcontacteventaddress(e.target.value)
+                            setcontacteventphone(e.target.value)
                           }
                         >
                           <FormLabel>Telepon</FormLabel>
