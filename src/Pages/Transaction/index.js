@@ -619,49 +619,48 @@ export default function Transaction() {
                       <PopoverCloseButton />
                       <PopoverHeader>Hasilkan Laporan Kepada</PopoverHeader>
                       <PopoverBody>
-                        <FormControl
-                          onChange={(e) => setcontacteventname(e.target.value)}
-                        >
+                        <FormControl>
                           <FormLabel>Nama</FormLabel>
                           <Input
                             type={"text"}
                             placeholder="ex. Jhon cruyff"
-                            value={contacteventname}
+                            value={contactreservename}
+                            onChange={(e) =>
+                              setcontactreservename(e.target.name)
+                            }
                           />
                         </FormControl>
-                        <FormControl
-                          mt={"5"}
-                          onChange={(e) =>
-                            setcontacteventaddress(e.target.value)
-                          }
-                        >
+                        <FormControl mt={"5"}>
                           <FormLabel>Alamat</FormLabel>
                           <Input
                             type={"text"}
                             placeholder="ex. St joseph london"
-                            value={contacteventaddress}
+                            value={contactreserveaddress}
+                            onChange={(e) =>
+                              setcontactreserveaddress(e.target.value)
+                            }
                           />
                         </FormControl>
-                        <FormControl
-                          mt={"5"}
-                          onChange={(e) => setcontacteventphone(e.target.value)}
-                        >
+                        <FormControl mt={"5"}>
                           <FormLabel>Telepon</FormLabel>
                           <Input
                             type={"number"}
                             placeholder="ex. +022 32424"
-                            value={contacteventphone}
+                            value={contactreservephone}
+                            onChange={(e) =>
+                              setcontactreservephone(e.target.value)
+                            }
                           />
                         </FormControl>
-                        <FormControl
-                          mt={"5"}
-                          onChange={(e) => setcontacteventemail(e.target.value)}
-                        >
+                        <FormControl mt={"5"}>
                           <FormLabel>Email</FormLabel>
                           <Input
                             type={"email"}
                             placeholder="ex. cruyfff@outlook.co.uk"
-                            value={contacteventemail}
+                            value={contactreserveemail}
+                            onChange={(e) =>
+                              setcontactreserveemail(e.target.value)
+                            }
                           />
                         </FormControl>
                       </PopoverBody>
@@ -858,9 +857,7 @@ export default function Transaction() {
                         </FormControl>
                         <FormControl
                           mt={"5"}
-                          onChange={(e) =>
-                            setcontacteventphone(e.target.value)
-                          }
+                          onChange={(e) => setcontacteventphone(e.target.value)}
                         >
                           <FormLabel>Telepon</FormLabel>
                           <Input
