@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/Tiberlium/niastripadmin/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
 
-<p id="description">Niastrip admin ini merupakan bagian dari sistem aplikasi mobile Niastrip yang berfungsi mengelola data dalam database.</p>
+<p id="description">Niastrip admin ini merupakan bagian dari sistem aplikasi mobile Niastrip yang berfungsi mengelola data dalam database. pass:admin</p>
 
 <h2>🚀 Demo</h2>
 
